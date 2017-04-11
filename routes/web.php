@@ -66,7 +66,10 @@ Route::get('cari-pasien','PendaftaranController@viewCariPasien');
 //====================================================
 //=======================PELAYANAN====================
 //====================================================
-Route::get('/lrj','PelayananController@lrj');
+Route::get('/lrj','PelayananController@indexLrj');
+Route::get('/lrj/form','PelayananController@lrj');
+Route::get('/lrj/form/edit/{id}','PelayananController@lrjUbah');
+Route::post('/lrj/form/edit/{id}','PelayananController@lrjUbahSimpan');
 Route::post('/lrj','PelayananController@lrjSimpan');
 //ajax
 Route::get('lrj/norm/{id}','PelayananController@AjaxCariRawatJalan');
@@ -81,4 +84,23 @@ Route::post('/pelayanan-igd','PelayananController@lgdSimpan');
 //ajax
 Route::get('/pelayanan-igd/norm/{id}','PelayananController@AjaxCarilgd');
 
+
+//====================================================
+//=======================PELAPORAN====================
+//====================================================
+
+Route::get('laporan/register','PelaporanController@getFormRegister');
+Route::post('laporan/register','PelaporanController@getFormLihatRegister');
+
+Route::get('laporan/eksternal','PelaporanController@getFormEksternal');
+Route::post('laporan/eksternal','PelaporanController@getFormLihatEksternal');
+Route::get('pelaporan/kodeicd','IcdController@form');
+Route::post('pelaporan/kodeicd/simpan','IcdController@simpan');
+Route::post('pelaporan/kodeicd/ubah','IcdController@ubah');
+Route::delete('pelaporan/kodeicd/{id}','IcdController@hapus');
+Route::get('tes','PelaporanController@tes');
+
+Route::get('chat',function(){
+	return view('chat');
+});
 

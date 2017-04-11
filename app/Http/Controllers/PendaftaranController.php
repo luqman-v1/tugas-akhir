@@ -198,7 +198,7 @@ class PendaftaranController extends Controller
     return view('pendaftaran.tambah')->with(compact('noRM','provinces'));
   }
 
-  public function tambah(Request $request, $id){
+  public function tambah(Request $request){
     $this->validate($request, [
             'noRm' => 'required',
             'nama' => 'required',
@@ -224,7 +224,6 @@ class PendaftaranController extends Controller
             'caraBayar' => 'required',
             'caraDatang' => 'required',
             'noPesertaJKN' => 'required',
-            'noAsuransiLain' => 'required',
             ]);
 
 
@@ -234,31 +233,31 @@ class PendaftaranController extends Controller
     $getKelurahan = Villages::where('id',$request->kelurahan)->first();
 
     $pasien = new Pasien();
-    $pasien->noRm = $request->get('noRm');
-    $pasien->nama = $request->get('nama');
+    $pasien->noRm = $request->noRm;
+    $pasien->nama = $request->nama;
     $pasien->provinsi  = $getProvinsi->name;
     $pasien->kabupaten = $getKota->name;
     $pasien->kecamatan = $getKecamatan->name;
     $pasien->kelurahan = $getKelurahan->name;
-    $pasien->dukuh = $request->get('dukuh');
-    $pasien->rt = $request->get('rt');
-    $pasien->rw = $request->get('rw');
-    $pasien->tglLahir = $request->get('tglLahir');
-    $pasien->tmptLahir = $request->get('tmptLahir');
-    $pasien->jenisKelamin = $request->get('jenisKelamin');
-    $pasien->agama = $request->get('agama');
-    $pasien->statusPerkawinan = $request->get('statusPerkawinan');
-    $pasien->pendidikanPasien = $request->get('pendidikanPasien');
-    $pasien->pekerjaanPasien = $request->get('pekerjaanPasien');
-    $pasien->kewarganegaraan = $request->get('kewarganegaraan');
-    $pasien->namaOrtu = $request->get('namaOrtu');
-    $pasien->namaSuami_istri = $request->get('namaSuami_istri');
-    $pasien->noHp = $request->get('noHp');
-    $pasien->tglMasuk = $request->get('tglMasuk');
-    $pasien->caraDatang = $request->get('caraDatang');
-    $pasien->caraBayar = $request->get('caraBayar');
-    $pasien->noPesertaJKN = $request->get('noPesertaJKN');
-    $pasien->noAsuransiLain = $request->get('noAsuransiLain');
+    $pasien->dukuh = $request->dukuh;
+    $pasien->rt = $request->rt;
+    $pasien->rw = $request->rw;
+    $pasien->tglLahir = $request->tglLahir;
+    $pasien->tmptLahir = $request->tmptLahir;
+    $pasien->jenisKelamin = $request->jenisKelamin;
+    $pasien->agama = $request->agama;
+    $pasien->statusPerkawinan = $request->statusPerkawinan;
+    $pasien->pendidikanPasien = $request->pendidikanPasien;
+    $pasien->pekerjaanPasien = $request->pekerjaanPasien;
+    $pasien->kewarganegaraan = $request->kewarganegaraan;
+    $pasien->namaOrtu = $request->namaOrtu;
+    $pasien->namaSuami_istri = $request->namaSuami_istri;
+    $pasien->noHp = $request->noHp;
+    $pasien->tglMasuk = $request->tglMasuk;
+    $pasien->caraDatang = $request->caraDatang;
+    $pasien->caraBayar = $request->caraBayar;
+    $pasien->noPesertaJKN = $request->noPesertaJKN;
+    $pasien->noAsuransiLain = $request->noAsuransiLain;
     $pasien->save();
 
     $config = Config::all()->first();

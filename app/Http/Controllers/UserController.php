@@ -65,7 +65,7 @@ class UserController extends Controller
 		public function update(Request $request, $id){
 	
 			$this->validate($request, [
-    	 	'username' => 'required|alpha_dash|unique:users',
+    	 	// 'username' => 'required|alpha_dash|unique:users',
     		'name' => 'required',
     	 	'email' => 'required|email|max:255|unique:users',
     	 	'noHp' =>'required',
@@ -81,9 +81,9 @@ class UserController extends Controller
  
         
             Image::make($image->getRealPath())->resize(200, 200)->save($path);
-             
+                       
             $update = User::find($id);
-			$update->username = $request->get('username');
+			// $update->username = $request->get('username');
 			$update->name = $request->get('name');
 			$update->email = $request->get('email');
 		    $update->noHp = $request->get('noHp');

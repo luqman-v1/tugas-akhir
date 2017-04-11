@@ -6,14 +6,14 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "barryvdh/laravel-snappy": "^0.3.3",
         "intervention/image": "dev-master",
         "klaravel/ntrust": "^1.1",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "nesbot/carbon": "^1.22",
         "pusher/pusher-php-server": "^2.6",
-        "uxweb/sweet-alert": "^1.4",
-        "yajra/laravel-datatables-oracle": "7.2"
+        "uxweb/sweet-alert": "^1.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

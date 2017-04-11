@@ -12,9 +12,55 @@ use App\PelayananRI;
 use App\Rawat_Inap;
 use App\Rawat_IGD;
 use App\PelayananIGD;
-
+use App\Icd;
 class PelayananController extends Controller
 {
+    public function indexLrj(){
+
+        $lrj = PelayananRj::join('rawat_jalan','id_RJ','Rawat_Jalan.id')
+       ->join('pasien','id_pasien','pasien.id')
+       ->orderBy('pelayanan_rawatJalan.id','desc')
+       ->where('kodeDiagnosis',null)->orWhere('kodeTindakan',null)
+       ->select('pelayanan_rawatJalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatJalan.*')
+       ->get();
+
+        return view('pelayanan.indexLRJ')->with('lrj',$lrj);
+    }
+    public function lrjUbah($id){
+        $edit = PelayananRj::where('pelayanan_rawatJalan.id',$id)->join('rawat_jalan','id_RJ','Rawat_Jalan.id')
+       ->join('pasien','id_pasien','pasien.id')
+       ->select('pelayanan_rawatJalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatJalan.*')
+       ->first();
+       $edit->tglLahir;
+        $biday = new DateTime($edit->tglLahir);
+        $today = new DateTime();
+        $diff = $today->diff($biday);
+          //bikin array baru 
+        $edit['tahun'] = $diff->y;
+        $edit['bulan'] = $diff->m;
+        $edit['hari'] = $diff->d;
+
+       $icd = Icd::all();
+       
+        return view('pelayanan.editLRJ')->with('edit',$edit)->with('icd',$icd);
+    }
+
+    public function lrjUbahSimpan(Request $request,$id){
+
+        $this->validate($request, [
+            'kodeDiagnosis' => 'required',
+            'kodeTindakan' => 'required',
+            ]);
+
+        $edit = PelayananRj::find($id);
+        $edit->kodeDiagnosis = $request->kodeDiagnosis;
+        $edit->kodeTindakan = $request->kodeTindakan;
+        $edit->save();
+        
+        Alert::success('Berhasil', 'Data diagnosis telah ditambahkan');
+        return redirect('lrj');
+    }
+
     public function lrj(){
 
     	return view('pelayanan.LRJ');
@@ -110,6 +156,7 @@ class PelayananController extends Controller
             'namaPetugasTpp' => 'required',
             'namaDokterPj' =>'required',
             'caraKeluar' => 'required',
+            'keadaanKeluar' => 'required',
             'tglKeluar' => 'required',
             'jamKeluar' => 'required',
             'diagnosisUtama' => 'required',
@@ -136,13 +183,24 @@ class PelayananController extends Controller
     	->orderBy('rawat_inap.id','desc')
     	->first();
 
+            if ($request->keadaanKeluar != "Meninggal") {
+            $tglMeninggal = $request->tglMeninggal = null;
+            $jamMeninggal = $request->jamMeninggal = null;
+        }else{
+            $tglMeninggal = $request->tglMeninggal;
+            $jamMeninggal = $request->jamMeninggal;
+        }
+
     	$rmk = new PelayananRI();
     	$rmk->id_RI = $rawatInap->id;
     	$rmk->diagnosisMasuk = $request->diagnosisMasuk;
     	$rmk->namaPerawat = $request->namaPerawat;
     	$rmk->namaPetugasTpp = $request->namaPetugasTpp;
     	$rmk->namaDokterPj = $request->namaDokterPj;
-    	$rmk->caraKeluar = $request->caraKeluar;
+        $rmk->caraKeluar = $request->caraKeluar;
+    	$rmk->keadaanKeluar = $request->keadaanKeluar;
+        $rmk->tglMeninggal = $tglMeninggal;
+        $rmk->jamMeninggal = $jamMeninggal;
     	$rmk->tglKeluar = $request->tglKeluar;
     	$rmk->jamKeluar = $request->jamKeluar;
     	$rmk->diagnosisUtama = $request->diagnosisUtama;
@@ -161,7 +219,7 @@ class PelayananController extends Controller
     	$rmk->pengobatanRadio = $request->pengobatanRadio;
     	$rmk->transfusiDarah = $request->transfusiDarah;
     	$rmk->sebabKematian = $request->sebabKematian;
-    	$rmk->dokterMemulangkan = $request->dokterMemulangkan;
+        $rmk->dokterMemulangkan = $request->dokterMemulangkan;
     	$rmk->save();
 
     	Alert::success('Berhasil', 'Data Pelayanan Rawat Inap telah ditambahkan');
@@ -224,6 +282,13 @@ class PelayananController extends Controller
     	->join('rawat_igd','pasien.id','id_pasien')
     	->orderBy('rawat_igd.id','desc')
     	->first();
+          if ($request->tindakanLanjut != "Meninggal") {
+            $tglMeninggal = $request->tglMeninggal = null;
+            $jamMeninggal = $request->jamMeninggal = null;
+        }else{
+            $tglMeninggal = $request->tglMeninggal;
+            $jamMeninggal = $request->jamMeninggal;
+        }
 
     	$igd = new PelayananIGD();
     	$igd->id_IGD = $rawatIGD->id;
@@ -238,7 +303,10 @@ class PelayananController extends Controller
     	$igd->diagonosisAwal = $request->diagonosisAwal;
     	$igd->terapiTindakan = $request->terapiTindakan;
     	$igd->diagnosisAkhir = $request->diagnosisAkhir;
-    	$igd->tindakanLanjut = $request->tindakanLanjut;
+        $igd->tindakanLanjut = $request->tindakanLanjut;
+        $igd->tglMeninggal = $tglMeninggal;
+        $igd->jamMeninggal = $jamMeninggal;
+    	$igd->dirujuk = $request->dirujuk;
     	$igd->save();
 
     	Alert::success('Berhasil', 'Data Pelayanan Rawat IGD telah ditambahkan');

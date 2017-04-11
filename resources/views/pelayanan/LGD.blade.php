@@ -334,18 +334,73 @@
 
                     <div class="col-md-6">
                         <div class="form-group {{ $errors->has('tindakanLanjut') ? 'has-error' : ''}}">
-                         <label class="control-label " for="tindakanLanjut">Tindak Lanjut</label>
+                         <label class="control-label" for="tindakanLanjut">Tindak Lanjut</label>
                             <div class="form-group">
-                               <input type="text" class="form-control" value="{{old('tindakanLanjut')}}" name="tindakanLanjut" placeholder="Tindak Lanjut">
+                               <select name="tindakanLanjut" id="tindakanLanjut" class="form-control">
+                                                             <option value="Pulang">Pulang</option>
+                                                             <option value="Dirujuk">Dirujuk</option>
+                                                             <option value="Dirawat">Dirawat</option>
+                                                             <option value="Meninggal">Meninggal</option>
+                                                             <option value="Menolak Dirawat">Menolak Dirawat</option>
+                                                         </select>
                                <span class="help-block">
                                 <strong>{{ $errors->first('tindakanLanjut') }}</strong>
                             </span>
                                 </div>
                          </div>
                     </div>
+
+                    <div id="dirujuk" style="display:none;" class="col-md-6">
+                                <div class="form-group {{ $errors->has('dirujuk') ? 'has-error' : ''}}">
+                                 <label class="control-label " for="dirujuk">Dirujuk Ke</label>
+                                    <div class="form-group">
+                                       <input type="text" class="form-control" name="dirujuk" value="{{old('dirujuk')}}" placeholder="Dirujuk Ke">
+                                       <span class="help-block">
+                                        <strong>{{ $errors->first('dirujuk') }}</strong>
+                                    </span>
+                                </div>
+                            </div>
+                    </div>
+
+                     <div id="tglMeninggal" style="display:none;" class="col-md-6">
+                                        <div class="form-group{{ $errors->has('tglMeninggal') ? ' has-error' : '' }}">
+                                            <label class="control-label " for="tglMeninggal">Tanggal Meninggal</label><br>
+                                            <div class='input-group date'>
+                                                <input placeholder="tglMeninggal" type='text' value="<?php echo date("Y-m-d"); ?>" name="tglMeninggal" class="form-control" id="tanggal_masuk">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            @if ($errors->has('tglMeninggal'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('tglMeninggal') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div id="jamMeninggal" style="display:none;" class="col-md-6">
+                                       <div class="bootstrap-timepicker">
+                                        <div class="form-group{{ $errors->has('jamMeninggal') ? ' has-error' : '' }}">
+                                            <label class="control-label " for="jamMeninggal">Jam Meninggal</label><br>
+                                            <div class="input-group">
+                                                <input type="text" id="valJam" name="jamMeninggal" value="{{old('jamMeninggal')}}" class="form-control timepicker">
+                                                <div class="input-group-addon">
+                                                  <i class="fa fa-clock-o"></i>
+                                              </div>
+                                          </div>
+                                          @if ($errors->has('jamMeninggal'))
+                                          <span class="help-block">
+                                            <strong>{{ $errors->first('jamMeninggal') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                 </div>
             
                             </div>
+
                     <div class="col-md-12">
                         <br><br><br><br><br>
                         <button type="submit" class="btn btn-primary btn-block btn-lg">Simpan</button>
@@ -467,5 +522,26 @@
         });
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#tindakanLanjut').on('change',function(){
+            if(this.value == "Dirujuk"){
+                $('#dirujuk').show();
+                $('#tglMeninggal').hide();
+                $('#jamMeninggal').hide();
+            }else if (this.value == "Meninggal"){
+                $('#tglMeninggal').show();
+                $('#jamMeninggal').show();
+                $('#dirujuk').hide();
 
+            }else{
+                $('#tglMeninggal').hide();
+                $('#jamMeninggal').hide();
+                $('#dirujuk').hide();
+            }
+        });
+    });
+
+ 
+</script>
 @endsection

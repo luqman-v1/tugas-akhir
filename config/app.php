@@ -179,7 +179,7 @@ return [
         Klaravel\Ntrust\NtrustServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
 
     ],
 
@@ -232,8 +232,9 @@ return [
         'Ntrust' => Klaravel\Ntrust\NtrustFacade::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Datatables' => Yajra\Datatables\DatatablesServiceProvider::class,
         'Carbon' => '\Carbon\Carbon',
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 
     ],
 

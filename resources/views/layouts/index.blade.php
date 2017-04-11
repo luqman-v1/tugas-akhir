@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -22,6 +23,17 @@
   <link href="{{ url('dist/sweetalert.css') }}" rel="stylesheet">
   <!-- DataTables -->
   <link rel="stylesheet" href="{{url('plugins/datatables/dataTables.bootstrap.css')}}">
+ <style type="text/css">
+ .screen {
+ /*background: #848587;*/
+ border-radius: 7px 7px 7px 7px;
+ position: absolute;
+ display: none;
+ z-index: 100;  
+ padding-right: 100px;
+ padding-left: 100px;
+ }
+ </style> 
   @yield('css')
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,16 +43,33 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini">
 <div class="wrapper">
 
    @include('layouts.header')
    @include('layouts.side')
-  
-  
 
+  <div class="screen">
+    {{-- @include('chat') --}}
+  </div>    
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    @if (Session::has('sweet_alert.alert'))
+    <script>
+        swal({
+            text: "{!! Session::get('sweet_alert.text') !!}",
+            title: "{!! Session::get('sweet_alert.title') !!}",
+            timer: {!! Session::get('sweet_alert.timer') !!},
+            type: "{!! Session::get('sweet_alert.type') !!}",
+            showConfirmButton: "{!! Session::get('sweet_alert.showConfirmButton') !!}",
+            confirmButtonText: "{!! Session::get('sweet_alert.confirmButtonText') !!}",
+            confirmButtonColor: "#AEDEF4"
+
+            // more options
+        });
+    </script>
+@endif
+
     @yield('content')
   </div>
   <!-- /.content-wrapper -->
@@ -77,6 +106,16 @@
 <!-- DataTables -->
 <script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{url('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+
+<script type="text/javascript">
+ $('.screen').animate({
+ opacity: 1,
+ right: "-150px",
+ bottom: "-15px",
+ height: "toggle"
+ }, 0, function() {
+ }).css('position','fixed');
+</script>
 
 @include('sweet::alert')
 @yield('js')

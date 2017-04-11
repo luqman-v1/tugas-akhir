@@ -258,7 +258,7 @@
                             <input class="form-control" id="namaOrtu" name="namaOrtu" value="{{old('namaOrtu')}}" type="text" placeholder="Nama Orang Tua">
                         </div>
                         <label for="namaSuami-istri">Nama Suami/Istri</label>
-                        <input class="form-control" name="namaSuami_istri" value="{{old('namaSuami-istri')}}" id="namaSuami_istri" type="text" placeholder="Nama Suami/Istri">
+                        <input class="form-control" name="namaSuami_istri" value="{{old('namaSuami_istri')}}" id="namaSuami_istri" type="text" placeholder="Nama Suami/Istri">
                     </div>
 
                     <div class="form-group">
@@ -389,7 +389,7 @@
                     dataType: "json",
                     success:function(data) {
 
-
+                        // console.log(data);
                         $('select[name="kota"]').empty();
                         $.each(data, function(key, value) {
                             $('select[name="kota"]').append('<option value="'+ key +'">'+ value +'</option>');

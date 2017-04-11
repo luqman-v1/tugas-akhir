@@ -105,7 +105,7 @@
                     <label for="inputName" class="col-sm-2 control-label">Username</label>
 
                     <div class="col-sm-10">
-                      <input type="text" value="{{auth::user()->username}}" name="username" class="form-control" id="inputName" placeholder="Username">
+                      <input type="text" value="{{auth::user()->username}}" readonly="" name="username" class="form-control" id="inputName" placeholder="Username">
                     </div>
                   </div>
 

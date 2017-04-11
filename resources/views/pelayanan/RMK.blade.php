@@ -243,7 +243,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                </div>
+                                <div class="row">
+                                       <div class="col-md-6">
                                             <div class="form-group {{ $errors->has('caraKeluar') ? 'has-error' : ''}}">
                                                <label class="control-label " for="caraKeluar">Cara Keluar RS</label>
                                                <div class="form-group">
@@ -259,13 +261,63 @@
                                             </div>
                                         </div>
                                     </div>
+                                       <div class="col-md-6">
+                                            <div class="form-group {{ $errors->has('keadaanKeluar') ? 'has-error' : ''}}">
+                                               <label class="control-label " for="keadaanKeluar">Keadaan Keluar RS</label>
+                                               <div class="form-group">
+                                                   <select name="keadaanKeluar" id="keadaanKeluar" class="form-control">
+                                                     <option value="Sembuh">Sembuh</option>
+                                                     <option value="Belum Sembuh">Belum Sembuh</option>
+                                                     <option value="Meninggal">Meninggal</option>
+                                                 </select>
+                                                 <span class="help-block">
+                                                    <strong>{{ $errors->first('keadaanKeluar') }}</strong>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div id="tglMeninggal" style="display:none;" class="col-md-6">
+                                        <div class="form-group{{ $errors->has('tglMeninggal') ? ' has-error' : '' }}">
+                                            <label class="control-label " for="tglMeninggal">Tanggal Meninggal</label><br>
+                                            <div class='input-group date'>
+                                                <input placeholder="tglMeninggal"  type='text' value="<?php echo date("Y-m-d"); ?>" name="tglMeninggal" class="form-control" id="tglMeninggalID">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            @if ($errors->has('tglMeninggal'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('tglMeninggal') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div id="jamMeninggal" style="display:none;" class="col-md-6">
+                                       <div class="bootstrap-timepicker">
+                                        <div class="form-group{{ $errors->has('jamMeninggal') ? ' has-error' : '' }}">
+                                            <label class="control-label " for="jamMeninggal">Jam Meninggal</label><br>
+                                            <div class="input-group">
+                                                <input type="text" id="valJam" name="jamMeninggal" value="{{old('jamMeninggal')}}" class="form-control timepicker">
+                                                <div class="input-group-addon">
+                                                  <i class="fa fa-clock-o"></i>
+                                              </div>
+                                          </div>
+                                          @if ($errors->has('jamMeninggal'))
+                                          <span class="help-block">
+                                            <strong>{{ $errors->first('jamMeninggal') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('tglKeluar') ? ' has-error' : '' }}">
                                             <label class="control-label " for="tglKeluar">Tanggal Keluar</label><br>
                                             <div class='input-group date'>
-                                                <input placeholder="Tanggal Kunjungan" type='text' value="<?php echo date("Y-m-d"); ?>" name="tglKeluar" class="form-control" id="tanggal_masuk">
+                                                <input placeholder="Tanggal Kunjungan" type='text' value="<?php echo date("Y-m-d"); ?>" name="tglKeluar" class="form-control" id="tanggal_keluar">
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
@@ -284,7 +336,6 @@
                                             <label class="control-label " for="jamKeluar">Jam Keluar</label><br>
                                             <div class="input-group">
                                                 <input type="text" name="jamKeluar" value="{{old('jamKeluar')}}" class="form-control timepicker">
-
                                                 <div class="input-group-addon">
                                                   <i class="fa fa-clock-o"></i>
                                               </div>
@@ -574,6 +625,11 @@
       format: 'yyyy-mm-dd'
   });
 
+   $('#tglMeninggalID').datepicker({
+    autoclose : true,
+    format : 'yyyy-mm-dd'
+   });
+
     //Date picker
    $('#tanggal_operasiTindakan').datepicker({
       autoclose: true,
@@ -582,6 +638,14 @@
 
      //Timepicker
      $(".timepicker").timepicker({
+        showInputs: false,
+        minuteStep: 1,
+        locale: 'id',
+        showMeridian :false,
+        use24hours: true
+
+    });
+      $(".valJam").timepicker({
         showInputs: false,
         minuteStep: 1,
         locale: 'id',
@@ -650,5 +714,21 @@
         });
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#keadaanKeluar').on('change',function(){
+            if (this.value == "Meninggal"){
+                $('#tglMeninggal').show();
+                $('#jamMeninggal').show();
+             
+            }else{
+                $('#tglMeninggal').hide();
+                $('#jamMeninggal').hide();
+             
+            }
+        });
+    });
 
+ 
+</script>
 @endsection
