@@ -94,10 +94,18 @@ Route::post('laporan/register','PelaporanController@getFormLihatRegister');
 
 Route::get('laporan/eksternal','PelaporanController@getFormEksternal');
 Route::post('laporan/eksternal','PelaporanController@getFormLihatEksternal');
-Route::get('pelaporan/kodeicd','IcdController@form');
+//kode icd 10
+Route::get('pelaporan/kodeicd10','IcdController@form');
 Route::post('pelaporan/kodeicd/simpan','IcdController@simpan');
 Route::post('pelaporan/kodeicd/ubah','IcdController@ubah');
 Route::delete('pelaporan/kodeicd/{id}','IcdController@hapus');
+//kode icd 9
+Route::get('pelaporan/kodeicd9','IcdController@formicd9');
+Route::post('pelaporan/kodeicd9/simpan','IcdController@simpanIcd9');
+Route::post('pelaporan/kodeicd9/ubah','IcdController@ubahIcd9');
+Route::delete('pelaporan/kodeicd9/{id}','IcdController@hapusIcd9');
+
+
 Route::get('tes','PelaporanController@tes');
 
 Route::get('chat',function(){

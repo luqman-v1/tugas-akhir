@@ -13,6 +13,9 @@ use App\Rawat_Inap;
 use App\Rawat_IGD;
 use App\PelayananIGD;
 use App\Icd;
+use App\Icd9;
+use App\Diagnosis;
+use App\Tindakan;
 class PelayananController extends Controller
 {
     public function indexLrj(){
@@ -41,8 +44,9 @@ class PelayananController extends Controller
         $edit['hari'] = $diff->d;
 
        $icd = Icd::all();
+        $icd9 = Icd9::all();
        
-        return view('pelayanan.editLRJ')->with('edit',$edit)->with('icd',$icd);
+        return view('pelayanan.editLRJ')->with('edit',$edit)->with('icd',$icd)->with('icd9',$icd9);
     }
 
     public function lrjUbahSimpan(Request $request,$id){
@@ -62,11 +66,14 @@ class PelayananController extends Controller
     }
 
     public function lrj(){
-
-    	return view('pelayanan.LRJ');
+        $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
+        $icd9 = Icd9::all();
+       
+    	return view('pelayanan.LRJ')->with('icd',$icd)->with('icd9',$icd9);
     }
 
     public function lrjSimpan(Request $request){
+  
     	  $this->validate($request, [
     	  	'noRm' => 'required',
             'nama' => 'required',
@@ -82,9 +89,7 @@ class PelayananController extends Controller
             'bulan' => 'required',
             'hari' => 'required',
             'anamnesa' => 'required',
-            'pemeriksaanFisik' => 'required',
-            'radiologi' => 'required',
-            'laboratorium' =>'required',
+            'riwayatAlergi'=>'required',
             'diagnosa' => 'required',
             'tindakan' => 'required',
             ]);
@@ -96,15 +101,39 @@ class PelayananController extends Controller
 
     	$prj = new PelayananRj();
     	$prj->id_RJ = $rawatJalan->id;
-    	$prj->anamnesa = $request->anamnesa;
-    	$prj->pemeriksaanFisik = $request->pemeriksaanFisik;
-    	$prj->radiologi = $request->radiologi;
-    	$prj->laboratorium = $request->laboratorium;
+        $prj->anamnesa = $request->anamnesa;
+        $prj->riwayatAlergi = $request->riwayatAlergi;
+        $prj->tensi = $request->tensi;
+        $prj->rr = $request->rr;
+        $prj->nadi = $request->nadi;
+        $prj->bb = $request->bb;
+        $prj->tb = $request->tb;
+        $prj->suhu = $request->suhu;
     	$prj->diagnosa = $request->diagnosa;
     	$prj->tindakan = $request->tindakan;
-    	$prj->kodeDiagnosis = $request->kodeDiagnosis;
-    	$prj->kodeTindakan = $request->kodeTindakan;
     	$prj->save();
+
+        $lastid = PelayananRj::orderBy('id','desc')->first();
+
+        foreach ($request->kodeTindakan as $data) {
+        $tindakan = new Tindakan();
+        $tindakan->id_pelayanan = $lastid->id;
+        $tindakan->jenis_pelayanan = 'lrj';
+        $tindakan->kode  = $data;
+        $tindakan->save(); 
+        }
+        
+        $kodeDiagnosis = $request->kodeDiagnosis;
+        $namaDiagnosis = $request->namaDiagnosis;
+
+        foreach ($kodeDiagnosis as $index => $kode) {
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $lastid->id;
+            $diagnosa->jenis_pelayanan = 'lrj';
+            $diagnosa->kode = $kode;
+            $diagnosa->nama = $namaDiagnosis[$index];
+            $diagnosa->save();
+        }
 
     	Alert::success('Berhasil', 'Data Pelayanan Rawat Jalan telah ditambahkan');
          return back();

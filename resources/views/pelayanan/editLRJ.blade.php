@@ -283,7 +283,7 @@
              <label class="control-label " for="kodeTindakan"  style="color: red";>Kode Tindakan</label>
                 <div class="form-group">
                     <select name="kodeTindakan" class="form-control select2">
-                             @foreach($icd as $data)
+                             @foreach($icd9 as $data)
                               <option value="{{$data->nama}}">{{$data->nama}}</option>
                                 @endforeach      
                             </select>

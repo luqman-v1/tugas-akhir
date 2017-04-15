@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Icd extends Model
+class Icd9 extends Model
 {
-    protected $table = 'tbl_icd10';
+    protected $table = 'tbl_icd9';
+ 
 }
