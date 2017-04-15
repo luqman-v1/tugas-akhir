@@ -16,15 +16,17 @@ use App\Icd;
 use App\Icd9;
 use App\Diagnosis;
 use App\Tindakan;
+
 class PelayananController extends Controller
 {
     public function indexLrj(){
 
-        $lrj = PelayananRj::join('rawat_jalan','id_RJ','Rawat_Jalan.id')
+        $lrj = Tindakan::join('pelayanan_rawatjalan','tindakan.id_pelayanan','pelayanan_rawatjalan.id')
+       ->join('rawat_jalan','id_RJ','rawat_jalan.id')
        ->join('pasien','id_pasien','pasien.id')
-       ->orderBy('pelayanan_rawatJalan.id','desc')
-       ->where('kodeDiagnosis',null)->orWhere('kodeTindakan',null)
-       ->select('pelayanan_rawatJalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatJalan.*')
+       ->orderBy('pelayanan_rawatjalan.id','desc')
+       ->Where('tindakan.kode',null)
+       ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
        ->get();
 
         return view('pelayanan.indexLRJ')->with('lrj',$lrj);
@@ -34,7 +36,8 @@ class PelayananController extends Controller
        ->join('pasien','id_pasien','pasien.id')
        ->select('pelayanan_rawatJalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatJalan.*')
        ->first();
-       $edit->tglLahir;
+        
+        $edit->tglLahir;
         $biday = new DateTime($edit->tglLahir);
         $today = new DateTime();
         $diff = $today->diff($biday);
@@ -43,27 +46,50 @@ class PelayananController extends Controller
         $edit['bulan'] = $diff->m;
         $edit['hari'] = $diff->d;
 
-       $icd = Icd::all();
+        $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
         $icd9 = Icd9::all();
        
         return view('pelayanan.editLRJ')->with('edit',$edit)->with('icd',$icd)->with('icd9',$icd9);
     }
 
     public function lrjUbahSimpan(Request $request,$id){
-
-        $this->validate($request, [
-            'kodeDiagnosis' => 'required',
-            'kodeTindakan' => 'required',
-            ]);
-
-        $edit = PelayananRj::find($id);
-        $edit->kodeDiagnosis = $request->kodeDiagnosis;
-        $edit->kodeTindakan = $request->kodeTindakan;
-        $edit->save();
+      
+    if ($request->kodeTindakan == [null] or $request->namaDiagnosis == [null] or $request->kodeDiagnosis == [null]) {
         
-        Alert::success('Berhasil', 'Data diagnosis telah ditambahkan');
+        Alert::error('Kode ICD Harus Diisi !','Oops...');
+        return back();
+    }else{
+
+        Diagnosis::where('id_pelayanan',$id)->delete();
+        Tindakan::where('id_pelayanan',$id)->delete();
+
+         foreach ($request->kodeTindakan as $data) {
+            $tindakan = new Tindakan();
+            $tindakan->id_pelayanan = $id;
+            $tindakan->jenis_pelayanan = 'lrj';
+            $tindakan->kode  = $data;
+            $tindakan->save(); 
+        }
+
+        $kodeDiagnosis = $request->kodeDiagnosis;
+        $namaDiagnosis = $request->namaDiagnosis;
+
+        foreach ($kodeDiagnosis as $index => $kode) {
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'lrj';
+            $diagnosa->kode = $kode;
+            $diagnosa->nama = $namaDiagnosis[$index];
+            $diagnosa->save();
+        }
+        
+        Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
         return redirect('lrj');
     }
+    
+    }
+
+    
 
     public function lrj(){
         $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
@@ -73,7 +99,6 @@ class PelayananController extends Controller
     }
 
     public function lrjSimpan(Request $request){
-  
     	  $this->validate($request, [
     	  	'noRm' => 'required',
             'nama' => 'required',
@@ -122,7 +147,7 @@ class PelayananController extends Controller
         $tindakan->kode  = $data;
         $tindakan->save(); 
         }
-        
+
         $kodeDiagnosis = $request->kodeDiagnosis;
         $namaDiagnosis = $request->namaDiagnosis;
 
@@ -160,8 +185,21 @@ class PelayananController extends Controller
     }
 
     public function rmk(){
+         $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
+        $icd9 = Icd9::all();
 
-    	return view('pelayanan.RMK');
+    	return view('pelayanan.RMK')->with('icd',$icd)->with('icd9',$icd9);
+    }
+
+    public function indexRmk(){
+        $rmk =  $lrj = Tindakan::join('pelayanan_rawatinap','tindakan.id_pelayanan','pelayanan_rawatinap.id')
+       ->join('rawat_inap','id_RI','rawat_inap.id')
+       ->join('pasien','id_pasien','pasien.id')
+       ->orderBy('pelayanan_rawatinap.id','desc')
+       ->Where('tindakan.kode',null)
+       ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
+       ->get();
+        return view('pelayanan.indexRMK')->with('rmk',$rmk);
     }
 
     public function rmkSimpan(Request $request){

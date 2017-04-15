@@ -74,7 +74,10 @@ Route::post('/lrj','PelayananController@lrjSimpan');
 //ajax
 Route::get('lrj/norm/{id}','PelayananController@AjaxCariRawatJalan');
 
-Route::get('/rmk','PelayananController@rmk');
+Route::get('/rmk','PelayananController@indexRmk');
+Route::get('/rmk/form','PelayananController@rmk');
+Route::get('/rmk/form/edit/{id}','PelayananController@rmkUbah');
+Route::get('/rmk/form/edit/{id}','PelayananController@rmkUbahSimpan');
 Route::post('/rmk','PelayananController@rmkSimpan');
 //ajax
 Route::get('/rmk/norm/{id}','PelayananController@AjaxCariRawatInap');

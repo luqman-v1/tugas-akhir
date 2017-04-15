@@ -202,106 +202,199 @@
                                                     </span>
                                                     @endif
                                                 </div>
-                                                <div class="form-group {{ $errors->has('pemeriksaanFisik') ? 'has-error' : ''}}">
-                                                    <label for="pemeriksaanFisik">Pemeriksaan Fisik</label>
-                                                    <input class="form-control" name="pemeriksaanFisik" readonly="" id="pemeriksaanFisik" value="{{$edit->pemeriksaanFisik}}" type="text" placeholder="pemeriksaanFisik">
-                                                    @if ($errors->has('pemeriksaanFisik'))
+                                                 <div class="form-group {{ $errors->has('riwayatAlergi') ? 'has-error' : ''}}">
+                                                    <label for="riwayatAlergi">Riwayat Alergi</label>
+                                                    <input class="form-control" name="riwayatAlergi" id="riwayatAlergi" value="{{$edit->riwayatAlergi}}" readonly="" type="text" placeholder="Riwayat Alergi">
+                                                    @if ($errors->has('riwayatAlergi'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('pemeriksaanFisik') }}</strong>
+                                                        <strong>{{ $errors->first('riwayatAlergi') }}</strong>
                                                     </span>
                                                     @endif
-                                                </div> 
+                                                </div>
+                                                <label for="pemeriksaanFisik">Pemeriksaan Fisik</label>
+                                                <hr>
                                                 <div class="row">
-                                                    <div class="col-md-6">  
-                                                        <div class="form-group {{ $errors->has('radiologi') ? 'has-error' : ''}}">
-                                                         <label class="control-label " for="radiologi">Radiologi</label>
-                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" readonly="" name="radiologi" value="{{$edit->radiologi}}">
-                                                           <span class="help-block">
-                                                            <strong>{{ $errors->first('radiologi') }}</strong>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group {{ $errors->has('tensi') ? 'has-error' : ''}}">
+                                                            <label for="tensi">Tensi</label>
+                                                            <div class='input-group date'>
+                                                                <input class="form-control" readonly="" name="tensi" id="tensi" value="{{$edit->tensi}}" type="text" placeholder="Tensi">
+                                                                <span class="input-group-addon">mmHg</span>
+                                                            </div>
+                                                            @if ($errors->has('tensi'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('tensi') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group {{ $errors->has('rr') ? 'has-error' : ''}}">
+                                                            <label for="rr">RR</label>
+                                                            <div class='input-group date'>
+                                                                <input class="form-control" name="rr" id="rr" readonly="" value="{{$edit->rr}}" type="text" placeholder="RR">
+                                                                <span class="input-group-addon">x/menit</span>
+                                                            </div>
+                                                            @if ($errors->has('rr'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('rr') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group {{ $errors->has('nadi') ? 'has-error' : ''}}">
+                                                            <label for="nadi">Nadi</label>
+                                                            <div class='input-group date'>
+                                                                <input class="form-control" readonly="" name="nadi" id="nadi" value="{{$edit->nadi}}" type="text" placeholder="Nadi">
+                                                                <span class="input-group-addon">x/menit</span>
+                                                            </div>
+                                                            @if ($errors->has('nadi'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('nadi') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group {{ $errors->has('bb') ? 'has-error' : ''}}">
+                                                            <label for="bb">BB</label>
+                                                            <div class='input-group date'>
+                                                                <input class="form-control" name="bb" readonly="" id="bb" value="{{$edit->bb}}" type="text" placeholder="BB">
+                                                                <span class="input-group-addon">KG</span>
+                                                            </div>
+                                                            @if ($errors->has('bb'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('bb') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group {{ $errors->has('tb') ? 'has-error' : ''}}">
+                                                            <label for="tb">TB</label>
+                                                            <div class='input-group date'>
+                                                                <input class="form-control" name="tb" id="tb" readonly="" value="{{$edit->tb}}" type="text" placeholder="TB">
+                                                                <span class="input-group-addon">CM</span>
+                                                            </div>
+                                                            @if ($errors->has('tb'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('tb') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group {{ $errors->has('suhu') ? 'has-error' : ''}}">
+                                                            <label for="suhu">SUHU</label>
+                                                            <div class='input-group date'>
+                                                                <input class="form-control" name="suhu" readonly="" id="suhu" value="{{$edit->suhu}}" type="text" placeholder="SUHU">
+                                                                <span class="input-group-addon">&deg;C</span>
+                                                            </div>
+                                                            @if ($errors->has('suhu'))
+                                                            <span class="help-block">
+                                                                <strong>{{ $errors->first('suhu') }}</strong>
+                                                            </span>
+                                                            @endif
+                                                        </div>
+                                                    </div>    
+                                                </div>
+                                                <hr>
+
+                                                <div class="row">
+                                                   <div class="col-md-6">
+                                                    <div class="form-group {{ $errors->has('diagnosa') ? 'has-error' : ''}}">
+                                                       <label class="control-label " for="diagnosa">Diagnosa</label>
+                                                       <div class="input-group date">
+                                                        <div class="form-group">
+                                                         <input type="text" class="form-control" name="diagnosa" readonly="" value="{{$edit->diagnosa}}" placeholder="Diagnosa">
+                                                         <span class="help-block">
+                                                            <strong>{{ $errors->first('diagnosa') }}</strong>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group {{ $errors->has('laboratorium') ? 'has-error' : ''}}">
-                                                 <label class="control-label " for="laboratorium">Laboratorium</label>
-                                                 <div class="form-group">
-                                                     <input type="text" class="form-control" value="{{$edit->laboratorium}}" readonly="" name="laboratorium">
-                                                   <span class="help-block">
-                                                    <strong>{{ $errors->first('laboratorium') }}</strong>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group {{ $errors->has('tindakan') ? 'has-error' : ''}}">
+                                               <label class="control-label " for="tindakan">Tindakan</label>
+                                               <div class="input-group date">
+                                                <div class="form-group">
+                                                 <input type="text" class="form-control" readonly="" value="{{$edit->tindakan}}" name="tindakan" placeholder="Tindakan">
+
+                                                 <span class="help-block">
+                                                    <strong>{{ $errors->first('tindakan') }}</strong>
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                 <div class="col-md-6">
-                                    <div class="form-group {{ $errors->has('diagnosa') ? 'has-error' : ''}}">
-                                     <label class="control-label " for="diagnosa">Diagnosa</label>
-                                     <div class="input-group date">
-                                        <div class="form-group">
-                                           <input type="text" class="form-control" name="diagnosa" readonly="" value="{{$edit->diagnosa}}" placeholder="Diagnosa">
-                                           <span class="help-block">
-                                            <strong>{{ $errors->first('diagnosa') }}</strong>
-                                        </span>
+
+                                <div class="col-md-6">
+                                    <div class="form-group {{ $errors->has('kodeDiagnosis') ? 'has-error' : ''}}">
+                                       <label class="control-label " for="kodeDiagnosis">Kode Diagnosis</label>     
+                                       <div class='input-group date'>
+                                           <select name="kodeDiagnosis[]" class="form-control select2">
+                                            <option value="">pilih kode diagnosis</option>
+                                            @foreach($icd as $data)
+                                            <option value="{{$data->kode}}">{{$data->kode}}</option>
+                                            @endforeach                           
+                                        </select>
+                                        <span class="input-group-addon"></span>
                                     </div>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('kodeDiagnosis') }}</strong>
+                                    </span>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group {{ $errors->has('tindakan') ? 'has-error' : ''}}">
-                             <label class="control-label " for="tindakan">Tindakan</label>
-                             <div class="input-group date">
-                                <div class="form-group">
-                                   <input type="text" class="form-control" value="{{$edit->tindakan}}" readonly="" name="tindakan" placeholder="Tindakan">
-
-                                   <span class="help-block">
-                                    <strong>{{ $errors->first('tindakan') }}</strong>
+                            <div class="col-md-6">
+                                <div class="form-group {{ $errors->has('namaDiagnosis') ? 'has-error' : ''}}">
+                                   <label class="control-label " for="namaDiagnosis">Nama Diagnosis</label>
+                                   <div class='input-group date'>
+                                     <select name="namaDiagnosis[]" class="form-control select2">
+                                        <option value="">pilih nama diagnosis</option>
+                                        @foreach($icd as $data)
+                                        <option value="{{$data->nama}}">{{$data->nama}}</option>
+                                        @endforeach                           
+                                    </select>
+                                    <span class="add_field_button input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
+                                </div><br>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('namaDiagnosis') }}</strong>
                                 </span>
                             </div>
                         </div>
+
+                        <div class="input_fields_wrap"> </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group {{ $errors->has('kodeTindakan') ? 'has-error' : ''}}">
+                               <label class="control-label " for="kodeTindakan">Kode Tindakan</label>
+                               <div class='input-group date'>
+                                 <select name="kodeTindakan[]" class="form-control select2">
+                                     <option value="">pilih kode tindakan</option>
+                                     @foreach($icd9 as $data)
+                                     <option value="{{$data->kode}}">{{$data->kode}}</option>
+                                     @endforeach      
+                                 </select>
+                                 <span class="add_field_button2 input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
+                             </div>
+                             <span class="help-block">
+                                <strong>{{ $errors->first('kodeTindakan') }}</strong>
+                            </span>
+                        </div>
                     </div>
+                    <div class="input_fields_wrap2"></div>
                 </div>
 
-                <div class="col-md-6">
-                    <div class="form-group {{ $errors->has('kodeDiagnosis') ? 'has-error' : ''}}">
-                     <label class="control-label " for="kodeDiagnosis"  style="color: red";>Kode Diagnosis</label>
-                          <select name="kodeDiagnosis" class="form-control select2">
-                                @foreach($icd as $data)
-                              <option value="{{$data->kode}}">{{$data->kode}}</option>
-                                @endforeach                           
-                            </select>
-                           <span class="help-block">
-                            <strong>{{ $errors->first('kodeDiagnosis') }}</strong>
-                    </div>
-                </div>
-
-        <div class="col-md-6">
-            <div class="form-group {{ $errors->has('kodeTindakan') ? 'has-error' : ''}}">
-             <label class="control-label " for="kodeTindakan"  style="color: red";>Kode Tindakan</label>
-                <div class="form-group">
-                    <select name="kodeTindakan" class="form-control select2">
-                             @foreach($icd9 as $data)
-                              <option value="{{$data->nama}}">{{$data->nama}}</option>
-                                @endforeach      
-                            </select>
-
-                   <span class="help-block">
-                    <strong>{{ $errors->first('kodeTindakan') }}</strong>
-                </span>
             </div>
-    </div>
-</div>
-</div>
-
-</div>
-<div class="col-md-12">
-    <br><br><br><br><br>
-    <button type="submit" class="btn btn-primary btn-block btn-lg">Simpan</button>
-</div>
-</form>
+            <div class="col-md-12">
+                <br><br><br><br><br>
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Simpan</button>
+            </div>
+        </form>
 <!-- /.row (nested) -->
 </div>
 <!--End Advanced Tables -->
@@ -420,6 +513,45 @@
         });
     });
 </script>
-
+<script type="text/javascript">
+    $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeDiagnosis"></label><div class="input-group date"><select name="kodeDiagnosis[]" class="form-control select2"><option value="">pilih kode diagnosis</option> @foreach($icd as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><span class="help-block"><strong></strong></span></div></div><div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeDiagnosis"></label><div class="input-group date"><select name="namaDiagnosis[]" class="form-control select2"><option value="">pilih nama diagnosis</option> @foreach($icd as $data)<option value="{{$data->nama}}">{{$data->nama}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap2"); //Fields wrapper
+    var add_button      = $(".add_field_button2"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label " for="kodeTindakan"></label><div class="input-group date"><select name="kodeTindakan[]" class="form-control select2"><option value="">pilih kode tindakan</option> @foreach($icd9 as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+</script>
 @endsection
 

@@ -9,7 +9,7 @@
 <section class="content-header">
   <h1>
       Pelayanan Pasien
-      <small>Daftar Lembar Rawat Jalan</small>
+      <small>Daftar Lembar Keluar Masuk</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -24,7 +24,7 @@
 
       <div class="box">
         <div class="box-header">
-       <a href="{{url('lrj/form')}}"> <button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-plus"></span> Tambah Pasien Rawat Jalan</button></a>
+       <a href="{{url('rmk/form')}}"> <button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-plus"></span> Tambah Pasien Keluar Masuk</button></a>
       </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -41,7 +41,7 @@
           </thead>
           <tbody>
              <?php $i = 1; ?>
-             @foreach($lrj as $data)
+             @foreach($rmk as $data)
              <tr>
                 <td>{{ $i }}</td>
                 <td>{{$data->noRm}}</td>
@@ -53,7 +53,7 @@
                 <td>{{$data->kode}}</td>
                 @endif
                 <td>
-                <a href="{{url('lrj/form/edit/'.$data->idp)}}"><button type="button" class="btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Tambahkan Kode ICD</button></a>
+                <a href="{{url('rmk/form/edit/'.$data->idp)}}"><button type="button" class="btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Tambahkan Kode ICD</button></a>
                                                                        
                                                                    
                 </td>
@@ -66,6 +66,7 @@
 <!-- /.box-body -->
 </div>
 <!-- /.box -->
+
 </div>
 <!-- /.col -->
 </div>

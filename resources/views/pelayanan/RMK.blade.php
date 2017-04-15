@@ -3,6 +3,8 @@
 @section('css')
 <link rel="stylesheet" href="{{url('/plugins/datepicker/datepicker3.css')}}">
 <link rel="stylesheet" href="{{url('/plugins/timepicker/bootstrap-timepicker.min.css')}}">
+<link rel="stylesheet" href="{{url('/plugins/select2/select2.min.css')}}">
+
 
 @endsection
 @section('content')
@@ -206,10 +208,11 @@
                                                            <label class="control-label " for="namaPerawat">Nama Perawat Ruangan yang Menerima</label>
                                                            <div class="form-group">
                                                                <select name="namaPerawat" id="namaPerawat" class="form-control">
-                                                                 <option value="perawat 1">perawat 1</option>
-                                                                 <option value="perawat 2">perawat 2</option>
-                                                             </select>
-                                                             <span class="help-block">
+                                                                <option value="">pilih</option>
+                                                                <option value="perawat 1">perawat 1</option>
+                                                                <option value="perawat 2">perawat 2</option>
+                                                            </select>
+                                                            <span class="help-block">
                                                                 <strong>{{ $errors->first('namaPerawat') }}</strong>
                                                             </span>
                                                         </div>
@@ -220,10 +223,11 @@
                                                        <label class="control-label " for="namaPetugasTpp">Nama Petugas TPP RI</label>
                                                        <div class="form-group">
                                                            <select name="namaPetugasTpp" id="namaPetugasTpp" class="form-control">
-                                                             <option value="petugas 1">petugas 1</option>
-                                                             <option value="petugas 2">petugas 2</option>
-                                                         </select>
-                                                         <span class="help-block">
+                                                            <option value="">pilih</option>
+                                                            <option value="petugas 1">petugas 1</option>
+                                                            <option value="petugas 2">petugas 2</option>
+                                                        </select>
+                                                        <span class="help-block">
                                                             <strong>{{ $errors->first('namaPetugasTpp') }}</strong>
                                                         </span>
                                                     </div>
@@ -234,370 +238,393 @@
                                                    <label class="control-label " for="namaDokterPj">Nama Dokter PJ Pelayanan</label>
                                                    <div class="form-group">
                                                        <select name="namaDokterPj" id="namaDokterPj" class="form-control">
-                                                         <option value="dokter 1">dokter 1</option>
-                                                         <option value="dokter 2">dokter 2</option>
-                                                     </select>
-                                                     <span class="help-block">
+                                                        <option value="">pilih</option>
+                                                        <option value="dokter 1">dokter 1</option>
+                                                        <option value="dokter 2">dokter 2</option>
+                                                    </select>
+                                                    <span class="help-block">
                                                         <strong>{{ $errors->first('namaDokterPj') }}</strong>
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
-                                </div>
-                                <div class="row">
+                                    </div>
+                                    <div class="row">
                                        <div class="col-md-6">
-                                            <div class="form-group {{ $errors->has('caraKeluar') ? 'has-error' : ''}}">
-                                               <label class="control-label " for="caraKeluar">Cara Keluar RS</label>
-                                               <div class="form-group">
-                                                   <select name="caraKeluar" id="caraKeluar" class="form-control">
-                                                     <option value="Diizinkan">Diizinkan</option>
-                                                     <option value="permintaan sendiri">permintaan sendiri</option>
-                                                     <option value="lari">lari</option>
-                                                     <option value="pindah/dirujuk rs lain">pindah/dirujuk rs lain</option>
-                                                 </select>
-                                                 <span class="help-block">
-                                                    <strong>{{ $errors->first('caraKeluar') }}</strong>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                       <div class="col-md-6">
-                                            <div class="form-group {{ $errors->has('keadaanKeluar') ? 'has-error' : ''}}">
-                                               <label class="control-label " for="keadaanKeluar">Keadaan Keluar RS</label>
-                                               <div class="form-group">
-                                                   <select name="keadaanKeluar" id="keadaanKeluar" class="form-control">
-                                                     <option value="Sembuh">Sembuh</option>
-                                                     <option value="Belum Sembuh">Belum Sembuh</option>
-                                                     <option value="Meninggal">Meninggal</option>
-                                                 </select>
-                                                 <span class="help-block">
-                                                    <strong>{{ $errors->first('keadaanKeluar') }}</strong>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                     <div id="tglMeninggal" style="display:none;" class="col-md-6">
-                                        <div class="form-group{{ $errors->has('tglMeninggal') ? ' has-error' : '' }}">
-                                            <label class="control-label " for="tglMeninggal">Tanggal Meninggal</label><br>
-                                            <div class='input-group date'>
-                                                <input placeholder="tglMeninggal"  type='text' value="<?php echo date("Y-m-d"); ?>" name="tglMeninggal" class="form-control" id="tglMeninggalID">
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                            @if ($errors->has('tglMeninggal'))
+                                        <div class="form-group {{ $errors->has('caraKeluar') ? 'has-error' : ''}}">
+                                           <label class="control-label " for="caraKeluar">Cara Keluar RS</label>
+                                           <div class="form-group">
+                                               <select name="caraKeluar" id="caraKeluar" class="form-control">
+                                                <option value="">pilih</option>
+                                                <option value="Diizinkan">Diizinkan</option>
+                                                <option value="permintaan sendiri">permintaan sendiri</option>
+                                                <option value="lari">lari</option>
+                                                <option value="pindah/dirujuk rs lain">pindah/dirujuk rs lain</option>
+                                            </select>
                                             <span class="help-block">
-                                                <strong>{{ $errors->first('tglMeninggal') }}</strong>
+                                                <strong>{{ $errors->first('caraKeluar') }}</strong>
                                             </span>
-                                            @endif
                                         </div>
                                     </div>
-
-                                    <div id="jamMeninggal" style="display:none;" class="col-md-6">
-                                       <div class="bootstrap-timepicker">
-                                        <div class="form-group{{ $errors->has('jamMeninggal') ? ' has-error' : '' }}">
-                                            <label class="control-label " for="jamMeninggal">Jam Meninggal</label><br>
-                                            <div class="input-group">
-                                                <input type="text" id="valJam" name="jamMeninggal" value="{{old('jamMeninggal')}}" class="form-control timepicker">
-                                                <div class="input-group-addon">
-                                                  <i class="fa fa-clock-o"></i>
-                                              </div>
-                                          </div>
-                                          @if ($errors->has('jamMeninggal'))
-                                          <span class="help-block">
-                                            <strong>{{ $errors->first('jamMeninggal') }}</strong>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group {{ $errors->has('keadaanKeluar') ? 'has-error' : ''}}">
+                                       <label class="control-label " for="keadaanKeluar">Keadaan Keluar RS</label>
+                                       <div class="form-group">
+                                           <select name="keadaanKeluar" id="keadaanKeluar" class="form-control">
+                                            <option value="">pilih</option>
+                                            <option value="Sembuh">Sembuh</option>
+                                            <option value="Belum Sembuh">Belum Sembuh</option>
+                                            <option value="Meninggal">Meninggal</option>
+                                        </select>
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('keadaanKeluar') }}</strong>
                                         </span>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group{{ $errors->has('tglKeluar') ? ' has-error' : '' }}">
-                                            <label class="control-label " for="tglKeluar">Tanggal Keluar</label><br>
-                                            <div class='input-group date'>
-                                                <input placeholder="Tanggal Kunjungan" type='text' value="<?php echo date("Y-m-d"); ?>" name="tglKeluar" class="form-control" id="tanggal_keluar">
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                            @if ($errors->has('tglKeluar'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('tglKeluar') }}</strong>
-                                            </span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                       <div class="bootstrap-timepicker">
-                                        <div class="form-group{{ $errors->has('jamKeluar') ? ' has-error' : '' }}">
-                                            <label class="control-label " for="jamKeluar">Jam Keluar</label><br>
-                                            <div class="input-group">
-                                                <input type="text" name="jamKeluar" value="{{old('jamKeluar')}}" class="form-control timepicker">
-                                                <div class="input-group-addon">
-                                                  <i class="fa fa-clock-o"></i>
-                                              </div>
-                                          </div>
-                                          @if ($errors->has('jamKeluar'))
-                                          <span class="help-block">
-                                            <strong>{{ $errors->first('jamKeluar') }}</strong>
+                            <div id="tglMeninggal" style="display:none;" class="col-md-6">
+                                <div class="form-group{{ $errors->has('tglMeninggal') ? ' has-error' : '' }}">
+                                    <label class="control-label " for="tglMeninggal">Tanggal Meninggal</label><br>
+                                    <div class='input-group date'>
+                                        <input placeholder="tglMeninggal"  type='text' value="<?php echo date("Y-m-d"); ?>" name="tglMeninggal" class="form-control" id="tglMeninggalID">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
-                                        @endif
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group {{ $errors->has('diagnosisUtama') ? 'has-error' : ''}}">
-                                            <label class="control-label " for="diagnosisUtama">Diagnosis Utama</label>
-                                                 <div class="form-group">
-                                                       <input type="text" class="form-control" name="diagnosisUtama" value="{{old('diagnosisUtama')}}" placeholder="Diagnosis Utama">
-                                                       <span class="help-block">
-                                                        <strong>{{ $errors->first('diagnosisUtama') }}</strong>
-                                                    </span>
-                                                </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group {{ $errors->has('kodeDiagnosisUtama') ? 'has-error' : ''}}">
-                                         <label class="control-label " for="kodeDiagnosisUtama">Kode Diagnosis Utama</label>
-                                            <div class="form-group">
-                                               <input type="text" class="form-control" value="{{old('kodeDiagnosisUtama')}}" name="kodeDiagnosisUtama" placeholder="Kode Diagnosis Utama">
-                                               <span class="help-block">
-                                                <strong>{{ $errors->first('kodeDiagnosisUtama') }}</strong>
-                                            </span>
-                                         </div>
-                                    </div>
-                                </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group {{ $errors->has('diagnosalLain') ? 'has-error' : ''}}">
-                                 <label class="control-label " for="diagnosisLain">Diagnosis Lain</label>
-                                    <div class="form-group">
-                                       <input type="text" class="form-control" name="diagnosisLain" value="{{old('diagnosisLain')}}" placeholder="Diagnosis Lain">
-                                       <span class="help-block">
-                                        <strong>{{ $errors->first('diagnosisLain') }}</strong>
+                                    @if ($errors->has('tglMeninggal'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('tglMeninggal') }}</strong>
                                     </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('kodeDiagnosisLain') ? 'has-error' : ''}}">
-                         <label class="control-label " for="kodeDiagnosisLain">Kode Diagnosis Lain</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" value="{{old('kodeDiagnosisLain')}}" name="kodeDiagnosisLain" placeholder="Kode Diagnosis Lain">
-
-                               <span class="help-block">
-                                <strong>{{ $errors->first('kodeDiagnosisLain') }}</strong>
-                            </span>
-                            </div>
-                         </div>
-                    </div>
-                    <div class="col-md-6">
-                                <div class="form-group {{ $errors->has('komplikasi') ? 'has-error' : ''}}">
-                                 <label class="control-label " for="komplikasi">Komplikasi</label>
-                                    <div class="form-group">
-                                       <input type="text" class="form-control" name="komplikasi" value="{{old('komplikasi')}}" placeholder="Komplikasi">
-                                       <span class="help-block">
-                                        <strong>{{ $errors->first('komplikasi') }}</strong>
-                                    </span>
+                                    @endif
                                 </div>
                             </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('penyebabLuarCedera') ? 'has-error' : ''}}">
-                         <label class="control-label " for="penyebabLuarCedera">Penyebab Luar Cedera/Keracunan/Morfologi Neoplasma</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" value="{{old('penyebabLuarCedera')}}" name="penyebabLuarCedera" placeholder="Penyebab Luar Cedera/Keracunan/Morfologi Neoplasma">
-                               <span class="help-block">
-                                <strong>{{ $errors->first('penyebabLuarCedera') }}</strong>
-                            </span>
-                                </div>
-                         </div>
-                    </div>
-                </div>
-                    <div class="row">
-                     <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('operasiTindakan') ? 'has-error' : ''}}">
-                         <label class="control-label " for="operasiTindakan">Operasi/tindakan</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" name="operasiTindakan" value="{{old('operasiTindakan')}}" placeholder="Operasi/Tindakan">
-                               <span class="help-block">
-                                <strong>{{ $errors->first('operasiTindakan') }}</strong>
-                            </span>
-                        </div>
-                    </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('kodeOperasiTindakan') ? 'has-error' : ''}}">
-                         <label class="control-label " for="kodeOperasiTindakan">Kode Operasi/tindakan</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" value="{{old('kodeOperasiTindakan')}}" name="kodeOperasiTindakan" placeholder="Kode Operasi/tindakan">
-
-                               <span class="help-block">
-                                <strong>{{ $errors->first('kodeOperasiTindakan') }}</strong>
-                            </span>
-                        </div>
-                    </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('golonganOperasiTindakan') ? 'has-error' : ''}}">
-                         <label class="control-label " for="kodeDiagnosis">Golongan Operasi/tindakan</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" name="golonganOperasiTindakan" value="{{old('golonganOperasiTindakan')}}" placeholder="Golongan Operasi/tindakan">
-                               <span class="help-block">
-                                <strong>{{ $errors->first('golonganOperasiTindakan') }}</strong>
-                            </span>
-                                </div>
-                            </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('tanggal_operasiTindakan') ? 'has-error' : ''}}">
-                         <label class="control-label " for="tanggal_operasiTindakan">Tanggal Operasi/tindakan</label>
-                            <div class='input-group date'>
-                                <input placeholder="Tanggal Kunjungan" type='text' value="<?php echo date("Y-m-d"); ?>" name="tanggal_operasiTindakan" class="form-control" id="tanggal_operasiTindakan">
-                                  <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                       </span>
+                            <div id="jamMeninggal" style="display:none;" class="col-md-6">
+                               <div class="bootstrap-timepicker">
+                                <div class="form-group{{ $errors->has('jamMeninggal') ? ' has-error' : '' }}">
+                                    <label class="control-label " for="jamMeninggal">Jam Meninggal</label><br>
+                                    <div class="input-group">
+                                        <input type="text" id="valJam" name="jamMeninggal" value="{{old('jamMeninggal')}}" class="form-control timepicker">
+                                        <div class="input-group-addon">
+                                          <i class="fa fa-clock-o"></i>
+                                      </div>
                                   </div>
+                                  @if ($errors->has('jamMeninggal'))
+                                  <span class="help-block">
+                                    <strong>{{ $errors->first('jamMeninggal') }}</strong>
+                                </span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                     <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('infeksiNosokomial') ? 'has-error' : ''}}">
-                         <label class="control-label " for="infeksiNosokomial">Infeksi Nosokomial</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" name="infeksiNosokomial" value="{{old('infeksiNosokomial')}}" placeholder="Infeksi Nosokomial">
-                               <span class="help-block">
-                                <strong>{{ $errors->first('infeksiNosokomial') }}</strong>
-                            </span>
-                    </div>
-                    </div>
-                    </div>
-
                     <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('penyebabInfeksiNosokomial') ? 'has-error' : ''}}">
-                         <label class="control-label " for="penyebabInfeksiNosokomial">Penyebab Infeksi Nosokomial</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" value="{{old('penyebabInfeksiNosokomial')}}" name="penyebabInfeksiNosokomial" placeholder="Penyebab Infeksi Nosokomial">
-                               <span class="help-block">
-                                <strong>{{ $errors->first('penyebabInfeksiNosokomial') }}</strong>
+                        <div class="form-group{{ $errors->has('tglKeluar') ? ' has-error' : '' }}">
+                            <label class="control-label " for="tglKeluar">Tanggal Keluar</label><br>
+                            <div class='input-group date'>
+                                <input placeholder="Tanggal Kunjungan" type='text' value="<?php echo date("Y-m-d"); ?>" name="tglKeluar" class="form-control" id="tanggal_keluar">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            @if ($errors->has('tglKeluar'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('tglKeluar') }}</strong>
                             </span>
-                             </div>
-                         </div>
-                    </div>
-                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">  
-                                                        <div class="form-group {{ $errors->has('imunisasi') ? 'has-error' : ''}}">
-                                                           <label class="control-label " for="imunisasi">Imunisasi yang Pernah Didapat</label>
-                                                           <div class="form-group">
-                                                               <select name="imunisasi" id="imunisasi" class="form-control">
-                                                                 <option value="Ya">BCG</option>
-                                                                 <option value="Tidak">DT</option>
-                                                                 <option value="Tidak">DPT</option>
-                                                                 <option value="Tidak">POLIO</option>
-                                                                 <option value="Tidak">TFT</option>
-                                                                 <option value="Tidak">CAMPAK</option>
-                                                                 <option value="Tidak">Lain-lain</option>
-                                                             </select>
-                                                             <span class="help-block">
-                                                                <strong>{{ $errors->first('imunisasi') }}</strong>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                             </div>
-
-                    <div class="row">
-                     <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('pengobatanRadio/nuklir') ? 'has-error' : ''}}">
-                         <label class="control-label " for="pengobatanRadio">Pengobatan Radioterapi/Nuklir</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" name="pengobatanRadio" value="{{old('pengobatanRadio')}}" placeholder="Pengobatan Radioterapi/Nuklir">
-                               <span class="help-block">
-                                <strong>{{ $errors->first('pengobatanRadio') }}</strong>
-                            </span>
+                            @endif
                         </div>
                     </div>
-                    </div>
 
                     <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('transfusiDarah') ? 'has-error' : ''}}">
-                         <label class="control-label " for="transfusiDarah">Transfusi Darah</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" value="{{old('transfusiDarah')}}" name="transfusiDarah" placeholder="Transfusi Darah">
-
-                               <span class="help-block">
-                                <strong>{{ $errors->first('transfusiDarah') }}</strong>
-                            </span>
-                        </div>
+                       <div class="bootstrap-timepicker">
+                        <div class="form-group{{ $errors->has('jamKeluar') ? ' has-error' : '' }}">
+                            <label class="control-label " for="jamKeluar">Jam Keluar</label><br>
+                            <div class="input-group">
+                                <input type="text" name="jamKeluar" value="{{old('jamKeluar')}}" class="form-control timepicker">
+                                <div class="input-group-addon">
+                                  <i class="fa fa-clock-o"></i>
+                              </div>
+                          </div>
+                          @if ($errors->has('jamKeluar'))
+                          <span class="help-block">
+                            <strong>{{ $errors->first('jamKeluar') }}</strong>
+                        </span>
+                        @endif
                     </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('sebabKematian') ? 'has-error' : ''}}">
-                         <label class="control-label " for="sebabKematian">Sebab Kematian</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" name="sebabKematian" value="{{old('sebabKematian')}}" placeholder="Sebab Kematian">
-                               <span class="help-block">
-                                <strong>{{ $errors->first('sebabKematian') }}</strong>
-                            </span>
-                                </div>
-                            </div>
-                    </div>
-
-                                            <div class="col-md-6">  
-                                                        <div class="form-group {{ $errors->has('dokterMemulangkan') ? 'has-error' : ''}}">
-                                                           <label class="control-label " for="dokterMemulangkan">Dokter yang Memulangkan</label>
-                                                           <div class="form-group">
-                                                               <select name="dokterMemulangkan" id="dokterMemulangkan" class="form-control">
-                                                                 <option value="Ya">dokter 1</option>
-                                                                 <option value="Tidak">dokter 2</option>
-                                                                 <option value="Tidak">dokter 3</option>
-                                                             </select>
-                                                             <span class="help-block">
-                                                                <strong>{{ $errors->first('dokterMemulangkan') }}</strong>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
                 </div>
-                            </div>
-                    <div class="col-md-12">
-                        <br><br><br><br><br>
-                        <button type="submit" class="btn btn-primary btn-block btn-lg">Simpan</button>
-                    </div>
-        </form>
-<!-- /.row (nested) -->
+            </div>
         </div>
-<!--End Advanced Tables -->
-    </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group {{ $errors->has('komplikasi') ? 'has-error' : ''}}">
+                 <label class="control-label " for="komplikasi">Komplikasi</label>
+                 <div class="form-group">
+                   <input type="text" class="form-control" name="komplikasi" value="{{old('komplikasi')}}" placeholder="Komplikasi">
+                   <span class="help-block">
+                    <strong>{{ $errors->first('komplikasi') }}</strong>
+                </span>
+            </div>
+        </div>
     </div>
 
+    <div class="col-md-6">
+        <div class="form-group {{ $errors->has('penyebabLuarCedera') ? 'has-error' : ''}}">
+         <label class="control-label " for="penyebabLuarCedera">Penyebab Luar Cedera/Keracunan/Morfologi Neoplasma</label>
+         <div class="form-group">
+           <input type="text" class="form-control" value="{{old('penyebabLuarCedera')}}" name="penyebabLuarCedera" placeholder="Penyebab Luar Cedera/Keracunan/Morfologi Neoplasma">
+           <span class="help-block">
+            <strong>{{ $errors->first('penyebabLuarCedera') }}</strong>
+        </span>
     </div>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+    <div class="form-group {{ $errors->has('golonganOperasiTindakan') ? 'has-error' : ''}}">
+     <label class="control-label " for="golonganOperasiTindakan">Golongan Operasi/tindakan</label>
+     <div class="form-group">
+       <select name="golonganOperasiTindakan" class="form-control">
+        <option value="">Pilih</option>
+        <option value="Kecil">Kecil</option>
+        <option value="Sedang">Sedang</option>
+        <option value="Khusus">Khusus</option>
+    </select>
+    <span class="help-block">
+        <strong>{{ $errors->first('golonganOperasiTindakan') }}</strong>
+    </span>
+</div>
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group {{ $errors->has('tanggal_operasiTindakan') ? 'has-error' : ''}}">
+     <label class="control-label " for="tanggal_operasiTindakan">Tanggal Operasi/tindakan</label>
+     <div class='input-group date'>
+        <input placeholder="Tanggal Kunjungan" type='text' value="<?php echo date("Y-m-d"); ?>" name="tanggal_operasiTindakan" class="form-control" id="tanggal_operasiTindakan">
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+</div>
+</div>
+</div>
+<div class="row">
+ <div class="col-md-6">
+    <div class="form-group {{ $errors->has('infeksiNosokomial') ? 'has-error' : ''}}">
+     <label class="control-label " for="infeksiNosokomial">Infeksi Nosokomial</label>
+     <div class="form-group">
+       <input type="text" class="form-control" name="infeksiNosokomial" value="{{old('infeksiNosokomial')}}" placeholder="Infeksi Nosokomial">
+       <span class="help-block">
+        <strong>{{ $errors->first('infeksiNosokomial') }}</strong>
+    </span>
+</div>
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group {{ $errors->has('penyebabInfeksiNosokomial') ? 'has-error' : ''}}">
+     <label class="control-label " for="penyebabInfeksiNosokomial">Penyebab Infeksi Nosokomial</label>
+     <div class="form-group">
+       <input type="text" class="form-control" value="{{old('penyebabInfeksiNosokomial')}}" name="penyebabInfeksiNosokomial" placeholder="Penyebab Infeksi Nosokomial">
+       <span class="help-block">
+        <strong>{{ $errors->first('penyebabInfeksiNosokomial') }}</strong>
+    </span>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-6">  
+        <div class="form-group {{ $errors->has('imunisasi') ? 'has-error' : ''}}">
+           <label class="control-label " for="imunisasi">Imunisasi yang Pernah Didapat</label>
+           <div class="form-group">
+               <select name="imunisasi" id="imunisasi" class="form-control">
+                   <option value="">pilih</option>
+                   <option value="Ya">BCG</option>
+                   <option value="Tidak">DT</option>
+                   <option value="Tidak">DPT</option>
+                   <option value="Tidak">POLIO</option>
+                   <option value="Tidak">TFT</option>
+                   <option value="Tidak">CAMPAK</option>
+                   <option value="Tidak">Lain-lain</option>
+               </select>
+               <span class="help-block">
+                <strong>{{ $errors->first('imunisasi') }}</strong>
+            </span>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="row">
+ <div class="col-md-6">
+    <div class="form-group {{ $errors->has('pengobatanRadio/nuklir') ? 'has-error' : ''}}">
+     <label class="control-label " for="pengobatanRadio">Pengobatan Radioterapi/Nuklir</label>
+     <div class="form-group">
+       <input type="text" class="form-control" name="pengobatanRadio" value="{{old('pengobatanRadio')}}" placeholder="Pengobatan Radioterapi/Nuklir">
+       <span class="help-block">
+        <strong>{{ $errors->first('pengobatanRadio') }}</strong>
+    </span>
+</div>
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group {{ $errors->has('transfusiDarah') ? 'has-error' : ''}}">
+     <label class="control-label " for="transfusiDarah">Transfusi Darah</label>
+     <div class="form-group">
+       <input type="text" class="form-control" value="{{old('transfusiDarah')}}" name="transfusiDarah" placeholder="Transfusi Darah">
+
+       <span class="help-block">
+        <strong>{{ $errors->first('transfusiDarah') }}</strong>
+    </span>
+</div>
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group {{ $errors->has('sebabKematian') ? 'has-error' : ''}}">
+     <label class="control-label " for="sebabKematian">Sebab Kematian</label>
+     <div class="form-group">
+       <input type="text" class="form-control" name="sebabKematian" value="{{old('sebabKematian')}}" placeholder="Sebab Kematian">
+       <span class="help-block">
+        <strong>{{ $errors->first('sebabKematian') }}</strong>
+    </span>
+</div>
+</div>
+</div>
+
+<div class="col-md-6">  
+    <div class="form-group {{ $errors->has('dokterMemulangkan') ? 'has-error' : ''}}">
+       <label class="control-label " for="dokterMemulangkan">Dokter yang Memulangkan</label>
+       <div class="form-group">
+           <select name="dokterMemulangkan" id="dokterMemulangkan" class="form-control">
+           <option value="">pilih</option>
+             <option value="Ya">dokter 1</option>
+             <option value="Tidak">dokter 2</option>
+             <option value="Tidak">dokter 3</option>
+         </select>
+         <span class="help-block">
+            <strong>{{ $errors->first('dokterMemulangkan') }}</strong>
+        </span>
+    </div>
+</div>
+</div>
+</div>
+<div class="row">
+ <div class="col-md-6">
+    <div class="form-group {{ $errors->has('diagnosisUtama') ? 'has-error' : ''}}">
+     <label class="control-label " for="diagnosisUtama">Diagnosa Utama</label>
+        <div class="form-group">
+           <input type="text" class="form-control" name="diagnosisUtama"  value="{{old('diagnosisUtama')}}" placeholder="Diagnosa Utama">
+           <span class="help-block">
+            <strong>{{ $errors->first('diagnosisUtama') }}</strong>
+        </span>
+    </div>
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group {{ $errors->has('operasiTindakan') ? 'has-error' : ''}}">
+     <label class="control-label " for="operasiTindakan">Operasi Tindakan</label>
+        <div class="form-group">
+        <input type="text" class="form-control"  value="{{old('operasiTindakan')}}" name="operasiTindakan" placeholder="Operasi Tindakan">
+           <span class="help-block">
+            <strong>{{ $errors->first('operasiTindakan') }}</strong>
+        </span>
+    </div>
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group {{ $errors->has('kodeDiagnosis') ? 'has-error' : ''}}">
+     <label class="control-label " for="kodeDiagnosis">Kode Diagnosis</label>     
+     <div class='input-group date'>
+         <select name="kodeDiagnosis[]" class="form-control select2">
+            <option value="">pilih kode diagnosis</option>
+            @foreach($icd as $data)
+            <option value="{{$data->kode}}">{{$data->kode}}</option>
+            @endforeach                           
+        </select>
+        <span class="input-group-addon"></span>
+    </div>
+    <span class="help-block">
+        <strong>{{ $errors->first('kodeDiagnosis') }}</strong>
+    </span>
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group {{ $errors->has('namaDiagnosis') ? 'has-error' : ''}}">
+     <label class="control-label " for="namaDiagnosis">Nama Diagnosis</label>
+     <div class='input-group date'>
+       <select name="namaDiagnosis[]" class="form-control select2">
+        <option value="">pilih nama diagnosis</option>
+        @foreach($icd as $data)
+        <option value="{{$data->nama}}">{{$data->nama}}</option>
+        @endforeach                           
+    </select>
+    <span class="add_field_button input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
+</div><br>
+<span class="help-block">
+    <strong>{{ $errors->first('namaDiagnosis') }}</strong>
+</span>
+</div>
+</div>
+
+<div class="input_fields_wrap"> </div>
+
+<div class="col-md-6">
+    <div class="form-group {{ $errors->has('kodeTindakan') ? 'has-error' : ''}}">
+     <label class="control-label " for="kodeTindakan">Kode Tindakan</label>
+     <div class='input-group date'>
+       <select name="kodeTindakan[]" class="form-control select2">
+           <option value="">pilih kode tindakan</option>
+           @foreach($icd9 as $data)
+           <option value="{{$data->kode}}">{{$data->kode}}</option>
+           @endforeach      
+       </select>
+       <span class="add_field_button2 input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
+   </div>
+   <span class="help-block">
+    <strong>{{ $errors->first('kodeTindakan') }}</strong>
+</span>
+</div>
+</div>
+<div class="input_fields_wrap2"></div>
+</div>
+
+
+</div>
+</div>
+<div class="col-md-12">
+    <br><br><br><br><br>
+    <button type="submit" class="btn btn-primary btn-block btn-lg">Simpan</button>
+</div>
+</form>
+<!-- /.row (nested) -->
+</div>
+<!--End Advanced Tables -->
+</div>
+</div>
+
+</div>
 <!-- /. PAGE INNER  -->
-    </div>
-    </div>
+</div>
+</div>
 <!-- /.box-body -->
-    </form>
-    </div>
+</form>
+</div>
 <!-- /.box -->
 
 
-    </div>
-    </div>
-    </div>
+</div>
+</div>
+</div>
 <!-- /.row -->
 </section>
 <!-- /.content -->
@@ -610,10 +637,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="{{url('plugins/datepicker/bootstrap-datepicker.js')}}"></script>
 <script src="{{url('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
+<script src="{{url('/plugins/select2/select2.full.min.js')}}"></script>
+
 
 <script>
   $(function () {
-
+   $(".select2").select2();
      //Date picker
      $('#tglLahir').datepicker({
       autoclose: true,
@@ -628,10 +657,15 @@
    $('#tglMeninggalID').datepicker({
     autoclose : true,
     format : 'yyyy-mm-dd'
-   });
+});
+   $('#tanggal_keluar').datepicker({
+    autoclose : true,
+    format : 'yyyy-mm-dd'
+});
+   
 
     //Date picker
-   $('#tanggal_operasiTindakan').datepicker({
+    $('#tanggal_operasiTindakan').datepicker({
       autoclose: true,
       format: 'yyyy-mm-dd'
   });
@@ -645,7 +679,7 @@
         use24hours: true
 
     });
-      $(".valJam").timepicker({
+     $(".valJam").timepicker({
         showInputs: false,
         minuteStep: 1,
         locale: 'id',
@@ -666,50 +700,50 @@
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-                         console.log(data);
-                        var pasien = jQuery.parseJSON(JSON.stringify(data));
-                        var nama = document.getElementById("nama").value =pasien['nama'];
-                        var provinsi = document.getElementById("provinsi").value =pasien['provinsi'];
-                        var kabupaten = document.getElementById("kabupaten").value =pasien['kabupaten'];
-                        var kecamatan = document.getElementById("kecamatan").value =pasien['kecamatan'];
-                        var kelurahan = document.getElementById("kelurahan").value =pasien['kelurahan'];
-                        var dukuh = document.getElementById("dukuh").value =pasien['dukuh'];
-                        var rt = document.getElementById("rt").value =pasien['rt'];
-                        var rw = document.getElementById("rw").value =pasien['rw'];
-                        var tglLahir = document.getElementById("tglLahir").value =pasien['tglLahir'];
-                        var umur = document.getElementById("tahun").value =pasien['tahun'];
-                        var umur = document.getElementById("bulan").value =pasien['bulan'];
-                        var umur = document.getElementById("hari").value =pasien['hari'];
-                        
-                    },
-                      error:function(exception){
-                       var nama = document.getElementById("nama").value ='Tidak DItemukan';
-                        var provinsi = document.getElementById("provinsi").value ='Tidak DItemukan';
-                        var kabupaten = document.getElementById("kabupaten").value ='Tidak DItemukan';
-                        var kecamatan = document.getElementById("kecamatan").value ='Tidak DItemukan';
-                        var kelurahan = document.getElementById("kelurahan").value ='Tidak DItemukan';
-                        var dukuh = document.getElementById("dukuh").value ='Tidak DItemukan';
-                        var rt = document.getElementById("rt").value ='Tidak DItemukan';
-                        var rw = document.getElementById("rw").value ='Tidak DItemukan';
-                        var tglLahir = document.getElementById("tglLahir").value ='Tidak DItemukan';
-                        var umur = document.getElementById("tahun").value ='Tidak DItemukan';
-                        var umur = document.getElementById("bulan").value ='Tidak DItemukan';
-                        var umur = document.getElementById("hari").value ='Tidak DItemukan';
-                    }
-                });
+                     console.log(data);
+                     var pasien = jQuery.parseJSON(JSON.stringify(data));
+                     var nama = document.getElementById("nama").value =pasien['nama'];
+                     var provinsi = document.getElementById("provinsi").value =pasien['provinsi'];
+                     var kabupaten = document.getElementById("kabupaten").value =pasien['kabupaten'];
+                     var kecamatan = document.getElementById("kecamatan").value =pasien['kecamatan'];
+                     var kelurahan = document.getElementById("kelurahan").value =pasien['kelurahan'];
+                     var dukuh = document.getElementById("dukuh").value =pasien['dukuh'];
+                     var rt = document.getElementById("rt").value =pasien['rt'];
+                     var rw = document.getElementById("rw").value =pasien['rw'];
+                     var tglLahir = document.getElementById("tglLahir").value =pasien['tglLahir'];
+                     var umur = document.getElementById("tahun").value =pasien['tahun'];
+                     var umur = document.getElementById("bulan").value =pasien['bulan'];
+                     var umur = document.getElementById("hari").value =pasien['hari'];
+
+                 },
+                 error:function(exception){
+                   var nama = document.getElementById("nama").value ='Tidak DItemukan';
+                   var provinsi = document.getElementById("provinsi").value ='Tidak DItemukan';
+                   var kabupaten = document.getElementById("kabupaten").value ='Tidak DItemukan';
+                   var kecamatan = document.getElementById("kecamatan").value ='Tidak DItemukan';
+                   var kelurahan = document.getElementById("kelurahan").value ='Tidak DItemukan';
+                   var dukuh = document.getElementById("dukuh").value ='Tidak DItemukan';
+                   var rt = document.getElementById("rt").value ='Tidak DItemukan';
+                   var rw = document.getElementById("rw").value ='Tidak DItemukan';
+                   var tglLahir = document.getElementById("tglLahir").value ='Tidak DItemukan';
+                   var umur = document.getElementById("tahun").value ='Tidak DItemukan';
+                   var umur = document.getElementById("bulan").value ='Tidak DItemukan';
+                   var umur = document.getElementById("hari").value ='Tidak DItemukan';
+               }
+           });
             }else{
-                        var nama = document.getElementById("nama").value ='';
-                        var provinsi = document.getElementById("provinsi").value ='';
-                        var kabupaten = document.getElementById("kabupaten").value ='';
-                        var kecamatan = document.getElementById("kecamatan").value ='';
-                        var kelurahan = document.getElementById("kelurahan").value ='';
-                        var dukuh = document.getElementById("dukuh").value ='';
-                        var rt = document.getElementById("rt").value ='';
-                        var rw = document.getElementById("rw").value ='';
-                        var tglLahir = document.getElementById("tglLahir").value ='';
-                        var umur = document.getElementById("tahun").value ='';
-                        var umur = document.getElementById("bulan").value ='';
-                        var umur = document.getElementById("hari").value ='';
+                var nama = document.getElementById("nama").value ='';
+                var provinsi = document.getElementById("provinsi").value ='';
+                var kabupaten = document.getElementById("kabupaten").value ='';
+                var kecamatan = document.getElementById("kecamatan").value ='';
+                var kelurahan = document.getElementById("kelurahan").value ='';
+                var dukuh = document.getElementById("dukuh").value ='';
+                var rt = document.getElementById("rt").value ='';
+                var rw = document.getElementById("rw").value ='';
+                var tglLahir = document.getElementById("tglLahir").value ='';
+                var umur = document.getElementById("tahun").value ='';
+                var umur = document.getElementById("bulan").value ='';
+                var umur = document.getElementById("hari").value ='';
             }
         });
     });
@@ -720,15 +754,55 @@
             if (this.value == "Meninggal"){
                 $('#tglMeninggal').show();
                 $('#jamMeninggal').show();
-             
+
             }else{
                 $('#tglMeninggal').hide();
                 $('#jamMeninggal').hide();
-             
+
             }
         });
     });
 
- 
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeDiagnosis"></label><div class="input-group date"><select name="kodeDiagnosis[]" class="form-control select2"><option value="">pilih kode diagnosis</option> @foreach($icd as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><span class="help-block"><strong></strong></span></div></div><div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeDiagnosis"></label><div class="input-group date"><select name="namaDiagnosis[]" class="form-control select2"><option value="">pilih nama diagnosis</option> @foreach($icd as $data)<option value="{{$data->nama}}">{{$data->nama}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap2"); //Fields wrapper
+    var add_button      = $(".add_field_button2"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label " for="kodeTindakan"></label><div class="input-group date"><select name="kodeTindakan[]" class="form-control select2"><option value="">pilih kode tindakan</option> @foreach($icd9 as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
 </script>
 @endsection

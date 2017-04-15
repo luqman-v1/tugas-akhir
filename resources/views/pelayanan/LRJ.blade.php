@@ -337,7 +337,7 @@
                                        <label class="control-label " for="kodeDiagnosis">Kode Diagnosis</label>     
                                        <div class='input-group date'>
                                            <select name="kodeDiagnosis[]" class="form-control select2">
-                                            <option>pilih kode diagnosis</option>
+                                            <option value="">pilih kode diagnosis</option>
                                             @foreach($icd as $data)
                                             <option value="{{$data->kode}}">{{$data->kode}}</option>
                                             @endforeach                           
@@ -355,7 +355,7 @@
                                    <label class="control-label " for="namaDiagnosis">Nama Diagnosis</label>
                                    <div class='input-group date'>
                                      <select name="namaDiagnosis[]" class="form-control select2">
-                                        <option>pilih nama diagnosis</option>
+                                        <option value="">pilih nama diagnosis</option>
                                         @foreach($icd as $data)
                                         <option value="{{$data->nama}}">{{$data->nama}}</option>
                                         @endforeach                           
@@ -375,7 +375,7 @@
                                <label class="control-label " for="kodeTindakan">Kode Tindakan</label>
                                <div class='input-group date'>
                                  <select name="kodeTindakan[]" class="form-control select2">
-                                     <option>pilih kode tindakan</option>
+                                     <option value="">pilih kode tindakan</option>
                                      @foreach($icd9 as $data)
                                      <option value="{{$data->kode}}">{{$data->kode}}</option>
                                      @endforeach      
@@ -525,7 +525,7 @@
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeDiagnosis"></label><div class="input-group date"><select name="kodeDiagnosis[]" class="form-control select2"><option>pilih kode diagnosis</option> @foreach($icd as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><span class="help-block"><strong></strong></span></div></div><div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeDiagnosis"></label><div class="input-group date"><select name="namaDiagnosis[]" class="form-control select2"><option>pilih nama diagnosis</option> @foreach($icd as $data)<option value="{{$data->nama}}">{{$data->nama}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
+            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeDiagnosis"></label><div class="input-group date"><select name="kodeDiagnosis[]" class="form-control select2"><option value="">pilih kode diagnosis</option> @foreach($icd as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><span class="help-block"><strong></strong></span></div></div><div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeDiagnosis"></label><div class="input-group date"><select name="namaDiagnosis[]" class="form-control select2"><option value="">pilih nama diagnosis</option> @foreach($icd as $data)<option value="{{$data->nama}}">{{$data->nama}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
         }
     });
     
@@ -545,7 +545,7 @@
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label " for="kodeTindakan"></label><div class="input-group date"><select name="kodeTindakan[]" class="form-control select2"><option>pilih kode tindakan</option> @foreach($icd9 as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
+            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label " for="kodeTindakan"></label><div class="input-group date"><select name="kodeTindakan[]" class="form-control select2"><option value="">pilih kode tindakan</option> @foreach($icd9 as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
         }
     });
     
