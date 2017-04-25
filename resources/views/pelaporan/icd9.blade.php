@@ -67,18 +67,25 @@
 							<h4 class="modal-title">Tambah Kode</h4>
 						</div>
 						<div class="modal-body">
+						<form action="{{url('pelaporan/kodeicd9/simpan')}}" method="post">
 							<div class="form-group">
 								{{ csrf_field() }}
-							 <label class="control-label " for="penyebab">Kode Tindakan</label>
+							 <label class="control-label " for="penyebab">Kode Diagnosis</label>
 								<input type="text" name="kode" id="kode" class="form-control" placeholder="Kode">
 							</div>
+							
 							<div class="form-group">
-							 <label class="control-label " for="penyebab">Nama Tindakan</label>
-								<input type="text" name="nama" id="nama" class="form-control" placeholder="Nama">
-							</div>
+							<section>
+								    <div id="initRow">
+							 <label class="control-label " for="penyebab">Nama Diagnosis</label>
+								        <input type="text" class="form-control" name="nama" placeholder="Nama">
+								    </div>
+								</section>
+								</div>
 							<div class="form-group" align="right">
-								<button type="button" id="add" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-plus"></span> Simpan</button>
+								<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Simpan</button>
 							</div>
+						</form>
 						</div>
 					</div>
 				</div>
@@ -92,22 +99,24 @@
 							<h4 class="modal-title">Ubah Data</h4>
 						</div>
 						<div class="modal-body">
+						<form action="{{url('pelaporan/kodeicd9/ubah')}}" method="post">
 							<div class="form-group">
 								{{ csrf_field() }}
-								<input type="hidden" name="id" id="id-edit">
+								<input type="hidden" name="id" value="id-edit" id="id-edit">
 							<div class="form-group">
-							 <label class="control-label " for="penyebab">Kode Tindakan</label>
-								<input type="text" name="kode-edit" id="kode-edit" class="form-control" placeholder="Kode">
+							 <label class="control-label " for="penyebab">Kode Diagnosis</label>
+								<input type="text" name="kode_edit" id="kode-edit" class="form-control" placeholder="Kode">
 							</div>
 							<div class="form-group">
-							 <label class="control-label " for="penyebab">Nama Tindakan</label>
-								<input type="text" name="nama-edit" id="nama-edit" class="form-control" placeholder="Nama">
+							 <label class="control-label " for="penyebab">Nama Diagnosis</label>
+								<input type="text" name="nama_edit" value="nama-edit" id="nama-edit" class="form-control" placeholder="Nama">
 							</div>
 							
 							<div class="form-group" align="right">
-								<button type="button" id="edit" class="btn btn-success" data-dismiss="modal">Ubah <span class="glyphicon glyphicon-edit"></span></button>
+								<button type="submit" class="btn btn-success">Ubah <span class="glyphicon glyphicon-edit"></span></button>
 							</div>
 						</div>
+						</form>
 					</div>
 				</div>
 
@@ -157,62 +166,14 @@ $(document).on('click', '.delete-modal', function(id) {
 		});
 	});
 
-//ajax tambah data
-
-$("#add").click(function() {
-	$.ajax({
-		type: 'post',
-		url: '{{url('pelaporan/kodeicd9/simpan')}}',
-		data: {
-			'_token': $('input[name=_token]').val(),
-			'nama': $('input[name=nama]').val(),
-			'kode': $('input[name=kode]').val()
-		},
-		success: function(data) {
-			console.log(data);
-
-			if ((data.errors)){
-				$('.error').removeClass('hidden');
-				$('.error').text(data.errors.name);
-			}
-			else {
-				$('.error').remove();
-				$('#example1').append("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.nama + "</td><td>" + data.kode + "</td><td><button class='edit-modal btn btn-success' data-id='" + data.id + "' data-nama='" + data.nama + "' data-kode='" + data.kode + "'>Ubah <span class='glyphicon glyphicon-edit'></span></button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-name='" + data.nama + "'>Hapus <span class='glyphicon glyphicon-trash'></span></button></td></tr>");
-
-				swal("Berhasil!", "Data Kode Diagnosis telah di tambahkan", "success")
-			}
-		},
-	});
-	$('#nama').val('');
-	$('#kode').val('');
-});
-//ajax edit
 	
-	$(document).on('click', '.edit-modal', function() {
+$(document).on('click', '.edit-modal', function() {
 		$('#id-edit').val($(this).data('id'));
 		$('#nama-edit').val($(this).data('nama'));
 		$('#kode-edit').val($(this).data('kode'));
 		$('.bs-example-modal-sm2').modal('show');
 	});
 
-  $("#edit").click(function() {
-	$.ajax({
-		type: 'post',
-		url: '{{url('pelaporan/kodeicd9/ubah')}}',
-		data: {
-			'_token': $('input[name=_token]').val(),
-			'id' : $('input[name=id]').val(),
-			'nama': $('input[name=nama-edit]').val(),
-			'kode': $('input[name=kode-edit]').val()
-		},
-		success: function(data) {
-			console.log(data);
-			$('.item' + data.id).replaceWith("<tr class='item" + data.id + "'><td>" + data.id + "</td><td>" + data.nama + "</td><td>" + data.kode + "</td><td><button class='edit-modal btn btn-success' data-id='" + data.id + "' data-nama='" + data.nama + "' data-kode='" + data.kode + "'>Ubah <span class='glyphicon glyphicon-edit'></span></button> <button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-name='" + data.nama + "'>Hapus <span class='glyphicon glyphicon-trash'></span></button></td></tr>");
-			console.log(data.id);
-			swal("Berhasil!", "Data Kode Diagnosis telah di Ubah", "success")
-		},
-	});
-});
 
 
 

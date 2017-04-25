@@ -73,17 +73,22 @@ Route::post('/lrj/form/edit/{id}','PelayananController@lrjUbahSimpan');
 Route::post('/lrj','PelayananController@lrjSimpan');
 //ajax
 Route::get('lrj/norm/{id}','PelayananController@AjaxCariRawatJalan');
+Route::get('/lrj/diagnosa/{id}','PelayananController@AjaxCariDiagnosa');
 
 Route::get('/rmk','PelayananController@indexRmk');
 Route::get('/rmk/form','PelayananController@rmk');
 Route::get('/rmk/form/edit/{id}','PelayananController@rmkUbah');
-Route::get('/rmk/form/edit/{id}','PelayananController@rmkUbahSimpan');
+Route::post('/rmk/form/edit/{id}','PelayananController@rmkUbahSimpan');
 Route::post('/rmk','PelayananController@rmkSimpan');
 //ajax
 Route::get('/rmk/norm/{id}','PelayananController@AjaxCariRawatInap');
 
-Route::get('/pelayanan-igd','PelayananController@lgd');
+Route::get('/pelayanan-igd/form','PelayananController@lgd');
+Route::get('/pelayanan-igd','PelayananController@Indexlgd');
+Route::get('/pelayanan-igd/form/edit/{id}','PelayananController@lgdUbah');
+Route::post('/pelayanan-igd/form/edit/{id}','PelayananController@lgdUbahSimpan');
 Route::post('/pelayanan-igd','PelayananController@lgdSimpan');
+
 //ajax
 Route::get('/pelayanan-igd/norm/{id}','PelayananController@AjaxCarilgd');
 

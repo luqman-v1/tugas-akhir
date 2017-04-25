@@ -307,7 +307,7 @@
                                                        <label class="control-label " for="diagnosa">Diagnosa</label>
                                                        <div class="input-group date">
                                                         <div class="form-group">
-                                                         <input type="text" class="form-control" name="diagnosa" readonly="" value="{{$edit->diagnosa}}" placeholder="Diagnosa">
+                                                         <input type="text" id="input" disabled="" data-role="tagsinput" class="form-control" name="diagnosa" readonly="" value="{{$edit->diagnosa}}">
                                                          <span class="help-block">
                                                             <strong>{{ $errors->first('diagnosa') }}</strong>
                                                         </span>
@@ -321,7 +321,7 @@
                                                <label class="control-label " for="tindakan">Tindakan</label>
                                                <div class="input-group date">
                                                 <div class="form-group">
-                                                 <input type="text" class="form-control" readonly="" value="{{$edit->tindakan}}" name="tindakan" placeholder="Tindakan">
+                                                 <input type="text" class="form-control" id="input" data-role="tagsinput" disabled="" value="{{$edit->tindakan}}" name="tindakan" >
 
                                                  <span class="help-block">
                                                     <strong>{{ $errors->first('tindakan') }}</strong>
@@ -335,10 +335,10 @@
                                     <div class="form-group {{ $errors->has('kodeDiagnosis') ? 'has-error' : ''}}">
                                        <label class="control-label " for="kodeDiagnosis">Kode Diagnosis</label>     
                                        <div class='input-group date'>
-                                           <select name="kodeDiagnosis[]" class="form-control select2">
+                                           <select name="kodeDiagnosis" class="form-control select2">
                                             <option value="">pilih kode diagnosis</option>
                                             @foreach($icd as $data)
-                                            <option value="{{$data->kode}}">{{$data->kode}}</option>
+                                            <option value="{{$data->id}}">{{$data->kode}}</option>
                                             @endforeach                           
                                         </select>
                                         <span class="input-group-addon"></span>
@@ -353,11 +353,8 @@
                                 <div class="form-group {{ $errors->has('namaDiagnosis') ? 'has-error' : ''}}">
                                    <label class="control-label " for="namaDiagnosis">Nama Diagnosis</label>
                                    <div class='input-group date'>
-                                     <select name="namaDiagnosis[]" class="form-control select2">
-                                        <option value="">pilih nama diagnosis</option>
-                                        @foreach($icd as $data)
-                                        <option value="{{$data->nama}}">{{$data->nama}}</option>
-                                        @endforeach                           
+                                     <select name="namaDiagnosis" class="form-control">
+                                        <option value="">pilih nama diagnosis</option>                           
                                     </select>
                                     <span class="add_field_button input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
                                 </div><br>
@@ -367,8 +364,134 @@
                             </div>
                         </div>
 
-                        <div class="input_fields_wrap"> </div>
                         
+                        <div id="kodediag" style="display:none;" class="col-md-6">
+                                    <div class="form-group {{ $errors->has('kodeDiagnosis') ? 'has-error' : ''}}">
+                                       <label class="control-label " for="kodeDiagnosis">Kode Diagnosis</label>     
+                                       <div class='input-group date'>
+                                           <select name="kodeDiagnosis1" class="form-control select2">
+                                            <option value="">pilih kode diagnosis</option>
+                                            @foreach($icd as $data)
+                                            <option value="{{$data->id}}">{{$data->kode}}</option>
+                                            @endforeach                           
+                                        </select>
+                                    </div>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('kodeDiagnosis') }}</strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div id="namadiag" style="display:none;" class="col-md-6">
+                                <div class="form-group {{ $errors->has('namaDiagnosis') ? 'has-error' : ''}}">
+                                   <label class="control-label " for="namaDiagnosis">Nama Diagnosis</label>
+                                   <div class='input-group date'>
+                                     <select name="namaDiagnosis1" class="form-control">
+                                        <option value="">pilih nama diagnosis</option>                           
+                                    </select>
+                                </div>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('namaDiagnosis') }}</strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="kodediag1" style="display:none;" class="col-md-6">
+                                    <div class="form-group {{ $errors->has('kodeDiagnosis') ? 'has-error' : ''}}">
+                                       <label class="control-label " for="kodeDiagnosis">Kode Diagnosis</label>     
+                                       <div class='input-group date'>
+                                           <select name="kodeDiagnosis2" class="form-control select2">
+                                            <option value="">pilih kode diagnosis</option>
+                                            @foreach($icd as $data)
+                                            <option value="{{$data->id}}">{{$data->kode}}</option>
+                                            @endforeach                           
+                                        </select>
+                                        
+                                    </div>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('kodeDiagnosis') }}</strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div id="namadiag1" style="display:none;" class="col-md-6">
+                                <div class="form-group {{ $errors->has('namaDiagnosis') ? 'has-error' : ''}}">
+                                   <label class="control-label " for="namaDiagnosis">Nama Diagnosis</label>
+                                   <div class='input-group date'>
+                                     <select name="namaDiagnosis2" class="form-control">
+                                        <option value="">pilih nama diagnosis</option>                           
+                                    </select>
+                                </div>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('namaDiagnosis') }}</strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="kodediag2" style="display:none;" class="col-md-6">
+                                    <div class="form-group {{ $errors->has('kodeDiagnosis') ? 'has-error' : ''}}">
+                                       <label class="control-label " for="kodeDiagnosis">Kode Diagnosis</label>     
+                                       <div class='input-group date'>
+                                           <select name="kodeDiagnosis3" class="form-control select2">
+                                            <option value="">pilih kode diagnosis</option>
+                                            @foreach($icd as $data)
+                                            <option value="{{$data->id}}">{{$data->kode}}</option>
+                                            @endforeach                           
+                                        </select>
+                                        
+                                    </div>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('kodeDiagnosis') }}</strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div id="namadiag2" style="display:none;" class="col-md-6">
+                                <div class="form-group {{ $errors->has('namaDiagnosis') ? 'has-error' : ''}}">
+                                   <label class="control-label " for="namaDiagnosis">Nama Diagnosis</label>
+                                   <div class='input-group date'>
+                                     <select name="namaDiagnosis3" class="form-control">
+                                        <option value="">pilih nama diagnosis</option>                           
+                                    </select>
+                                </div>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('namaDiagnosis') }}</strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div id="kodediag3" style="display:none;" class="col-md-6">
+                                    <div class="form-group {{ $errors->has('kodeDiagnosis') ? 'has-error' : ''}}">
+                                       <label class="control-label " for="kodeDiagnosis">Kode Diagnosis</label>     
+                                       <div class='input-group date'>
+                                           <select name="kodeDiagnosis4" class="form-control select2">
+                                            <option value="">pilih kode diagnosis</option>
+                                            @foreach($icd as $data)
+                                            <option value="{{$data->id}}">{{$data->kode}}</option>
+                                            @endforeach                           
+                                        </select>
+                                        
+                                    </div>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('kodeDiagnosis') }}</strong>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div id="namadiag3" style="display:none;" class="col-md-6">
+                                <div class="form-group {{ $errors->has('namaDiagnosis') ? 'has-error' : ''}}">
+                                   <label class="control-label " for="namaDiagnosis">Nama Diagnosis</label>
+                                   <div class='input-group date'>
+                                     <select name="namaDiagnosis4" class="form-control">
+                                        <option value="">pilih nama diagnosis</option>                           
+                                    </select>
+                                </div>
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('namaDiagnosis') }}</strong>
+                                </span>
+                            </div>
+                        </div>
+
                         <div class="col-md-6">
                             <div class="form-group {{ $errors->has('kodeTindakan') ? 'has-error' : ''}}">
                                <label class="control-label " for="kodeTindakan">Kode Tindakan</label>
@@ -395,9 +518,9 @@
                 <button type="submit" class="btn btn-primary btn-block btn-lg">Simpan</button>
             </div>
         </form>
-<!-- /.row (nested) -->
-</div>
-<!--End Advanced Tables -->
+        <!-- /.row (nested) -->
+    </div>
+    <!--End Advanced Tables -->
 </div>
 </div>
 
@@ -431,7 +554,7 @@
 
 <script>
   $(function () {
-    $(".select2").select2();
+   $(".select2").select2();
      //Date picker
      $('#tglLahir').datepicker({
       autoclose: true,
@@ -461,7 +584,7 @@
             var cariID = $(this).val();
             if(cariID) {
                 $.ajax({
-                    url: 'lrj/norm/'+cariID,
+                    url: '{{url('lrj/norm')}}/'+cariID,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
@@ -481,41 +604,41 @@
                         var umur = document.getElementById("hari").value =pasien['hari'];
                         
                     },
-                      error:function(exception){
-                       var nama = document.getElementById("nama").value ='Tidak DItemukan';
-                        var provinsi = document.getElementById("provinsi").value ='Tidak DItemukan';
-                        var kabupaten = document.getElementById("kabupaten").value ='Tidak DItemukan';
-                        var kecamatan = document.getElementById("kecamatan").value ='Tidak DItemukan';
-                        var kelurahan = document.getElementById("kelurahan").value ='Tidak DItemukan';
-                        var dukuh = document.getElementById("dukuh").value ='Tidak DItemukan';
-                        var rt = document.getElementById("rt").value ='Tidak DItemukan';
-                        var rw = document.getElementById("rw").value ='Tidak DItemukan';
-                        var tglLahir = document.getElementById("tglLahir").value ='Tidak DItemukan';
-                        var umur = document.getElementById("tahun").value ='Tidak DItemukan';
-                        var umur = document.getElementById("bulan").value ='Tidak DItemukan';
-                        var umur = document.getElementById("hari").value ='Tidak DItemukan';
-                    }
-                });
+                    error:function(exception){
+                     var nama = document.getElementById("nama").value ='Tidak DItemukan';
+                     var provinsi = document.getElementById("provinsi").value ='Tidak DItemukan';
+                     var kabupaten = document.getElementById("kabupaten").value ='Tidak DItemukan';
+                     var kecamatan = document.getElementById("kecamatan").value ='Tidak DItemukan';
+                     var kelurahan = document.getElementById("kelurahan").value ='Tidak DItemukan';
+                     var dukuh = document.getElementById("dukuh").value ='Tidak DItemukan';
+                     var rt = document.getElementById("rt").value ='Tidak DItemukan';
+                     var rw = document.getElementById("rw").value ='Tidak DItemukan';
+                     var tglLahir = document.getElementById("tglLahir").value ='Tidak DItemukan';
+                     var umur = document.getElementById("tahun").value ='Tidak DItemukan';
+                     var umur = document.getElementById("bulan").value ='Tidak DItemukan';
+                     var umur = document.getElementById("hari").value ='Tidak DItemukan';
+                 }
+             });
             }else{
-                        var nama = document.getElementById("nama").value ='';
-                        var provinsi = document.getElementById("provinsi").value ='';
-                        var kabupaten = document.getElementById("kabupaten").value ='';
-                        var kecamatan = document.getElementById("kecamatan").value ='';
-                        var kelurahan = document.getElementById("kelurahan").value ='';
-                        var dukuh = document.getElementById("dukuh").value ='';
-                        var rt = document.getElementById("rt").value ='';
-                        var rw = document.getElementById("rw").value ='';
-                        var tglLahir = document.getElementById("tglLahir").value ='';
-                        var umur = document.getElementById("tahun").value ='';
-                        var umur = document.getElementById("bulan").value ='';
-                        var umur = document.getElementById("hari").value ='';
+                var nama = document.getElementById("nama").value ='';
+                var provinsi = document.getElementById("provinsi").value ='';
+                var kabupaten = document.getElementById("kabupaten").value ='';
+                var kecamatan = document.getElementById("kecamatan").value ='';
+                var kelurahan = document.getElementById("kelurahan").value ='';
+                var dukuh = document.getElementById("dukuh").value ='';
+                var rt = document.getElementById("rt").value ='';
+                var rw = document.getElementById("rw").value ='';
+                var tglLahir = document.getElementById("tglLahir").value ='';
+                var umur = document.getElementById("tahun").value ='';
+                var umur = document.getElementById("bulan").value ='';
+                var umur = document.getElementById("hari").value ='';
             }
         });
     });
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-    var max_fields      = 10; //maximum input boxes allowed
+    var max_fields      = 5; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID
     
@@ -523,8 +646,28 @@
     $(add_button).click(function(e){ //on add input button click
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
+           console.log(x);
+
+            if (x == 1){
+                $('#kodediag').show();
+                $('#namadiag').show();
+
+            }else if(x==2){
+                $('#kodediag1').show();
+                $('#namadiag1').show();
+            }else if(x==3){
+                $('#kodediag2').show();
+                $('#namadiag2').show();
+            }else if(x==4){
+                $('#kodediag3').show();
+                $('#namadiag3').show();
+            }else{
+                $('#kodediag4').show();
+                $('#namadiag4').show();
+            }
+
             x++; //text box increment
-            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeDiagnosis"></label><div class="input-group date"><select name="kodeDiagnosis[]" class="form-control select2"><option value="">pilih kode diagnosis</option> @foreach($icd as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><span class="help-block"><strong></strong></span></div></div><div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeDiagnosis"></label><div class="input-group date"><select name="namaDiagnosis[]" class="form-control select2"><option value="">pilih nama diagnosis</option> @foreach($icd as $data)<option value="{{$data->nama}}">{{$data->nama}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
+        
         }
     });
     
@@ -535,7 +678,7 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-    var max_fields      = 10; //maximum input boxes allowed
+    var max_fields      = 5; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap2"); //Fields wrapper
     var add_button      = $(".add_field_button2"); //Add button ID
     
@@ -544,6 +687,7 @@
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
+            
             $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label " for="kodeTindakan"></label><div class="input-group date"><select name="kodeTindakan[]" class="form-control select2"><option value="">pilih kode tindakan</option> @foreach($icd9 as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
         }
     });
@@ -553,5 +697,137 @@
     })
 });
 </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="kodeDiagnosis"]').on('change', function() {
+            var diagnosisID = $(this).val();
+
+            if(diagnosisID) {
+                $.ajax({
+                    url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        console.log(data);
+                        $('select[name="namaDiagnosis"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="namaDiagnosis"]').append('<option value="'+ value +'">'+ value +'</option>');
+                        });
+
+                    }
+                });
+            }else{
+                $('select[name="namaDiagnosis"]').empty();
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="kodeDiagnosis1"]').on('change', function() {
+            var diagnosisID = $(this).val();
+        
+            if(diagnosisID) {
+                $.ajax({
+                    url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        console.log(data);
+                        $('select[name="namaDiagnosis1"]').empty();
+                        $.each(data, function(key, value) {
+                            console.log(key);
+                            $('select[name="namaDiagnosis1"]').append('<option value="'+ value +'">'+ value +'</option>');
+                        });
+
+                    }
+                });
+            }else{
+                $('select[name="namaDiagnosis1"]').empty();
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        $('select[name="kodeDiagnosis2"]').on('change', function() {
+            var diagnosisID = $(this).val();
+
+            if(diagnosisID) {
+                $.ajax({
+                    url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        console.log(data);
+                        $('select[name="namaDiagnosis2"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="namaDiagnosis2"]').append('<option value="'+ value +'">'+ value +'</option>');
+                        });
+
+                    }
+                });
+            }else{
+                $('select[name="namaDiagnosis2"]').empty();
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        $('select[name="kodeDiagnosis3"]').on('change', function() {
+            var diagnosisID = $(this).val();
+
+            if(diagnosisID) {
+                $.ajax({
+                    url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        console.log(data);
+                        $('select[name="namaDiagnosis3"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="namaDiagnosis3"]').append('<option value="'+ value +'">'+ value +'</option>');
+                        });
+
+                    }
+                });
+            }else{
+                $('select[name="namaDiagnosis3"]').empty();
+            }
+        });
+    });
+
+    $(document).ready(function() {
+        $('select[name="kodeDiagnosis4"]').on('change', function() {
+            var diagnosisID = $(this).val();
+
+            if(diagnosisID) {
+                $.ajax({
+                    url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        console.log(data);
+                        $('select[name="namaDiagnosis4"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="namaDiagnosis4"]').append('<option value="'+ value +'">'+ value +'</option>');
+                        });
+
+                    }
+                });
+            }else{
+                $('select[name="namaDiagnosis4"]').empty();
+            }
+        });
+    });
+
+
+</script>
+
+
 @endsection
 

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>RL 5.1</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{url('/bootstrap/css/bootstrap.min.css')}}">
   <script src="{{url('plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
   <script src="{{url('/bootstrap/js/bootstrap.min.js')}}"></script>
 </head>
-<body>
+<body >
 
 <div class="container">
 <hr><width="100" height="75"></hr>
@@ -44,7 +44,7 @@
       
     </tbody>
   </table>
-</div>
 
+</div>
 </body>
 </html>

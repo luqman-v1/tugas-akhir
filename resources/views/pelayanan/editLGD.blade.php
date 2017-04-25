@@ -1,5 +1,5 @@
 @extends('layouts.index')
-@section('title') Lembar Rawat Jalan @endsection
+@section('title') Lembar Gawat Darurat @endsection
 @section('css')
 <link rel="stylesheet" href="{{url('/plugins/datepicker/datepicker3.css')}}">
 <link rel="stylesheet" href="{{url('/plugins/timepicker/bootstrap-timepicker.min.css')}}">
@@ -12,7 +12,7 @@
 <section class="content-header">
   <h1>
       Pelayanan Pasien
-      <small>Pelayanan Lembar Rawat Jalan</small>
+      <small>Pelayanan Lembar Gawat Darurat</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -26,7 +26,7 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Form Pelayanan Lembar Rawat Jalan</h3>
+                    <h3 class="box-title">Form Lembar Gawat Darurat</h3>
                 </div>
                 <div class="box-body">
                     <div class="row">
@@ -35,21 +35,21 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <form role="form" method="post" action="{{url('lrj')}}">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <form role="form" method="post" action="{{url('/pelayanan-igd/form/edit/'.$edit->idp)}}">
+                                               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="col-lg-6">
                                                     <div class="form-group {{ $errors->has('noRm') ? 'has-error' : ''}}">
                                                         <label for="noRm">Nomor Rekam Medis</label>
-                                                        <input class="form-control" id="noRm" name="noRm" value="{{old('noRm')}}" type="text" placeholder="Nomor Rekam Medis" onkeyup="
+                                                        <input class="form-control" readonly="" id="noRm" name="noRm" value="{{$edit->noRm}}" type="text" placeholder="Nomor Rekam Medis" onkeyup="
                                                         var noRm = this.value;
                                                         if (noRm.match(/^\d{2}$/) !== null) {
-                                                         this.value = noRm + '-';
-                                                     } else if (noRm.match(/^\d{2}\-\d{2}$/) !== null) {
-                                                         this.value = noRm + '-';
-                                                     }" maxlength="8">
+                                                           this.value = noRm + '-';
+                                                       } else if (noRm.match(/^\d{2}\-\d{2}$/) !== null) {
+                                                           this.value = noRm + '-';
+                                                       }" maxlength="8">
 
-                                                     @if ($errors->has('noRm'))
-                                                     <span class="help-block">
+                                                       @if ($errors->has('noRm'))
+                                                       <span class="help-block">
                                                         <strong>{{ $errors->first('noRm') }}</strong>
                                                     </span>
                                                     @endif
@@ -58,7 +58,7 @@
 
                                                 <div class="form-group {{ $errors->has('nama') ? 'has-error' : ''}}">
                                                     <label for="nama">Nama Pasien</label>
-                                                    <input class="form-control" type="text" readonly="" value="{{old('nama')}}"  id="nama" name="nama" placeholder="Nama Pasien">
+                                                    <input class="form-control" type="text" readonly="" value="{{$edit->nama}}"  id="nama" name="nama" placeholder="Nama Pasien">
                                                     @if ($errors->has('nama'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('nama') }}</strong>
@@ -70,24 +70,24 @@
                                                 <center><label for="title">Alamat Lengkap :</label></center>
                                                 <div class="form-group">
                                                     <label for="title">Provinsi :</label>
-                                                    <input class="form-control" readonly="" id="provinsi" type="text" value="{{old('provinsi')}}" name="provinsi" placeholder="Provinsi" style="width:350px">
+                                                    <input class="form-control" readonly="" id="provinsi" type="text" value="{{$edit->provinsi}}" name="provinsi" placeholder="Provinsi" style="width:350px">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="title">Kabupaten/Kota :</label>
-                                                    <input class="form-control" readonly="" id="kabupaten" type="text" value="{{old('kabupaten')}}" name="kabupaten" placeholder="Kabupaten/Kota" style="width:350px">
+                                                    <input class="form-control" readonly="" id="kabupaten" type="text" value="{{$edit->kabupaten}}" name="kabupaten" placeholder="Kabupaten/Kota" style="width:350px">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="title">Kecamatan :</label>
-                                                    <input class="form-control" readonly="" id="kecamatan" type="text" value="{{old('kecamatan')}}" name="kecamatan" placeholder="Kecamatan" style="width:350px">
+                                                    <input class="form-control" readonly="" id="kecamatan" type="text" value="{{$edit->kecamatan}}" name="kecamatan" placeholder="Kecamatan" style="width:350px">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="title">Kelurahan/Desa :</label>
-                                                    <input class="form-control" readonly="" id="kelurahan" type="text" value="{{old('kelurahan')}}" name="kelurahan" placeholder="Kelurahan/Desa" style="width:350px">
+                                                    <input class="form-control" readonly="" id="kelurahan" type="text" value="{{$edit->kelurahan}}" name="kelurahan" placeholder="Kelurahan/Desa" style="width:350px">
                                                 </div>
 
                                                 <div class="form-group {{ $errors->has('dukuh') ? 'has-error' : ''}}">
                                                     <label for="dukuh">Dukuh</label>
-                                                    <input class="form-control" readonly="" id="dukuh" type="text" value="{{old('dukuh')}}" name="dukuh" placeholder="Dukuh">
+                                                    <input class="form-control" readonly="" id="dukuh" type="text" value="{{$edit->dukuh}}" name="dukuh" placeholder="Dukuh">
                                                     @if ($errors->has('dukuh'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('dukuh') }}</strong>
@@ -100,7 +100,7 @@
                                                         <div class="form-group{{ $errors->has('rt') ? ' has-error' : '' }}">
                                                             <label class="control-label " for="RT">RT</label><br>
                                                             <div class='input-group date'>
-                                                                <input placeholder="RT" readonly="" type='text' value="{{old('rt')}}" name="rt" class="form-control" id="rt" >
+                                                                <input placeholder="RT" readonly="" type='text' value="{{$edit->rt}}" name="rt" class="form-control" id="rt" >
                                                             </div>
                                                             @if ($errors->has('RT'))
                                                             <span class="help-block">
@@ -114,7 +114,7 @@
                                                         <div class="form-group{{ $errors->has('rw') ? ' has-error' : '' }}">
                                                             <label class="control-label " for="rw">RW</label><br>
                                                             <div class='input-group date'>
-                                                                <input placeholder="rw" readonly="" type='text' value="{{old('rw')}}" name="rw" class="form-control" id="rw" >
+                                                                <input placeholder="rw" readonly="" type='text' value="{{$edit->rw}}" name="rw" class="form-control" id="rw" >
                                                             </div>
                                                             @if ($errors->has('rw'))
                                                             <span class="help-block">
@@ -134,7 +134,7 @@
                                                         <div class="form-group{{ $errors->has('tglLahir') ? ' has-error' : '' }}">
                                                             <label class="control-label " for="tglLahir"> Tanggal Lahir</label><br>
                                                             <div class='input-group date'>
-                                                                <input placeholder="Tanggal Lahir" readonly="" type='text' value="{{old('tglLahir')}}" name="tglLahir" class="form-control" id="tglLahir" >
+                                                                <input placeholder="Tanggal Lahir" readonly="" type='text' value="{{$edit->tglLahir}}" name="tglLahir" class="form-control" id="tglLahir" >
                                                                 <span class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                                 </span>
@@ -151,7 +151,7 @@
                                                         <div class="form-group {{ $errors->has('tahun') ? ' has-error' : '' }}">
                                                             <label class="control-label "  for="tahun"> Tahun</label><br>
                                                             <div class="input-group date">
-                                                                <input placeholder="tahun" readonly="" type='text' value="{{old('tahun')}}" name="tahun" class="form-control" id='tahun' />
+                                                                <input placeholder="tahun" readonly="" type='text' value="{{$edit->tahun}}" name="tahun" class="form-control" id='tahun' />
                                                                 
                                                             </div>
                                                             @if ($errors->has('tahun'))
@@ -167,7 +167,7 @@
                                                         <div class="form-group {{ $errors->has('bulan') ? ' has-error' : '' }}">
                                                             <label class="control-label " for="bulan"> Bulan</label><br>
                                                             <div class="input-group date">
-                                                                <input placeholder="bulan" readonly="" type='text' value="{{old('bulan')}}" name="bulan" class="form-control" id='bulan' />
+                                                                <input placeholder="bulan" readonly="" type='text' value="{{$edit->bulan}}" name="bulan" class="form-control" id='bulan' />
                                                                 
                                                             </div>
                                                             @if ($errors->has('bulan'))
@@ -183,7 +183,7 @@
                                                         <div class="form-group {{ $errors->has('hari') ? ' has-error' : '' }}">
                                                             <label class="control-label " for="hari"> Hari</label><br>
                                                             <div class="input-group date">
-                                                                <input placeholder="hari" readonly="" type='text' value="{{old('hari')}}" name="hari" class="form-control" id='hari' />
+                                                                <input placeholder="hari" readonly="" type='text' value="{{$edit->hari}}" name="hari" class="form-control" id='hari' />
                                                                 
                                                             </div>
                                                             @if ($errors->has('hari'))
@@ -194,145 +194,202 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group {{ $errors->has('anamnesa') ? 'has-error' : ''}}">
-                                                    <label for="anamnesa">Anamnesa</label>
-                                                    <input class="form-control" name="anamnesa" id="anamnesa" value="{{old('anamnesa')}}" type="text" placeholder="Anamnesa">
-                                                    @if ($errors->has('anamnesa'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('anamnesa') }}</strong>
-                                                    </span>
-                                                    @endif
-                                                </div>
-                                                <div class="form-group {{ $errors->has('riwayatAlergi') ? 'has-error' : ''}}">
-                                                    <label for="riwayatAlergi">Riwayat Alergi</label>
-                                                    <input class="form-control" name="riwayatAlergi" id="riwayatAlergi" value="{{old('riwayatAlergi')}}" type="text" placeholder="Riwayat Alergi">
-                                                    @if ($errors->has('riwayatAlergi'))
-                                                    <span class="help-block">
-                                                        <strong>{{ $errors->first('riwayatAlergi') }}</strong>
-                                                    </span>
-                                                    @endif
-                                                </div>
-                                                <label for="pemeriksaanFisik">Pemeriksaan Fisik</label>
-                                                <hr>
                                                 <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="form-group {{ $errors->has('tensi') ? 'has-error' : ''}}">
-                                                            <label for="tensi">Tensi</label>
-                                                            <div class='input-group date'>
-                                                                <input class="form-control" name="tensi" id="tensi" value="{{old('tensi')}}" type="text" placeholder="Tensi">
-                                                                <span class="input-group-addon">mmHg</span>
-                                                            </div>
-                                                            @if ($errors->has('tensi'))
-                                                            <span class="help-block">
-                                                                <strong>{{ $errors->first('tensi') }}</strong>
+                                                    <div class="col-md-6">  
+                                                        <div class="form-group {{ $errors->has('jenisKasus') ? 'has-error' : ''}}">
+                                                           <label class="control-label " for="jenisKasus">Jenis Kasus</label>
+                                                           <div class="form-group">
+                                                              <input type="text" class="form-control" readonly="" value="{{$edit->jenisKasus}}" name="">
+                                                             <span class="help-block">
+                                                                <strong>{{ $errors->first('jenisKasus') }}</strong>
                                                             </span>
-                                                            @endif
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group {{ $errors->has('rr') ? 'has-error' : ''}}">
-                                                            <label for="rr">RR</label>
-                                                            <div class='input-group date'>
-                                                                <input class="form-control" name="rr" id="rr" value="{{old('rr')}}" type="text" placeholder="RR">
-                                                                <span class="input-group-addon">x/menit</span>
-                                                            </div>
-                                                            @if ($errors->has('rr'))
-                                                            <span class="help-block">
-                                                                <strong>{{ $errors->first('rr') }}</strong>
-                                                            </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group {{ $errors->has('nadi') ? 'has-error' : ''}}">
-                                                            <label for="nadi">Nadi</label>
-                                                            <div class='input-group date'>
-                                                                <input class="form-control" name="nadi" id="nadi" value="{{old('nadi')}}" type="text" placeholder="Nadi">
-                                                                <span class="input-group-addon">x/menit</span>
-                                                            </div>
-                                                            @if ($errors->has('nadi'))
-                                                            <span class="help-block">
-                                                                <strong>{{ $errors->first('nadi') }}</strong>
-                                                            </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group {{ $errors->has('bb') ? 'has-error' : ''}}">
-                                                            <label for="bb">BB</label>
-                                                            <div class='input-group date'>
-                                                                <input class="form-control" name="bb" id="bb" value="{{old('pemeriksaanFisik')}}" type="text" placeholder="BB">
-                                                                <span class="input-group-addon">KG</span>
-                                                            </div>
-                                                            @if ($errors->has('bb'))
-                                                            <span class="help-block">
-                                                                <strong>{{ $errors->first('bb') }}</strong>
-                                                            </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group {{ $errors->has('tb') ? 'has-error' : ''}}">
-                                                            <label for="tb">TB</label>
-                                                            <div class='input-group date'>
-                                                                <input class="form-control" name="tb" id="tb" value="{{old('tb')}}" type="text" placeholder="TB">
-                                                                <span class="input-group-addon">CM</span>
-                                                            </div>
-                                                            @if ($errors->has('tb'))
-                                                            <span class="help-block">
-                                                                <strong>{{ $errors->first('tb') }}</strong>
-                                                            </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="form-group {{ $errors->has('suhu') ? 'has-error' : ''}}">
-                                                            <label for="suhu">SUHU</label>
-                                                            <div class='input-group date'>
-                                                                <input class="form-control" name="suhu" id="suhu" value="{{old('suhu')}}" type="text" placeholder="SUHU">
-                                                                <span class="input-group-addon">&deg;C</span>
-                                                            </div>
-                                                            @if ($errors->has('suhu'))
-                                                            <span class="help-block">
-                                                                <strong>{{ $errors->first('suhu') }}</strong>
-                                                            </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>    
                                                 </div>
-                                                <hr>
-
-                                                <div class="row">
-                                                   <div class="col-md-6">
-                                                    <div class="form-group {{ $errors->has('diagnosa') ? 'has-error' : ''}}">
-                                                       <label class="control-label " for="diagnosa">Diagnosa</label>
-                                                       <div class="input-group date">
-                                                        <div class="form-group">
-                                                         <input type="text" id="input" data-role="tagsinput" class="form-control" name="diagnosa" value="{{old('diagnosa')}}" placeholder="Diagnosa">
+                                                <div class="col-md-6">
+                                                    <div class="form-group {{ $errors->has('tindakanResuitasi') ? 'has-error' : ''}}">
+                                                       <label class="control-label " for="tindakanResuitasi">Tindakan Resusitasi</label>
+                                                       <div class="form-group">
+                                                        <input type="text" readonly="" value="{{$edit->tindakanResuitasi}}" class="form-control" name="">
                                                          <span class="help-block">
-                                                            <strong>{{ $errors->first('diagnosa') }}</strong>
+                                                            <strong>{{ $errors->first('tindakanResuitasi') }}</strong>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-6">  
+                                                <div class="form-group {{ $errors->has('cramsScore') ? 'has-error' : ''}}">
+                                                   <label class="control-label " for="cramsScore">Crams Score/ CGS</label>
+                                                   <div class="form-group">
+                                                       <input placeholder="Crams Score/ CGS" readonly="" type='text' value="{{$edit->cramsScore}}" name="cramsScore" class="form-control" id="cramsScore">
+                                                     <span class="help-block">
+                                                        <strong>{{ $errors->first('cramsScore') }}</strong>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
-
                                         <div class="col-md-6">
-                                            <div class="form-group {{ $errors->has('tindakan') ? 'has-error' : ''}}">
-                                               <label class="control-label " for="tindakan">Tindakan</label>
-                                               <div class="input-group date">
-                                                <div class="form-group">
-                                                 <input type="text" id="input" data-role="tagsinput" class="form-control" value="{{old('tindakan')}}" name="tindakan" placeholder="Tindakan">
-
+                                            <div class="form-group {{ $errors->has('anamnesis') ? 'has-error' : ''}}">
+                                               <label class="control-label " for="anamnesis">Anamnesis</label>
+                                               <div class="form-group">
+                                                  <input placeholder="Anamnesis" type='text' readonly="" value="{{$edit->anamnesis}}" name="anamnesis" class="form-control" id="anamnesis">
                                                  <span class="help-block">
-                                                    <strong>{{ $errors->first('tindakan') }}</strong>
+                                                    <strong>{{ $errors->first('anamnesis') }}</strong>
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group{{ $errors->has('pemeriksaanFisik') ? ' has-error' : '' }}">
+                                            <label class="control-label " for="pemeriksaanFisik">Pemeriksaan Fisik</label><br>
+                                               <input placeholder="Pemeriksaan Fisik" type='text' readonly="" value="{{$edit->pemeriksaanFisik}}" name="pemeriksaanFisik" class="form-control" id="pemeriksaanFisik">
+                                            </div>
+                                            @if ($errors->has('pemeriksaanFisik'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('pemeriksaanFisik') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
 
-                                <div style="display:none;" class="col-md-6">
+                                    <div class="col-md-6">
+                                       <div class="bootstrap-timepicker">
+                                        <div class="form-group{{ $errors->has('pemeriksaanStatus') ? ' has-error' : '' }}">
+                                            <label class="control-label " for="jam_masuk">Pemeriksaan Status Nyeri</label><br>
+                                             <input placeholder="Pemeriksaan Status Nyeri" type='text' readonly="" value="{{$edit->pemeriksaanStatus}}" name="pemeriksaanStatus" class="form-control" id="pemeriksaanStatus">
+                                          </div>
+                                          @if ($errors->has('pemeriksaanStatus'))
+                                          <span class="help-block">
+                                            <strong>{{ $errors->first('pemeriksaanStatus') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                            </div>
+                        </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group {{ $errors->has('pemeriksaanLaboratorium') ? 'has-error' : ''}}">
+                                            <label class="control-label " for="pemeriksaanLaboratorium">Pemeriksaan Laboratorium</label>
+                                                 <div class="form-group">
+                                                       <input type="text" class="form-control" readonly="" name="pemeriksaanLaboratorium" value="{{$edit->pemeriksaanLaboratorium}}" placeholder="Pemeriksaan Laboratorium">
+                                                       <span class="help-block">
+                                                        <strong>{{ $errors->first('pemeriksaanLaboratorium') }}</strong>
+                                                    </span>
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group {{ $errors->has('pemeriksaanRadiologi') ? 'has-error' : ''}}">
+                                         <label class="control-label " for="pemeriksaanRadiologi">Pemeriksaan Radiologi</label>
+                                            <div class="form-group">
+                                               <input type="text" class="form-control" readonly="" value="{{$edit->pemeriksaanRadiologi}}" name="pemeriksaanRadiologi" placeholder="Pemeriksaan Radiologi">
+
+                                               <span class="help-block">
+                                                <strong>{{ $errors->first('pemeriksaanRadiologi') }}</strong>
+                                            </span>
+                                         </div>
+                                    </div>
+                                </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group {{ $errors->has('diagonosisAwal') ? 'has-error' : ''}}">
+                                 <label class="control-label " for="diagonosisAwal">Diagnosis Awal</label>
+                                    <div class="form-group">
+                                       <input type="text" disabled="" class="form-control" data-role="tagsinput" name="diagonosisAwal" value="{{$edit->diagonosisAwal}}">
+                                       <span class="help-block">
+                                        <strong>{{ $errors->first('diagonosisAwal') }}</strong>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group {{ $errors->has('terapiTindakan') ? 'has-error' : ''}}">
+                         <label class="control-label " for="terapiTindakan">Terapi/Tindakan di IGD</label>
+                            <div class="form-group">
+                               <input type="text" disabled="" class="form-control" data-role="tagsinput" value="{{$edit->terapiTindakan}}" name="terapiTindakan">
+                               <span class="help-block">
+                                <strong>{{ $errors->first('terapiTindakan') }}</strong>
+                            </span>
+                            </div>
+                         </div>
+                    </div>
+                    <div class="col-md-6">
+                                <div class="form-group {{ $errors->has('diagnosisAkhir') ? 'has-error' : ''}}">
+                                 <label class="control-label " for="diagnosisAkhir">Diagnosis Akhir</label>
+                                    <div class="form-group">
+                                       <input type="text" class="form-control" data-role="tagsinput" name="diagnosisAkhir" value="{{$edit->diagnosisAkhir}}" disabled="">
+                                       <span class="help-block">
+                                        <strong>{{ $errors->first('diagnosisAkhir') }}</strong>
+                                    </span>
+                                </div>
+                            </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group {{ $errors->has('tindakanLanjut') ? 'has-error' : ''}}">
+                         <label class="control-label" for="tindakanLanjut">Tindak Lanjut</label>
+                            <div class="form-group">
+                              <input type="text" class="form-control" readonly="" id="tindakanLanjut" value="{{$edit->tindakanLanjut}}" name="">
+                               <span class="help-block">
+                                <strong>{{ $errors->first('tindakanLanjut') }}</strong>
+                            </span>
+                                </div>
+                         </div>
+                    </div>
+
+                    <div id="dirujuk" style="display:none;" class="col-md-6">
+                                <div class="form-group {{ $errors->has('dirujuk') ? 'has-error' : ''}}">
+                                 <label class="control-label " for="dirujuk">Dirujuk Ke</label>
+                                    <div class="form-group">
+                                       <input type="text" class="form-control" name="dirujuk" value="{{$edit->dirujuk}}" readonly="" placeholder="Dirujuk Ke">
+                                       <span class="help-block">
+                                        <strong>{{ $errors->first('dirujuk') }}</strong>
+                                    </span>
+                                </div>
+                            </div>
+                    </div>
+
+                     <div id="tglMeninggal" style="display:none;" class="col-md-6">
+                                        <div class="form-group{{ $errors->has('tglMeninggal') ? ' has-error' : '' }}">
+                                            <label class="control-label " for="tglMeninggal">Tanggal Meninggal</label><br>
+                                            <div class='input-group date'>
+                                                <input placeholder="tglMeninggal" type='text' value="{{$edit->tglMeninggal}}" readonly="" name="tglMeninggal" class="form-control" id="tanggal_masuk">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            @if ($errors->has('tglMeninggal'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('tglMeninggal') }}</strong>
+                                            </span>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div id="jamMeninggal" style="display:none;" class="col-md-6">
+                                       <div class="bootstrap-timepicker">
+                                        <div class="form-group{{ $errors->has('jamMeninggal') ? ' has-error' : '' }}">
+                                            <label class="control-label " for="jamMeninggal">Jam Meninggal</label><br>
+                                            <div class="input-group">
+                                                <input type="text" id="valJam" name="jamMeninggal" value="{{$edit->jamMeninggal}}" readonly="" class="form-control timepicker">
+                                                <div class="input-group-addon">
+                                                  <i class="fa fa-clock-o"></i>
+                                              </div>
+                                          </div>
+                                          @if ($errors->has('jamMeninggal'))
+                                          <span class="help-block">
+                                            <strong>{{ $errors->first('jamMeninggal') }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                             <div class="col-md-6">
                                     <div class="form-group {{ $errors->has('kodeDiagnosis') ? 'has-error' : ''}}">
                                        <label class="control-label " for="kodeDiagnosis">Kode Diagnosis</label>     
                                        <div class='input-group date'>
@@ -350,7 +407,7 @@
                                 </div>
                             </div>
 
-                            <div style="display:none;" class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('namaDiagnosis') ? 'has-error' : ''}}">
                                    <label class="control-label " for="namaDiagnosis">Nama Diagnosis</label>
                                    <div class='input-group date'>
@@ -493,7 +550,7 @@
                             </div>
                         </div>
 
-                        <div style="display:none;" class="col-md-6">
+                        <div class="col-md-6">
                             <div class="form-group {{ $errors->has('kodeTindakan') ? 'has-error' : ''}}">
                                <label class="control-label " for="kodeTindakan">Kode Tindakan</label>
                                <div class='input-group date'>
@@ -555,7 +612,6 @@
 
 <script>
   $(function () {
-
    $(".select2").select2();
      //Date picker
      $('#tglLahir').datepicker({
@@ -581,6 +637,25 @@
  });
 </script>
 <script type="text/javascript">
+     $(document).ready(function(){
+           var tindakLanjut =  $('#tindakanLanjut').val();
+           // console.log(tindakLanjut);
+            if(tindakLanjut == 'Dirujuk'){
+                $('#jamMeninggal').hide();
+                $('#tglMeninggal').hide();
+                $('#dirujuk').show();
+            }else if(tindakLanjut == 'Meninggal'){
+                $('#jamMeninggal').show();
+                $('#tglMeninggal').show();
+                $('#dirujuk').hide();
+            }else{
+                 $('#jamMeninggal').hide();
+                $('#tglMeninggal').hide();
+                $('#dirujuk').hide();
+            }
+        });
+    
+
     $(document).ready(function() {
         $('#noRm').on('keyup', function(e) {
             var cariID = $(this).val();
@@ -680,7 +755,7 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-    var max_fields      = 10; //maximum input boxes allowed
+    var max_fields      = 5; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap2"); //Fields wrapper
     var add_button      = $(".add_field_button2"); //Add button ID
     

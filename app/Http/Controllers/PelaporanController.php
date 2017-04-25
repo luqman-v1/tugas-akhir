@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use App\Rawat_Jalan;
 use App\Rawat_Inap;
 use App\Rawat_IGD;
+use App\PelayananRJ;
 use Alert;
 use DateTime;
 use PDF;
+use DB;
 use App\Pasien;
+use App\Diagnosis;
+use App\PelayananRI;
 use \Carbon\Carbon;
+
 class PelaporanController extends Controller
 {
     public function getFormRegister(){
@@ -25,10 +30,34 @@ class PelaporanController extends Controller
 			'sampaiTanggal' => 'required',
 		]);
 
+        if ($request->register == 'RJ') {
+            
+             $register = PelayananRJ::join('rawat_jalan','id_RJ','rawat_jalan.id')
+                ->join('pasien','id_pasien','pasien.id')
+            ->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])
+            ->orderBy('pelayanan_rawatjalan.id','desc')
+            ->get();
+            $nama = 'Rawat Jalan';
 
-		$rj = Rawat_Jalan::whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->get();
+        return view('pelaporan.viewRegister')->with(compact('register','nama'));
 
-    	return view('pelaporan.hasil')->with(compact('rj'));
+        }elseif($request->register == 'RI'){
+
+              $register = PelayananRI::join('rawat_inap','id_RI','rawat_inap.id')
+                ->join('pasien','id_pasien','pasien.id')
+            ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+            ->orderBy('pelayanan_rawatinap.id','desc')
+            ->get();
+            $nama = 'Rawat Inap';
+            
+        return view('pelaporan.viewRegister')->with(compact('register','nama'));
+
+        }else{
+
+        }
+
+		
+
     }
 
     public function tes(){
@@ -54,6 +83,9 @@ class PelaporanController extends Controller
             $year = date("Y", $dateValue) ." "; 
             $mon = date("m", $dateValue); 
             $now = Carbon::now();
+            
+            $month_name = date("F", mktime(0, 0, 0, $mon, 10));
+
         if ($request->rl == 51) {
         
         $getPasienBaru = Pasien::whereBetween('tglMasuk', [$request->dariTanggal,$request->sampaiTanggal])->count();
@@ -68,10 +100,10 @@ class PelaporanController extends Controller
       
         $month_name = date("F", mktime(0, 0, 0, $mon, 10));
         $tanggal = $now->toFormattedDateString();
-        $pdf = PDF::loadView('pelaporan.extR1', compact('getPasienBaru','jumlah','month_name','year'));
+        // $pdf = PDF::loadView('pelaporan.extR1', compact('getPasienBaru','jumlah','month_name','year'));
         
-        return $pdf->download("RL 5.1 - $tanggal.pdf");
-        // return view('pelaporan.extR1')->with('getPasienBaru',$getPasienBaru)->with('jumlah',$jumlah);
+        // return $pdf->download("RL 5.1 - $tanggal.pdf");
+        return view('pelaporan.extR1')->with(compact('getPasienBaru','jumlah','month_name','year'));
         
         }elseif ($request->rl == 52) {
     
@@ -93,7 +125,38 @@ class PelaporanController extends Controller
         $tanggal = $now->toFormattedDateString();
         $pdf = PDF::loadView('pelaporan.extR2', compact('bedahUmum','Digestive','BedahThroraks','Orthopedi','Urologi','BedahPlastik','month_name','year'));
         
-        return $pdf->download("RL 5.2 - $tanggal.pdf");
+        // return $pdf->download("RL 5.2 - $tanggal.pdf");
+        return view('pelaporan.extR2')->with(compact('bedahUmum','Digestive','BedahThroraks','Orthopedi','Urologi','BedahPlastik','month_name','year'));
+
+         }elseif ($request->rl == 53) {
+                $extR3 = DB::table('diagnosis')
+                ->join('pelayanan_rawatinap','id_pelayanan','pelayanan_rawatinap.id')
+                ->join('rawat_inap','id_RI','rawat_inap.id')
+                ->join('pasien','id_pasien','pasien.id')
+                ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+                ->select('kode','diagnosis.nama as aka',DB::raw('
+                    (SELECT COUNT(jenisKelamin) FROM pasien  WHERE jenisKelamin="Laki-Laki"  AND NOT keadaanKeluar="Meninggal" ) 
+                    as lakiHidup,
+                    (SELECT COUNT(jenisKelamin) FROM pasien  WHERE jenisKelamin="Perempuan" AND NOT keadaanKeluar="Meninggal") 
+                    as PerempuanHidup ,
+                    (SELECT COUNT(jenisKelamin) FROM pasien  WHERE jenisKelamin="Laki-Laki"  AND keadaanKeluar="Meninggal" ) 
+                    as lakiMati,
+                    (SELECT COUNT(jenisKelamin) FROM pasien  WHERE jenisKelamin="Perempuan" AND keadaanKeluar="Meninggal") 
+                    as PerempuanMati ,
+                    (SELECT COUNT(jenisKelamin) FROM pasien  ) 
+                    as total
+                    ')
+                )
+              
+                ->groupBy('kode')
+                ->orderBy('total','asc')
+                ->limit(10)
+                ->get();
+
+             
+             return view('pelaporan.extR3')->with(compact('extR3','month_name','year'));
+         }else{
+            return view('pelaporan.extr4');
          }
 
         

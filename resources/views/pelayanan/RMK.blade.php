@@ -35,7 +35,7 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <form role="form" method="post" action="">
+                                            <form role="form" method="post" action="{{url('rmk')}}">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="col-lg-6">
                                                     <div class="form-group {{ $errors->has('noRm') ? 'has-error' : ''}}">
@@ -192,7 +192,9 @@
                                                 </div>
                                                 <div class="form-group {{ $errors->has('diagnosisMasuk') ? 'has-error' : ''}}">
                                                     <label for="diagnosisMasuk">Diagnosis Masuk</label>
-                                                    <input class="form-control" name="diagnosisMasuk" id="diagnosisMasuk" value="{{old('diagnosisMasuk')}}" type="text" placeholder="Diagnosis Masuk">
+                                                    <div class="form-group">
+                                                    <input class="form-control" data-role="tagsinput" name="diagnosisMasuk" id="diagnosisMasuk" value="{{old('diagnosisMasuk')}}" type="text" placeholder="Diagnosis Masuk">
+                                                    </div>
                                                     @if ($errors->has('diagnosisMasuk'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('diagnosisMasuk') }}</strong>
@@ -357,19 +359,6 @@
             </div>
         </div>
         <div class="row">
-
-            <div class="col-md-6">
-                <div class="form-group {{ $errors->has('komplikasi') ? 'has-error' : ''}}">
-                 <label class="control-label " for="komplikasi">Komplikasi</label>
-                 <div class="form-group">
-                   <input type="text" class="form-control" name="komplikasi" value="{{old('komplikasi')}}" placeholder="Komplikasi">
-                   <span class="help-block">
-                    <strong>{{ $errors->first('komplikasi') }}</strong>
-                </span>
-            </div>
-        </div>
-    </div>
-
     <div class="col-md-6">
         <div class="form-group {{ $errors->has('penyebabLuarCedera') ? 'has-error' : ''}}">
          <label class="control-label " for="penyebabLuarCedera">Penyebab Luar Cedera/Keracunan/Morfologi Neoplasma</label>
@@ -444,13 +433,13 @@
            <div class="form-group">
                <select name="imunisasi" id="imunisasi" class="form-control">
                    <option value="">pilih</option>
-                   <option value="Ya">BCG</option>
-                   <option value="Tidak">DT</option>
-                   <option value="Tidak">DPT</option>
-                   <option value="Tidak">POLIO</option>
-                   <option value="Tidak">TFT</option>
-                   <option value="Tidak">CAMPAK</option>
-                   <option value="Tidak">Lain-lain</option>
+                   <option value="BCG">BCG</option>
+                   <option value="DT">DT</option>
+                   <option value="DPT">DPT</option>
+                   <option value="POLIO">POLIO</option>
+                   <option value="TFT">TFT</option>
+                   <option value="CAMPAK">CAMPAK</option>
+                   <option value="Lain-lain">Lain-lain</option>
                </select>
                <span class="help-block">
                 <strong>{{ $errors->first('imunisasi') }}</strong>
@@ -520,7 +509,7 @@
     <div class="form-group {{ $errors->has('diagnosisUtama') ? 'has-error' : ''}}">
      <label class="control-label " for="diagnosisUtama">Diagnosa Utama</label>
         <div class="form-group">
-           <input type="text" class="form-control" name="diagnosisUtama"  value="{{old('diagnosisUtama')}}" placeholder="Diagnosa Utama">
+           <input type="text" class="form-control" name="diagnosisUtama" data-role="tagsinput" value="{{old('diagnosisUtama')}}" placeholder="Diagnosa Utama">
            <span class="help-block">
             <strong>{{ $errors->first('diagnosisUtama') }}</strong>
         </span>
@@ -532,7 +521,7 @@
     <div class="form-group {{ $errors->has('operasiTindakan') ? 'has-error' : ''}}">
      <label class="control-label " for="operasiTindakan">Operasi Tindakan</label>
         <div class="form-group">
-        <input type="text" class="form-control"  value="{{old('operasiTindakan')}}" name="operasiTindakan" placeholder="Operasi Tindakan">
+        <input type="text" class="form-control"  value="{{old('operasiTindakan')}}" data-role="tagsinput" name="operasiTindakan" placeholder="Operasi Tindakan">
            <span class="help-block">
             <strong>{{ $errors->first('operasiTindakan') }}</strong>
         </span>
@@ -540,6 +529,19 @@
 </div>
 </div>
 
+  <div class="col-md-6">
+                <div class="form-group {{ $errors->has('komplikasi') ? 'has-error' : ''}}">
+                 <label class="control-label " for="komplikasi">Komplikasi</label>
+                 <div class="form-group">
+                   <input type="text" class="form-control" name="komplikasi" data-role="tagsinput" value="{{old('komplikasi')}}" placeholder="Komplikasi">
+                   <span class="help-block">
+                    <strong>{{ $errors->first('komplikasi') }}</strong>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="display:none;" class="row">
 <div class="col-md-6">
     <div class="form-group {{ $errors->has('kodeDiagnosis') ? 'has-error' : ''}}">
      <label class="control-label " for="kodeDiagnosis">Kode Diagnosis</label>     
@@ -558,7 +560,7 @@
 </div>
 </div>
 
-<div class="col-md-6">
+<div  class="col-md-6">
     <div class="form-group {{ $errors->has('namaDiagnosis') ? 'has-error' : ''}}">
      <label class="control-label " for="namaDiagnosis">Nama Diagnosis</label>
      <div class='input-group date'>
@@ -578,7 +580,45 @@
 
 <div class="input_fields_wrap"> </div>
 
-<div class="col-md-6">
+<div style="display:none;" class="col-md-6">
+    <div class="form-group {{ $errors->has('kodeKomplikasi') ? 'has-error' : ''}}">
+     <label class="control-label " for="kodeKomplikasi">Kode komplikasi</label>     
+     <div class='input-group date'>
+         <select name="kodeKomplikasi[]" class="form-control select2">
+            <option value="">pilih kode komplikasi</option>
+            @foreach($icd as $data)
+            <option value="{{$data->kode}}">{{$data->kode}}</option>
+            @endforeach                           
+        </select>
+        <span class="input-group-addon"></span>
+    </div>
+    <span class="help-block">
+        <strong>{{ $errors->first('kodeKomplikasi') }}</strong>
+    </span>
+</div>
+</div>
+
+<div style="display:none;" class="col-md-6">
+    <div class="form-group {{ $errors->has('namaKomplikasi') ? 'has-error' : ''}}">
+     <label class="control-label " for="namaKomplikasi">Nama komplikasi</label>
+     <div class='input-group date'>
+       <select name="namaKomplikasi[]" class="form-control select2">
+        <option value="">pilih nama komplikasi</option>
+        @foreach($icd as $data)
+        <option value="{{$data->nama}}">{{$data->nama}}</option>
+        @endforeach                           
+    </select>
+    <span class="add_field_button3 input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
+</div><br>
+<span class="help-block">
+    <strong>{{ $errors->first('namaKomplikasi') }}</strong>
+</span>
+</div>
+</div>
+
+<div class="input_fields_wrap3"> </div>
+
+<div style="display:none;" class="col-md-6">
     <div class="form-group {{ $errors->has('kodeTindakan') ? 'has-error' : ''}}">
      <label class="control-label " for="kodeTindakan">Kode Tindakan</label>
      <div class='input-group date'>
@@ -599,7 +639,6 @@
 </div>
 
 
-</div>
 </div>
 <div class="col-md-12">
     <br><br><br><br><br>
@@ -696,7 +735,7 @@
             var cariID = $(this).val();
             if(cariID) {
                 $.ajax({
-                    url: 'rmk/norm/'+cariID,
+                    url: '{{url('/')}}/rmk/norm/'+cariID,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
@@ -785,6 +824,28 @@
     })
 });
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap3"); //Fields wrapper
+    var add_button      = $(".add_field_button3"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label "for="kodeKomplikasi"></label><div class="input-group date"><select name="kodeKomplikasi[]" class="form-control select2"><option value="">pilih kode komplikasi</option> @foreach($icd as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><span class="help-block"><strong></strong></span></div></div><div class="col-md-6"><div class="form-group"><label class="control-label "for="namaKomplikasi"></label><div class="input-group date"><select name="namaKomplikasi[]" class="form-control select2"><option value="">pilih nama komplikasi</option> @foreach($icd as $data)<option value="{{$data->nama}}">{{$data->nama}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
+</script>
+
 <script type="text/javascript">
     $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed

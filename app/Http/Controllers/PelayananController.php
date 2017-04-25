@@ -14,6 +14,7 @@ use App\Rawat_IGD;
 use App\PelayananIGD;
 use App\Icd;
 use App\Icd9;
+use App\tbl_icd10nama;
 use App\Diagnosis;
 use App\Tindakan;
 
@@ -25,16 +26,16 @@ class PelayananController extends Controller
        ->join('rawat_jalan','id_RJ','rawat_jalan.id')
        ->join('pasien','id_pasien','pasien.id')
        ->orderBy('pelayanan_rawatjalan.id','desc')
-       ->Where('tindakan.kode',null)
+       ->Where('tindakan.kode',null)->where('jenis_pelayanan','lrj')
        ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
        ->get();
 
         return view('pelayanan.indexLRJ')->with('lrj',$lrj);
     }
     public function lrjUbah($id){
-        $edit = PelayananRj::where('pelayanan_rawatJalan.id',$id)->join('rawat_jalan','id_RJ','Rawat_Jalan.id')
+        $edit = PelayananRj::where('pelayanan_rawatjalan.id',$id)->join('rawat_jalan','id_RJ','Rawat_jalan.id')
        ->join('pasien','id_pasien','pasien.id')
-       ->select('pelayanan_rawatJalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatJalan.*')
+       ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
        ->first();
         
         $edit->tglLahir;
@@ -54,7 +55,7 @@ class PelayananController extends Controller
 
     public function lrjUbahSimpan(Request $request,$id){
       
-    if ($request->kodeTindakan == [null] or $request->namaDiagnosis == [null] or $request->kodeDiagnosis == [null]) {
+    if ($request->kodeTindakan == [null] or $request->namaDiagnosis == null or $request->kodeDiagnosis == null) {
         
         Alert::error('Kode ICD Harus Diisi !','Oops...');
         return back();
@@ -70,18 +71,70 @@ class PelayananController extends Controller
             $tindakan->kode  = $data;
             $tindakan->save(); 
         }
+          if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('lrj');  
+            }
 
-        $kodeDiagnosis = $request->kodeDiagnosis;
-        $namaDiagnosis = $request->namaDiagnosis;
+          $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'lrj';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis)->kode;
+            $diagnosa->nama = $request->namaDiagnosis;
+            $diagnosa->save();
 
-        foreach ($kodeDiagnosis as $index => $kode) {
+          if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('lrj');  
+            }  
+
             $diagnosa = new Diagnosis();
             $diagnosa->id_pelayanan = $id;
             $diagnosa->jenis_pelayanan = 'lrj';
-            $diagnosa->kode = $kode;
-            $diagnosa->nama = $namaDiagnosis[$index];
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis1)->kode;
+            $diagnosa->nama = $request->namaDiagnosis1;
             $diagnosa->save();
-        }
+
+            if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('lrj');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'lrj';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis2)->kode;
+            $diagnosa->nama = $request->namaDiagnosis2;
+            $diagnosa->save();
+            
+            if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('lrj');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'lrj';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis3)->kode;
+            $diagnosa->nama = $request->namaDiagnosis3;
+            $diagnosa->save();
+
+            if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('lrj');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'lrj';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis4)->kode;
+            $diagnosa->nama = $request->namaDiagnosis4;
+            $diagnosa->save();
         
         Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
         return redirect('lrj');
@@ -99,6 +152,7 @@ class PelayananController extends Controller
     }
 
     public function lrjSimpan(Request $request){
+
     	  $this->validate($request, [
     	  	'noRm' => 'required',
             'nama' => 'required',
@@ -139,7 +193,7 @@ class PelayananController extends Controller
     	$prj->save();
 
         $lastid = PelayananRj::orderBy('id','desc')->first();
-
+        $id = $lastid->id;
         foreach ($request->kodeTindakan as $data) {
         $tindakan = new Tindakan();
         $tindakan->id_pelayanan = $lastid->id;
@@ -148,18 +202,72 @@ class PelayananController extends Controller
         $tindakan->save(); 
         }
 
-        $kodeDiagnosis = $request->kodeDiagnosis;
-        $namaDiagnosis = $request->namaDiagnosis;
-
-        foreach ($kodeDiagnosis as $index => $kode) {
-            $diagnosa = new Diagnosis();
-            $diagnosa->id_pelayanan = $lastid->id;
+        if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('lrj');  
+            }  
+    
+             $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
             $diagnosa->jenis_pelayanan = 'lrj';
-            $diagnosa->kode = $kode;
-            $diagnosa->nama = $namaDiagnosis[$index];
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis)->kode;
+            $diagnosa->nama = $request->namaDiagnosis;
             $diagnosa->save();
-        }
 
+          if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('lrj');  
+            }  
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'lrj';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis1)->kode;
+            $diagnosa->nama = $request->namaDiagnosis1;
+            $diagnosa->save();
+
+            if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('lrj');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'lrj';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis2)->kode;
+            $diagnosa->nama = $request->namaDiagnosis2;
+            $diagnosa->save();
+            
+            if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('lrj');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'lrj';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis3)->kode;
+            $diagnosa->nama = $request->namaDiagnosis3;
+            $diagnosa->save();
+
+            if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('lrj');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'lrj';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis4)->kode;
+            $diagnosa->nama = $request->namaDiagnosis4;
+            $diagnosa->save();
+
+            
     	Alert::success('Berhasil', 'Data Pelayanan Rawat Jalan telah ditambahkan');
          return back();
     	
@@ -184,7 +292,17 @@ class PelayananController extends Controller
     	return $rawatJalan;
     }
 
+    public function AjaxCariDiagnosa($id){
+
+        $diagnosa = tbl_icd10nama::where('id_tblicd10',$id)->pluck('nama');
+
+        return json_encode($diagnosa);
+    }
+//================================================= PELAYANAN RAWAT JALAN END ======================================//
+    
+//================================================= PELAYANAN INAP Start ======================================//
     public function rmk(){
+
          $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
         $icd9 = Icd9::all();
 
@@ -192,11 +310,12 @@ class PelayananController extends Controller
     }
 
     public function indexRmk(){
-        $rmk =  $lrj = Tindakan::join('pelayanan_rawatinap','tindakan.id_pelayanan','pelayanan_rawatinap.id')
+
+         $rmk  = Tindakan::join('pelayanan_rawatinap','tindakan.id_pelayanan','pelayanan_rawatinap.id')
        ->join('rawat_inap','id_RI','rawat_inap.id')
        ->join('pasien','id_pasien','pasien.id')
        ->orderBy('pelayanan_rawatinap.id','desc')
-       ->Where('tindakan.kode',null)
+       ->Where('tindakan.kode',null)->where('jenis_pelayanan','rmk')
        ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
        ->get();
         return view('pelayanan.indexRMK')->with('rmk',$rmk);
@@ -227,13 +346,9 @@ class PelayananController extends Controller
             'tglKeluar' => 'required',
             'jamKeluar' => 'required',
             'diagnosisUtama' => 'required',
-            'kodeDiagnosisUtama' => 'required',
-            'diagnosisLain' => 'required',
-            'kodeDiagnosisLain' => 'required',
             'komplikasi' => 'required',
             'penyebabLuarCedera' => 'required',
             'operasiTindakan' => 'required',
-            'kodeOperasiTindakan' => 'required',
             'golonganOperasiTindakan' => 'required',
             'tanggal_operasiTindakan' => 'required',
             'infeksiNosokomial' => 'required',
@@ -271,13 +386,9 @@ class PelayananController extends Controller
     	$rmk->tglKeluar = $request->tglKeluar;
     	$rmk->jamKeluar = $request->jamKeluar;
     	$rmk->diagnosisUtama = $request->diagnosisUtama;
-    	$rmk->kodeDiagnosisUtama = $request->kodeDiagnosisUtama;
-    	$rmk->diagnosisLain = $request->diagnosisLain;
-    	$rmk->kodeDiagnosisLain = $request->kodeDiagnosisLain;
     	$rmk->komplikasi = $request->komplikasi;
     	$rmk->penyebabLuarCedera = $request->penyebabLuarCedera;
     	$rmk->operasiTindakan = $request->operasiTindakan;
-    	$rmk->kodeOperasiTindakan = $request->kodeOperasiTindakan;
     	$rmk->golonganOperasiTindakan = $request->golonganOperasiTindakan;
     	$rmk->tanggal_operasiTindakan = $request->tanggal_operasiTindakan;
     	$rmk->infeksiNosokomial = $request->infeksiNosokomial;
@@ -289,8 +400,198 @@ class PelayananController extends Controller
         $rmk->dokterMemulangkan = $request->dokterMemulangkan;
     	$rmk->save();
 
+
+        $lastid = PelayananRI::orderBy('id','desc')->first();
+
+        foreach ($request->kodeTindakan as $data) {
+        $tindakan = new Tindakan();
+        $tindakan->id_pelayanan = $lastid->id;
+        $tindakan->jenis_pelayanan = 'rmk';
+        $tindakan->kode  = $data;
+        $tindakan->save(); 
+        }
+
+        $kodeDiagnosis = $request->kodeDiagnosis;
+        $namaDiagnosis = $request->namaDiagnosis;
+
+        foreach ($kodeDiagnosis as $index => $kode) {
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $lastid->id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = $kode;
+            $diagnosa->nama = $namaDiagnosis[$index];
+            $diagnosa->save();
+        }
+        $kodeKomplikasi = $request->kodeDiagnosis;
+        $namaKomplikasi = $request->namaDiagnosis;
+
+        foreach ($kodeKomplikasi as $index => $kode) {
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $lastid->id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'komplikasi';
+            $diagnosa->kode = $kode;
+            $diagnosa->nama = $namaKomplikasi[$index];
+            $diagnosa->save();
+        }
+
     	Alert::success('Berhasil', 'Data Pelayanan Rawat Inap telah ditambahkan');
-         return back();
+         return redirect('rmk');
+    }
+
+    public function rmkUbah($id){
+        $edit = PelayananRI::where('pelayanan_rawatinap.id',$id)->join('rawat_inap','id_RI','rawat_inap.id')
+       ->join('pasien','id_pasien','pasien.id')
+       ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
+       ->first();
+        
+        $edit->tglLahir;
+        $biday = new DateTime($edit->tglLahir);
+        $today = new DateTime();
+        $diff = $today->diff($biday);
+          //bikin array baru 
+        $edit['tahun'] = $diff->y;
+        $edit['bulan'] = $diff->m;
+        $edit['hari'] = $diff->d;
+
+        $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
+        $icd9 = Icd9::all();
+
+        return view('pelayanan.editRMK')->with('icd',$icd)->with('icd9',$icd9)->with('edit',$edit);
+    }
+
+    public function rmkUbahSimpan(Request $request,$id){
+        
+         if ($request->kodeTindakan == null or $request->namaDiagnosis == null or $request->kodeDiagnosis == null or $request->kodeKomplikasi == null or $request->kodeKomplikasi == null ) {
+        
+        Alert::error('Kode ICD Harus Diisi !','Oops...');
+        return back();
+    }else{
+
+        Diagnosis::where('id_pelayanan',$id)->delete();
+        Tindakan::where('id_pelayanan',$id)->delete();
+
+
+        foreach ($request->kodeTindakan as $data) {
+        $tindakan = new Tindakan();
+        $tindakan->id_pelayanan = $id;
+        $tindakan->jenis_pelayanan = 'rmk';
+        $tindakan->kode  = $data;
+        $tindakan->save(); 
+        }
+
+         if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null OR $request->kodeKomplikasi == null OR $request->namaKomplikasi == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('rmk');  
+            }
+
+        $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis)->kode;
+            $diagnosa->nama = $request->namaDiagnosis;
+            $diagnosa->save();
+
+          $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'komplikasi';
+            $diagnosa->kode = Icd::find($request->kodeKomplikasi)->kode;
+            $diagnosa->nama = $request->namaKomplikasi;
+            $diagnosa->save();
+
+          if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null OR $request->kodeKomplikasi1 == null OR $request->namaKomplikasi1 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('rmk');  
+            }  
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis1)->kode;
+            $diagnosa->nama = $request->namaDiagnosis1;
+            $diagnosa->save();
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'komplikasi';
+            $diagnosa->kode = Icd::find($request->kodeKomplikasi1)->kode;
+            $diagnosa->nama = $request->namaKomplikasi1;
+            $diagnosa->save();
+
+
+            if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null OR $request->kodeKomplikasi2 == null OR $request->namaKomplikasi2 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('rmk');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis2)->kode;
+            $diagnosa->nama = $request->namaDiagnosis2;
+            $diagnosa->save();
+
+              $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'komplikasi';
+            $diagnosa->kode = Icd::find($request->kodeKomplikasi2)->kode;
+            $diagnosa->nama = $request->namaKomplikasi2;
+            $diagnosa->save();
+            
+            if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null OR $request->kodeKomplikasi3 == null OR $request->namaKomplikasi3 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('rmk');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis3)->kode;
+            $diagnosa->nama = $request->namaDiagnosis3;
+            $diagnosa->save();
+
+             $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'komplikasi';
+            $diagnosa->kode = Icd::find($request->kodeKomplikasi3)->kode;
+            $diagnosa->nama = $request->namaKomplikasi3;
+            $diagnosa->save();
+
+            if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null OR $request->kodeKomplikasi4 == null OR $request->namaKomplikasi4 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('rmk');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis4)->kode;
+            $diagnosa->nama = $request->namaDiagnosis4;
+            $diagnosa->save();
+
+             $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'rmk';
+            $diagnosa->diagnosa_komplikasi = 'komplikasi';
+            $diagnosa->kode = Icd::find($request->kodeKomplikasi4)->kode;
+            $diagnosa->nama = $request->namaKomplikasi4;
+            $diagnosa->save();
+
+
+        Alert::success('Berhasil', 'Kode ICD Pelayanan Rawat Inap telah ditambahkan');
+
+        return redirect('rmk');
+    }
     }
 
     public function AjaxCariRawatInap($id){
@@ -310,9 +611,27 @@ class PelayananController extends Controller
     	return $rawatInap;
     }
 
-    public function lgd(){
+//================================================= PELAYANAN INAP END ======================================//
 
-    	return view('pelayanan.LGD');
+//================================================= PELAYANAN IGD Start ======================================//
+
+    public function Indexlgd(){
+          $igd  = Tindakan::join('pelayanan_rawatigd','tindakan.id_pelayanan','pelayanan_rawatigd.id')
+       ->join('rawat_igd','id_IGD','rawat_igd.id')
+       ->join('pasien','id_pasien','pasien.id')
+       ->orderBy('pelayanan_rawatigd.id','desc')
+       ->Where('tindakan.kode',null)->where('jenis_pelayanan','igd')
+       ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
+       ->get();
+
+    return view('pelayanan.indexLGD')->with('igd',$igd);
+    }
+
+    public function lgd(){
+         $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
+        $icd9 = Icd9::all();
+
+    	return view('pelayanan.LGD')->with('icd',$icd)->with('icd9',$icd9);
     }
 
     public function lgdSimpan(Request $request){
@@ -376,9 +695,195 @@ class PelayananController extends Controller
     	$igd->dirujuk = $request->dirujuk;
     	$igd->save();
 
+         $lastid = PelayananIGD::orderBy('id','desc')->first();
+         $id = $lastid->id;
+       
+        foreach ($request->kodeTindakan as $data) {
+        $tindakan = new Tindakan();
+        $tindakan->id_pelayanan = $lastid->id;
+        $tindakan->jenis_pelayanan = 'igd';
+        $tindakan->kode  = $data;
+        $tindakan->save(); 
+        }
+
+          if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                 return redirect('pelayanan-igd');  
+            }
+            
+       $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'igd';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis)->kode;
+            $diagnosa->nama = $request->namaDiagnosis;
+            $diagnosa->save();
+
+          if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('pelayanan-igd');  
+            }  
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'igd';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis1)->kode;
+            $diagnosa->nama = $request->namaDiagnosis1;
+            $diagnosa->save();
+
+            if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('pelayanan-igd');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'igd';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis2)->kode;
+            $diagnosa->nama = $request->namaDiagnosis2;
+            $diagnosa->save();
+            
+            if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('pelayanan-igd');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'igd';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis3)->kode;
+            $diagnosa->nama = $request->namaDiagnosis3;
+            $diagnosa->save();
+
+            if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('pelayanan-igd');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'igd';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis4)->kode;
+            $diagnosa->nama = $request->namaDiagnosis4;
+            $diagnosa->save();
+
     	Alert::success('Berhasil', 'Data Pelayanan Rawat IGD telah ditambahkan');
-         return back();
+         return redirect('pelayanan-igd');
     }
+
+    public function lgdUbah($id){
+           $edit = PelayananIGD::where('pelayanan_rawatigd.id',$id)->join('rawat_igd','id_IGD','rawat_igd.id')
+       ->join('pasien','id_pasien','pasien.id')
+       ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
+       ->first();
+        
+        $edit->tglLahir;
+        $biday = new DateTime($edit->tglLahir);
+        $today = new DateTime();
+        $diff = $today->diff($biday);
+          //bikin array baru 
+        $edit['tahun'] = $diff->y;
+        $edit['bulan'] = $diff->m;
+        $edit['hari'] = $diff->d;
+
+        $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
+        $icd9 = Icd9::all();
+
+        return view('pelayanan.editLGD')->with('icd',$icd)->with('icd9',$icd9)->with('edit',$edit);
+    }
+
+    public function lgdUbahSimpan(Request $request,$id){
+        if ($request->kodeTindakan == [null] or $request->namaDiagnosis == [null] or $request->kodeDiagnosis == [null]) {
+        
+        Alert::error('Kode ICD Harus Diisi !','Oops...');
+        return back();
+    }else{
+
+        Diagnosis::where('id_pelayanan',$id)->delete();
+        Tindakan::where('id_pelayanan',$id)->delete();
+
+         foreach ($request->kodeTindakan as $data) {
+            $tindakan = new Tindakan();
+            $tindakan->id_pelayanan = $id;
+            $tindakan->jenis_pelayanan = 'igd';
+            $tindakan->kode  = $data;
+            $tindakan->save(); 
+        }
+        
+         if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('pelayanan-igd');  
+            }
+
+        $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'igd';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis)->kode;
+            $diagnosa->nama = $request->namaDiagnosis;
+            $diagnosa->save();
+
+          if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('pelayanan-igd');  
+            }  
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'igd';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis1)->kode;
+            $diagnosa->nama = $request->namaDiagnosis1;
+            $diagnosa->save();
+
+            if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('pelayanan-igd');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'igd';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis2)->kode;
+            $diagnosa->nama = $request->namaDiagnosis2;
+            $diagnosa->save();
+            
+            if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('pelayanan-igd');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'igd';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis3)->kode;
+            $diagnosa->nama = $request->namaDiagnosis3;
+            $diagnosa->save();
+
+            if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
+                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  return redirect('pelayanan-igd');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayanan = $id;
+            $diagnosa->jenis_pelayanan = 'igd';
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = Icd::find($request->kodeDiagnosis4)->kode;
+            $diagnosa->nama = $request->namaDiagnosis4;
+            $diagnosa->save();
+        
+        Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+
+        return redirect('pelayanan-igd');
+    }
+}
 
     public function AjaxCarilgd($id){
     		$rawatIGD = Pasien::where('noRm',$id)

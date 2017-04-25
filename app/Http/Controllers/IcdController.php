@@ -73,6 +73,8 @@ class IcdController extends Controller
     }
 
 
+// icd 9
+
     public function formicd9(){
 
          $icd = Icd9::orderBy('nama','asc')->get();
@@ -91,7 +93,8 @@ class IcdController extends Controller
         $icd->kode = $request->kode;
         $icd->save();
 
-        return $icd;
+       Alert::success('Berhasil', 'Data diagnosis telah ditambahkan');
+        return back();
 
     }
 
@@ -103,16 +106,19 @@ class IcdController extends Controller
 
     }
     public function ubahIcd9(Request $request){
+
           $this->validate($request,[
-            'nama' => 'required',
-            'kode' => 'required',
+            'nama_edit' => 'required',
+            'kode_edit' => 'required',
             ]);
-        $icd = Icd::find($request->id);
-        $icd->kode = $request->kode;
-        $icd->nama = $request->nama;
+
+        $icd = Icd9::find($request->id);
+        $icd->kode = $request->kode_edit;
+        $icd->nama = $request->nama_edit;
         $icd->save();
         
-        return $icd;
+       Alert::success('Berhasil', 'Data diagnosis telah diperbaruhi');
+        return back();
     }
 
 }

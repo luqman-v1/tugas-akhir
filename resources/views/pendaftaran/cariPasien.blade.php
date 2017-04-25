@@ -47,7 +47,7 @@
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
                 <td>{{$data->tglLahir}}</td>
-                <td>{{$data->provinsi}} - {{$data->kabupaten}} - {{$data->kecamatan}} - {{$data->kelurahan}} - {{$data->dukuh}} - {{$data->rt}} - {{$data->rt}}</td>
+                <td>Jl. {{$data->dukuh}} RT{{$data->rt}}/{{$data->rw}},Kelurahan {{$data->kelurahan}}, Kecamatan {{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}}</td>
                 <td>
                <button type="button" class="btn-xs btn-info"  data-toggle="modal" value="{{$data->noRm}}" id="noRm{{ $i }}" name="noRm" data-target="#myModal">Lihat Detail </button> 
                 <a href="{{url('/rawat-jalan/input/'.$data->id)}}"><button type="button" class="btn-xs btn-success">Rawat Jalan</button></a>
