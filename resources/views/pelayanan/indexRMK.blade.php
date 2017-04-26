@@ -13,7 +13,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="{{url('/')}}/pegawai/sppd">Pelayanan</a></li>
+    <li><a href="{{url('/')}}">Pelayanan</a></li>
     <li class="active">daftar</li>
 </ol>
 </section>

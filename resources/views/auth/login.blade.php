@@ -24,10 +24,12 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition login-page">
+<body background="{{url('body.jpg')}}" >
+
+</nav>
     <div class="login-box">
       <div class="login-logo">
-        <a href="{{url('/')}}"><b>RSKB Ring Road Selatan </b></a>
+        <img src="{{url('/logos.png')}}">
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
@@ -59,13 +61,11 @@
         </div>
     </div>
 
-
-    
     <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Ingat Saya
+              <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>  Ingat Saya
           </label>
       </div>
   </div>

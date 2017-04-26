@@ -12,9 +12,16 @@
 
 <div class="container">
 <hr><width="100" height="75"></hr>
-<h1><center><b><font size="5" face="Courier New">Formulir RL 5.4</font></b></center></h1>
-<center><b><font size="4" face="Courier New">Daftar 10 Besar Penyakit Rawat Jalan</font></b></center><br>
-
+<div class="row">
+<div class="col-md-4"></div>
+  <div class="col-md-1">
+  <img style="height: 80px;width: auto;margin-top: -10px;" src="{{url('/logos.png')}}">
+  </div>
+  <div class="col-md-4">
+    <b><font size="5" face="Courier New">Formulir RL 5.4</font></b><br>
+    <b><font size="4" face="Courier New">Daftar 10 Besar Penyakit Rawat Jalan</font></b>
+  </div>
+</div>
 <hr><width="100" height="75"></hr>
 
   <h4>Kode RS : 1234 </h4> 

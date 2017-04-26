@@ -12,7 +12,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="{{url('/')}}/pegawai/sppd">Pendaftaran</a></li>
+    <li><a href="{{url('/rawat-jalan')}}">Pendaftaran</a></li>
     <li class="active">Baru</li>
 </ol>
 </section>
@@ -213,6 +213,7 @@
                                                    <label class="control-label " for="caraDatang">Cara Datang</label>
                                                    <div class="form-group">
                                                      <select name="caraDatang" id="caraDatang" class="form-control" onChange="changetextbox();">
+                                                     <option>pilih</option>
                                                          <option value="Sendiri">Sendiri</option>
                                                          <option value="Rujukan">Rujukan</option>
                                                      </select>
@@ -231,6 +232,7 @@
                                                <label class="control-label " for="caraBayar">Cara Bayar</label>
                                                <div class="form-group">
                                                  <select name="caraBayar" id="caraBayar" class="form-control" onChange="changetextbox();">
+                                                 <option>pilih</option>
                                                      <option value="BPJS">BPJS</option>
                                                      <option value="UMUM">UMUM</option>
                                                  </select>
@@ -247,6 +249,7 @@
                                                <div class="input-group date">
                                                 <div class="form-group">
                                                     <select name="klinikTujuan" class="form-control">
+                                                    <option>pilih</option>
                                                         <option value="Bedah Umum">Bedah Umum</option>
                                                         <option value="Bedah Saluran Cerna (Digestive)">Bedah Saluran Cerna (Digestive)</option>
                                                         <option value="Bedah Throraks">Bedah Throraks</option>
@@ -268,6 +271,7 @@
                                            <div class="input-group date">
                                             <div class="form-group">
                                                 <select name="DokterPJ" class="form-control">
+                                                <option>pilih</option>
                                                     @foreach($dokter as $data)
                                                     <option value="{{$data->name}}">{{$data->name}}</option>
                                                     @endforeach

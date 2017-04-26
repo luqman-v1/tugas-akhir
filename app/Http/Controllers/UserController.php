@@ -109,5 +109,51 @@ class UserController extends Controller
 				Alert::success('Update Sukses', 'password Telah diupdate');
 			return back();
 		}
+
+        public function list(){
+             $role = Role::all();
+            $user = role_user::join('users','user_id','users.id')->get();
+            return view('User.list')->with('user',$user)->with('role',$role);
+        }
+
+        public function register(Request $request){
+        $this->validate($request, [
+            'username' => 'required|alpha_dash|unique:users',
+            'name' => 'required',
+            'email' => 'required|email|max:255|unique:users',
+            'noHp' =>'required',
+            'jabatan' => 'required',
+            'password' => 'required|min:6|confirmed',
+            ]);
+
+           $user = User::create([
+            'username' => $request['username'],
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'foto' => 'avatar2.png',
+            'noHp' => $request['noHp'],
+            'password' => bcrypt($request['password']),
+        ]);
+
+        $member = Role::where('id',$request->jabatan)->first();
+        $user->attachRole($member->id);
+
+        Alert::success('Sukses', 'User telah ditambahkan');
+            return back();
+        }
+
+        public function ubahPassword(Request $request){
+
+         $this->validate($request, [
+            'password' => 'required|min:6|confirmed',
+            ]);
+
+           $user = User::find($request->id);
+           $user->password = bcrypt($request->password);
+           $user->save();
+
+            Alert::success('Sukses', 'Password User telah diUbah');
+            return back();
+        }
 		
 }

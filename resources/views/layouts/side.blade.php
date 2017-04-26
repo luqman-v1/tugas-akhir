@@ -38,6 +38,23 @@
             </span>
           </a>
         </li>
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i>
+            <span>Profil Pelayanan</span>
+            <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{url('/pendaftaran-pasien')}}"><i class="fa fa-circle-o"></i> Jadwal Pelayanan</a></li>
+            <li><a href="{{url('/rawat-jalan')}}"><i class="fa fa-circle-o"></i> Daftar Dokter Spesialis</a></li>
+            <li><a href="{{url('igd')}}"><i class="fa fa-circle-o"></i> Daftar Dokter Jaga</a></li>
+            <li><a href="{{url('cari-pasien')}}"><i class="fa fa-circle-o"></i> Daftar Jaminan Kesehatan</a></li>
+            <li><a href="{{url('cari-pasien')}}"><i class="fa fa-circle-o"></i> Stok Formulir Rekam medis</a></li>
+          </ul>
+        </li>
+         @role(['admin','rekmed'])
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -54,8 +71,11 @@
             <li><a href="{{url('cari-pasien')}}"><i class="fa fa-circle-o"></i> Cari Pasien</a></li>
           </ul>
         </li>
+        @endrole
+
+        @role(['admin','dokter','rekmed','perawat'])
         <li>
-          <a href="pages/widgets.html">
+          <a href="">
             <i class="fa fa-files-o"></i> <span>Pelayanan</span>
             <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -67,6 +87,8 @@
             <li><a href="{{url('/pelayanan-igd')}}"><i class="fa fa-circle-o"></i> Lembar Gawat Darurat</a></li>
           </ul>
         </li>
+        @endrole
+        @role(['admin','rekmed','perawat'])
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -80,6 +102,9 @@
             <li><a href="{{url('/')}}"><i class="fa fa-circle-o"></i> Cari Kamar Kosong</a></li>
           </ul>
         </li>
+        @endrole
+
+        @role(['admin','rekmed'])
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -95,18 +120,18 @@
             <li><a href="{{url('pelaporan/kodeicd10')}}"><i class="fa fa-circle-o"></i> Kode ICD 10</a></li>
           </ul>
         </li>
+        @endrole
+
+        @role(['admin','rekmed'])
         <li class="treeview">
-          <a href="#">
+          <a href="{{url('/index')}}">
             <i class="fa fa-files-o"></i>
             <span>Index</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('/')}}"><i class="fa fa-circle-o"></i> unknown</a></li>
-          </ul>
         </li>
+        @endrole
+
+        @role(['admin','farmasi','rekmed'])
         <li class="treeview">
           <a href="#">
              <i class="fa fa-files-o"></i> <span>Farmasi</span>
@@ -120,6 +145,9 @@
             <li><a href="{{url('/')}}"><i class="fa fa-circle-o"></i> unknown</a></li>
           </ul>
         </li>
+        @endrole
+
+        @role(['admin','kasir','rekmed'])
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i><span>Kasir</span>
@@ -132,6 +160,21 @@
             <li><a href="{{url('/')}}"><i class="fa fa-circle-o"></i> unknown</a></li>
           </ul>
         </li>
+        @endrole
+
+        @role(['admin'])
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i><span>User</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{url('/user/list')}}"><i class="fa fa-circle-o"></i> Daftar User</a></li>
+          </ul>
+        </li>
+        @endrole
       </ul>
     </section>
     <!-- /.sidebar -->

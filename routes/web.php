@@ -13,27 +13,62 @@
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index');
+Route::get('/','UserController@dashboard');
 
 // Route::get('/', 'ChatsController@index');
-Route::get('messages', 'ChatsController@fetchMessages');
-Route::post('messages', 'ChatsController@sendMessage');
+
+// Route::get('messages', 'ChatsController@fetchMessages');
+// Route::post('messages', 'ChatsController@sendMessage');
 // Route::get('/','ChatsController@tes');
 
+Route::group(['middleware' => ['role:admin']], function(){
 //====================================================
 //=======================USER====================
 //====================================================
-
-
-Route::get('/','UserController@dashboard');
+Route::get('/user/list','UserController@list');
+Route::post('/user/register','UserController@register');
+Route::post('/user/register/ubahPassword','UserController@ubahPassword');
 Route::get('/users/profile/{id}','UserController@profile');
 Route::post('/users/profile/{id}','UserController@update');
 Route::post('/users/profile/{id}/password','UserController@updatePassword');
 
+});
+
+
+
+Route::group(['middleware' => ['role:admin|rekmed']], function(){
+
+// ====================== index ================
+
+Route::get('index','PelaporanController@formIndex');
+Route::post('index','PelaporanController@formIndexCek');
+
+//====================================================
+//=======================PELAPORAN====================
+//====================================================
+
+Route::get('laporan/register','PelaporanController@getFormRegister');
+Route::post('laporan/register','PelaporanController@getFormLihatRegister');
+
+Route::get('laporan/eksternal','PelaporanController@getFormEksternal');
+Route::post('laporan/eksternal','PelaporanController@getFormLihatEksternal');
+//kode icd 10
+Route::get('pelaporan/kodeicd10','IcdController@form');
+Route::post('pelaporan/kodeicd/simpan','IcdController@simpan');
+Route::post('pelaporan/kodeicd/ubah','IcdController@ubah');
+Route::delete('pelaporan/kodeicd/{id}','IcdController@hapus');
+//kode icd 9
+Route::get('pelaporan/kodeicd9','IcdController@formicd9');
+Route::post('pelaporan/kodeicd9/simpan','IcdController@simpanIcd9');
+Route::post('pelaporan/kodeicd9/ubah','IcdController@ubahIcd9');
+Route::delete('pelaporan/kodeicd9/{id}','IcdController@hapusIcd9');
+
+
+});
+Route::group(['middleware' => ['role:admin|rekmed']], function(){
 //====================================================
 //=======================PENDAFTARAN==================
 //====================================================
-
 
 //Rekam Medis
 Route::get('pendaftaran-pasien','PendaftaranController@form');
@@ -43,13 +78,15 @@ Route::get('pendaftaran-pasien/kota/{id}','PendaftaranController@formAjaxKota');
 Route::get('pendaftaran-pasien/kecamatan/{id}','PendaftaranController@formAjaxKecamatan');
 Route::get('pendaftaran-pasien/kelurahan/{id}','PendaftaranController@formAjaxKelurahan');
 
-Route::get('rawat-jalan','PendaftaranController@rawatJalan');
+Route::get('rawat-jalan','PendaftaranController@rawatJalanIndex');
+Route::get('rawat-jalan/form','PendaftaranController@rawatJalan');
 Route::get('rawat-jalan/input/{id}','PendaftaranController@rawatJalanInput');
 Route::post('rawat-jalan','PendaftaranController@saveRawatJalan');
 //ajax keyup
 Route::get('rawat-jalan/norm/{id}','PendaftaranController@formAjaxCari');
 
-Route::get('rawat-inap','PendaftaranController@rawatInap');
+Route::get('rawat-inap','PendaftaranController@rawatInapIndex');
+Route::get('rawat-inap/form','PendaftaranController@rawatInap');
 Route::get('rawat-inap/input/{id}','PendaftaranController@rawatInapInput');
 Route::post('rawat-inap','PendaftaranController@rawatInapSimpan');
 //ajax onchange ruangan
@@ -57,12 +94,14 @@ Route::get('rawat-inap/kelas/{id}','PendaftaranController@formAjaxKelas');
 Route::get('rawat-inap/kamar/{id}','PendaftaranController@formAjaxKamar');
 
 
-Route::get('igd','PendaftaranController@igd');
+Route::get('igd','PendaftaranController@igdIndex');
+Route::get('igd/form','PendaftaranController@igd');
 Route::get('igd/input/{id}','PendaftaranController@igdInput');
 Route::post('igd','PendaftaranController@igdSimpan');
 Route::get('cari-pasien','PendaftaranController@viewCariPasien');
+});
 
-
+Route::group(['middleware' => ['role:admin|rekmed|dokter|perawat']], function(){
 //====================================================
 //=======================PELAYANAN====================
 //====================================================
@@ -92,31 +131,14 @@ Route::post('/pelayanan-igd','PelayananController@lgdSimpan');
 //ajax
 Route::get('/pelayanan-igd/norm/{id}','PelayananController@AjaxCarilgd');
 
-
-//====================================================
-//=======================PELAPORAN====================
-//====================================================
-
-Route::get('laporan/register','PelaporanController@getFormRegister');
-Route::post('laporan/register','PelaporanController@getFormLihatRegister');
-
-Route::get('laporan/eksternal','PelaporanController@getFormEksternal');
-Route::post('laporan/eksternal','PelaporanController@getFormLihatEksternal');
-//kode icd 10
-Route::get('pelaporan/kodeicd10','IcdController@form');
-Route::post('pelaporan/kodeicd/simpan','IcdController@simpan');
-Route::post('pelaporan/kodeicd/ubah','IcdController@ubah');
-Route::delete('pelaporan/kodeicd/{id}','IcdController@hapus');
-//kode icd 9
-Route::get('pelaporan/kodeicd9','IcdController@formicd9');
-Route::post('pelaporan/kodeicd9/simpan','IcdController@simpanIcd9');
-Route::post('pelaporan/kodeicd9/ubah','IcdController@ubahIcd9');
-Route::delete('pelaporan/kodeicd9/{id}','IcdController@hapusIcd9');
-
-
-Route::get('tes','PelaporanController@tes');
-
-Route::get('chat',function(){
-	return view('chat');
 });
+
+
+
+
+// Route::get('tes','PelaporanController@tes');
+
+// Route::get('chat',function(){
+// 	return view('chat');
+// });
 

@@ -13,7 +13,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="{{url('/')}}/pegawai/sppd">Pendaftaran</a></li>
+    <li><a href="#">Pendaftaran</a></li>
     <li class="active">Baru</li>
 </ol>
 </section>
@@ -67,7 +67,7 @@
 <!-- /.box -->
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
 
       <!-- Modal content-->
       <div class="modal-content">

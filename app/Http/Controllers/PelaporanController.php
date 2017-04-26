@@ -11,6 +11,7 @@ use Alert;
 use DateTime;
 use PDF;
 use DB;
+use App\PelayananIGD;
 use App\Pasien;
 use App\Diagnosis;
 use App\PelayananRI;
@@ -53,7 +54,25 @@ class PelaporanController extends Controller
         return view('pelaporan.viewRegister')->with(compact('register','nama'));
 
         }else{
+             $inap = PelayananRI::join('rawat_inap','id_RI','rawat_inap.id')
+                ->join('pasien','id_pasien','pasien.id')
+            ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+            ->orderBy('pelayanan_rawatinap.id','desc')
+            ->get();
 
+             $jalan = PelayananRJ::join('rawat_jalan','id_RJ','rawat_jalan.id')
+                ->join('pasien','id_pasien','pasien.id')
+            ->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])
+            ->orderBy('pelayanan_rawatjalan.id','desc')
+            ->get();
+
+            $igd =  PelayananIGD::join('rawat_igd','id_IGD','rawat_igd.id')
+                ->join('pasien','id_pasien','pasien.id')
+            ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+            ->orderBy('pelayanan_rawatigd.id','desc')
+            ->get();
+
+            return view('pelaporan.kunjunganRumahSakit')->with(compact('inap','jalan','igd'));
         }
 
 		
@@ -157,8 +176,15 @@ class PelaporanController extends Controller
              return view('pelaporan.extR3')->with(compact('extR3','month_name','year'));
          }else{
             return view('pelaporan.extr4');
-         }
+         }   
+    }
 
-        
+    public function formIndex(){
+
+        return view('pelaporan.index');
+    }
+
+    public function formIndexCek(){
+        return view('');
     }
 }

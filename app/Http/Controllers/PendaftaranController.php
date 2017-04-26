@@ -25,6 +25,14 @@ use App\Rawat_Inap;
 use App\Rawat_IGD;
 class PendaftaranController extends Controller
 {
+
+    public function rawatJalanIndex(){
+        $rj = Rawat_Jalan::join('pasien','id_pasien','pasien.id')
+        ->orderBy('rawat_jalan.id','desc')
+        ->get();
+
+        return view('pendaftaran.indexRawatJalan')->with('rj',$rj);
+    }
     public function rawatJalan(){
              $dokter = role_user::where('role_id',6)
              ->join('users','user_id','id')
@@ -48,6 +56,14 @@ class PendaftaranController extends Controller
 
         $bangsal = Bangsal::pluck("nama","id");
     	return view('pendaftaran.rawatInap')->with(compact('bangsal'));
+    }
+
+    public function rawatInapIndex(){
+          $inap = Rawat_Inap::join('pasien','id_pasien','pasien.id')
+        ->orderBy('rawat_inap.id','desc')
+        ->get();
+
+        return view('pendaftaran.indexRawatInap')->with('inap',$inap);
     }
 
     public function rawatInapInput($id){
@@ -118,6 +134,15 @@ class PendaftaranController extends Controller
          $igd = Pasien::findOrFail($id);
 
         return view('pendaftaran.igdInput')->with(compact('igd'));
+    }
+
+    public function igdIndex(){
+         $igd = Rawat_IGD::join('pasien','id_pasien','pasien.id')
+        ->orderBy('rawat_igd.id','desc')
+        ->get();
+
+        return view('pendaftaran.indexRawatIGD')->with('igd',$igd);
+
     }
 
     public function igdSimpan(Request $request){

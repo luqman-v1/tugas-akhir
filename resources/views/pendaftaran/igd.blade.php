@@ -14,7 +14,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li><a href="{{url('/')}}/pegawai/sppd">Pendaftaran</a></li>
+    <li><a href="{{url('/igd')}}">Pendaftaran</a></li>
     <li class="active">Baru</li>
 </ol>
 </section>
