@@ -63,25 +63,65 @@ class UserController extends Controller
 		}
 
 		public function update(Request $request, $id){
-	
+	  
+       if ($request->email == User::find($id)->email) {
+           $this->validate($request, [
+            'name' => 'required',
+            'noHp' =>'required',
+            ]);
+
+           $image = $request->file('foto');
+        
+            if($image != null){
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+             $path = public_path('foto/' . $filename);
+            Image::make($image->getRealPath())->resize(200, 200)->save($path);
+             $update = User::find($id);
+            // $update->username = $request->get('username');
+            $update->name = $request->get('name');
+            $update->email = $request->get('email');
+            $update->noHp = $request->get('noHp');
+            $update->foto = $filename;
+            $update->save(); 
+          
+            }else{
+            $filename = User::find($id)->foto;
+            $update = User::find($id);
+            // $update->username = $request->get('username');
+            $update->name = $request->get('name');
+            $update->email = $request->get('email');
+            $update->noHp = $request->get('noHp');
+            $update->foto = $filename;
+            $update->save(); 
+          }
+
+       }else{
 			$this->validate($request, [
     	 	// 'username' => 'required|alpha_dash|unique:users',
     		'name' => 'required',
     	 	'email' => 'required|email|max:255|unique:users',
     	 	'noHp' =>'required',
-    	 	'foto' => 'required',
+    	 	// 'foto' => 'required',
 			]);
 
-  			if(Input::file()){
+  	
   
-            $image = Input::file('foto');
-            $filename  = time() . '.' . $image->getClientOriginalExtension();
-
-            $path = public_path('foto/' . $filename);
- 
+            $image = $request->file('foto');
         
+            if($image != null){
+            $filename  = time() . '.' . $image->getClientOriginalExtension();
+             $path = public_path('foto/' . $filename);
             Image::make($image->getRealPath())->resize(200, 200)->save($path);
-                       
+             $update = User::find($id);
+            // $update->username = $request->get('username');
+            $update->name = $request->get('name');
+            $update->email = $request->get('email');
+            $update->noHp = $request->get('noHp');
+            $update->foto = $filename;
+            $update->save(); 
+          
+            }else{
+            $filename = User::find($id)->foto;
             $update = User::find($id);
 			// $update->username = $request->get('username');
 			$update->name = $request->get('name');
@@ -89,8 +129,8 @@ class UserController extends Controller
 		    $update->noHp = $request->get('noHp');
 			$update->foto = $filename;
 			$update->save(); 
-           }
-			
+          }
+        }
 			Alert::success('Update Sukses', 'Profile Telah diupdate');
 			return back();
 

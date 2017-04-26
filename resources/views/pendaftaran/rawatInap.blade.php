@@ -412,11 +412,11 @@
             var cariID = $(this).val();
             if(cariID) {
                 $.ajax({
-                    url: 'rawat-jalan/norm/'+cariID,
+                    url: '{{url('/')}}/pasien/norm/'+cariID,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-                        console.log(data);
+                        // console.log(data);
                         var pasien = jQuery.parseJSON(JSON.stringify(data));
                         var nama = document.getElementById("nama").value =pasien['nama'];
                         var provinsi = document.getElementById("provinsi").value =pasien['provinsi'];
@@ -471,7 +471,7 @@
             var bangsalID = $(this).val();
             if(bangsalID) {
                 $.ajax({
-                    url: 'rawat-inap/kelas/'+bangsalID,
+                    url: '{{url('/')}}/rawat-inap/kelas/'+bangsalID,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
@@ -498,7 +498,7 @@
             var kamarID = $(this).val();
             if(kamarID) {
                 $.ajax({
-                    url: 'rawat-inap/kamar/'+kamarID,
+                    url: '{{url('/')}}/rawat-inap/kamar/'+kamarID,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {

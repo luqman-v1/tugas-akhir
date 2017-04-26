@@ -346,11 +346,11 @@
             var cariID = $(this).val();
             if(cariID) {
                 $.ajax({
-                    url: 'rawat-jalan/norm/'+cariID,
+                    url: '{{url('/')}}/pasien/norm/'+cariID,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-                        console.log(data);
+                        // console.log(data);
                         var pasien = jQuery.parseJSON(JSON.stringify(data));
                         var nama = document.getElementById("nama").value =pasien['nama'];
                         var provinsi = document.getElementById("provinsi").value =pasien['provinsi'];

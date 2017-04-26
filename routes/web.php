@@ -14,7 +14,9 @@
 Auth::routes();
 
 Route::get('/','UserController@dashboard');
-
+Route::get('/users/profile/{id}','UserController@profile');
+Route::post('/users/profile/{id}','UserController@update');
+Route::post('/users/profile/{id}/password','UserController@updatePassword');
 // Route::get('/', 'ChatsController@index');
 
 // Route::get('messages', 'ChatsController@fetchMessages');
@@ -28,9 +30,7 @@ Route::group(['middleware' => ['role:admin']], function(){
 Route::get('/user/list','UserController@list');
 Route::post('/user/register','UserController@register');
 Route::post('/user/register/ubahPassword','UserController@ubahPassword');
-Route::get('/users/profile/{id}','UserController@profile');
-Route::post('/users/profile/{id}','UserController@update');
-Route::post('/users/profile/{id}/password','UserController@updatePassword');
+
 
 });
 
@@ -83,7 +83,7 @@ Route::get('rawat-jalan/form','PendaftaranController@rawatJalan');
 Route::get('rawat-jalan/input/{id}','PendaftaranController@rawatJalanInput');
 Route::post('rawat-jalan','PendaftaranController@saveRawatJalan');
 //ajax keyup
-Route::get('rawat-jalan/norm/{id}','PendaftaranController@formAjaxCari');
+Route::get('pasien/norm/{id}','PendaftaranController@formAjaxCari');
 
 Route::get('rawat-inap','PendaftaranController@rawatInapIndex');
 Route::get('rawat-inap/form','PendaftaranController@rawatInap');
