@@ -47,8 +47,8 @@ class PelayananController extends Controller
         $edit['bulan'] = $diff->m;
         $edit['hari'] = $diff->d;
 
-        $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
-        $icd9 = Icd9::all();
+        $icd = Icd::distinct()->orderBy('kode','asc')->get();
+        $icd9 = Icd9::orderBy('kode','asc')->get();
        
         return view('pelayanan.editLRJ')->with('edit',$edit)->with('icd',$icd)->with('icd9',$icd9);
     }
@@ -81,7 +81,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'lrj';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis)->kode;
-            $diagnosa->nama = $request->namaDiagnosis;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis)->sub_kode;
             $diagnosa->save();
 
           if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
@@ -94,7 +95,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'lrj';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis1)->kode;
-            $diagnosa->nama = $request->namaDiagnosis1;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis1)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis1)->sub_kode;
             $diagnosa->save();
 
             if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
@@ -107,7 +109,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'lrj';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis2)->kode;
-            $diagnosa->nama = $request->namaDiagnosis2;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis2)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis2)->sub_kode;
             $diagnosa->save();
             
             if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
@@ -120,7 +123,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'lrj';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis3)->kode;
-            $diagnosa->nama = $request->namaDiagnosis3;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis3)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis3)->sub_kode;
             $diagnosa->save();
 
             if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
@@ -133,7 +137,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'lrj';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis4)->kode;
-            $diagnosa->nama = $request->namaDiagnosis4;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis4)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis4)->sub_kode;
             $diagnosa->save();
         
         Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
@@ -294,7 +299,7 @@ class PelayananController extends Controller
 
     public function AjaxCariDiagnosa($id){
 
-        $diagnosa = tbl_icd10nama::where('id_tblicd10',$id)->pluck('nama');
+        $diagnosa = tbl_icd10nama::where('id_tblicd10',$id)->pluck('nama','id');
 
         return json_encode($diagnosa);
     }
@@ -455,8 +460,8 @@ class PelayananController extends Controller
         $edit['bulan'] = $diff->m;
         $edit['hari'] = $diff->d;
 
-        $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
-        $icd9 = Icd9::all();
+        $icd = Icd::distinct()->orderBy('kode','asc')->get();
+        $icd9 = Icd9::orderBy('kode','asc')->get();
 
         return view('pelayanan.editRMK')->with('icd',$icd)->with('icd9',$icd9)->with('edit',$edit);
     }
@@ -491,7 +496,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'rmk';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis)->kode;
-            $diagnosa->nama = $request->namaDiagnosis;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis)->sub_kode;
             $diagnosa->save();
 
           $diagnosa = new Diagnosis();
@@ -499,7 +505,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'rmk';
             $diagnosa->diagnosa_komplikasi = 'komplikasi';
             $diagnosa->kode = Icd::find($request->kodeKomplikasi)->kode;
-            $diagnosa->nama = $request->namaKomplikasi;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaKomplikasi)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaKomplikasi)->sub_kode;
             $diagnosa->save();
 
           if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null OR $request->kodeKomplikasi1 == null OR $request->namaKomplikasi1 == null) {
@@ -512,7 +519,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'rmk';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis1)->kode;
-            $diagnosa->nama = $request->namaDiagnosis1;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis1)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis1)->sub_kode;
             $diagnosa->save();
 
             $diagnosa = new Diagnosis();
@@ -520,7 +528,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'rmk';
             $diagnosa->diagnosa_komplikasi = 'komplikasi';
             $diagnosa->kode = Icd::find($request->kodeKomplikasi1)->kode;
-            $diagnosa->nama = $request->namaKomplikasi1;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaKomplikasi1)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaKomplikasi1)->sub_kode;
             $diagnosa->save();
 
 
@@ -534,7 +543,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'rmk';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis2)->kode;
-            $diagnosa->nama = $request->namaDiagnosis2;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis2)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis2)->sub_kode;
             $diagnosa->save();
 
               $diagnosa = new Diagnosis();
@@ -542,7 +552,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'rmk';
             $diagnosa->diagnosa_komplikasi = 'komplikasi';
             $diagnosa->kode = Icd::find($request->kodeKomplikasi2)->kode;
-            $diagnosa->nama = $request->namaKomplikasi2;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaKomplikasi2)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaKomplikasi2)->sub_kode;
             $diagnosa->save();
             
             if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null OR $request->kodeKomplikasi3 == null OR $request->namaKomplikasi3 == null) {
@@ -555,7 +566,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'rmk';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis3)->kode;
-            $diagnosa->nama = $request->namaDiagnosis3;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis3)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis3)->sub_kode;
             $diagnosa->save();
 
              $diagnosa = new Diagnosis();
@@ -563,7 +575,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'rmk';
             $diagnosa->diagnosa_komplikasi = 'komplikasi';
             $diagnosa->kode = Icd::find($request->kodeKomplikasi3)->kode;
-            $diagnosa->nama = $request->namaKomplikasi3;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaKomplikasi3)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaKomplikasi3)->sub_kode;
             $diagnosa->save();
 
             if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null OR $request->kodeKomplikasi4 == null OR $request->namaKomplikasi4 == null) {
@@ -576,7 +589,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'rmk';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis4)->kode;
-            $diagnosa->nama = $request->namaDiagnosis4;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis4)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis4)->sub_kode;
             $diagnosa->save();
 
              $diagnosa = new Diagnosis();
@@ -584,7 +598,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'rmk';
             $diagnosa->diagnosa_komplikasi = 'komplikasi';
             $diagnosa->kode = Icd::find($request->kodeKomplikasi4)->kode;
-            $diagnosa->nama = $request->namaKomplikasi4;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaKomplikasi4)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaKomplikasi4)->sub_kode;
             $diagnosa->save();
 
 
@@ -790,8 +805,8 @@ class PelayananController extends Controller
         $edit['bulan'] = $diff->m;
         $edit['hari'] = $diff->d;
 
-        $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
-        $icd9 = Icd9::all();
+        $icd = Icd::distinct()->orderBy('kode','asc')->get();
+        $icd9 = Icd9::orderBy('kode','asc')->get();
 
         return view('pelayanan.editLGD')->with('icd',$icd)->with('icd9',$icd9)->with('edit',$edit);
     }
@@ -824,7 +839,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'igd';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis)->kode;
-            $diagnosa->nama = $request->namaDiagnosis;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis)->sub_kode;
             $diagnosa->save();
 
           if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
@@ -837,7 +853,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'igd';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis1)->kode;
-            $diagnosa->nama = $request->namaDiagnosis1;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis1)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis1)->sub_kode;
             $diagnosa->save();
 
             if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
@@ -850,7 +867,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'igd';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis2)->kode;
-            $diagnosa->nama = $request->namaDiagnosis2;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis2)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis2)->sub_kode;
             $diagnosa->save();
             
             if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
@@ -863,7 +881,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'igd';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis3)->kode;
-            $diagnosa->nama = $request->namaDiagnosis3;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis3)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis3)->sub_kode;
             $diagnosa->save();
 
             if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
@@ -876,7 +895,8 @@ class PelayananController extends Controller
             $diagnosa->jenis_pelayanan = 'igd';
             $diagnosa->diagnosa_komplikasi = 'diagnosa';
             $diagnosa->kode = Icd::find($request->kodeDiagnosis4)->kode;
-            $diagnosa->nama = $request->namaDiagnosis4;
+            $diagnosa->nama = tbl_icd10nama::find($request->namaDiagnosis4)->nama;
+            $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis4)->sub_kode;
             $diagnosa->save();
         
         Alert::success('Berhasil', 'Kode ICD telah ditambahkan');

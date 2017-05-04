@@ -40,13 +40,13 @@
                                                         <input class="form-control" id="noRm" name="noRm" value="{{old('noRm')}}" type="text" placeholder="Nomor Rekam Medis" onkeyup="
                                                         var noRm = this.value;
                                                         if (noRm.match(/^\d{2}$/) !== null) {
-                                                           this.value = noRm + '-';
-                                                       } else if (noRm.match(/^\d{2}\-\d{2}$/) !== null) {
-                                                           this.value = noRm + '-';
-                                                       }" maxlength="8">
+                                                         this.value = noRm + '-';
+                                                     } else if (noRm.match(/^\d{2}\-\d{2}$/) !== null) {
+                                                         this.value = noRm + '-';
+                                                     }" maxlength="8">
 
-                                                       @if ($errors->has('noRm'))
-                                                       <span class="help-block">
+                                                     @if ($errors->has('noRm'))
+                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('noRm') }}</strong>
                                                     </span>
                                                     @endif
@@ -210,7 +210,7 @@
                                                     </div>
 
                                                     <div class="col-md-6">
-                                                       <div class="bootstrap-timepicker">
+                                                     <div class="bootstrap-timepicker">
                                                         <div class="form-group{{ $errors->has('jam_masuk') ? ' has-error' : '' }}">
                                                             <label class="control-label " for="jam_masuk">Jam Masuk</label><br>
                                                             <div class="input-group">
@@ -230,73 +230,52 @@
                                             </div>
                                         </div>
                                         <div class="form-group {{ $errors->has('caraDatang') ? 'has-error' : ''}}">
-                                           <label class="control-label " for="caraDatang">Cara Datang</label>
-                                           <div class="form-group">
-                                             <select name="caraDatang" id="caraDatang" class="form-control" onChange="changetextbox();">
-                                             <option>pilih</option>
-                                                 <option value="Sendiri">Sendiri</option>
-                                                 <option value="Rujukan">Rujukan</option>
-                                             </select>
-                                             <span class="help-block">
-                                                <strong>{{ $errors->first('caraDatang') }}</strong>
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="rujukan">Rujukan</label>
-                                        <input class="form-control" name="rujukan" disabled="" value="{{old('rujukan')}}" id="rujukan" type="text" placeholder="Rujukan">
-                                    </div>
-
-                                    <div class="form-group {{ $errors->has('caraBayar') ? 'has-error' : ''}}">
-                                       <label class="control-label " for="caraBayar">Cara Bayar</label>
-                                       <div class="form-group">
-                                         <select name="caraBayar" id="caraBayar" class="form-control" onChange="changetextbox();">
-                                         <option>pilih</option>
-                                             <option value="BPJS">BPJS</option>
-                                             <option value="UMUM">UMUM</option>
-                                         </select>
-                                         <span class="help-block">
-                                            <strong>{{ $errors->first('caraBayar') }}</strong>
+                                         <label class="control-label " for="caraDatang">Cara Datang</label>
+                                         <div class="form-group">
+                                           <select name="caraDatang" id="caraDatang" class="form-control" onChange="changetextbox();">
+                                               <option>pilih</option>
+                                               <option value="Sendiri">Sendiri</option>
+                                               <option value="Rujukan">Rujukan</option>
+                                           </select>
+                                           <span class="help-block">
+                                            <strong>{{ $errors->first('caraDatang') }}</strong>
                                         </span>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                 <div class="col-md-6">
-                                    <div class="form-group {{ $errors->has('caraMasuk') ? 'has-error' : ''}}">
-                                     <label class="control-label " for="caraMasuk">Cara Masuk RS</label>
-                                     <div class="input-group date">
-                                        <div class="form-group">
-                                            <select name="caraMasuk" class="form-control">
-                                            <option>pilih</option>
-                                                <option value="IGD">IGD</option>
-                                                <option value="Rawat Jalan">Rawat Jalan</option>
-                                            </select>
-
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('caraMasuk') }}</strong>
-                                            </span>
-
-                                        </div>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="rujukan">Rujukan</label>
+                                    <input class="form-control" name="rujukan" disabled="" value="{{old('rujukan')}}" id="rujukan" type="text" placeholder="Rujukan">
                                 </div>
+
+                                <div class="form-group {{ $errors->has('caraBayar') ? 'has-error' : ''}}">
+                                 <label class="control-label " for="caraBayar">Cara Bayar</label>
+                                 <div class="form-group">
+                                   <select name="caraBayar" id="caraBayar" class="form-control" onChange="changetextbox();">
+                                       <option>pilih</option>
+                                       <option value="BPJS">BPJS</option>
+                                       <option value="UMUM">UMUM</option>
+                                   </select>
+                                   <span class="help-block">
+                                    <strong>{{ $errors->first('caraBayar') }}</strong>
+                                </span>
                             </div>
+                        </div>
 
-                            <div class="col-md-6">
-                                <div class="form-group {{ $errors->has('bangsal') ? 'has-error' : ''}}">
-                                 <label class="control-label " for="tanggal_kembali">Bangsal</label>
-                                 <div class="input-group date">
-                                    <div class="form-group">
-                                        <select name="bangsal" class="form-control">
-                                         <option value="">--- Pilih Bangsal ---</option>
-                                         @foreach($bangsal as $key => $value)
-                                         <option value="{{$key}}">{{$value}}</option>
-                                         @endforeach 
-                                     </select>
+                        <div class="row">
+                           <div class="col-md-6">
+                            <div class="form-group {{ $errors->has('caraMasuk') ? 'has-error' : ''}}">
+                               <label class="control-label " for="caraMasuk">Cara Masuk RS</label>
+                               <div class="input-group date">
+                                <div class="form-group">
+                                    <select name="caraMasuk" class="form-control">
+                                        <option>pilih</option>
+                                        <option value="IGD">IGD</option>
+                                        <option value="Rawat Jalan">Rawat Jalan</option>
+                                    </select>
 
-                                     <span class="help-block">
-                                        <strong>{{ $errors->first('bangsal') }}</strong>
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('caraMasuk') }}</strong>
                                     </span>
 
                                 </div>
@@ -305,47 +284,68 @@
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('kelas') ? 'has-error' : ''}}">
-                         <label class="control-label " for="tanggal_kembali">Kelas</label>
-                         <div class="input-group date">
+                        <div class="form-group {{ $errors->has('bangsal') ? 'has-error' : ''}}">
+                           <label class="control-label " for="tanggal_kembali">Bangsal</label>
+                           <div class="input-group date">
                             <div class="form-group">
-                                <select name="kelas" class="form-control">
-                                <option>pilih</option>
-                                </select>
+                                <select name="bangsal" class="form-control">
+                                   <option value="">--- Pilih Bangsal ---</option>
+                                   @foreach($bangsal as $key => $value)
+                                   <option value="{{$key}}">{{$value}}</option>
+                                   @endforeach 
+                               </select>
 
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('kelas') }}</strong>
-                                </span>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group {{ $errors->has('kamar') ? 'has-error' : ''}}">
-                     <label class="control-label " for="tanggal_kembali">Nomor Kamar</label>
-                     <div class="input-group date">
-                        <div class="form-group">
-                            <select name="kamar" class="form-control">
-                            <option>pilih</option>
-                            </select>
-
-                            <span class="help-block">
-                                <strong>{{ $errors->first('kamar') }}</strong>
+                               <span class="help-block">
+                                <strong>{{ $errors->first('bangsal') }}</strong>
                             </span>
 
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="form-group {{ $errors->has('kelas') ? 'has-error' : ''}}">
+                   <label class="control-label " for="tanggal_kembali">Kelas</label>
+                   <div class="input-group date">
+                    <div class="form-group">
+                        <select name="kelas" class="form-control">
+                            <option>pilih</option>
+                        </select>
+
+                        <span class="help-block">
+                            <strong>{{ $errors->first('kelas') }}</strong>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <div class="col-md-6">
+            <div class="form-group {{ $errors->has('kamar') ? 'has-error' : ''}}">
+               <label class="control-label " for="tanggal_kembali">Nomor Kamar</label>
+               <div class="input-group date">
+                <div class="form-group">
+                    <select name="kamar" class="form-control">
+                        <option>pilih</option>
+                    </select>
+
+                    <span class="help-block">
+                        <strong>{{ $errors->first('kamar') }}</strong>
+                    </span>
+
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-12">
-        <br><br><br><br><br>
-        <button type="submit" class="btn btn-primary btn-block btn-lg">Simpan</button>
-    </div>
+</div>
+
+</div>
+<div class="col-md-12">
+    <br><br><br><br><br>
+    <button type="submit" class="btn btn-primary btn-block btn-lg">Simpan</button>
+</div>
 </form>
 <!-- /.row (nested) -->
 </div>
@@ -432,34 +432,34 @@
                         var umur = document.getElementById("hari").value =pasien['hari'];
                         
                     },
-                      error:function(exception){
-                       var nama = document.getElementById("nama").value ='Tidak DItemukan';
-                        var provinsi = document.getElementById("provinsi").value ='Tidak DItemukan';
-                        var kabupaten = document.getElementById("kabupaten").value ='Tidak DItemukan';
-                        var kecamatan = document.getElementById("kecamatan").value ='Tidak DItemukan';
-                        var kelurahan = document.getElementById("kelurahan").value ='Tidak DItemukan';
-                        var dukuh = document.getElementById("dukuh").value ='Tidak DItemukan';
-                        var rt = document.getElementById("rt").value ='Tidak DItemukan';
-                        var rw = document.getElementById("rw").value ='Tidak DItemukan';
-                        var tglLahir = document.getElementById("tglLahir").value ='Tidak DItemukan';
-                        var umur = document.getElementById("tahun").value ='Tidak DItemukan';
-                        var umur = document.getElementById("bulan").value ='Tidak DItemukan';
-                        var umur = document.getElementById("hari").value ='Tidak DItemukan';
-                    }
-                });
+                    error:function(exception){
+                     var nama = document.getElementById("nama").value ='Tidak DItemukan';
+                     var provinsi = document.getElementById("provinsi").value ='Tidak DItemukan';
+                     var kabupaten = document.getElementById("kabupaten").value ='Tidak DItemukan';
+                     var kecamatan = document.getElementById("kecamatan").value ='Tidak DItemukan';
+                     var kelurahan = document.getElementById("kelurahan").value ='Tidak DItemukan';
+                     var dukuh = document.getElementById("dukuh").value ='Tidak DItemukan';
+                     var rt = document.getElementById("rt").value ='Tidak DItemukan';
+                     var rw = document.getElementById("rw").value ='Tidak DItemukan';
+                     var tglLahir = document.getElementById("tglLahir").value ='Tidak DItemukan';
+                     var umur = document.getElementById("tahun").value ='Tidak DItemukan';
+                     var umur = document.getElementById("bulan").value ='Tidak DItemukan';
+                     var umur = document.getElementById("hari").value ='Tidak DItemukan';
+                 }
+             });
             }else{
-                        var nama = document.getElementById("nama").value ='';
-                        var provinsi = document.getElementById("provinsi").value ='';
-                        var kabupaten = document.getElementById("kabupaten").value ='';
-                        var kecamatan = document.getElementById("kecamatan").value ='';
-                        var kelurahan = document.getElementById("kelurahan").value ='';
-                        var dukuh = document.getElementById("dukuh").value ='';
-                        var rt = document.getElementById("rt").value ='';
-                        var rw = document.getElementById("rw").value ='';
-                        var tglLahir = document.getElementById("tglLahir").value ='';
-                        var umur = document.getElementById("tahun").value ='';
-                        var umur = document.getElementById("bulan").value ='';
-                        var umur = document.getElementById("hari").value ='';
+                var nama = document.getElementById("nama").value ='';
+                var provinsi = document.getElementById("provinsi").value ='';
+                var kabupaten = document.getElementById("kabupaten").value ='';
+                var kecamatan = document.getElementById("kecamatan").value ='';
+                var kelurahan = document.getElementById("kelurahan").value ='';
+                var dukuh = document.getElementById("dukuh").value ='';
+                var rt = document.getElementById("rt").value ='';
+                var rw = document.getElementById("rw").value ='';
+                var tglLahir = document.getElementById("tglLahir").value ='';
+                var umur = document.getElementById("tahun").value ='';
+                var umur = document.getElementById("bulan").value ='';
+                var umur = document.getElementById("hari").value ='';
             }
         });
     });
@@ -519,13 +519,13 @@
     });
 </script>
 <script type="text/javascript">
-function changetextbox()
-{
-    if (document.getElementById("caraDatang").value == "Sendiri") {
-        document.getElementById("rujukan").disabled='true';
-    } else {
-        document.getElementById("rujukan").disabled='';
+    function changetextbox()
+    {
+        if (document.getElementById("caraDatang").value == "Sendiri") {
+            document.getElementById("rujukan").disabled='true';
+        } else {
+            document.getElementById("rujukan").disabled='';
+        }
     }
-}
 </script>
 @endsection

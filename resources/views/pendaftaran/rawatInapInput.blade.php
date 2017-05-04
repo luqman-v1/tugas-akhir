@@ -400,37 +400,6 @@
  });
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#noRm').on('keyup', function(e) {
-            var cariID = $(this).val();
-            if(cariID) {
-                $.ajax({
-                    url: 'rawat-jalan/norm/'+cariID,
-                    type: "GET",
-                    dataType: "json",
-                    success:function(data) {
-                        console.log(data);
-                        var pasien = jQuery.parseJSON(JSON.stringify(data));
-                        var nama = document.getElementById("nama").value =pasien['nama'];
-                        var provinsi = document.getElementById("provinsi").value =pasien['provinsi'];
-                        var kabupaten = document.getElementById("kabupaten").value =pasien['kabupaten'];
-                        var kecamatan = document.getElementById("kecamatan").value =pasien['kecamatan'];
-                        var kelurahan = document.getElementById("kelurahan").value =pasien['kelurahan'];
-                        var dukuh = document.getElementById("dukuh").value =pasien['dukuh'];
-                        var rt = document.getElementById("rt").value =pasien['rt'];
-                        var rw = document.getElementById("rw").value =pasien['rw'];
-                        var tglLahir = document.getElementById("tglLahir").value =pasien['tglLahir'];
-                        var umur = document.getElementById("tahun").value =pasien['tahun'];
-                        var umur = document.getElementById("bulan").value =pasien['bulan'];
-                        var umur = document.getElementById("hari").value =pasien['hari'];
-                        
-                    }
-                });
-            }
-        });
-    });
-</script>
 
 <script type="text/javascript">
     $(document).ready(function() {

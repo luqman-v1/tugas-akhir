@@ -29,9 +29,10 @@ class IcdController extends Controller
     	$icd->kode = $request->kode;
     	$icd->save();
         
-         $lastIcd = ICD::orderBy('id','desc')->first();
+         $lastIcd = $icd->id;
         
         $nama = $request->nama;
+        $i=1;
         foreach ($nama as $name) {
             if ($name == null) {
 
@@ -39,11 +40,12 @@ class IcdController extends Controller
                 return back();
             }
         $icdNama = new tbl_icd10nama();
-        $icdNama->id_tblicd10 = $lastIcd->id;
+        $icdNama->id_tblicd10 = $lastIcd;
+        $icdNama->sub_kode = $i;
         $icdNama->nama = $name;
 
         $icdNama->save();
-            
+          $i++;  
         }
         Alert::success('Berhasil', 'Data diagnosis telah ditambahkan');
     	return back();

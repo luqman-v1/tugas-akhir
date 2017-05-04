@@ -778,7 +778,7 @@
     $(document).ready(function() {
         $('select[name="kodeDiagnosis"]').on('change', function() {
             var diagnosisID = $(this).val();
-            console.log(diagnosisID);
+            // console.log(diagnosisID);
             if(diagnosisID) {
                 $.ajax({
                     url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
@@ -789,7 +789,7 @@
                         console.log(data);
                         $('select[name="namaDiagnosis"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="namaDiagnosis"]').append('<option value="'+ value +'">'+ value +'</option>');
+                            $('select[name="namaDiagnosis"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
 
                     }
@@ -815,7 +815,7 @@
                         console.log(data);
                         $('select[name="namaDiagnosis1"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="namaDiagnosis1"]').append('<option value="'+ value +'">'+ value +'</option>');
+                            $('select[name="namaDiagnosis1"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
 
                     }
@@ -840,7 +840,7 @@
                         console.log(data);
                         $('select[name="namaDiagnosis2"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="namaDiagnosis2"]').append('<option value="'+ value +'">'+ value +'</option>');
+                            $('select[name="namaDiagnosis2"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
 
                     }
@@ -865,7 +865,7 @@
                         console.log(data);
                         $('select[name="namaDiagnosis3"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="namaDiagnosis3"]').append('<option value="'+ value +'">'+ value +'</option>');
+                            $('select[name="namaDiagnosis3"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
 
                     }
@@ -890,7 +890,7 @@
                         console.log(data);
                         $('select[name="namaDiagnosis4"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="namaDiagnosis4"]').append('<option value="'+ value +'">'+ value +'</option>');
+                            $('select[name="namaDiagnosis4"]').append('<option value="'+ key +'">'+ value +'</option>');
                         });
 
                     }

@@ -12,8 +12,25 @@
 */
 
 Auth::routes();
+// === Mematikan FItur Bawaan===
+Route::get('/register',function(){
+	return back();
+});
+Route::post('/register',function(){
+	return back();
+});
+Route::get('password/reset',function(){
+	return back();
+});
+Route::post('password/reset',function(){
+	return back();
+});
+Route::get('password/email',function(){
+	return back();
+});
+//========= end ========
 
-Route::get('/','UserController@dashboard');
+Route::get('/',['middleware' => 'auth','uses' => 'DashboardController@index']);
 Route::get('/users/profile/{id}','UserController@profile');
 Route::post('/users/profile/{id}','UserController@update');
 Route::post('/users/profile/{id}/password','UserController@updatePassword');
@@ -23,7 +40,7 @@ Route::post('/users/profile/{id}/password','UserController@updatePassword');
 // Route::post('messages', 'ChatsController@sendMessage');
 // Route::get('/','ChatsController@tes');
 
-Route::group(['middleware' => ['role:admin']], function(){
+Route::group(['as' => 'user','middleware' => ['role:admin']], function(){
 //====================================================
 //=======================USER====================
 //====================================================
@@ -36,7 +53,7 @@ Route::post('/user/register/ubahPassword','UserController@ubahPassword');
 
 
 
-Route::group(['middleware' => ['role:admin|rekmed']], function(){
+Route::group(['as' => 'pelaporan','middleware' => ['role:admin|rekmed']], function(){
 
 // ====================== index ================
 
@@ -65,7 +82,7 @@ Route::delete('pelaporan/kodeicd9/{id}','IcdController@hapusIcd9');
 
 
 });
-Route::group(['middleware' => ['role:admin|rekmed']], function(){
+Route::group(['as' => 'pendaftaran','middleware' => ['role:admin|rekmed']], function(){
 //====================================================
 //=======================PENDAFTARAN==================
 //====================================================
@@ -101,7 +118,7 @@ Route::post('igd','PendaftaranController@igdSimpan');
 Route::get('cari-pasien','PendaftaranController@viewCariPasien');
 });
 
-Route::group(['middleware' => ['role:admin|rekmed|dokter|perawat']], function(){
+Route::group([ 'as' => 'pelayanan','middleware' => ['role:admin|rekmed|dokter|perawat']], function(){
 //====================================================
 //=======================PELAYANAN====================
 //====================================================
@@ -134,7 +151,13 @@ Route::get('/pelayanan-igd/norm/{id}','PelayananController@AjaxCarilgd');
 });
 
 
+Route::group(['as' => 'kasir','middleware' => ['role:admin|rekmed|kasir']], function(){
 
+});
+
+Route::group(['as' => 'farmasi', 'middleware' => ['role:admin|rekmed|farmasi']],function(){
+
+});
 
 // Route::get('tes','PelaporanController@tes');
 

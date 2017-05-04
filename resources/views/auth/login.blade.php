@@ -77,10 +77,10 @@
   <!-- /.col -->
 </div>
 </form>
-
+{{-- 
 <a class="btn btn-link" href="{{ route('password.request') }}">
  Lupa Password?
-</a>
+</a> --}}
 
 </div>
 <!-- /.login-box-body -->

@@ -183,7 +183,7 @@
             var cariID = $(this).val();
             if(cariID) {
                 $.ajax({
-                    url: 'rawat-jalan/norm/'+cariID,
+                    url: '{{url('/')}}/pasien/norm/'+cariID,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
