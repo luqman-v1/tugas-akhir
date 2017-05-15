@@ -16,7 +16,10 @@ use App\Pasien;
 use App\Diagnosis;
 use App\PelayananRI;
 use \Carbon\Carbon;
-
+use App\role_user;
+use App\ICD;
+use App\tbl_icd10nama;
+use App\ICD9;
 class PelaporanController extends Controller
 {
     public function getFormRegister(){
@@ -186,5 +189,24 @@ class PelaporanController extends Controller
 
     public function formIndexCek(){
         return view('');
+    }
+
+    public function dokter(){
+        $dokter = role_user::join('users','user_id','id')->where('role_id',6)->pluck("name","id");
+
+        return $dokter;
+    }
+    public function penyakit(){
+
+        $penyakit = tbl_icd10nama::join('tbl_icd10','id_tblicd10','tbl_icd10.id')->orderBy('nama','asc')->pluck("nama","id_tblicd10");
+
+        return $penyakit;
+    }
+
+    public function tindakan(){
+        $tindakan = ICD9::orderBy('nama','asc')->pluck("nama","id");
+
+        return $tindakan;
+
     }
 }

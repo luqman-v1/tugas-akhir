@@ -34,7 +34,7 @@
 							<div class="form-group" style="text-align: center;">
 								<div class="col-md-4">
 									<label>
-									&nbsp&nbsp	<input type="radio" class="flat-red" name="index" id="optionsRadios1" value="penyakit" checked="">
+									&nbsp&nbsp	<input type="radio" class="flat-red" name="index" id="optionsRadios1" value="penyakit">
 										I.Penyakit
 									</label>
 								</div>
@@ -57,6 +57,12 @@
 									</label>
 								</div>
 							</div>
+							
+							<div  id="list" style="display: none;" class="form-group">
+							<label>Pilih</label>
+								<select class="form-control" name="list"></select>
+							</div>
+							
 							<!-- Minimal red style -->
 							<div class="form-group{{ $errors->has('dariTanggal') ? ' has-error' : '' }}">
 								<label class="control-label " for="dariTanggal">Dari Tanggal</label><br>
@@ -123,11 +129,81 @@
    	format: 'yyyy-mm-dd'
    });
  //Flat red color scheme for iCheck
- $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
- 	checkboxClass: 'icheckbox_flat-green',
- 	radioClass: 'iradio_flat-green'
- });
+ // $('input[type="radio"]').iCheck({
+ // 	checkboxClass: 'icheckbox_flat-green',
+ // 	radioClass: 'iradio_flat-green'
+ // });
  
+});
+</script>
+<script>
+	$(document).ready(function() {
+    $("input[type=radio][name=index]").change(function() {
+
+    	 if (this.value == "penyakit") {
+    	 	$('#list').show();
+     		$("select[name=list]").removeAttr('disabled');
+                $.ajax({
+                    url: '{{ url('/index/list/penyakit') }}',
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        // console.log(data);
+                        $('select[name="list"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="list"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+
+                    }
+                });
+        }
+        else if (this.value == "tindakan") {
+        	$('#list').show();
+     		$("select[name=list]").removeAttr('disabled');
+                $.ajax({
+                    url: '{{ url('/index/list/tindakan') }}',
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        // console.log(data);
+                        $('select[name="list"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="list"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+
+                    }
+                });
+            
+        }else if(this.value == "dokter"){
+        	$('#list').show();
+     		$("select[name=list]").removeAttr('disabled');
+                $.ajax({
+                    url: '{{ url('/index/list/dokter') }}',
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        // console.log(data);
+                        $('select[name="list"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="list"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+
+                    }
+                });
+            
+
+        }else{
+  			$("select[name=list]").attr('disabled','disabled');
+        	$('#list').hide();
+
+        }	
+    	
+
+       
+    });
 });
 </script>
 

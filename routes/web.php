@@ -56,7 +56,9 @@ Route::post('/user/register/ubahPassword','UserController@ubahPassword');
 Route::group(['as' => 'pelaporan','middleware' => ['role:admin|rekmed']], function(){
 
 // ====================== index ================
-
+Route::get('/index/list/dokter','PelaporanController@dokter');
+Route::get('/index/list/penyakit','PelaporanController@penyakit');
+Route::get('/index/list/tindakan','PelaporanController@tindakan');
 Route::get('index','PelaporanController@formIndex');
 Route::post('index','PelaporanController@formIndexCek');
 

@@ -88,7 +88,7 @@
           </ul>
         </li>
         @endrole
-        @role(['admin','rekmed','perawat'])
+{{--         @role(['admin','rekmed','perawat'])
         <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -102,7 +102,7 @@
             <li><a href="{{url('/')}}"><i class="fa fa-circle-o"></i> Cari Kamar Kosong</a></li>
           </ul>
         </li>
-        @endrole
+        @endrole --}}
 
         @role(['admin','rekmed'])
         <li class="treeview">
@@ -130,7 +130,7 @@
           </a>
         </li>
         @endrole
-
+{{-- 
         @role(['admin','farmasi','rekmed'])
         <li class="treeview">
           <a href="#">
@@ -160,7 +160,7 @@
             <li><a href="{{url('/')}}"><i class="fa fa-circle-o"></i> unknown</a></li>
           </ul>
         </li>
-        @endrole
+        @endrole --}}
 
         @role(['admin'])
         <li class="treeview">

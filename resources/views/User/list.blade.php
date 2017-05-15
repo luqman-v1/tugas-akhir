@@ -24,7 +24,7 @@
 
       <div class="box">
         <div class="box-header">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm1"><span class="glyphicon glyphicon-plus"></span> Tambah Kode</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm1"><span class="glyphicon glyphicon-plus"></span> Tambah User</button>
         </div>
         <!-- /.box-header -->
         <div class="box-body">

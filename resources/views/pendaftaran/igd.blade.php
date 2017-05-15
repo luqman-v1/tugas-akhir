@@ -353,8 +353,10 @@
        <div class="input-group date">
         <div class="form-group">
             <select name="dokterJaga" class="form-control">
-                <option value="Dokter Jaga IGD 1">Dokter Jaga IGD 1</option>
-                <option value="Dokter Jaga IGD 2">Dokter Jaga IGD 2</option>
+                <option value="">pilih</option>
+                @foreach($dokter as $data)
+                <option value="{{ $data->name }}">{{ $data->name }}</option>
+                @endforeach
             </select>
 
             <span class="help-block">
@@ -371,8 +373,10 @@
        <div class="input-group date">
         <div class="form-group">
             <select name="perawat" class="form-control">
-                <option value="Perawat IGD 1">Perawat IGD 1</option>
-                <option value="Perawat IGD 2">Perawat IGD 2</option>
+                <option value="">pilih</option>
+                @foreach($perawat as $data)
+                <option value="{{ $data->name }}">{{ $data->name }}</option>
+                @endforeach
             </select>
             <span class="help-block">
                 <strong>{{ $errors->first('perawat') }}</strong>

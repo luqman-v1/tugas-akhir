@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Image;
 use Illuminate\Support\Facades\Input;
 use App\Config;
+use File;
 class UserController extends Controller
 {
     	public function __construct(){
@@ -73,10 +74,13 @@ class UserController extends Controller
            $image = $request->file('foto');
         
             if($image != null){
+
+            File::delete('foto/' . User::find($id)->foto);
             $filename  = time() . '.' . $image->getClientOriginalExtension();
              $path = public_path('foto/' . $filename);
             Image::make($image->getRealPath())->resize(200, 200)->save($path);
              $update = User::find($id);
+             
             // $update->username = $request->get('username');
             $update->name = $request->get('name');
             $update->email = $request->get('email');
@@ -85,13 +89,11 @@ class UserController extends Controller
             $update->save(); 
           
             }else{
-            $filename = User::find($id)->foto;
             $update = User::find($id);
             // $update->username = $request->get('username');
             $update->name = $request->get('name');
             $update->email = $request->get('email');
             $update->noHp = $request->get('noHp');
-            $update->foto = $filename;
             $update->save(); 
           }
 
@@ -109,10 +111,11 @@ class UserController extends Controller
             $image = $request->file('foto');
         
             if($image != null){
-            $filename  = time() . '.' . $image->getClientOriginalExtension();
-             $path = public_path('foto/' . $filename);
-            Image::make($image->getRealPath())->resize(200, 200)->save($path);
-             $update = User::find($id);
+                    File::delete('foto/' . User::find($id)->foto);
+                    $filename  = time() . '.' . $image->getClientOriginalExtension();
+                     $path = public_path('foto/' . $filename);
+                    Image::make($image->getRealPath())->resize(200, 200)->save($path);
+                     $update = User::find($id);
             // $update->username = $request->get('username');
             $update->name = $request->get('name');
             $update->email = $request->get('email');
@@ -121,13 +124,11 @@ class UserController extends Controller
             $update->save(); 
           
             }else{
-            $filename = User::find($id)->foto;
             $update = User::find($id);
 			// $update->username = $request->get('username');
 			$update->name = $request->get('name');
 			$update->email = $request->get('email');
 		    $update->noHp = $request->get('noHp');
-			$update->foto = $filename;
 			$update->save(); 
           }
         }

@@ -211,8 +211,9 @@
                                                            <div class="form-group">
                                                                <select name="namaPerawat" id="namaPerawat" class="form-control">
                                                                 <option value="">pilih</option>
-                                                                <option value="perawat 1">perawat 1</option>
-                                                                <option value="perawat 2">perawat 2</option>
+                                                                    @foreach($perawat as $data)
+                                                                    <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                                                    @endforeach
                                                             </select>
                                                             <span class="help-block">
                                                                 <strong>{{ $errors->first('namaPerawat') }}</strong>
@@ -226,8 +227,9 @@
                                                        <div class="form-group">
                                                            <select name="namaPetugasTpp" id="namaPetugasTpp" class="form-control">
                                                             <option value="">pilih</option>
-                                                            <option value="petugas 1">petugas 1</option>
-                                                            <option value="petugas 2">petugas 2</option>
+                                                        @foreach($rekmed as $data)
+                                                        <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                                        @endforeach
                                                         </select>
                                                         <span class="help-block">
                                                             <strong>{{ $errors->first('namaPetugasTpp') }}</strong>
@@ -241,8 +243,9 @@
                                                    <div class="form-group">
                                                        <select name="namaDokterPj" id="namaDokterPj" class="form-control">
                                                         <option value="">pilih</option>
-                                                        <option value="dokter 1">dokter 1</option>
-                                                        <option value="dokter 2">dokter 2</option>
+                                                        @foreach($dokter as $data)
+                                                        <option value="{{ $data->name }}">{{ $data->name }}</option>
+                                                        @endforeach
                                                     </select>
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('namaDokterPj') }}</strong>
@@ -492,10 +495,10 @@
        <label class="control-label " for="dokterMemulangkan">Dokter yang Memulangkan</label>
        <div class="form-group">
            <select name="dokterMemulangkan" id="dokterMemulangkan" class="form-control">
-           <option value="">pilih</option>
-             <option value="Ya">dokter 1</option>
-             <option value="Tidak">dokter 2</option>
-             <option value="Tidak">dokter 3</option>
+            <option value="">pilih</option>
+               @foreach($dokter as $data)
+               <option value="{{ $data->name }}">{{ $data->name }}</option>
+                @endforeach
          </select>
          <span class="help-block">
             <strong>{{ $errors->first('dokterMemulangkan') }}</strong>

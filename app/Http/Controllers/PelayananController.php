@@ -17,7 +17,7 @@ use App\Icd9;
 use App\tbl_icd10nama;
 use App\Diagnosis;
 use App\Tindakan;
-
+use App\role_user;
 class PelayananController extends Controller
 {
     public function indexLrj(){
@@ -311,7 +311,11 @@ class PelayananController extends Controller
          $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
         $icd9 = Icd9::all();
 
-    	return view('pelayanan.RMK')->with('icd',$icd)->with('icd9',$icd9);
+        $dokter = role_user::join('users','user_id','users.id')->where('role_id',6)->get();
+        $perawat = role_user::join('users','user_id','users.id')->where('role_id',3)->get();
+        $rekmed = role_user::join('users','user_id','users.id')->where('role_id',2)->get();
+
+    	return view('pelayanan.RMK')->with(compact('icd','icd9','dokter','perawat','rekmed'));
     }
 
     public function indexRmk(){
