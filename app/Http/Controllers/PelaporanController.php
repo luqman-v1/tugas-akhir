@@ -187,8 +187,35 @@ class PelaporanController extends Controller
         return view('pelaporan.index');
     }
 
-    public function formIndexCek(){
-        return view('');
+    public function formIndexCek(Request $request){
+        // return $request->all();
+
+        if ($request->index == "penyakit") {
+            # code...
+        }elseif ($request->index == "tindakan") {
+            # code...
+        }elseif ($request->index == "dokter") {
+            return $pri = PelayananRI::where('namaDokterPj',$request->list)
+            ->join('rawat_inap','id_RI','rawat_inap.id')->join('pasien','id_pasien','pasien.id')
+            ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+            ->get(); 
+
+            $ri = rawat_igd::where('dokterJaga',$request->list)
+            ->join('pasien','id_pasien','pasien.id')
+            ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+            ->get();
+            $rj =  rawat_jalan::where('DokterPJ',$request->list)
+            ->join('pasien','id_pasien','pasien.id')
+            ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+            ->get();
+
+            return view('pelaporan.indexDokter')->with(compact('pri','ri','rj'));
+
+        }else{
+
+        }
+
+      
     }
 
     public function dokter(){

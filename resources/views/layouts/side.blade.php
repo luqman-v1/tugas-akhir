@@ -47,11 +47,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('/pendaftaran-pasien')}}"><i class="fa fa-circle-o"></i> Jadwal Pelayanan</a></li>
-            <li><a href="{{url('/rawat-jalan')}}"><i class="fa fa-circle-o"></i> Daftar Dokter Spesialis</a></li>
-            <li><a href="{{url('igd')}}"><i class="fa fa-circle-o"></i> Daftar Dokter Jaga</a></li>
-            <li><a href="{{url('cari-pasien')}}"><i class="fa fa-circle-o"></i> Daftar Jaminan Kesehatan</a></li>
-            <li><a href="{{url('cari-pasien')}}"><i class="fa fa-circle-o"></i> Stok Formulir Rekam medis</a></li>
+            <li><a href="{{url('/jadwal-pelayanan')}}"><i class="fa fa-circle-o"></i> Jadwal Pelayanan</a></li>
+            <li><a href="{{url('/dokter-spesialis')}}"><i class="fa fa-circle-o"></i> Daftar Dokter Spesialis</a></li>
+            <li><a href="{{url('dokter-jaga')}}"><i class="fa fa-circle-o"></i> Daftar Dokter Jaga</a></li>
+            <li><a href="{{url('jaminan-kesehatan')}}"><i class="fa fa-circle-o"></i> Daftar Jaminan Kesehatan</a></li>
+            <li><a href="{{url('stok-formulir')}}"><i class="fa fa-circle-o"></i> Stok Formulir Rekam medis</a></li>
           </ul>
         </li>
          @role(['admin','rekmed'])

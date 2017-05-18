@@ -34,11 +34,18 @@ Route::get('/',['middleware' => 'auth','uses' => 'DashboardController@index']);
 Route::get('/users/profile/{id}','UserController@profile');
 Route::post('/users/profile/{id}','UserController@update');
 Route::post('/users/profile/{id}/password','UserController@updatePassword');
-// Route::get('/', 'ChatsController@index');
 
-// Route::get('messages', 'ChatsController@fetchMessages');
-// Route::post('messages', 'ChatsController@sendMessage');
-// Route::get('/','ChatsController@tes');
+//====================================================
+//======================= profile pelayanan ====================
+//====================================================
+
+Route::get('/jadwal-pelayanan','ProfileController@pelayanan');
+Route::get('/dokter-spesialis','ProfileController@spesialis');
+Route::get('/dokter-jaga','ProfileController@jaga');
+Route::get('/jaminan-kesehatan','ProfileController@kesehatan');
+Route::get('/stok-formulir','ProfileController@formulir');
+
+//================== end ==============
 
 Route::group(['as' => 'user','middleware' => ['role:admin']], function(){
 //====================================================
@@ -118,6 +125,7 @@ Route::get('igd/form','PendaftaranController@igd');
 Route::get('igd/input/{id}','PendaftaranController@igdInput');
 Route::post('igd','PendaftaranController@igdSimpan');
 Route::get('cari-pasien','PendaftaranController@viewCariPasien');
+Route::get('cetak-krs/{id}','PendaftaranController@cetakkrs');
 });
 
 Route::group([ 'as' => 'pelayanan','middleware' => ['role:admin|rekmed|dokter|perawat']], function(){
@@ -163,7 +171,7 @@ Route::group(['as' => 'farmasi', 'middleware' => ['role:admin|rekmed|farmasi']],
 
 // Route::get('tes','PelaporanController@tes');
 
-// Route::get('chat',function(){
-// 	return view('chat');
-// });
+Route::get('tes',function(){
+	return view('pendaftaran.printKRS');
+});
 

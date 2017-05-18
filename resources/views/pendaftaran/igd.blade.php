@@ -33,7 +33,7 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <form role="form" method="post" action="">
+                                            <form role="form" method="post" action="{{ url('igd') }}">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="col-lg-6">
                                                     <div class="form-group {{ $errors->has('noRm') ? 'has-error' : ''}}">

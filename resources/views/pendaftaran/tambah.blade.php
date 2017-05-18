@@ -1,5 +1,5 @@
 @extends('layouts.index')
-@section('title') Pendaftaran Rawat Jalan @endsection
+@section('title') Pendaftaran Pasien Baru @endsection
 @section('css')
 <link rel="stylesheet" href="{{url('/plugins/datepicker/datepicker3.css')}}">
 @endsection
@@ -156,6 +156,7 @@
                                                          <div class="input-group date">
                                                             <div class="form-group">
                                                                 <select name="jenisKelamin" class="form-control">
+                                                                <option value="">pilih</option>
                                                                     <option value="Laki-Laki">Laki-Laki</option>
                                                                     <option value="Perempuan">Perempuan</option>
                                                                 </select>
@@ -174,6 +175,7 @@
                                                      <div class="input-group date">
                                                         <div class="form-group">
                                                             <select name="agama" class="form-control">
+                                                                <option value="">pilih</option>
                                                                 <option value="Islam">Islam</option>
                                                                 <option value="Kristen Protestan">Kristen Protestan</option>
                                                                 <option value="Kristen Katolik">Kristen Katolik</option>
@@ -197,6 +199,7 @@
                                              <div class="input-group date">
                                                 <div class="form-group">
                                                     <select name="statusPerkawinan" class="form-control">
+                                                    <option value="">pilih</option>
                                                         <option value="Kawin">Kawin</option>
                                                         <option value="Belum Kawin">Belum Kawin</option>
                                                         <option value="Cerai Hidup">Cerai Hidup</option>
@@ -244,6 +247,7 @@
                                  <label class="control-label " for="kewarganegaraan">kewarganegaraan</label>
                                  <div class="form-group">
                                    <select name="kewarganegaraan" class="form-control">
+                                       <option value="">pilih</option>
                                        <option value="WNI">WNI</option>
                                        <option value="WNA">WNA</option>
                                    </select>
@@ -289,6 +293,7 @@
                                  <label class="control-label " for="caraDatang">Cara Datang</label>
                                  <div class="form-group">
                                    <select name="caraDatang" id="caraDatang" class="form-control" onChange="changetextbox();">
+                                   <option value="">pilih</option>
                                        <option value="Sendiri">Sendiri</option>
                                        <option value="Rujukan">Rujukan</option>
                                    </select>
@@ -307,6 +312,7 @@
                                  <label class="control-label " for="caraBayar">Cara Bayar</label>
                                  <div class="form-group">
                                    <select name="caraBayar" id="caraBayar" class="form-control" onChange="changetextbox();">
+                                   <option value="">pilih</option>
                                        <option value="BPJS">BPJS</option>
                                        <option value="UMUM">UMUM</option>
                                    </select>

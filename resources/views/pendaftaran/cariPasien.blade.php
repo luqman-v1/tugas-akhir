@@ -47,12 +47,13 @@
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
                 <td>{{$data->tglLahir}}</td>
-                <td>Jl. {{$data->dukuh}} RT{{$data->rt}}/{{$data->rw}},Kelurahan {{$data->kelurahan}}, Kecamatan {{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}}</td>
+                <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
                 <td>
                <button type="button" class="btn-xs btn-info"  data-toggle="modal" value="{{$data->noRm}}" id="noRm{{ $i }}" name="noRm" data-target="#myModal">Lihat Detail </button> 
                 <a href="{{url('/rawat-jalan/input/'.$data->id)}}"><button type="button" class="btn-xs btn-success">Rawat Jalan</button></a>
                 <a href="{{url('/rawat-inap/input/'.$data->id)}}"><button type="button" class="btn-xs btn-primary">Rawat Inap</button></a>
                 <a href="{{url('/igd/input/'.$data->id)}}"><button type="button" class="btn-xs btn-warning">IGD</button></a>
+                <a href="{{url('/cetak-krs/'.$data->id)}}"><button type="button" class="btn-xs">Cetak KIB</button></a>
                                                                        
                                                                    
                 </td>
@@ -61,7 +62,7 @@
             @endforeach
         </tbody>
   </table>
-</div>
+</div>  
 <!-- /.box-body -->
 </div>
 <!-- /.box -->

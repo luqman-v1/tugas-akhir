@@ -188,7 +188,7 @@
                         // console.log(data);
                         $('select[name="list"]').empty();
                         $.each(data, function(key, value) {
-                            $('select[name="list"]').append('<option value="'+ key +'">'+ value +'</option>');
+                            $('select[name="list"]').append('<option value="'+ value +'">'+ value +'</option>');
                         });
 
                     }

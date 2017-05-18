@@ -689,11 +689,11 @@
             var cariID = $(this).val();
             if(cariID) {
                 $.ajax({
-                    url: '{{url('lrj/norm')}}/'+cariID,
+                    url: '{{url('pelayanan-igd/norm/')}}/'+cariID,
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-                        console.log(data);
+                        // console.log(data);
                         var pasien = jQuery.parseJSON(JSON.stringify(data));
                         var nama = document.getElementById("nama").value =pasien['nama'];
                         var provinsi = document.getElementById("provinsi").value =pasien['provinsi'];
@@ -806,7 +806,7 @@
     $(document).ready(function() {
         $('select[name="kodeDiagnosis"]').on('change', function() {
             var diagnosisID = $(this).val();
-            console.log(diagnosisID);
+            // console.log(diagnosisID);
             if(diagnosisID) {
                 $.ajax({
                     url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
@@ -814,7 +814,7 @@
                     dataType: "json",
                     success:function(data) {
 
-                        console.log(data);
+                        // console.log(data);
                         $('select[name="namaDiagnosis"]').empty();
                         $.each(data, function(key, value) {
                             $('select[name="namaDiagnosis"]').append('<option value="'+ value +'">'+ value +'</option>');
@@ -832,7 +832,7 @@
     $(document).ready(function() {
         $('select[name="kodeDiagnosis1"]').on('change', function() {
             var diagnosisID = $(this).val();
-            console.log(diagnosisID);
+            // console.log(diagnosisID);
             if(diagnosisID) {
                 $.ajax({
                     url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
@@ -840,7 +840,7 @@
                     dataType: "json",
                     success:function(data) {
 
-                        console.log(data);
+                        // console.log(data);
                         $('select[name="namaDiagnosis1"]').empty();
                         $.each(data, function(key, value) {
                             $('select[name="namaDiagnosis1"]').append('<option value="'+ value +'">'+ value +'</option>');
@@ -857,7 +857,7 @@
     $(document).ready(function() {
         $('select[name="kodeDiagnosis2"]').on('change', function() {
             var diagnosisID = $(this).val();
-            console.log(diagnosisID);
+            // console.log(diagnosisID);
             if(diagnosisID) {
                 $.ajax({
                     url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
@@ -865,7 +865,7 @@
                     dataType: "json",
                     success:function(data) {
 
-                        console.log(data);
+                        // console.log(data);
                         $('select[name="namaDiagnosis2"]').empty();
                         $.each(data, function(key, value) {
                             $('select[name="namaDiagnosis2"]').append('<option value="'+ value +'">'+ value +'</option>');
@@ -882,7 +882,7 @@
     $(document).ready(function() {
         $('select[name="kodeDiagnosis3"]').on('change', function() {
             var diagnosisID = $(this).val();
-            console.log(diagnosisID);
+            // console.log(diagnosisID);
             if(diagnosisID) {
                 $.ajax({
                     url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
@@ -890,7 +890,7 @@
                     dataType: "json",
                     success:function(data) {
 
-                        console.log(data);
+                        // console.log(data);
                         $('select[name="namaDiagnosis3"]').empty();
                         $.each(data, function(key, value) {
                             $('select[name="namaDiagnosis3"]').append('<option value="'+ value +'">'+ value +'</option>');
@@ -907,7 +907,7 @@
     $(document).ready(function() {
         $('select[name="kodeDiagnosis4"]').on('change', function() {
             var diagnosisID = $(this).val();
-            console.log(diagnosisID);
+            // console.log(diagnosisID);
             if(diagnosisID) {
                 $.ajax({
                     url: '{{url('/')}}/lrj/diagnosa/'+diagnosisID,
@@ -915,7 +915,7 @@
                     dataType: "json",
                     success:function(data) {
 
-                        console.log(data);
+                        // console.log(data);
                         $('select[name="namaDiagnosis4"]').empty();
                         $.each(data, function(key, value) {
                             $('select[name="namaDiagnosis4"]').append('<option value="'+ value +'">'+ value +'</option>');

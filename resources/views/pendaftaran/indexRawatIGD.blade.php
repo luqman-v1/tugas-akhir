@@ -1,5 +1,5 @@
 @extends('layouts.index')
-@section('title') Pendaftaran Rawat Jalan @endsection
+@section('title')  Unit Gawat Darurat @endsection
 @section('css')
 <link rel="stylesheet" href="{{url('/plugins/datepicker/datepicker3.css')}}">
 <link rel="stylesheet" href="{{url('/plugins/timepicker/bootstrap-timepicker.min.css')}}">
@@ -46,7 +46,7 @@
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
                 <td>{{$data->tglLahir}}</td>
-                <td>Jl. {{$data->dukuh}} RT{{$data->rt}}/{{$data->rw}},Kelurahan {{$data->kelurahan}}, Kecamatan {{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}}</td>
+                <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               </tr>
             <?php $i++; ?>
             @endforeach

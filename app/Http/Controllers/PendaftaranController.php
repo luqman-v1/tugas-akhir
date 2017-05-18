@@ -23,6 +23,7 @@ use App\Ruangan\Kelas;
 use App\Ruangan\No_Kamar;
 use App\Rawat_Inap;
 use App\Rawat_IGD;
+use PDF;
 class PendaftaranController extends Controller
 {
 
@@ -142,8 +143,8 @@ class PendaftaranController extends Controller
 
     public function igd(){
         $dokter = role_user::join('users','user_id','users.id')->where('role_id',6)->get();
-        $perawat = role_user::join('users','user_id','users.id')->where('role_id',3)->get();
-
+        $perawat = role_user::join('users','user_id','users.id')->where('role_id',7)->get();
+        
     	return view('pendaftaran.igd')->with(compact('dokter','perawat'));
     }
 
@@ -224,9 +225,15 @@ class PendaftaranController extends Controller
     }
     public function viewCariPasien(){
         $pasien = Pasien::orderBy('id', 'desc')->get();
-       
+        
 
     	return view('pendaftaran.cariPasien')->with('pasien',$pasien);
+    }
+
+    public function cetakkrs($id){
+        $pasien = Pasien::findOrFail($id);
+        $pdf = PDF::loadView('pendaftaran.printKRS', compact('pasien'))->setPaper('a7')->setOrientation('landscape');
+        return $pdf->download("$pasien->noRm.pdf");
     }
 
 
@@ -332,6 +339,8 @@ class PendaftaranController extends Controller
              $config->save();
 
             }
+
+           
 
      Alert::success('Berhasil', 'Data Pasien telah ditambahkan');
      return back();
