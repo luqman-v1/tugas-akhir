@@ -46,7 +46,7 @@
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
                 <td>{{$data->tglLahir}}</td>
-                <td>Jl. {{$data->dukuh}} RT{{$data->rt}}/{{$data->rw}},Kelurahan {{$data->kelurahan}}, Kecamatan {{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}}</td>
+                <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               </tr>
             <?php $i++; ?>
             @endforeach
@@ -58,7 +58,7 @@
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
                 <td>{{$data->tglLahir}}</td>
-                <td>Jl. {{$data->dukuh}} RT{{$data->rt}}/{{$data->rw}},Kelurahan {{$data->kelurahan}}, Kecamatan {{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}}</td>
+                <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               </tr>
             <?php $a++; ?>
             @endforeach
@@ -69,7 +69,7 @@
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
                 <td>{{$data->tglLahir}}</td>
-                <td>Jl. {{$data->dukuh}} RT{{$data->rt}}/{{$data->rw}},Kelurahan {{$data->kelurahan}}, Kecamatan {{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}}</td>
+                <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               </tr>
             <?php $b++; ?>
             @endforeach

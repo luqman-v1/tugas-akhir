@@ -308,20 +308,6 @@
                         <input class="form-control" name="rujukan" disabled="" value="{{old('rujukan')}}" id="rujukan" type="text" placeholder="Rujukan">
                     </div>
 
-                    <div class="form-group {{ $errors->has('caraBayar') ? 'has-error' : ''}}">
-                                 <label class="control-label " for="caraBayar">Cara Bayar</label>
-                                 <div class="form-group">
-                                   <select name="caraBayar" id="caraBayar" class="form-control" onChange="changetextbox();">
-                                   <option value="">pilih</option>
-                                       <option value="BPJS">BPJS</option>
-                                       <option value="UMUM">UMUM</option>
-                                   </select>
-                                   <span class="help-block">
-                                    <strong>{{ $errors->first('caraBayar') }}</strong>
-                                </span>
-                            </div>
-                        </div>
-
                     <div class="form-group">
                         <label for="noPesertaJKN">Nomor Peserta JKN</label>
                         <input class="form-control" name="noPesertaJKN" value="{{old('noPesertaJKN')}}" id="noPesertaJKN" type="text" placeholder="Nomor Peserta JKN">

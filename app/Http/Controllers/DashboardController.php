@@ -57,20 +57,34 @@ class DashboardController extends Controller
      $icd10 = Icd::count();
      $icd9 = Icd9::count();
 
+      // $bpjsRawatJalan = rawat_jalan::join('pasien','id_pasien','pasien.id')->select(DB::raw('MONTHNAME(tglKunjungan) AS bulan'),DB::raw('count(*) AS jumlah'))
+      //  ->whereYear('tglKunjungan',$tahun)
+      //   ->where('caraBayar','BPJS')
+      //  ->orderBy('tglKunjungan','asc')
+      //  ->groupBy('bulan')
+      //  ->get();
+      //   $bpjsRawatInap = rawat_inap::join('pasien','id_pasien','pasien.id')->select(DB::raw('MONTHNAME(tanggal_masuk) AS bulan'),DB::raw('count(*) AS jumlah'))
+      //  ->whereYear('tanggal_masuk',$tahun)
+      //   ->where('caraBayar','BPJS')
+      //  ->orderBy('tanggal_masuk','asc')
+      //  ->groupBy('bulan')
+      //  ->get();
 
-       $bpjs = Pasien::select(DB::raw('MONTHNAME(tglMasuk) AS bulan'),DB::raw('count(*) AS jumlah'))
-       ->whereYear('tglMasuk',$tahun)
-        ->where('caraBayar','BPJS')
-       ->orderBy('tglMasuk','asc')
-       ->groupBy('bulan')
-       ->get();
+      //  $bpjsRawatIgd = rawat_igd::join('pasien','id_pasien','pasien.id')->select(DB::raw('MONTHNAME(tanggal_masuk) AS bulan'),DB::raw('count(*) AS jumlah'))
+      //  ->whereYear('tanggal_masuk',$tahun)
+      //   ->where('caraBayar','BPJS')
+      //  ->orderBy('tanggal_masuk','asc')
+      //  ->groupBy('bulan')
+      //  ->get();
 
-       $umum = Pasien::select(DB::raw('MONTHNAME(tglMasuk) AS bulan'),DB::raw('count(*) AS jumlah'))
-       ->whereYear('tglMasuk',$tahun)
-       ->where('caraBayar','UMUM')
-       ->orderBy('tglMasuk','asc')
-       ->groupBy('bulan')
-       ->get();
+      //  $bpjs = $bpjsRawatJalan + $bpjsRawatInap +  $bpjsRawatIgd ;
+
+       // $umum = Pasien::select(DB::raw('MONTHNAME(tglMasuk) AS bulan'),DB::raw('count(*) AS jumlah'))
+       // ->whereYear('tglMasuk',$tahun)
+       // ->where('caraBayar','UMUM')
+       // ->orderBy('tglMasuk','asc')
+       // ->groupBy('bulan')
+       // ->get();
 
        $getBulan = Pasien::select(DB::raw('MONTHNAME(tglMasuk) AS bulan'),DB::raw('count(*) AS jumlah'))
        ->whereYear('tglMasuk',$tahun)

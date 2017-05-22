@@ -43,14 +43,16 @@
             <tbody>
              <?php $i = 1; ?>
              @foreach($user as $data)
-             <tr>
+             <tr class="item{{$data->id}}">
               <td>{{ $i }}</td>
               <td>{{$data->username}}</td>
               <td>{{$data->name}}</td>
               <td>{{$data->email}}</td>
               <td>{{$data->noHp}}</td>
               <td>{{App\Role::find($data->role_id)->display_name}}</td>
-              <td><button data-toggle="modal" id="ubahPassword" value="{{$data->id}}" data-target=".modal-edit" class="btn-sm btn-warning">Ubah Password</button></td>
+              <td>
+              <button data-toggle="modal" id="ubahPassword" value="{{$data->id}}" data-target=".modal-edit" class="btn-xsm btn-warning">Ubah Password</button> 
+              <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger">Hapus User</button>
             </tr>
             <?php $i++; ?>
             @endforeach
@@ -218,6 +220,54 @@
   });
 
  </script>
+
+<script>
+//ajax delete data
+$(document).on('click', '.delete-modal', function(id) {
+  var id =  $(this).val();
+    // console.log(id);
+    swal({
+      title: "Anda Yakin?",
+      text: "Data Akan Dihapus!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Ya, Hapus Data!",
+      closeOnConfirm: false
+    },
+    function(isConfirm){
+      if(isConfirm){
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          type: 'DELETE',
+          url: '{{url('/')}}'+'/user/list/delete/'+id,
+          dataType: "json",
+          success: function(data){
+          // console.log(data);
+          $('.item' + data.id).remove();
+          swal("Berhasil!", "Data Berhasil Dihapus", "success");
+
+        }
+      })  
+      }
+
+    });
+  });
+
+  
+$(document).on('click', '.edit-modal', function() {
+    $('#id-edit').val($(this).data('id'));
+    $('#nama-edit').val($(this).data('nama'));
+    $('#kode-edit').val($(this).data('kode'));
+    $('.bs-example-modal-sm2').modal('show');
+  });
+
+
+
+
+</script>
 
  <script>
   $(function () {

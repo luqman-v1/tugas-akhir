@@ -28,11 +28,40 @@ class PendaftaranController extends Controller
 {
 
     public function rawatJalanIndex(){
-        $rj = Rawat_Jalan::join('pasien','id_pasien','pasien.id')
+        $rj = Pasien::join('rawat_jalan','pasien.id','id_pasien')
         ->orderBy('rawat_jalan.id','desc')
+        ->whereNull('rawat_jalan.deleted_at')
         ->get();
+    $dokter = role_user::where('role_id',6)
+             ->join('users','user_id','id')
+             ->get();
+            
+        return view('pendaftaran.indexRawatJalan')->with('rj',$rj)->with('dokter',$dokter);
+    }
 
-        return view('pendaftaran.indexRawatJalan')->with('rj',$rj);
+    public function rawatJalanDetail($id){
+        $data = Rawat_Jalan::find($id);
+        return $data;
+    }
+    public function rawatJalanDelete($id){
+        $data = Rawat_Jalan::find($id);
+        $data->delete();
+        return $data;
+    }
+
+    public function rawatJalanSimpan(Request $request){
+         $this->validate($request, [
+            'tglKunjungan' => 'required',
+            'caraBayar' => 'required',
+            'caraDatang' => 'required',
+            'klinikTujuan' => 'required',
+            'DokterPJ' => 'required',
+            ]);
+        $input = $request->all();
+        $data = Rawat_Jalan::find($request->id);
+        $data->update($input);
+            Alert::success('Berhasil', 'Data Pasien Rawat jalan telah diubah');
+        return back();
     }
     public function rawatJalan(){
              $dokter = role_user::where('role_id',6)
@@ -67,12 +96,44 @@ class PendaftaranController extends Controller
     	return view('pendaftaran.rawatInap')->with(compact('bangsal'));
     }
 
-    public function rawatInapIndex(){
-          $inap = Rawat_Inap::join('pasien','id_pasien','pasien.id')
-        ->orderBy('rawat_inap.id','desc')
-        ->get();
+    public function rawatInapDelete($id){
+        $data = Rawat_Inap::find($id);
+        $data->delete();
 
-        return view('pendaftaran.indexRawatInap')->with('inap',$inap);
+        return $data;
+    }
+
+    public function rawatInapSave(Request $request){
+         $this->validate($request, [
+            'tanggal_masuk' => 'required',
+            'jam_masuk' => 'required',
+            'caraBayar' => 'required',
+            'caraDatang' => 'required',
+            'caraMasuk' => 'required',
+            'bangsal' => 'required',
+            'kelas' => 'required',
+            'kamar' => 'required',
+            ]);
+
+        $input = $request->all();
+        $data = Rawat_Inap::find($request->id);
+        $data->update($input);
+        Alert::success('Berhasil', 'Data Pasien Rawat Inap telah diupdate');
+        return back();
+    }
+
+    public function rawatInapDetail($id){
+        $data = Rawat_Inap::find($id);
+
+        return $data;
+    }
+    public function rawatInapIndex(){
+          $inap = Pasien::join('rawat_inap','pasien.id','id_pasien')
+        ->orderBy('rawat_inap.id','desc')
+            ->whereNull('rawat_inap.deleted_at')
+        ->get();
+         $bangsal = Bangsal::pluck("nama","id");
+        return view('pendaftaran.indexRawatInap')->with('inap',$inap)->with('bangsal',$bangsal);
     }
 
     public function rawatInapInput($id){
@@ -163,12 +224,53 @@ class PendaftaranController extends Controller
         return view('pendaftaran.igdInput')->with(compact('igd'));
     }
 
+    public function rawatIgdDelete($id){
+        $data = Rawat_IGD::find($id);
+        $data->delete();
+
+        return $data;
+
+    }
+
+    public function igdDetail($id){
+        $data = Rawat_IGD::find($id);
+
+        return $data;
+    }
+
+    public function igdSave(Request $request){
+         $this->validate($request, [
+            'tanggal_masuk' => 'required',
+            'jam_masuk' => 'required',
+            'alasan' => 'required',
+            'pengantar' => 'required',
+            'alamatPengantar' => 'required',
+            'caraDatang' => 'required',
+            'kendaraan' => 'required',
+            'penyebab' => 'required',
+            'tempatKejadian' => 'required',
+            'dokterJaga' => 'required',
+            'perawat' => 'required',
+            ]);
+
+        $input = $request->all();
+        $data = Rawat_IGD::find($request->id);
+
+        $data->update($input);
+        Alert::success('Berhasil', 'Data Pasien Rawat IGD telah diUbah');
+        return back();
+
+    }
     public function igdIndex(){
-         $igd = Rawat_IGD::join('pasien','id_pasien','pasien.id')
+          $dokter = role_user::join('users','user_id','users.id')->where('role_id',6)->get();
+        $perawat = role_user::join('users','user_id','users.id')->where('role_id',7)->get();
+         
+         $igd = Pasien::join('rawat_igd','pasien.id','id_pasien')
         ->orderBy('rawat_igd.id','desc')
+        ->whereNull('rawat_igd.deleted_at')
         ->get();
 
-        return view('pendaftaran.indexRawatIGD')->with('igd',$igd);
+        return view('pendaftaran.indexRawatIGD')->with('igd',$igd)->with(compact('dokter','perawat'));
 
     }
 
@@ -192,7 +294,6 @@ class PendaftaranController extends Controller
             'alasan' => 'required',
             'pengantar' => 'required',
             'alamatPengantar' => 'required',
-            'caraBayar' => 'required',
             'caraDatang' => 'required',
             'kendaraan' => 'required',
             'penyebab' => 'required',
@@ -210,7 +311,6 @@ class PendaftaranController extends Controller
         $igd->alasan = $request->alasan;
         $igd->pengantar = $request->pengantar;
         $igd->alamatPengantar = $request->alamatPengantar;
-        $igd->caraBayar = $request->caraBayar;
         $igd->caraDatang = $request->caraDatang;
         $igd->kendaraan = $request->kendaraan;
         $igd->penyebab = $request->penyebab;

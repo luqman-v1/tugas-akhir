@@ -44,7 +44,7 @@
           <tbody>
              <?php $i = 1; ?>
              @foreach($igd as $data)
-             <tr>
+            <tr class="item{{$data->id}}">
                 <td>{{ $i }}</td>
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
@@ -56,7 +56,8 @@
                 @endif
                 <td>
                 <a href="{{url('pelayanan-igd/form/edit/'.$data->idp)}}"><button type="button" class="btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Tambahkan Kode ICD</button></a>
-                                                                       
+                  <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span> Hapus</button>
+                <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span> Hapus</button>                                                         
                                                                    
                 </td>
             </tr>
@@ -83,5 +84,49 @@
     $("#example1").DataTable();
 
 });
+</script>
+<script>
+//ajax delete data
+$(document).on('click', '.delete-modal', function(id) {
+  var id =  $(this).val();
+    console.log(id);
+    swal({
+      title: "Anda Yakin?",
+      text: "Data Akan Dihapus!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Ya, Hapus Data!",
+      closeOnConfirm: false
+    },
+    function(isConfirm){
+      if(isConfirm){
+        $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          type: 'DELETE',
+          url: '{{url('/')}}'+'/pelayanan-igd/delete/'+id,
+          dataType: "json",
+          success: function(data){
+          // console.log(data);
+          $('.item' + data.id).remove();
+          swal("Berhasil!", "Data Berhasil Dihapus", "success");
+
+        }
+      })  
+      }
+
+    });
+  });
+
+  
+$(document).on('click', '.edit-modal', function() {
+    $('#id-edit').val($(this).data('id'));
+    $('#nama-edit').val($(this).data('nama'));
+    $('#kode-edit').val($(this).data('kode'));
+    $('.bs-example-modal-sm2').modal('show');
+  });
+
 </script>
 @endsection

@@ -195,7 +195,8 @@ class PelaporanController extends Controller
         }elseif ($request->index == "tindakan") {
             # code...
         }elseif ($request->index == "dokter") {
-            return $pri = PelayananRI::where('namaDokterPj',$request->list)
+
+             $pri = PelayananRI::where('namaDokterPj',$request->list)
             ->join('rawat_inap','id_RI','rawat_inap.id')->join('pasien','id_pasien','pasien.id')
             ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
             ->get(); 
@@ -206,10 +207,12 @@ class PelaporanController extends Controller
             ->get();
             $rj =  rawat_jalan::where('DokterPJ',$request->list)
             ->join('pasien','id_pasien','pasien.id')
-            ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+            ->whereBetween('tglMasuk', [$request->dariTanggal,$request->sampaiTanggal])
             ->get();
+            
+            $dokter = $request->list;
 
-            return view('pelaporan.indexDokter')->with(compact('pri','ri','rj'));
+            return view('pelaporan.indexDokter')->with(compact('pri','ri','rj','dokter'));
 
         }else{
 

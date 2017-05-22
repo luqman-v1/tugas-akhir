@@ -611,31 +611,7 @@
     // This will get the first returned node in the jQuery collection.
     var areaChart = new Chart(areaChartCanvas);
 
-    var areaChartData = {
-      labels: [@foreach($getBulan as $data) "{{ $data->bulan }}", @endforeach],
-      datasets: [
-        {
-          label: "BPJS",
-          fillColor: "rgba(210, 214, 222, 1)",
-          strokeColor: "rgba(210, 214, 222, 1)",
-          pointColor: "rgba(210, 214, 222, 1)",
-          pointStrokeColor: "#c1c7d1",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(220,220,220,1)",
-          data: [@foreach($bpjs as $data) {{ $data->jumlah }}, @endforeach ]
-        },
-        {
-          label: "UMUM",
-          fillColor: "rgba(60,141,188,0.9)",
-          strokeColor: "rgba(60,141,188,0.8)",
-          pointColor: "#3b8bba",
-          pointStrokeColor: "rgba(60,141,188,1)",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(60,141,188,1)",
-          data: [@foreach($umum as $data) {{ $data->jumlah }}, @endforeach]
-        }
-      ]
-    };
+    
 
     var areaChartOptions = {
       //Boolean - If we should show the scale at all

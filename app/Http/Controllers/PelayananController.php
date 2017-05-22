@@ -32,8 +32,56 @@ class PelayananController extends Controller
 
         return view('pelayanan.indexLRJ')->with('lrj',$lrj);
     }
+
+    public function indexLrjDetail($id){
+        $data = PelayananRj::find($id);
+
+        return $data;
+    }
+
+    public function indexLrjSimpan(Request $request){
+
+          $this->validate($request, [
+            'tensi' => 'required',
+            'rr' => 'required',
+            'nadi' => 'required',
+            'bb' => 'required',
+            'tb' => 'required',
+            'suhu' => 'required',
+            'anamnesa' => 'required',
+            'riwayatAlergi'=>'required',
+            'diagnosa' => 'required',
+            'tindakan' => 'required',
+            ]);
+
+        $input = $request->all();
+        $data = PelayananRj::find($request->id);
+        $data->tensi = $request->tensi;
+        $data->rr = $request->rr;
+        $data->nadi = $request->nadi;
+        $data->bb = $request->bb;
+        $data->tb = $request->tb;
+        $data->suhu = $request->suhu;
+        $data->anamnesa = $request->anamnesa;
+        $data->riwayatAlergi = $request->riwayatAlergi;
+        $data->diagnosa = $request->diagnosa;
+        $data->tindakan = $request->tindakan;
+        $data->save();
+
+        Alert::success('Berhasil', 'data telah di update');
+        return back();
+    }
+
+    public function indexDeleteLrj($id){
+        $data = PelayananRj::find($id);
+        $data->delete();
+        $tindakan = Tindakan::where('id_pelayananjalan',$id)->first();
+        $tindakan->delete();
+        return $data;
+
+    }
     public function lrjUbah($id){
-        $edit = PelayananRj::where('pelayanan_rawatjalan.id',$id)->join('rawat_jalan','id_RJ','Rawat_jalan.id')
+       $edit = PelayananRj::where('pelayanan_rawatjalan.id',$id)->join('rawat_jalan','id_RJ','Rawat_jalan.id')
        ->join('pasien','id_pasien','pasien.id')
        ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
        ->first();
@@ -57,7 +105,7 @@ class PelayananController extends Controller
       
     if ($request->kodeTindakan == [null] or $request->namaDiagnosis == null or $request->kodeDiagnosis == null) {
         
-        Alert::error('Kode ICD Harus Diisi !','Oops...');
+        Alert::error('data Harus Diisi !','Oops...');
         return back();
     }else{
 
@@ -71,7 +119,7 @@ class PelayananController extends Controller
             $tindakan->save(); 
         }
           if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
             }
 
@@ -84,7 +132,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
           if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
             }  
 
@@ -97,7 +145,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
             if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
             }
 
@@ -110,7 +158,7 @@ class PelayananController extends Controller
             $diagnosa->save();
             
             if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
             }
 
@@ -123,7 +171,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
             if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
             }
 
@@ -135,7 +183,7 @@ class PelayananController extends Controller
             $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis4)->sub_kode;
             $diagnosa->save();
         
-        Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+        Alert::success('Berhasil', 'data telah ditambahkan');
         return redirect('lrj');
     }
     
@@ -170,6 +218,12 @@ class PelayananController extends Controller
             'riwayatAlergi'=>'required',
             'diagnosa' => 'required',
             'tindakan' => 'required',
+              'tensi' => 'required',
+            'rr' => 'required',
+            'nadi' => 'required',
+            'bb' => 'required',
+            'tb' => 'required',
+            'suhu' => 'required',
             ]);
 
     	$rawatJalan = Pasien::where('noRm',$request->noRm)
@@ -202,7 +256,7 @@ class PelayananController extends Controller
         }
 
         if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
             }  
     
@@ -214,7 +268,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
           if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
             }  
 
@@ -226,7 +280,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
             if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
             }
 
@@ -238,7 +292,7 @@ class PelayananController extends Controller
             $diagnosa->save();
             
             if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
             }
 
@@ -250,7 +304,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
             if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
             }
 
@@ -307,8 +361,21 @@ class PelayananController extends Controller
     	return view('pelayanan.RMK')->with(compact('icd','icd9','dokter','perawat','rekmed'));
     }
 
-    public function indexRmk(){
+    public function indexDeleteRmk($id){
 
+        $data = PelayananRI::find($id);
+        $data->delete();
+        $tindakan = Tindakan::where('id_pelayananinap',$id)->first();
+        $tindakan->delete();
+        return $data;
+
+    }
+
+    public function indexRmk(){
+         $dokter = role_user::join('users','user_id','users.id')->where('role_id',6)->get();
+        $perawat = role_user::join('users','user_id','users.id')->where('role_id',3)->get();
+        $rekmed = role_user::join('users','user_id','users.id')->where('role_id',2)->get();
+        
          $rmk  = Tindakan::join('pelayanan_rawatinap','tindakan.id_pelayananinap','pelayanan_rawatinap.id')
        ->join('rawat_inap','id_RI','rawat_inap.id')
        ->join('pasien','id_pasien','pasien.id')
@@ -316,7 +383,7 @@ class PelayananController extends Controller
        ->Where('tindakan.kode',null)
        ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
        ->get();
-        return view('pelayanan.indexRMK')->with('rmk',$rmk);
+        return view('pelayanan.indexRMK')->with('rmk',$rmk)->with('dokter',$dokter)->with('perawat',$perawat)->with('rekmed',$rekmed);
     }
 
     public function rmkSimpan(Request $request){
@@ -458,7 +525,7 @@ class PelayananController extends Controller
         
          if ($request->kodeTindakan == null or $request->namaDiagnosis == null or $request->kodeDiagnosis == null or $request->kodeKomplikasi == null or $request->kodeKomplikasi == null ) {
         
-        Alert::error('Kode ICD Harus Diisi !','Oops...');
+        Alert::error('data Harus Diisi !','Oops...');
         return back();
     }else{
 
@@ -474,7 +541,7 @@ class PelayananController extends Controller
         }
 
          if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null OR $request->kodeKomplikasi == null OR $request->namaKomplikasi == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('rmk');  
             }
 
@@ -495,7 +562,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
           if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null OR $request->kodeKomplikasi1 == null OR $request->namaKomplikasi1 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('rmk');  
             }  
 
@@ -517,7 +584,7 @@ class PelayananController extends Controller
 
 
             if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null OR $request->kodeKomplikasi2 == null OR $request->namaKomplikasi2 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('rmk');  
             }
 
@@ -538,7 +605,7 @@ class PelayananController extends Controller
             $diagnosa->save();
             
             if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null OR $request->kodeKomplikasi3 == null OR $request->namaKomplikasi3 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('rmk');  
             }
 
@@ -559,7 +626,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
             if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null OR $request->kodeKomplikasi4 == null OR $request->namaKomplikasi4 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('rmk');  
             }
 
@@ -580,7 +647,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
 
-        Alert::success('Berhasil', 'Kode ICD Pelayanan Rawat Inap telah ditambahkan');
+        Alert::success('Berhasil', 'data Pelayanan Rawat Inap telah ditambahkan');
 
         return redirect('rmk');
     }
@@ -617,6 +684,15 @@ class PelayananController extends Controller
        ->get();
 
     return view('pelayanan.indexLGD')->with('igd',$igd);
+    }
+
+     public function indexDeleteIgd($id){
+        $data = PelayananIGD::find($id);
+        $data->delete();
+        $tindakan = Tindakan::where('id_pelayananigd',$id)->first();
+        $tindakan->delete();
+        return $data;
+
     }
 
     public function lgd(){
@@ -697,7 +773,7 @@ class PelayananController extends Controller
         }
 
           if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                  return redirect('pelayanan-igd');  
             }
             
@@ -709,7 +785,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
           if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
             }  
 
@@ -721,7 +797,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
             if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
             }
 
@@ -733,7 +809,7 @@ class PelayananController extends Controller
             $diagnosa->save();
             
             if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
             }
 
@@ -745,7 +821,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
             if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
             }
 
@@ -784,7 +860,7 @@ class PelayananController extends Controller
     public function lgdUbahSimpan(Request $request,$id){
         if ($request->kodeTindakan == [null] or $request->namaDiagnosis == [null] or $request->kodeDiagnosis == [null]) {
         
-        Alert::error('Kode ICD Harus Diisi !','Oops...');
+        Alert::error('data Harus Diisi !','Oops...');
         return back();
     }else{
 
@@ -799,7 +875,7 @@ class PelayananController extends Controller
         }
         
          if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
             }
 
@@ -812,7 +888,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
           if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
             }  
 
@@ -825,7 +901,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
             if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
             }
 
@@ -838,7 +914,7 @@ class PelayananController extends Controller
             $diagnosa->save();
             
             if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
             }
 
@@ -851,7 +927,7 @@ class PelayananController extends Controller
             $diagnosa->save();
 
             if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
-                  Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+                  Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
             }
 
@@ -863,7 +939,7 @@ class PelayananController extends Controller
             $diagnosa->sub_kode = tbl_icd10nama::find($request->namaDiagnosis4)->sub_kode;
             $diagnosa->save();
         
-        Alert::success('Berhasil', 'Kode ICD telah ditambahkan');
+        Alert::success('Berhasil', 'data telah ditambahkan');
 
         return redirect('pelayanan-igd');
     }

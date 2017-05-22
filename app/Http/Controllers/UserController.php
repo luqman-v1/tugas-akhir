@@ -153,7 +153,7 @@ class UserController extends Controller
 
         public function list(){
              $role = Role::all();
-            $user = role_user::join('users','user_id','users.id')->get();
+            $user = role_user::whereNull('deleted_at')->join('users','user_id','users.id')->orderBy('users.id','desc')->get();
             return view('User.list')->with('user',$user)->with('role',$role);
         }
 
@@ -194,6 +194,18 @@ class UserController extends Controller
            $user->save();
 
             Alert::success('Sukses', 'Password User telah diUbah');
+            return back();
+        }
+
+        public function delete($id){
+            $user = User::find($id);
+            $user->delete();
+            return $user;
+        }
+
+        public function restore($id){
+            $user = User::onlyTrashed()->find($id)->restore();
+
             return back();
         }
 		

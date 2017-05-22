@@ -38,7 +38,7 @@
             </span>
           </a>
         </li>
-         <li class="treeview">
+      {{--    <li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Profil Pelayanan</span>
@@ -53,7 +53,7 @@
             <li><a href="{{url('jaminan-kesehatan')}}"><i class="fa fa-circle-o"></i> Daftar Jaminan Kesehatan</a></li>
             <li><a href="{{url('stok-formulir')}}"><i class="fa fa-circle-o"></i> Stok Formulir Rekam medis</a></li>
           </ul>
-        </li>
+        </li> --}}
          @role(['admin','rekmed'])
         <li class="treeview">
           <a href="#">
@@ -164,15 +164,9 @@
 
         @role(['admin'])
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i><span>User</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+          <a href="{{url('/user/list')}}">
+            <i class="fa fa-files-o"></i><span>Daftar User</span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('/user/list')}}"><i class="fa fa-circle-o"></i> Daftar User</a></li>
-          </ul>
         </li>
         @endrole
       </ul>

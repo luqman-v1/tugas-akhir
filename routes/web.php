@@ -52,6 +52,8 @@ Route::group(['as' => 'user','middleware' => ['role:admin']], function(){
 //=======================USER====================
 //====================================================
 Route::get('/user/list','UserController@list');
+Route::delete('/user/list/delete/{id}','UserController@delete');
+Route::get('/user/list/restore/{id}','UserController@restore');
 Route::post('/user/register','UserController@register');
 Route::post('/user/register/ubahPassword','UserController@ubahPassword');
 
@@ -105,6 +107,9 @@ Route::get('pendaftaran-pasien/kecamatan/{id}','PendaftaranController@formAjaxKe
 Route::get('pendaftaran-pasien/kelurahan/{id}','PendaftaranController@formAjaxKelurahan');
 
 Route::get('rawat-jalan','PendaftaranController@rawatJalanIndex');
+Route::get('rawat-jalan/detail/{id}','PendaftaranController@rawatJalanDetail');
+Route::post('rawat-jalan/detail','PendaftaranController@rawatJalanSimpan');
+Route::delete('rawat-jalan/delete/{id}','PendaftaranController@rawatJalanDelete');
 Route::get('rawat-jalan/form','PendaftaranController@rawatJalan');
 Route::get('rawat-jalan/input/{id}','PendaftaranController@rawatJalanInput');
 Route::post('rawat-jalan','PendaftaranController@saveRawatJalan');
@@ -112,6 +117,9 @@ Route::post('rawat-jalan','PendaftaranController@saveRawatJalan');
 Route::get('pasien/norm/{id}','PendaftaranController@formAjaxCari');
 
 Route::get('rawat-inap','PendaftaranController@rawatInapIndex');
+Route::get('rawat-inap/detail/{id}','PendaftaranController@rawatInapDetail');
+Route::post('rawat-inap/detail','PendaftaranController@rawatInapSave');
+Route::delete('rawat-inap/delete/{id}','PendaftaranController@rawatInapDelete');
 Route::get('rawat-inap/form','PendaftaranController@rawatInap');
 Route::get('rawat-inap/input/{id}','PendaftaranController@rawatInapInput');
 Route::post('rawat-inap','PendaftaranController@rawatInapSimpan');
@@ -121,6 +129,9 @@ Route::get('rawat-inap/kamar/{id}','PendaftaranController@formAjaxKamar');
 
 
 Route::get('igd','PendaftaranController@igdIndex');
+Route::get('igd/detail/{id}','PendaftaranController@igdDetail');
+Route::post('igd/detail','PendaftaranController@igdSave');
+Route::delete('igd/delete/{id}','PendaftaranController@rawatIgdDelete');
 Route::get('igd/form','PendaftaranController@igd');
 Route::get('igd/input/{id}','PendaftaranController@igdInput');
 Route::post('igd','PendaftaranController@igdSimpan');
@@ -133,6 +144,9 @@ Route::group([ 'as' => 'pelayanan','middleware' => ['role:admin|rekmed|dokter|pe
 //=======================PELAYANAN====================
 //====================================================
 Route::get('/lrj','PelayananController@indexLrj');
+Route::get('/lrj/detail/{id}','PelayananController@indexLrjDetail');
+Route::post('/lrj/detail','PelayananController@indexLrjSimpan');
+Route::DELETE('/lrj/delete/{id}','PelayananController@indexDeleteLrj');
 Route::get('/lrj/form','PelayananController@lrj');
 Route::get('/lrj/form/edit/{id}','PelayananController@lrjUbah');
 Route::post('/lrj/form/edit/{id}','PelayananController@lrjUbahSimpan');
@@ -142,6 +156,7 @@ Route::get('lrj/norm/{id}','PelayananController@AjaxCariRawatJalan');
 Route::get('/lrj/diagnosa/{id}','PelayananController@AjaxCariDiagnosa');
 
 Route::get('/rmk','PelayananController@indexRmk');
+Route::DELETE('/rmk/delete/{id}','PelayananController@indexDeleteRmk');
 Route::get('/rmk/form','PelayananController@rmk');
 Route::get('/rmk/form/edit/{id}','PelayananController@rmkUbah');
 Route::post('/rmk/form/edit/{id}','PelayananController@rmkUbahSimpan');
@@ -151,6 +166,7 @@ Route::get('/rmk/norm/{id}','PelayananController@AjaxCariRawatInap');
 
 Route::get('/pelayanan-igd/form','PelayananController@lgd');
 Route::get('/pelayanan-igd','PelayananController@Indexlgd');
+Route::DELETE('/pelayanan-igd/delete/{id}','PelayananController@indexDeleteIgd');
 Route::get('/pelayanan-igd/form/edit/{id}','PelayananController@lgdUbah');
 Route::post('/pelayanan-igd/form/edit/{id}','PelayananController@lgdUbahSimpan');
 Route::post('/pelayanan-igd','PelayananController@lgdSimpan');
