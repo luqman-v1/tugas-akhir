@@ -28,7 +28,7 @@
       </div>
       <!-- /.box-header -->
       <div class="box-body">
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example1" class="table table-bordered table-striped table-hover dataTable js-exportable">
             <thead>
                 <tr>
                   <th>No</th>
@@ -123,16 +123,19 @@
 </script>
 
 <script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-  });
+ $(function () {
+    $('.js-basic-example').DataTable({
+        responsive: true
+    });
+
+    //Exportable table
+    $('.js-exportable').DataTable({
+        dom: 'Bfrtip',
+        responsive: true,
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
 });
 </script>
 @endsection

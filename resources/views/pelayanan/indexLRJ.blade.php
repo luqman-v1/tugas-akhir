@@ -18,13 +18,72 @@
   </ol>
 </section>
 
+</section>
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
 
       <div class="box">
         <div class="box-header">
-         <a href="{{url('lrj/form')}}"> <button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-plus"></span> Tambah Pasien Rawat Jalan</button></a>
+        <h3 style="text-align: center;">Antrian Pasien Pelayanan Rawat Jalan</h3>
+       </div>
+       <!-- /.box-header -->
+       <div class="box-body">
+        <table id="example3" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>No</th>
+                <th>No Rekam Medis</th>
+                <th>Nama</th>
+                <th>Nama Dokter</th>
+                <th>No Telp</th>
+                <th>Tanggal Kunjungan</th>
+                <th>Cara Bayar</th>
+                <th>Alamat</th>
+                <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+           <?php $i = 1; ?>
+           @foreach($antrian as $data)
+           <tr class="item{{$data->id}}">
+            <td>{{ $i }}</td>
+              <td>{{$data->noRm}}</td>
+              <td>{{$data->nama}}</td>
+              <td>{{$data->DokterPJ}}</td>
+              <td>{{$data->noHp}}</td>
+              <td>{{$data->tglKunjungan}}</td>
+              <td>{{$data->caraBayar}}</td>
+              <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
+            <td>
+              <a href="{{ url('/lrj/form/'.$data->id) }}"><button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span></button></a>
+              
+            </td>
+          </tr>
+          <?php $i++; ?>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  
+
+<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="box">
+        <div class="box-header">
+        {{--  <a href="{{url('lrj/form')}}"> <button type="button" class="btn btn-primary" ><span class="glyphicon glyphicon-plus"></span> Tambah Pasien Rawat Jalan</button></a> --}}
+      <h3 style="text-align: center;">Daftar Pelayanan Yang Belum Memasukan Kode ICD</h3>
        </div>
        <!-- /.box-header -->
        <div class="box-body">
@@ -35,7 +94,7 @@
               <th>No Rekam Medis</th>
               <th>Nama</th>
               <th>Tanggal Lahir</th>
-              <th>Kode ICD</th>
+               <th>Keterangan</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -47,15 +106,15 @@
             <td>{{$data->noRm}}</td>
             <td>{{$data->nama}}</td>
             <td>{{$data->tglLahir}}</td>
-            @if($data->kode == null)
+             @if($data->kode == null)
             <td><span class="label label-warning">Harap Masukan Kode ICD</span></td>
             @else
             <td>{{$data->kode}}</td>
             @endif
             <td>
-              <a href="{{url('lrj/form/edit/'.$data->idp)}}"><button type="button" class="btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span> Tambahkan Kode ICD</button></a>
-              <button data-toggle="modal" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span> Ubah</button>
-              <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span> Hapus</button>
+              <a href="{{url('lrj/form/edit/'.$data->idp)}}"><button type="button" class="btn-xsm btn-success"><span class="glyphicon glyphicon-plus"></span> Tambahkan Kode ICD</button></a>
+              <button data-toggle="modal" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
+              <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
               
             </td>
           </tr>
@@ -194,8 +253,6 @@
                   </div>    
                 </div>
                 <hr>
-
-
                 <div class="row">
                  <div class="col-md-6">
                   <div class="form-group {{ $errors->has('diagnosa') ? 'has-error' : ''}}">
@@ -225,10 +282,7 @@
             </div>
           </div>
         </div>
-
-        
       </div>
-
     </div>
     <div class="col-md-12">
       <br><br><br><br><br>
@@ -252,6 +306,63 @@
 </div>
 <!-- /.row -->
 </section>
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="box">
+        <div class="box-header">
+        <h3 style="text-align: center;">Histori Pelayanan Lembar Rawat Jalan</h3>
+       </div>
+       <!-- /.box-header -->
+       <div class="box-body">
+        <table id="example2" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>No</th>
+                <th>No Rekam Medis</th>
+                <th>Nama</th>
+                <th>Nama Dokter</th>
+                <th>No Telp</th>
+                <th>Tanggal Kunjungan</th>
+                <th>Cara Bayar</th>
+                <th>Alamat</th>
+                <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+           <?php $i = 1; ?>
+           @foreach($histori as $data)
+           <tr class="item{{$data->id}}">
+            <td>{{ $i }}</td>
+              <td>{{$data->noRm}}</td>
+              <td>{{$data->nama}}</td>
+              <td>{{$data->DokterPJ}}</td>
+              <td>{{$data->noHp}}</td>
+              <td>{{$data->tglKunjungan}}</td>
+              <td>{{$data->caraBayar}}</td>
+              <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
+            <td>
+              <button data-toggle="modal" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xs btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
+              <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+              
+            </td>
+          </tr>
+          <?php $i++; ?>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+  </div>
+  
+
+<!-- /.box -->
+</div>
+<!-- /.col -->
+</div>
+<!-- /.row -->
+</section>
 
 @endsection
 
@@ -260,6 +371,8 @@
 <script>
   $(function () {
     $("#example1").DataTable();
+    $("#example2").DataTable();
+    $("#example3").DataTable();
 
   });
 </script>

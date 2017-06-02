@@ -31,11 +31,16 @@
           <table id="example1" class="table table-bordered table-striped">
             <thead>
               <tr>
-                <th>No</th>
+               <th>No</th>
                 <th>No Rekam Medis</th>
                 <th>Nama</th>
-                <th>Tanggal Lahir</th>
+                <th>No Telp</th>
+                <th>Tanggal Kunjungan</th>
+                <th>Cara Bayar</th>
                 <th>Alamat</th>
+                <th>Bangsal</th>
+                <th>Kelas</th>
+                <th>Kamar</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -43,14 +48,19 @@
              <?php $i = 1; ?>
              @foreach($inap as $data)
              <tr class="item{{$data->id}}">
-              <td>{{ $i }}</td>
+             <td>{{ $i }}</td>
               <td>{{$data->noRm}}</td>
               <td>{{$data->nama}}</td>
-              <td>{{$data->tglLahir}}</td>
+              <td>{{$data->noHp}}</td>
+              <td>{{$data->tanggal_masuk}}</td>
+              <td>{{$data->caraBayar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
+              <td>{{$data->bangsal}}</td>
+              <td>{{$data->kelas}}</td>  
+              <td>{{$data->kamar}}</td>
               <td> 
-               <button data-toggle="modal" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span> Ubah</button>
-               <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span> Hapus</button>
+               <button data-toggle="modal" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
+               <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
              </td>
            </tr>
            <?php $i++; ?>
@@ -58,6 +68,7 @@
          </tbody>
        </table>
      </div>
+     
      <!-- /.box-body -->
    </div>
    <!-- /.box -->

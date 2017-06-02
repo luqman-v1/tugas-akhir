@@ -7,7 +7,6 @@ use App\Rawat_Jalan;
 use App\Pasien;
 use App\Rawat_Inap;
 use App\Rawat_IGD;
-
 use App\tbl_icd10nama;
 use App\Diagnosis;
 use App\Tindakan;
@@ -19,14 +18,27 @@ use App\User;
 use App\Icd9;
 use App\Icd;
 use DB;
+use Auth;
 class DashboardController extends Controller
 {
+
+
+
+    // public function index(){
+   
+    // 	 if (Auth::user()->hasRole('admin')) {
+    //     return redirect('/dashboard');
+    //     }elseif(Auth::user()->hasRole('dokter')) {
+    //       return redirect('lrj'); 
+    //   }
+    // }
+
     public function index(){
-    	$totalPasien = Pasien::count();
-
-    	$tahun = date('Y');
-
-       
+      if (Auth::user()->hasRole('dokter') OR Auth::user()->hasRole('perawat')) {
+        return redirect('lrj'); 
+      }
+      $totalPasien = Pasien::count();
+      $tahun = date('Y');
        $rj = Rawat_Jalan::select(DB::raw('MONTHNAME(tglKunjungan) AS bulan'),DB::raw('count(*) AS jumlah'))
        ->whereYear('tglKunjungan',$tahun)
        ->orderBy('tglKunjungan','asc')
@@ -95,6 +107,6 @@ class DashboardController extends Controller
        $laki = Pasien::where('jenisKelamin','Laki-Laki')->count();
        $perempuan = Pasien::where('jenisKelamin','Perempuan')->count();
 
-    	return view('dashboard.home')->with(compact('totalPasien','rj','ri','igd','tahun','besar','pegawai','icd10','icd9','bpjs','umum','getBulan','laki','perempuan'));
+      return view('dashboard.home')->with(compact('totalPasien','rj','ri','igd','tahun','besar','pegawai','icd10','icd9','bpjs','umum','getBulan','laki','perempuan'));
     }
 }

@@ -1,9 +1,5 @@
 @extends('layouts.index')
 @section('title') Pendaftaran Rawat Inap @endsection
-@section('css')
-<link rel="stylesheet" href="{{url('/plugins/datepicker/datepicker3.css')}}">
-<link rel="stylesheet" href="{{url('/plugins/timepicker/bootstrap-timepicker.min.css')}}">
-@endsection
 @section('content')
 
 <section class="content-header">
@@ -28,7 +24,7 @@
       </div>
       <!-- /.box-header -->
       <div class="box-body">
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example1" class="table table-bordered table-striped table-hover dataTable js-exportable">
             <thead>
                 <tr>
                   <th>No</th>
@@ -66,50 +62,21 @@
 @endsection
 
 @section('js')
-<!-- bootstrap datepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="{{url('plugins/datepicker/bootstrap-datepicker.js')}}"></script>
-<script src="{{url('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
 
 <script>
-  $(function () {
-
-     //Date picker
-     $('#tglLahir').datepicker({
-      autoclose: true,
-      format: 'yyyy-mm-dd'
-  });
-   //Date picker
-   $('#tanggal_kunjungan').datepicker({
-      autoclose: true,
-      format: 'yyyy-mm-dd'
-  });
-
-     //Timepicker
-     $(".timepicker").timepicker({
-        showInputs: false,
-        minuteStep: 1,
-        locale: 'id',
-        showMeridian :false,
-        use24hours: true
-
+ $(function () {
+    $('.js-basic-example').DataTable({
+        responsive: true
     });
 
- });
-</script>
-
-<script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-  });
+    //Exportable table
+    $('.js-exportable').DataTable({
+        dom: 'Bfrtip',
+        responsive: true,
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    });
 });
 </script>
 @endsection

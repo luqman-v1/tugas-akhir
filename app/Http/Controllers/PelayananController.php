@@ -18,6 +18,7 @@ use App\tbl_icd10nama;
 use App\Diagnosis;
 use App\Tindakan;
 use App\role_user;
+use App\Ruangan\No_Kamar;
 class PelayananController extends Controller
 {
     public function indexLrj(){
@@ -30,7 +31,23 @@ class PelayananController extends Controller
        ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
        ->get();
 
-        return view('pelayanan.indexLRJ')->with('lrj',$lrj);
+       $histori = Tindakan::join('pelayanan_rawatjalan','tindakan.id_pelayananjalan','pelayanan_rawatjalan.id')
+       ->join('rawat_jalan','id_RJ','rawat_jalan.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
+       ->orderBy('pelayanan_rawatjalan.id','desc')
+       ->whereNotNull('anamnesa')
+       ->whereNotNull('kode')
+       ->get();
+
+       $antrian = PelayananRj::join('rawat_jalan','id_RJ','rawat_jalan.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
+       ->orderBy('pelayanan_rawatjalan.id','desc')
+       ->where('anamnesa',Null)->whereNull('rawat_jalan.deleted_at')
+       ->get();
+
+        return view('pelayanan.indexLRJ')->with('lrj',$lrj)->with('histori',$histori)->with('antrian',$antrian);
     }
 
     public function indexLrjDetail($id){
@@ -77,6 +94,7 @@ class PelayananController extends Controller
         $data->delete();
         $tindakan = Tindakan::where('id_pelayananjalan',$id)->first();
         $tindakan->delete();
+
         return $data;
 
     }
@@ -191,15 +209,28 @@ class PelayananController extends Controller
 
     
 
-    public function lrj(){
+    public function lrj($id){
         $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
         $icd9 = Icd9::all();
+
+         $lrj = PelayananRj::join('rawat_jalan','id_RJ','rawat_jalan.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
+       ->where('pelayanan_rawatjalan.id',$id)
+       ->first();
+
+        $biday = new DateTime($lrj->tglLahir);
+              $today = new DateTime();
+            $diff = $today->diff($biday);
+            //bikin array baru 
+            $lrj['tahun'] = $diff->y;
+            $lrj['bulan'] = $diff->m;
+            $lrj['hari'] = $diff->d;
        
-    	return view('pelayanan.LRJ')->with('icd',$icd)->with('icd9',$icd9);
+    	return view('pelayanan.LRJ')->with('icd',$icd)->with('icd9',$icd9)->with('lrj',$lrj);
     }
 
     public function lrjSimpan(Request $request){
-
     	  $this->validate($request, [
     	  	'noRm' => 'required',
             'nama' => 'required',
@@ -226,13 +257,7 @@ class PelayananController extends Controller
             'suhu' => 'required',
             ]);
 
-    	$rawatJalan = Pasien::where('noRm',$request->noRm)
-    	->join('rawat_jalan','pasien.id','id_pasien')
-    	->orderBy('rawat_jalan.id','desc')
-    	->first();
-
-    	$prj = new PelayananRj();
-    	$prj->id_RJ = $rawatJalan->id;
+    	$prj = PelayananRj::find($request->id);
         $prj->anamnesa = $request->anamnesa;
         $prj->riwayatAlergi = $request->riwayatAlergi;
         $prj->tensi = $request->tensi;
@@ -349,16 +374,67 @@ class PelayananController extends Controller
 //================================================= PELAYANAN RAWAT JALAN END ======================================//
     
 //================================================= PELAYANAN INAP Start ======================================//
-    public function rmk(){
-
+    public function rmk($id){
          $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
         $icd9 = Icd9::all();
-
         $dokter = role_user::join('users','user_id','users.id')->where('role_id',6)->get();
         $perawat = role_user::join('users','user_id','users.id')->where('role_id',3)->get();
         $rekmed = role_user::join('users','user_id','users.id')->where('role_id',2)->get();
+        $rmk = PelayananRI::join('rawat_inap','id_RI','rawat_inap.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
+       ->orderBy('pelayanan_rawatinap.id','desc')
+       ->where('pelayanan_rawatinap.id',$id)
+       ->first();
+        $biday = new DateTime($rmk->tglLahir);
+        $today = new DateTime();
+        $diff = $today->diff($biday);
+          //bikin array baru 
+        $rmk['tahun'] = $diff->y;
+        $rmk['bulan'] = $diff->m;
+        $rmk['hari'] = $diff->d;
 
-    	return view('pelayanan.RMK')->with(compact('icd','icd9','dokter','perawat','rekmed'));
+    	return view('pelayanan.RMK')->with(compact('icd','icd9','dokter','perawat','rekmed','rmk'));
+    }
+    public function indexDetail($id){
+        $data = PelayananRI::find($id);
+
+        return $data;
+
+    }
+    public function indexSave(Request $request){
+
+        $this->validate($request, [
+            'diagnosisMasuk' => 'required',
+            'namaPerawat' => 'required',
+            'namaPetugasTpp' => 'required',
+            'namaDokterPj' =>'required',
+            'caraKeluar' => 'required',
+            'keadaanKeluar' => 'required',
+            'tglKeluar' => 'required',
+            'jamKeluar' => 'required',
+            'diagnosisUtama' => 'required',
+            'komplikasi' => 'required',
+            'penyebabLuarCedera' => 'required',
+            'operasiTindakan' => 'required',
+            'golonganOperasiTindakan' => 'required',
+            'tanggal_operasiTindakan' => 'required',
+            'infeksiNosokomial' => 'required',
+            'penyebabInfeksiNosokomial' => 'required',
+            'imunisasi' => 'required',
+            'pengobatanRadio' => 'required',
+            'transfusiDarah' => 'required',
+            'sebabKematian' => 'required',
+            'dokterMemulangkan' => 'required',
+            ]);
+
+        $input = $request->all();
+        $data = PelayananRI::find($request->id);
+        $data->update($input);
+
+        Alert::success('Berhasil', 'Data Pelayanan Rawat Inap telah diubah');
+        return back();
+
     }
 
     public function indexDeleteRmk($id){
@@ -383,7 +459,30 @@ class PelayananController extends Controller
        ->Where('tindakan.kode',null)
        ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
        ->get();
-        return view('pelayanan.indexRMK')->with('rmk',$rmk)->with('dokter',$dokter)->with('perawat',$perawat)->with('rekmed',$rekmed);
+
+         $histori  = Tindakan::join('pelayanan_rawatinap','tindakan.id_pelayananinap','pelayanan_rawatinap.id')
+       ->join('rawat_inap','id_RI','rawat_inap.id')
+       ->join('pasien','id_pasien','pasien.id')
+       ->orderBy('pelayanan_rawatinap.id','desc')
+       ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
+       ->whereNotNull('diagnosisMasuk')
+       ->whereNotNull('kode')
+       ->get();
+
+       $antrian = PelayananRI::join('rawat_inap','id_RI','rawat_inap.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
+       ->orderBy('pelayanan_rawatinap.id','desc')
+       ->where('diagnosisMasuk',Null)->whereNull('rawat_inap.deleted_at')
+       ->get();
+
+        return view('pelayanan.indexRMK')
+                                ->with('rmk',$rmk)
+                                ->with('dokter',$dokter)
+                                ->with('perawat',$perawat)
+                                ->with('rekmed',$rekmed)
+                                ->with('antrian',$antrian)
+                                ->with('histori',$histori);
     }
 
     public function rmkSimpan(Request $request){
@@ -430,7 +529,7 @@ class PelayananController extends Controller
     	->orderBy('rawat_inap.id','desc')
     	->first();
 
-            if ($request->keadaanKeluar != "Meninggal") {
+        if ($request->keadaanKeluar != "Meninggal") {
             $tglMeninggal = $request->tglMeninggal = null;
             $jamMeninggal = $request->jamMeninggal = null;
         }else{
@@ -438,8 +537,7 @@ class PelayananController extends Controller
             $jamMeninggal = $request->jamMeninggal;
         }
 
-    	$rmk = new PelayananRI();
-    	$rmk->id_RI = $rawatInap->id;
+    	$rmk = PelayananRI::find($request->id);
     	$rmk->diagnosisMasuk = $request->diagnosisMasuk;
     	$rmk->namaPerawat = $request->namaPerawat;
     	$rmk->namaPetugasTpp = $request->namaPetugasTpp;
@@ -464,6 +562,15 @@ class PelayananController extends Controller
     	$rmk->sebabKematian = $request->sebabKematian;
         $rmk->dokterMemulangkan = $request->dokterMemulangkan;
     	$rmk->save();
+
+        $carirj = PelayananRI::find($request->id)->id_RI;
+        $rawatInap = Rawat_Inap::find($carirj)->kamar;
+        $kamar = No_Kamar::where('kamar_no',$rawatInap)->first();
+        $kamar->status = 0;
+        $kamar->no_pasien = Null;
+        $kamar->save();
+
+
 
 
         foreach ($request->kodeTindakan as $data) {
@@ -683,9 +790,45 @@ class PelayananController extends Controller
        ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
        ->get();
 
-    return view('pelayanan.indexLGD')->with('igd',$igd);
+       $histori = Tindakan::join('pelayanan_rawatigd','tindakan.id_pelayananigd','pelayanan_rawatigd.id')
+       ->join('rawat_igd','id_IGD','rawat_igd.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
+       ->orderBy('pelayanan_rawatigd.id','desc')
+       ->whereNotNull('anamnesis')
+       ->whereNotNull('kode')
+       ->get();
+
+       $antrian = PelayananIGD::join('rawat_igd','id_IGD','rawat_igd.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
+       ->orderBy('pelayanan_rawatigd.id','desc')
+       ->where('anamnesis',Null)->whereNull('rawat_igd.deleted_at')
+       ->get();
+
+    return view('pelayanan.indexLGD')
+                            ->with('igd',$igd)
+                            ->with('histori',$histori)
+                            ->with('antrian',$antrian);
+    }
+    public function IndexlgdDetail($id){
+        $data = PelayananIGD::find($id);
+
+        return $data;
+
     }
 
+    public function IndexlgdSave(Request $request){
+        $input = $request->all();
+        $data = PelayananIGD::find($request->id);
+        $data->pemeriksaanFisik = $request->pemeriksaanFisik;
+        $data->anamnesis = $request->anamnesis;
+        $data->Save();
+        $data->update($input);
+
+     Alert::success('Berhasil', 'data telah diubah');
+        return back(); 
+    }
      public function indexDeleteIgd($id){
         $data = PelayananIGD::find($id);
         $data->delete();
@@ -695,11 +838,28 @@ class PelayananController extends Controller
 
     }
 
-    public function lgd(){
+    public function lgd($id){
          $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
         $icd9 = Icd9::all();
 
-    	return view('pelayanan.LGD')->with('icd',$icd)->with('icd9',$icd9);
+        $igd = PelayananIGD::join('rawat_igd','id_IGD','rawat_igd.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
+       ->where('pelayanan_rawatigd.id',$id)
+       ->first();
+
+       $biday = new DateTime($igd->tglLahir);
+        $today = new DateTime();
+        $diff = $today->diff($biday);
+          //bikin array baru 
+        $igd['tahun'] = $diff->y;
+        $igd['bulan'] = $diff->m;
+        $igd['hari'] = $diff->d;
+
+    	return view('pelayanan.LGD')
+                        ->with('icd',$icd)
+                        ->with('icd9',$icd9)
+                        ->with('igd',$igd);
     }
 
     public function lgdSimpan(Request $request){
@@ -744,8 +904,7 @@ class PelayananController extends Controller
             $jamMeninggal = $request->jamMeninggal;
         }
 
-    	$igd = new PelayananIGD();
-    	$igd->id_IGD = $rawatIGD->id;
+    	$igd = PelayananIGD::find($request->id);
     	$igd->jenisKasus = $request->jenisKasus;
     	$igd->tindakanResuitasi = $request->tindakanResuitasi;
     	$igd->cramsScore = $request->cramsScore;

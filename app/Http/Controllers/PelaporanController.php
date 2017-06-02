@@ -152,7 +152,7 @@ class PelaporanController extends Controller
 
          }elseif ($request->rl == 53) {
                 $extR3 = DB::table('diagnosis')
-                ->join('pelayanan_rawatinap','id_pelayanan','pelayanan_rawatinap.id')
+                ->join('pelayanan_rawatinap','id_pelayananinap','pelayanan_rawatinap.id')
                 ->join('rawat_inap','id_RI','rawat_inap.id')
                 ->join('pasien','id_pasien','pasien.id')
                 ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])

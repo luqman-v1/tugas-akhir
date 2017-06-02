@@ -24,6 +24,9 @@ use App\Ruangan\No_Kamar;
 use App\Rawat_Inap;
 use App\Rawat_IGD;
 use PDF;
+use App\PelayananRj;
+use App\PelayananRI;
+use App\PelayananIGD;
 class PendaftaranController extends Controller
 {
 
@@ -133,6 +136,7 @@ class PendaftaranController extends Controller
             ->whereNull('rawat_inap.deleted_at')
         ->get();
          $bangsal = Bangsal::pluck("nama","id");
+
         return view('pendaftaran.indexRawatInap')->with('inap',$inap)->with('bangsal',$bangsal);
     }
 
@@ -197,6 +201,15 @@ class PendaftaranController extends Controller
         $inap->kamar = $kamar;
         $inap->rujukan = $request->rujukan;
         $inap->Save();
+
+        $updateKamar = No_Kamar::find($request->kamar);
+        $updateKamar->status = 1;
+        $updateKamar->no_pasien = $request->noRm;
+        $updateKamar->save();
+
+        $pelayananRI = new PelayananRI();
+        $pelayananRI->id_RI = $inap->id;
+        $pelayananRI->save();
 
      Alert::success('Berhasil', 'Data Pasien Rawat Inap telah ditambahkan');
          return back();
@@ -320,16 +333,87 @@ class PendaftaranController extends Controller
         $igd->rujukan = $request->rujukan;
         $igd->Save();
 
+        $pelayananIGD = new PelayananIGD();
+        $pelayananIGD->id_IGD = $igd->id;
+        $pelayananIGD->save();
+
         Alert::success('Berhasil', 'Data Pasien Rawat IGD telah ditambahkan');
      return back();
     }
     public function viewCariPasien(){
         $pasien = Pasien::orderBy('id', 'desc')->get();
         
-
     	return view('pendaftaran.cariPasien')->with('pasien',$pasien);
     }
 
+    public function formUbah($id){
+         $data = Pasien::find($id);
+
+        $provinces =  DB::table("provinces")->pluck("name","id");
+        return view('pendaftaran.edit')->with('data',$data)->with('provinces',$provinces);
+    }
+
+    public function formUbahSimpan(Request $request, $id){
+        // return $request->caraDatang;
+         $this->validate($request, [
+            'noRm' => 'required',
+            'nama' => 'required',
+            'provinsi' => 'required',
+            'kota' =>'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required',
+            'dukuh' => 'required',
+            'rt' => 'required',
+            'rw' => 'required',
+            'tglLahir' => 'required',
+            'tmptLahir' => 'required',
+            'jenisKelamin' => 'required',
+            'agama' => 'required',
+            'statusPerkawinan' => 'required',
+            'pendidikanPasien' => 'required',
+            'pekerjaanPasien' => 'required',
+            'kewarganegaraan' => 'required',
+            'namaOrtu' => 'required',
+            'namaSuami_istri' => 'required',
+            'noHp' => 'required',
+            'tglMasuk' => 'required',
+            'caraDatang' => 'required',
+            'noPesertaJKN' => 'required',
+            ]);
+         $getProvinsi = Provinces::where('id',$request->provinsi)->first();
+    $getKota = Regencies::where('id',$request->kota)->first();
+    $getKecamatan = Districts::where('id',$request->kecamatan)->first();
+    $getKelurahan = Villages::where('id',$request->kelurahan)->first();
+
+         $pasien = Pasien::find($id);
+           $pasien->noRm = $request->noRm;
+            $pasien->nama = $request->nama;
+            $pasien->provinsi  = $getProvinsi->name;
+            $pasien->kabupaten = $getKota->name;
+            $pasien->kecamatan = $getKecamatan->name;
+            $pasien->kelurahan = $getKelurahan->name;
+            $pasien->dukuh = $request->dukuh;
+            $pasien->rt = $request->rt;
+            $pasien->rw = $request->rw;
+            $pasien->tglLahir = $request->tglLahir;
+            $pasien->tmptLahir = $request->tmptLahir;
+            $pasien->jenisKelamin = $request->jenisKelamin;
+            $pasien->agama = $request->agama;
+            $pasien->statusPerkawinan = $request->statusPerkawinan;
+            $pasien->pendidikanPasien = $request->pendidikanPasien;
+            $pasien->pekerjaanPasien = $request->pekerjaanPasien;
+            $pasien->kewarganegaraan = $request->kewarganegaraan;
+            $pasien->namaOrtu = $request->namaOrtu;
+            $pasien->namaSuami_istri = $request->namaSuami_istri;
+            $pasien->noHp = $request->noHp;
+            $pasien->tglMasuk = $request->tglMasuk;
+            $pasien->caraDatang = $request->caraDatang;
+            $pasien->noPesertaJKN = $request->noPesertaJKN;
+            $pasien->noAsuransiLain = $request->noAsuransiLain;
+            $pasien->save();
+        Alert::success('Berhasil', 'Data Pasien telah di ubah');
+        return redirect('/cari-pasien');
+    }
     public function cetakkrs($id){
         $pasien = Pasien::findOrFail($id);
         $pdf = PDF::loadView('pendaftaran.printKRS', compact('pasien'))->setPaper('a7')->setOrientation('landscape');
@@ -356,6 +440,13 @@ class PendaftaranController extends Controller
     return view('pendaftaran.tambah')->with(compact('noRM','provinces'));
   }
 
+  public function formDelete($id){
+        $pasien = Pasien::find($id);
+        $pasien->delete();
+
+        return $pasien;
+  }
+
   public function tambah(Request $request){
     $this->validate($request, [
             'noRm' => 'required',
@@ -379,7 +470,6 @@ class PendaftaranController extends Controller
             'namaSuami_istri' => 'required',
             'noHp' => 'required',
             'tglMasuk' => 'required',
-            'caraBayar' => 'required',
             'caraDatang' => 'required',
             'noPesertaJKN' => 'required',
             ]);
@@ -413,7 +503,6 @@ class PendaftaranController extends Controller
     $pasien->noHp = $request->noHp;
     $pasien->tglMasuk = $request->tglMasuk;
     $pasien->caraDatang = $request->caraDatang;
-    $pasien->caraBayar = $request->caraBayar;
     $pasien->noPesertaJKN = $request->noPesertaJKN;
     $pasien->noAsuransiLain = $request->noAsuransiLain;
     $pasien->save();
@@ -523,6 +612,10 @@ class PendaftaranController extends Controller
         $simpan->DokterPJ = $request->DokterPJ;
         $simpan->rujukan = $request->rujukan;
         $simpan->save();
+
+        $pelayananRJ =new PelayananRj();
+        $pelayananRJ->id_RJ = $simpan->id;
+        $pelayananRJ->save();
      
      Alert::success('Berhasil', 'Data Pasien Rawat Jalan telah ditambahkan');
         return back();

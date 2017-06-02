@@ -23,7 +23,8 @@
   <link rel="stylesheet" href="{{url('dist/css/skins/_all-skins.min.css')}}">
   <link href="{{ url('dist/sweetalert.css') }}" rel="stylesheet">
   <!-- DataTables -->
-  <link rel="stylesheet" href="{{url('plugins/datatables/dataTables.bootstrap.css')}}">
+  <link rel="stylesheet" href="{{url('plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}">
+  <link rel="stylesheet" href="{{url('css/style.css')}}">
  <style type="text/css">
  .screen {
  /*background: #848587;*/
@@ -50,9 +51,7 @@
    @include('layouts.header')
    @include('layouts.side')
 
-  <div class="screen">
-    {{-- @include('chat') --}}
-  </div>    
+  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
@@ -91,20 +90,20 @@
 <script src="{{url('dist/sweetalert.min.js') }}"></script>
 <script src="{{url('dist/sweetalert-dev.js') }}"></script>
 <!-- DataTables -->
-<script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{url('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+  <!-- Jquery DataTable Plugin Js -->
+    <script src="{{url('plugins/jquery-datatable/jquery.dataTables.js')}}"></script>
+    <script src="{{url('plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js')}}"></script>
+    <script src="{{url('plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js')}}"></script>
+    <script src="{{url('plugins/jquery-datatable/extensions/export/buttons.flash.min.js')}}"></script>
+    <script src="{{url('plugins/jquery-datatable/extensions/export/jszip.min.js')}}"></script>
+    <script src="{{url('plugins/jquery-datatable/extensions/export/pdfmake.min.js')}}"></script>
+    <script src="{{url('plugins/jquery-datatable/extensions/export/vfs_fonts.js')}}"></script>
+    <script src="{{url('plugins/jquery-datatable/extensions/export/buttons.html5.min.js')}}"></script>
+    <script src="{{url('plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
+{{-- tag input --}}
 <script src="{{url('plugins/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
 
 
-<script type="text/javascript">
- $('.screen').animate({
- opacity: 1,
- right: "-150px",
- bottom: "-15px",
- height: "toggle"
- }, 0, function() {
- }).css('position','fixed');
-</script>
 
 @include('sweet::alert')
 @yield('js')
