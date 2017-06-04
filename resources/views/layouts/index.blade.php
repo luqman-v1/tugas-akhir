@@ -25,17 +25,7 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="{{url('plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}">
   <link rel="stylesheet" href="{{url('css/style.css')}}">
- <style type="text/css">
- .screen {
- /*background: #848587;*/
- border-radius: 7px 7px 7px 7px;
- position: absolute;
- display: none;
- z-index: 100;  
- padding-right: 100px;
- padding-left: 100px;
- }
- </style> 
+
   @yield('css')
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

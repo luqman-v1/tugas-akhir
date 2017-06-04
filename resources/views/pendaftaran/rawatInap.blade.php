@@ -233,7 +233,7 @@
                                          <label class="control-label " for="caraDatang">Cara Datang</label>
                                          <div class="form-group">
                                            <select name="caraDatang" id="caraDatang" class="form-control" onChange="changetextbox();">
-                                               <option>pilih</option>
+                                               <option value="">pilih</option>
                                                <option value="Sendiri">Sendiri</option>
                                                <option value="Rujukan">Rujukan</option>
                                            </select>
@@ -252,7 +252,7 @@
                                  <label class="control-label " for="caraBayar">Cara Bayar</label>
                                  <div class="form-group">
                                    <select name="caraBayar" id="caraBayar" class="form-control" onChange="changetextbox();">
-                                       <option>pilih</option>
+                                       <option value="">pilih</option>
                                        <option value="BPJS">BPJS</option>
                                        <option value="UMUM">UMUM</option>
                                    </select>
@@ -269,7 +269,7 @@
                                <div class="input-group date">
                                 <div class="form-group">
                                     <select name="caraMasuk" class="form-control">
-                                        <option>pilih</option>
+                                        <option value="">pilih</option>
                                         <option value="IGD">IGD</option>
                                         <option value="Rawat Jalan">Rawat Jalan</option>
                                     </select>
@@ -310,7 +310,7 @@
                    <div class="input-group date">
                     <div class="form-group">
                         <select name="kelas" class="form-control">
-                            <option>pilih</option>
+                            <option value="">pilih</option>
                         </select>
 
                         <span class="help-block">
@@ -328,7 +328,7 @@
                <div class="input-group date">
                 <div class="form-group">
                     <select name="kamar" class="form-control">
-                        <option>pilih</option>
+                        <option value="">pilih</option>
                     </select>
 
                     <span class="help-block">

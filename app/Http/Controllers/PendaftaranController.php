@@ -470,7 +470,6 @@ class PendaftaranController extends Controller
             'namaSuami_istri' => 'required',
             'noHp' => 'required',
             'tglMasuk' => 'required',
-            'caraDatang' => 'required',
             'noPesertaJKN' => 'required',
             ]);
 
@@ -502,7 +501,6 @@ class PendaftaranController extends Controller
     $pasien->namaSuami_istri = $request->namaSuami_istri;
     $pasien->noHp = $request->noHp;
     $pasien->tglMasuk = $request->tglMasuk;
-    $pasien->caraDatang = $request->caraDatang;
     $pasien->noPesertaJKN = $request->noPesertaJKN;
     $pasien->noAsuransiLain = $request->noAsuransiLain;
     $pasien->save();

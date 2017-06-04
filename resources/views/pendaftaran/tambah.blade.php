@@ -149,7 +149,10 @@
                                                        </div>                                                             
                                                    </div>
 
-                                                   <div class="row">
+                                                   
+                        </div>
+                                            <div class="col-lg-6">
+                                            <div class="row">
                                                      <div class="col-md-6">
                                                         <div class="form-group {{ $errors->has('jenisKelamin') ? 'has-error' : ''}}">
                                                          <label class="control-label " for="jenisKelamin">Jenis Kelamin</label>
@@ -229,8 +232,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="form-group {{ $errors->has('pekerjaanPasien') ? 'has-error' : ''}}">
                                     <label for="pekerjaanPasien">Pekerjaan Pasien</label>
@@ -287,25 +288,6 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group {{ $errors->has('caraDatang') ? 'has-error' : ''}}">
-                                 <label class="control-label " for="caraDatang">Cara Datang</label>
-                                 <div class="form-group">
-                                   <select name="caraDatang" id="caraDatang" class="form-control" onChange="changetextbox();">
-                                   <option value="">pilih</option>
-                                       <option value="Sendiri">Sendiri</option>
-                                       <option value="Rujukan">Rujukan</option>
-                                   </select>
-                                   <span class="help-block">
-                                    <strong>{{ $errors->first('caraDatang') }}</strong>
-                                </span>
-                            </div>
-                        </div>
-
-                    <div class="form-group">
-                        <label for="rujukan">Rujukan</label>
-                        <input class="form-control" name="rujukan" disabled="" value="{{old('rujukan')}}" id="rujukan" type="text" placeholder="Rujukan">
                     </div>
 
                     <div class="form-group">
@@ -449,18 +431,6 @@
     });
 </script>
 
-<script type="text/javascript">
-function changetextbox()
-{
-    if (document.getElementById("caraDatang").value == "Sendiri") {
-        document.getElementById("rujukan").disabled='true';
-    } else {
-        document.getElementById("rujukan").disabled='';
-    }
-}
-
-
-</script>
 
 
 @endsection
