@@ -92,6 +92,9 @@
     <script src="{{url('plugins/jquery-datatable/extensions/export/buttons.print.min.js')}}"></script>
 {{-- tag input --}}
 <script src="{{url('plugins/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+{{-- validation --}}
+<script src="{{url('plugins/jquery-validation/jquery.validate.js')}}"></script>
+<script src="{{url('plugins/jquery-validation/form-validation.js')}}"></script>
 
 
 

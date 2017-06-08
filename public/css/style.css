@@ -70,3 +70,12 @@
   .dt-button-info div {
     color: #777;
     margin-bottom: 20px; }
+
+     .form-group label.error {
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+    font-weight: normal;
+    color: #F44336; }
+
+    

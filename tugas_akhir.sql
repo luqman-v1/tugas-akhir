@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2017 at 05:21 AM
--- Server version: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Generation Time: Jun 08, 2017 at 04:43 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -44,41 +44,20 @@ INSERT INTO `bangsal` (`id`, `nama`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `config`
---
-
-CREATE TABLE `config` (
-  `id` int(11) NOT NULL,
-  `no1` int(2) UNSIGNED ZEROFILL NOT NULL,
-  `no2` int(2) UNSIGNED ZEROFILL NOT NULL,
-  `no3` int(2) UNSIGNED ZEROFILL NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `config`
---
-
-INSERT INTO `config` (`id`, `no1`, `no2`, `no3`, `created_at`, `updated_at`) VALUES
-(1, 00, 00, 06, '2017-04-06 06:15:48', '2017-04-06 06:15:48');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `diagnosis`
 --
 
 CREATE TABLE `diagnosis` (
   `id` int(11) NOT NULL,
-  `id_pelayanan` int(11) NOT NULL,
-  `jenis_pelayanan` varchar(11) NOT NULL,
-  `diagnosa_komplikasi` varchar(11) NOT NULL,
-  `kode` varchar(11) DEFAULT NULL,
+  `id_pelayananigd` int(11) DEFAULT NULL,
+  `id_pelayananinap` int(11) DEFAULT NULL,
+  `id_pelayananjalan` int(11) DEFAULT NULL,
+  `diagnosa_komplikasi` enum('diagnosa','komplikasi') NOT NULL,
+  `kode` int(11) DEFAULT NULL,
   `sub_kode` int(11) DEFAULT NULL,
-  `nama` varchar(30) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -90,7 +69,7 @@ CREATE TABLE `diagnosis` (
 CREATE TABLE `districts` (
   `id` char(7) COLLATE utf8_unicode_ci NOT NULL,
   `regency_id` char(4) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -1436,7 +1415,7 @@ INSERT INTO `districts` (`id`, `regency_id`, `name`) VALUES
 ('1608010', '1608', 'MEKAKAU ILIR'),
 ('1608020', '1608', 'BANDING AGUNG'),
 ('1608021', '1608', 'WARKUK RANAU SELATAN'),
-('1608022', '1608', 'BUAY PEMATANG RIBU RANAU TENGAH'),
+('1608022', '1608', 'BUAY PEMATANG RIBU RANAU TENGA'),
 ('1608030', '1608', 'BUAY PEMACA'),
 ('1608040', '1608', 'SIMPANG'),
 ('1608041', '1608', 'BUANA PEMACA'),
@@ -7229,24 +7208,24 @@ INSERT INTO `kelas` (`id`, `bangsal_id`, `nama`, `fasilitas`, `harga`, `created_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Table structure for table `norekam_medis`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `norekam_medis` (
+  `id` int(11) NOT NULL,
+  `no1` int(2) UNSIGNED ZEROFILL NOT NULL,
+  `no2` int(2) UNSIGNED ZEROFILL NOT NULL,
+  `no3` int(2) UNSIGNED ZEROFILL NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data for table `norekam_medis`
 --
 
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2017_02_25_091344_create_messages_table', 1),
-(4, '2017_03_03_034954_user_ntrust_setup_tables', 2);
+INSERT INTO `norekam_medis` (`id`, `no1`, `no2`, `no3`, `created_at`, `updated_at`) VALUES
+(1, 00, 00, 13, '2017-06-03 06:26:20', '2017-06-03 06:26:20');
 
 -- --------------------------------------------------------
 
@@ -7269,18 +7248,18 @@ CREATE TABLE `no_kamar` (
 --
 
 INSERT INTO `no_kamar` (`id`, `id_kelas`, `kamar_no`, `no_pasien`, `status`, `created_at`, `updated_at`) VALUES
-(1, 5, 'VIP 1', '', 0, '2017-03-31 09:41:29', '0000-00-00 00:00:00'),
-(2, 6, '2', '', 0, '2017-03-27 15:57:12', '0000-00-00 00:00:00'),
+(1, 5, 'VIP 1', '', 0, '2017-05-27 09:39:49', '2017-05-27 09:39:49'),
+(2, 6, '2', '', 0, '2017-06-03 05:54:47', '2017-06-03 05:54:47'),
 (3, 6, '3', '', 0, '2017-03-27 15:57:17', '0000-00-00 00:00:00'),
 (4, 7, '4', '', 0, '2017-03-27 15:57:28', '0000-00-00 00:00:00'),
 (5, 7, '5', '', 0, '2017-03-27 15:57:31', '0000-00-00 00:00:00'),
 (6, 7, '6', '', 0, '2017-03-27 15:57:53', '0000-00-00 00:00:00'),
-(7, 8, '7', '', 0, '2017-03-27 15:59:33', '0000-00-00 00:00:00'),
-(8, 8, '8', '', 0, '2017-03-27 15:59:33', '0000-00-00 00:00:00'),
+(7, 8, '7', '00-00-06', 1, '2017-05-27 09:24:09', '2017-05-27 09:24:09'),
+(8, 8, '8', '00-00-03', 1, '2017-05-27 09:26:10', '2017-05-27 09:26:10'),
 (9, 8, '9', '', 0, '2017-03-27 15:59:33', '0000-00-00 00:00:00'),
 (10, 8, '10', '', 0, '2017-03-27 15:59:33', '0000-00-00 00:00:00'),
 (11, 10, 'VIP 2', '', 0, '2017-03-31 09:42:02', '0000-00-00 00:00:00'),
-(12, 11, '12', '', 0, '2017-03-27 16:03:43', '0000-00-00 00:00:00'),
+(12, 11, '12', '00-00-01', 1, '2017-06-05 04:45:52', '2017-06-05 04:45:52'),
 (13, 11, '13', '', 0, '2017-03-27 16:03:43', '0000-00-00 00:00:00'),
 (14, 12, '14', '', 0, '2017-03-27 16:04:36', '0000-00-00 00:00:00'),
 (15, 12, '15', '', 0, '2017-03-27 16:04:36', '0000-00-00 00:00:00'),
@@ -7309,47 +7288,40 @@ CREATE TABLE `pasien` (
   `rw` int(11) NOT NULL,
   `tglLahir` date NOT NULL,
   `tmptLahir` varchar(30) NOT NULL,
-  `jenisKelamin` varchar(20) NOT NULL,
-  `agama` varchar(20) NOT NULL,
-  `statusPerkawinan` varchar(30) NOT NULL,
+  `jenisKelamin` enum('Laki-Laki','Perempuan') NOT NULL,
+  `agama` enum('Islam','Kristen Protestan','Kristen Katolik','Hindu','Buddha','Khonghucu') NOT NULL,
+  `statusPerkawinan` enum('Kawin','Belum Kawin','Cerai Hidup','Cerai Mati') NOT NULL,
   `pendidikanPasien` varchar(30) NOT NULL,
   `pekerjaanPasien` varchar(30) NOT NULL,
-  `kewarganegaraan` varchar(10) NOT NULL,
+  `kewarganegaraan` enum('WNI','WNA') NOT NULL,
   `namaOrtu` varchar(30) NOT NULL,
   `namaSuami_istri` varchar(30) NOT NULL,
   `noHp` varchar(20) NOT NULL,
   `tglMasuk` date NOT NULL,
-  `rujukan` varchar(30) DEFAULT NULL,
-  `caraDatang` varchar(11) NOT NULL,
-  `caraBayar` varchar(11) NOT NULL,
   `noPesertaJKN` varchar(30) NOT NULL,
   `noAsuransiLain` varchar(30) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`id`, `noRm`, `nama`, `provinsi`, `kabupaten`, `kecamatan`, `kelurahan`, `dukuh`, `rt`, `rw`, `tglLahir`, `tmptLahir`, `jenisKelamin`, `agama`, `statusPerkawinan`, `pendidikanPasien`, `pekerjaanPasien`, `kewarganegaraan`, `namaOrtu`, `namaSuami_istri`, `noHp`, `tglMasuk`, `rujukan`, `caraDatang`, `caraBayar`, `noPesertaJKN`, `noAsuransiLain`, `created_at`, `updated_at`) VALUES
-(1, '00-00-01', 'luqmanul hakim', 'NUSA TENGGARA BARAT', 'KABUPATEN DOMPU', 'DOMPU', 'KARAMABURA', 'sleman', 10, 12, '1995-10-30', 'jambi', 'Laki-Laki', 'Islam', 'Kawin', 'D3', 'ngoding', 'WNI', 'loekman', 'anom', '089636607271', '2017-03-22', 'sarjito', '', '', '21973981239', '89278973298', '2017-03-27 06:55:55', '2017-03-26 06:55:54'),
-(2, '00-00-02', 'Agus Rianto', 'DI YOGYAKARTA', 'KABUPATEN GUNUNG KIDUL', 'PONJONG', 'PONJONG', 'coeg', 12, 1, '2016-11-16', 'cibubur', 'Laki-Laki', 'Islam', 'Kawin', 'S1', 'jaga warnet', 'WNI', 'paijo', 'egy', '089636607271', '2017-03-17', 'ugm', '', '', 'o1238098213', '29389283423', '2017-03-26 07:01:03', '2017-03-26 07:01:03'),
-(3, '00-00-03', 'raya', 'DI YOGYAKARTA', 'KABUPATEN SLEMAN', 'MLATI', 'SINDUADI', 'sendowo', 5, 12, '1995-07-13', 'jakarata', 'Perempuan', 'Islam', 'Kawin', 's1', 'tes', 'WNI', 'tes', 'tes', '+6289636607271', '2017-04-20', 'sarjito', '', '', '0981209380', '-', '2017-04-22 08:21:59', '2017-04-01 04:46:21'),
-(4, '00-00-04', 'farid', 'DKI JAKARTA', 'KOTA JAKARTA TIMUR', 'CAKUNG', 'CAKUNG TIMUR', 'gak tau', 1, 9, '2017-04-11', 'RSKB', 'Laki-Laki', 'Islam', 'Kawin', 'S1', 'ngoding', 'WNI', 'coeg', 'dudu', '089506461641', '2017-04-02', NULL, 'Sendiri', 'BPJS', '090909090928', '-', '2017-04-02 08:19:46', '2017-04-02 08:19:46'),
-(5, '00-00-05', 'ikhsan', 'ACEH', 'KABUPATEN ACEH BARAT DAYA', 'BLANG PIDIE', 'MATA IE', 'sendowo', 12, 21, '2017-04-27', 'jakarata', 'Laki-Laki', 'Islam', 'Kawin', 'S1', 'asd', 'WNI', 'das', 'asd', 'asd', '2017-04-06', NULL, 'Sendiri', 'BPJS', '90980980', NULL, '2017-04-06 06:15:48', '2017-04-06 06:15:48');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `pasien` (`id`, `noRm`, `nama`, `provinsi`, `kabupaten`, `kecamatan`, `kelurahan`, `dukuh`, `rt`, `rw`, `tglLahir`, `tmptLahir`, `jenisKelamin`, `agama`, `statusPerkawinan`, `pendidikanPasien`, `pekerjaanPasien`, `kewarganegaraan`, `namaOrtu`, `namaSuami_istri`, `noHp`, `tglMasuk`, `noPesertaJKN`, `noAsuransiLain`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '00-00-01', 'luqmanul hakim', 'NUSA TENGGARA BARAT', 'KABUPATEN DOMPU', 'DOMPU', 'KARAMABURA', 'sleman', 10, 12, '1995-10-30', 'jambi', 'Laki-Laki', 'Islam', 'Kawin', 'D3', 'ngoding', 'WNI', 'loekman', 'anom', '089636607271', '2017-03-22', '21973981239', '89278973298', '2017-05-23 06:32:20', '2017-05-23 04:57:39', NULL),
+(2, '00-00-02', 'Agus Rianto', 'DI YOGYAKARTA', 'KABUPATEN GUNUNG KIDUL', 'PONJONG', 'PONJONG', 'coeg', 12, 1, '2016-11-16', 'cibubur', 'Laki-Laki', 'Kristen Protestan', 'Kawin', 'S1', 'jaga warnet', 'WNI', 'paijo', 'egy', '089636607271', '2017-03-17', 'o1238098213', '29389283423', '2017-05-17 08:13:10', '2017-03-26 07:01:03', NULL),
+(3, '00-00-03', 'raya', 'DI YOGYAKARTA', 'KABUPATEN SLEMAN', 'MLATI', 'SINDUADI', 'sendowo', 5, 12, '1995-07-13', 'jakarata', 'Perempuan', 'Islam', 'Kawin', 's1', 'tes', 'WNI', 'tes', 'tes', '+6289636607271', '2017-04-20', '0981209380', '-', '2017-05-17 17:01:30', '2017-04-01 04:46:21', NULL),
+(4, '00-00-04', 'farid', 'DKI JAKARTA', 'KOTA JAKARTA TIMUR', 'CAKUNG', 'CAKUNG TIMUR', 'gak tau', 1, 9, '2017-04-11', 'RSKB', 'Laki-Laki', 'Kristen Protestan', 'Kawin', 'S1', 'ngoding', 'WNI', 'coeg', 'dudu', '089506461641', '2017-04-02', '090909090928', '-', '2017-05-17 17:01:27', '2017-04-02 08:19:46', NULL),
+(5, '00-00-05', 'ikhsan', 'NUSA TENGGARA BARAT', 'KABUPATEN LOMBOK TIMUR', 'AIKMEL', 'KALIJAGA TENGAH', 'sendowo', 12, 21, '2017-04-27', 'jakarata', 'Laki-Laki', 'Kristen Protestan', 'Kawin', 'S1', 'asd', 'WNI', 'das', 'asd', '097777878787', '2017-04-06', '90980980', NULL, '2017-05-27 09:43:06', '2017-05-27 09:43:06', NULL),
+(6, '00-00-06', 'yahya S', 'SUMATERA UTARA', 'KABUPATEN TAPANULI SELATAN', 'SAYUR MATINGGI', 'HUTA PARDOMUAN', 'Bantul', 12, 11, '2017-05-31', 'bantul', 'Laki-Laki', 'Islam', 'Belum Kawin', 'S1', 'kuli', 'WNI', 'paijo', 'sukijam', '+6289636607271', '2017-05-25', '0088888888', NULL, '2017-05-17 17:00:42', '2017-05-17 17:00:42', NULL),
+(7, '00-00-07', 'nurul', 'ACEH', 'KABUPATEN ACEH SINGKIL', 'PULAU BANYAK BARAT', 'UJUNG SIALIT', 'sukuharjo', 10, 11, '2017-05-11', 'kandang', 'Perempuan', 'Kristen Katolik', 'Belum Kawin', 'D3', 'mangkal', 'WNA', 'das', 'anom', '+6289636607271', '2017-05-18', '12123132', NULL, '2017-05-23 04:59:01', '2017-05-23 04:58:44', NULL),
+(10, '00-00-08', 'agung', 'ACEH', 'KABUPATEN ACEH SELATAN', 'TRUMON TIMUR', 'ALUR BUJOK', 'oke', 10, 10, '2017-05-17', 'jambi', 'Perempuan', 'Islam', 'Belum Kawin', 'D1', 'maling', 'WNI', 'bambang', 'adsasd', '+6289636607271', '2017-05-18', '00012021', NULL, '2017-05-23 04:59:06', '2017-05-23 04:58:41', NULL),
+(11, '00-00-09', 'Hanna Montana', 'JAMBI', 'KABUPATEN SAROLANGUN', 'PELAWAN', 'MEKARSARI', 'belimbingsari', 19, 12, '2017-05-11', 'grogol', 'Laki-Laki', 'Kristen Protestan', 'Belum Kawin', 'S1', 'ngoding', 'WNI', 'Jako', 'Hak', '+6289636607271', '2017-05-18', '02002020', NULL, '2017-05-23 06:29:04', '2017-05-23 06:29:04', NULL),
+(12, '00-00-10', 'ipul', 'JAWA BARAT', 'KABUPATEN BOGOR', 'CIAWI', 'CILEUNGSI', 'serodotan', 12, 21, '1994-06-22', 'bogor', 'Laki-Laki', 'Islam', 'Belum Kawin', 'D3', 'Mahasiswa', 'WNI', 'Haki', 'Gavin', '0895063652', '2017-05-23', '090909090900', NULL, '2017-05-23 08:51:08', '2017-05-23 08:51:08', NULL),
+(13, '00-00-11', 'vita', 'SUMATERA UTARA', 'KABUPATEN MANDAILING NATAL', 'SINUNUKAN', 'SINUNUKAN II', 'kemayoran', 10, 12, '2017-06-22', 'jakarta', 'Perempuan', 'Islam', 'Belum Kawin', 'S1', 'masak', 'WNI', 'carla', 'yonglex', '+6289636607271', '2017-06-03', '898989822882', NULL, '2017-06-03 03:02:41', '2017-06-03 03:02:41', NULL),
+(14, '00-00-12', 'gina', 'SUMATERA UTARA', 'KABUPATEN MANDAILING NATAL', 'BATAHAN', 'PULO SAROK', 'serodotan', 12, 32, '2017-06-22', 'dd', 'Perempuan', 'Islam', 'Belum Kawin', 'D3', 'dd', 'WNI', 'suparman', 'suamiti', '+6289636607271', '2017-06-03', '090909090900', NULL, '2017-06-03 06:26:20', '2017-06-03 06:26:20', NULL);
 
 -- --------------------------------------------------------
 
@@ -7360,55 +7332,25 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `pelayanan_rawatigd` (
   `id` int(11) NOT NULL,
   `id_IGD` int(11) DEFAULT NULL,
-  `jenisKasus` varchar(30) DEFAULT NULL,
+  `jenisKasus` enum('Bedah','Obsgin','Interna') DEFAULT NULL,
   `tindakanResuitasi` enum('Ya','Tidak') DEFAULT NULL,
   `cramsScore` varchar(30) DEFAULT NULL,
   `anamnesis` varchar(30) DEFAULT NULL,
-  `pemeriksaanFisik` varchar(30) DEFAULT NULL,
+  `pemeriksaanFisik` enum('0','1','2','3','4','5','6','7','8','9','10') DEFAULT NULL,
   `pemeriksaanStatus` varchar(30) DEFAULT NULL,
   `pemeriksaanLaboratorium` varchar(30) DEFAULT NULL,
   `pemeriksaanRadiologi` varchar(30) DEFAULT NULL,
   `terapiTindakan` varchar(30) DEFAULT NULL,
   `diagonosisAwal` varchar(30) NOT NULL,
   `diagnosisAkhir` varchar(30) DEFAULT NULL,
-  `tindakanLanjut` varchar(30) DEFAULT NULL,
+  `tindakanLanjut` enum('Pulang','Dirujuk','Dirawat','Meninggal','Menolak Dirawat') DEFAULT NULL,
   `tglMeninggal` date DEFAULT NULL,
   `jamMeninggal` time DEFAULT NULL,
   `dirujuk` varchar(30) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pelayanan_rawatigd`
---
-
-INSERT INTO `pelayanan_rawatigd` (`id`, `id_IGD`, `jenisKasus`, `tindakanResuitasi`, `cramsScore`, `anamnesis`, `pemeriksaanFisik`, `pemeriksaanStatus`, `pemeriksaanLaboratorium`, `pemeriksaanRadiologi`, `terapiTindakan`, `diagonosisAwal`, `diagnosisAkhir`, `tindakanLanjut`, `tglMeninggal`, `jamMeninggal`, `dirujuk`, `created_at`, `updated_at`) VALUES
-(1, 4, 'Obsgin', 'Ya', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', 'asd', '', 'asd', 'asd', NULL, NULL, NULL, '2017-04-04 13:34:39', '2017-04-04 13:34:39'),
-(2, 2, 'Bedah', 'Ya', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', '', 'sdf', 'Meninggal', '2017-04-08', '14:58:00', NULL, '2017-04-08 08:00:02', '2017-04-08 08:00:02'),
-(3, 5, 'Obsgin', 'Ya', 'sdf', 'sdf', 'sdf', 'dsf', 'dsf', 'dsf', 'dsf', '', 'dsfdf', 'Dirujuk', NULL, NULL, 'sdfdfs', '2017-04-08 08:08:14', '2017-04-08 08:00:42'),
-(4, 4, 'Bedah', 'Ya', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', 'sdf', '', 'sdf', 'Dirujuk', NULL, NULL, 'sdfdsf', '2017-04-08 08:08:14', '2017-04-08 08:01:34'),
-(5, 2, 'Bedah', 'Ya', 'fdssdf', 'sdf', 'sdf', 'sdf', 'dsf', 'sfd', 'sdf', '', 'fds', 'Dirujuk', NULL, NULL, 'sdf', '2017-04-08 08:08:14', '2017-04-08 08:02:39'),
-(6, 2, 'Bedah', 'Ya', 'adsads', 'asd', 'adsdsa', 'adsasd', 'asd', 'asdasd', 'asd', '', 'asdasd', 'Dirujuk', NULL, NULL, 'adsasd', '2017-04-08 08:06:47', '2017-04-08 08:06:47'),
-(7, 5, 'Bedah', 'Ya', 'asdasd', 'asd', 'asddsa', 'asd', 'asd', 'asd', 'asdads', '', 'asdasd', 'Meninggal', '2017-04-08', '15:07:00', NULL, '2017-04-08 08:07:49', '2017-04-08 08:07:49'),
-(8, 2, 'Bedah', 'Ya', 'dd', 'd', 'd', 'd', 'd', 'd', 'd', '', 'd', 'Dirujuk', NULL, NULL, NULL, '2017-04-08 16:42:20', '2017-04-08 16:42:20'),
-(9, 5, 'Bedah', 'Ya', 'f', 'f', 'f', 'f', 'f', 'f', 'f', '', 'f', 'Meninggal', '2017-04-08', '23:42:00', NULL, '2017-04-08 16:42:58', '2017-04-08 16:42:58'),
-(10, 5, 'Obsgin', 'Tidak', 'asd', 'fds', 'sfd', 'sdf', 'sdf', 'sdf', 'sdf', '', 'sdf', 'Dirawat', NULL, NULL, NULL, '2017-04-16 15:26:52', '2017-04-16 15:26:52'),
-(11, 2, 'Bedah', 'Ya', 'gf', 'dd', 'df', 'g', 'dg', 'dfg', 'hh', '', 'hhrfg', 'Pulang', NULL, NULL, NULL, '2017-04-16 15:28:43', '2017-04-16 15:28:43'),
-(12, 5, 'Bedah', 'Ya', 'gg', 'gg', 'g', 'gg', 'gg', 'gg', 'gg', '', 'gg', 'Pulang', NULL, NULL, NULL, '2017-04-16 15:36:56', '2017-04-16 15:36:56'),
-(13, 4, 'Bedah', 'Ya', 'ss', 'ss', 'ss', 'ss', 'ss', 'ww', 'ss', '', 'ss', 'Pulang', NULL, NULL, NULL, '2017-04-19 17:15:12', '2017-04-19 17:15:12'),
-(14, 4, 'Bedah', 'Ya', 'dd', 'dd', 'dd', 'dd', 'dd', 'dd', 'dd', '', 'dd', 'Pulang', NULL, NULL, NULL, '2017-04-19 17:19:08', '2017-04-19 17:19:08'),
-(15, 4, 'Bedah', 'Ya', 'dd', 'dd', 'dd', 'dd', 'dd', 'dd', 'dd', '', 'dd', 'Pulang', NULL, NULL, NULL, '2017-04-19 17:19:33', '2017-04-19 17:19:33'),
-(16, 4, 'Bedah', 'Ya', 'dd', 'dd', 'ddd', 'dd', 'dd', 'dd', 'dd', '', 'dd', 'Pulang', NULL, NULL, NULL, '2017-04-19 17:20:05', '2017-04-19 17:20:05'),
-(17, 4, 'Bedah', 'Ya', 'dd', 'dd', 'ddd', 'dd', 'dd', 'dd', 'dd', '', 'dd', 'Pulang', NULL, NULL, NULL, '2017-04-19 17:21:06', '2017-04-19 17:21:06'),
-(18, 4, 'Bedah', 'Ya', 'dd', 'dd', 'ddd', 'dd', 'dd', 'dd', 'dd', '', 'dd', 'Pulang', NULL, NULL, NULL, '2017-04-19 17:21:22', '2017-04-19 17:21:22'),
-(19, 4, 'Bedah', 'Ya', 'dd', 'dd', 'dd', 'dd', 'dd', 'dd', 'dd', '', 'dd', 'Pulang', NULL, NULL, NULL, '2017-04-19 17:21:55', '2017-04-19 17:21:55'),
-(20, 4, 'Bedah', 'Ya', '33', '44', 'ff', 'fg', 'gg', 'gg', 'gg', '', 'gg', 'Pulang', NULL, NULL, NULL, '2017-04-20 09:44:12', '2017-04-20 09:44:12'),
-(21, 2, 'Interna', 'Tidak', 'sss', 'ss', '2', 'd', 'dd', 'd', 'jangan bandel,makan yang bener', 'mencret,mual mual', 'jajan sembarangan,kwkwkw', 'Menolak Dirawat', NULL, NULL, NULL, '2017-04-21 14:39:37', '2017-04-21 14:39:37'),
-(22, 2, 'Bedah', 'Ya', 'dd', 'dd', '5', 'dd', 'dd', 'dd', 'suntik', 'haha,hehe', 'hoho,wkkwkw', 'Meninggal', '2017-04-21', '21:44:00', NULL, '2017-04-21 14:45:06', '2017-04-21 14:45:06'),
-(23, 2, 'Bedah', 'Tidak', 'dd', 'dd', '1', 'dd', 'dd', 'dd', 'ddd', 'ddd', 'ddd', 'Dirujuk', NULL, NULL, 'ddddd', '2017-04-21 14:51:32', '2017-04-21 14:51:32'),
-(24, 2, 'Obsgin', 'Tidak', 'eeee', 'eee', '1', 'ee', 'ee', 'ee', 'obatanin', 'oke,sakit jiwa,mantap gan', 'hehehe,kocak,joz', 'Pulang', NULL, NULL, NULL, '2017-04-29 05:13:22', '2017-04-29 05:13:22'),
-(25, 2, 'Obsgin', 'Tidak', 'dd', 'dd', '1', 'dd', 'dd', 'dd', 'dd', 'dd', 'dd', 'Dirawat', NULL, NULL, NULL, '2017-04-29 07:46:33', '2017-04-29 07:46:33');
 
 -- --------------------------------------------------------
 
@@ -7420,10 +7362,10 @@ CREATE TABLE `pelayanan_rawatinap` (
   `id` int(11) NOT NULL,
   `id_RI` int(11) DEFAULT NULL,
   `diagnosisMasuk` varchar(30) DEFAULT NULL,
-  `namaPerawat` varchar(30) DEFAULT NULL,
-  `namaPetugasTpp` varchar(30) DEFAULT NULL,
-  `namaDokterPj` varchar(30) DEFAULT NULL,
-  `caraKeluar` varchar(30) DEFAULT NULL,
+  `namaPerawat` int(10) UNSIGNED DEFAULT NULL,
+  `namaPetugasTpp` int(10) UNSIGNED DEFAULT NULL,
+  `namaDokterPj` int(10) UNSIGNED DEFAULT NULL,
+  `caraKeluar` enum('Diizinkan','permintaan sendiri','lari','pindah/dirujuk rs lain') DEFAULT NULL,
   `keadaanKeluar` enum('Sembuh','Belum Sembuh','Meninggal') DEFAULT NULL,
   `tglMeninggal` date DEFAULT NULL,
   `jamMeninggal` time DEFAULT NULL,
@@ -7433,56 +7375,19 @@ CREATE TABLE `pelayanan_rawatinap` (
   `komplikasi` varchar(30) DEFAULT NULL,
   `penyebabLuarCedera` varchar(30) DEFAULT NULL,
   `operasiTindakan` varchar(30) DEFAULT NULL,
-  `golonganOperasiTindakan` varchar(30) DEFAULT NULL,
+  `golonganOperasiTindakan` enum('Kecil','Sedang','Khusus') DEFAULT NULL,
   `tanggal_operasiTindakan` date DEFAULT NULL,
   `infeksiNosokomial` varchar(30) DEFAULT NULL,
   `penyebabInfeksiNosokomial` varchar(30) NOT NULL,
-  `imunisasi` varchar(30) DEFAULT NULL,
+  `imunisasi` enum('BCG','DT','DPT','POLIO','TFT','CAMPAK','Lain-lain') DEFAULT NULL,
   `pengobatanRadio` varchar(30) DEFAULT NULL,
   `transfusiDarah` varchar(30) DEFAULT NULL,
   `sebabKematian` varchar(30) DEFAULT NULL,
-  `dokterMemulangkan` varchar(30) DEFAULT NULL,
+  `dokterMemulangkan` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `pelayanan_rawatinap`
---
-
-INSERT INTO `pelayanan_rawatinap` (`id`, `id_RI`, `diagnosisMasuk`, `namaPerawat`, `namaPetugasTpp`, `namaDokterPj`, `caraKeluar`, `keadaanKeluar`, `tglMeninggal`, `jamMeninggal`, `tglKeluar`, `jamKeluar`, `diagnosisUtama`, `komplikasi`, `penyebabLuarCedera`, `operasiTindakan`, `golonganOperasiTindakan`, `tanggal_operasiTindakan`, `infeksiNosokomial`, `penyebabInfeksiNosokomial`, `imunisasi`, `pengobatanRadio`, `transfusiDarah`, `sebabKematian`, `dokterMemulangkan`, `created_at`, `updated_at`) VALUES
-(1, 1, 'ads', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', NULL, NULL, NULL, '2017-04-04', '19:28:00', 'asd', 'asd', 'asd', 'asd', 'ddfsdf', '2017-04-04', 'ads', 'ads', 'Ya', 'asd', 'sad', 'asd', 'Tidak', '2017-04-04 12:32:49', '2017-04-04 12:32:49'),
-(2, 5, 'asdsad', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', NULL, NULL, NULL, '2017-04-04', '19:32:00', 'asd', 'asd', 'asd', 'ads', 'asd', '2017-04-04', 'asd', 'asd', 'Ya', 'asd', 'asd', 'asd', 'Tidak', '2017-04-04 12:33:49', '2017-04-04 12:33:49'),
-(3, 5, 'asd', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', NULL, NULL, NULL, '2017-04-04', '19:33:00', 'asd', 'ads', 'asd', 'asd', 'asd', '2017-04-04', 'asd', 'ads', 'Tidak', 'ads', 'asd', 'ads', 'Ya', '2017-04-04 12:35:51', '2017-04-04 12:35:51'),
-(4, 1, 'asdsdsad', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', NULL, '2017-04-08', '20:57:00', '2017-04-06', '20:57:00', 'asdasd', 'asd', 'asd', 'sda', 'asd', '2017-04-08', 'asdsda', 'asddsa', 'Ya', 'asdasd', 'asddsa', 'asdsad', 'Ya', '2017-04-08 13:58:08', '2017-04-08 13:58:08'),
-(5, 5, 'sdfsdf', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', NULL, '2017-04-08', '20:58:00', '2017-04-08', '20:58:00', 'adsasd', 'asdsda', 'asd', 'asd', 'asdads', '2017-04-08', 'asddas', 'asddas', 'Ya', 'sdfdsf', 'sdfds', 'sdf', 'Ya', '2017-04-08 13:58:51', '2017-04-08 13:58:51'),
-(6, 5, 'gdgg', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', NULL, '2017-04-08', '21:09:00', '2017-04-08', '21:09:00', 'ddg', 'dg', 'd', 'dg', 'd', '2017-04-08', 'dd', 'd', 'Ya', 'dg', 'd', 'dfgd', 'Ya', '2017-04-08 14:10:04', '2017-04-08 14:10:04'),
-(7, 5, 'xvcxcvxcv', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', 'Belum Sembuh', '2017-04-08', '21:12:00', '2017-04-08', '21:12:00', 'xcvcv', 'xcvxcv', 'xcvxvc', 'xvcxcv', 'xcvxcv', '2017-04-08', 'xcvxcv', 'xcvxvc', 'Ya', 'xcv', 'xcv', 'xcv', 'Ya', '2017-04-08 14:12:58', '2017-04-08 14:12:58'),
-(8, 1, 'sdfdsf', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', 'Belum Sembuh', '2017-04-08', '21:14:00', '2017-04-08', '21:14:00', 'sdfsdf', 'sfdsdf', 'sfddsf', 'sdfdsf', 'sdfdsf', '2017-04-08', 'sdfdsfsdf', 'sdfsdf', 'Ya', 'dsfdsf', 'sdf', 'sdfsdf', 'Ya', '2017-04-08 14:15:30', '2017-04-08 14:15:30'),
-(9, 1, 'asdads', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', 'Belum Sembuh', '2017-04-08', '21:16:00', '2017-04-08', '21:16:00', 'asd', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'sdfsdf', '2017-04-08', 'sdfsdf', 'sdfsdf', 'Ya', 'sdfsdf', 'sdfsdf', 'sdfsfd', 'Ya', '2017-04-08 14:16:30', '2017-04-08 14:16:30'),
-(10, 1, 'ddd', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', 'Meninggal', '2017-04-08', '21:59:00', '2017-04-08', '21:58:00', 'sdfsfd', 'sdfdsf', 'sdfsdf', 'sdfsdf', 'dsfdsf', '2017-04-08', 'sdfsdf', 'gdfdfg', 'Ya', 'dd', 'fdd', 'ddgd', 'Ya', '2017-04-08 15:00:01', '2017-04-08 15:00:01'),
-(11, 1, 'c', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', 'Sembuh', '2017-04-08', '22:01:00', '2017-04-08', '22:01:00', 'c', 'c', 'c', 'c', 'c', '2017-04-08', 'c', 'c', 'Ya', 'c', 'c', 'c', 'Ya', '2017-04-08 15:02:23', '2017-04-08 15:02:23'),
-(12, 5, 'z', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', 'Belum Sembuh', '2017-04-08', '22:13:00', '2017-04-08', '22:13:00', 'z', 'z', 'z', 'z', 'z', '2017-04-08', 'z', 'z', 'Ya', 'z', 'z', 'z', 'Ya', '2017-04-08 15:14:01', '2017-04-08 15:14:01'),
-(13, 1, 'b', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', 'Sembuh', '2017-04-08', '22:50:00', '2017-04-08', '22:50:00', 'b', 'b', 'b', 'b', 'b', '2017-04-08', 'b', 'b', 'Ya', 'b', 'b', 'b', 'Ya', '2017-04-08 15:50:57', '2017-04-08 15:50:57'),
-(14, 5, 'b', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', 'Sembuh', NULL, NULL, '2017-04-08', '23:36:00', 'b', 'b', 'b', 'b', 'b', '2017-04-08', 'b', 'b', 'Ya', 'b', 'b', 'b', 'Ya', '2017-04-08 16:36:27', '2017-04-08 16:36:27'),
-(15, 5, 'c', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', 'Meninggal', '2017-04-08', '23:36:00', '2017-04-08', '23:36:00', 'c', 'c', 'c', 'c', 'c', '2017-04-08', 'c', 'c', 'Ya', 'c', 'c', 'c', 'Ya', '2017-04-08 16:37:03', '2017-04-08 16:37:03'),
-(16, 6, 'fsdfds', 'perawat 1', 'petugas 2', 'dokter 2', 'lari', 'Belum Sembuh', NULL, NULL, '2017-04-16', '19:59:00', 'sdfsdf', 'sdfsdf', 'sdf', 'sdf', 'Kecil', '2017-04-16', 'sdfsdf', 'sdggds', 'Tidak', 'sdfsdf', 'sdfsdf', 'sdffsd', 'Tidak', '2017-04-16 12:59:59', '2017-04-16 12:59:59'),
-(17, 1, 'sadads', 'perawat 1', 'petugas 2', 'dokter 1', 'Diizinkan', 'Belum Sembuh', NULL, NULL, '2017-04-16', '20:20:00', 'qweqwe', 'qweqwe', 'qwqweeqw', 'qweqwe', 'Khusus', '2017-04-16', 'qweqwe', 'qweqwe', 'Tidak', 'qwe', 'qweqwe', 'qwe', 'Tidak', '2017-04-16 13:22:22', '2017-04-16 13:22:22'),
-(18, 1, 'sdfsdf', 'perawat 1', 'petugas 1', 'dokter 2', 'permintaan sendiri', 'Belum Sembuh', NULL, NULL, '2017-04-16', '20:23:00', 'asdads', 'asddas', 'asdsad', 'asdasd', 'Sedang', '2017-04-16', 'sdfsdf', 'sdfdsf', 'Tidak', 'sdfsdf', 'sdfsdf', 'sdfsdf', 'Tidak', '2017-04-16 13:57:58', '2017-04-16 13:57:58'),
-(19, 6, 'tuusuk', 'perawat 2', 'petugas 2', 'dokter 1', 'permintaan sendiri', 'Meninggal', '2017-04-21', '22:19:00', '2017-04-21', '22:19:00', 'dd', 'dd', 'ssss', 'ddd', 'Sedang', '2017-04-21', 'ss', 'ss', 'CAMPAK', 'dd', 'dd', 'dd', 'Tidak', '2017-04-21 15:20:03', '2017-04-21 15:20:03'),
-(20, 5, 'ddda', 'perawat 1', 'petugas 2', 'dokter 1', 'Diizinkan', 'Sembuh', NULL, NULL, '2017-04-21', '22:23:00', 'dd', 'dd', 'ddd', 'dd', 'Khusus', '2017-04-21', 'dd', 'dd', 'DT', 'dd', 'dd', 'dd', 'Tidak', '2017-04-21 15:24:41', '2017-04-21 15:24:41'),
-(21, 5, 'dd', 'perawat 1', 'petugas 2', 'dokter 1', 'permintaan sendiri', 'Belum Sembuh', NULL, NULL, '2017-04-21', '23:28:00', 'dd', 'dd', 'ddd', 'dd', 'Sedang', '2017-04-21', 'dd', 'dd', 'CAMPAK', 'dd', 'dd', 'dd', 'Ya', '2017-04-21 16:29:18', '2017-04-21 16:29:18'),
-(22, 5, 'dssd', 'perawat 2', 'petugas 1', 'dokter 2', 'permintaan sendiri', 'Belum Sembuh', NULL, NULL, '2017-04-21', '23:30:00', 'ff', 'ff', 'ddd', 'ff', 'Kecil', '2017-04-21', 'dd', 'dd', 'TFT', 'ff', 'f', 'ff', 'Ya', '2017-04-21 16:30:51', '2017-04-21 16:30:51'),
-(23, 6, 'fff', 'perawat 1', 'petugas 1', 'dokter 1', 'permintaan sendiri', 'Sembuh', NULL, NULL, '2017-04-21', '23:36:00', 'ff', 'ff', 'ddd', 'fff', 'Khusus', '2017-04-21', 'dd', 'dd', 'CAMPAK', 'ff', 'ff', 'ff', 'Ya', '2017-04-21 16:38:24', '2017-04-21 16:38:24'),
-(24, 5, 'ddd', 'perawat 2', 'petugas 2', 'dokter 1', 'permintaan sendiri', 'Sembuh', NULL, NULL, '2017-04-21', '23:41:00', 'dd', 'dd', 'ddd', 'dd', 'Sedang', '2017-04-21', 'dd', 'dd', 'DT', 'dd', 'dd', 'dd', 'Tidak', '2017-04-21 16:41:52', '2017-04-21 16:41:52'),
-(25, 5, 'ddd', 'perawat 2', 'petugas 1', 'dokter 1', 'permintaan sendiri', 'Belum Sembuh', NULL, NULL, '2017-04-21', '23:53:00', 'dd', 'ddd', 'dd', 'dd', 'Khusus', '2017-04-21', 'dd', 'dd', 'TFT', 'ddg', 'dd', 'dd', 'Tidak', '2017-04-21 16:54:54', '2017-04-21 16:54:54'),
-(26, 5, 'fff', 'perawat 2', 'petugas 2', 'dokter 1', 'Diizinkan', 'Belum Sembuh', NULL, NULL, '2017-04-21', '23:57:00', 'ff', 'ff', 'fff', 'ff', 'Kecil', '2017-04-21', 'ff', 'ff', 'CAMPAK', 'ff', 'ff', 'ff', 'Tidak', '2017-04-21 16:57:26', '2017-04-21 16:57:26'),
-(27, 1, 'ddd', 'perawat 2', 'petugas 2', 'dokter 1', 'permintaan sendiri', 'Sembuh', NULL, NULL, '2017-04-22', '00:03:00', 'dd', 'dd', 'dd', 'dd', 'Sedang', '2017-04-22', 'dd', 'dd', 'CAMPAK', 'dd', 'dd', 'dd', 'Ya', '2017-04-21 17:04:05', '2017-04-21 17:04:05'),
-(28, 5, 'dd', 'perawat 2', 'petugas 1', 'dokter 2', 'lari', 'Belum Sembuh', NULL, NULL, '2017-04-22', '00:05:00', 'ff', 'ff', 'fff', 'ff', 'Kecil', '2017-04-22', 'ff', 'ff', 'BCG', 'ff', 'ff', 'ff', 'Tidak', '2017-04-21 17:05:49', '2017-04-21 17:05:49'),
-(29, 1, 'dddddd', 'perawat 2', 'petugas 2', 'dokter 2', 'permintaan sendiri', 'Meninggal', '2017-04-22', '00:09:00', '2017-04-22', '00:09:00', 'dd', 'dd', 'dd', 'dd', 'Kecil', '2017-04-22', 'dd', 'dd', 'CAMPAK', 'dd', 'dd', 'dd', 'Ya', '2017-04-21 17:10:24', '2017-04-21 17:10:24'),
-(30, 5, 'dd', 'perawat 2', 'petugas 1', 'dokter 2', 'Diizinkan', 'Sembuh', NULL, NULL, '2017-04-22', '00:11:00', 'dd', 'dd', 'dd', 'dd', 'Kecil', '2017-04-22', 'dd', 'dd', 'DT', 'dd', 'dd', 'dd', 'Tidak', '2017-04-21 17:12:50', '2017-04-21 17:12:50'),
-(31, 5, 'dsdasd', 'perawat 1', 'petugas 1', 'dokter 2', 'permintaan sendiri', 'Belum Sembuh', NULL, NULL, '2017-04-22', '00:14:00', 'gg', 'gg', 'fff', 'gg', 'Kecil', '2017-04-22', 'fg', 'g', 'BCG', 'gg', 'gg', 'gg', 'Ya', '2017-04-21 17:14:50', '2017-04-21 17:14:50'),
-(32, 5, 'kebakaban', 'perawat 1', 'petugas 1', 'dokter 1', 'Diizinkan', 'Sembuh', NULL, NULL, '2017-04-29', '14:44:00', 'dd', 'dd', 'dd', 'dd', 'Kecil', '2017-04-29', 'dd', 'dd', 'DPT', 'dd', 'dd', 'dd', 'Ya', '2017-04-29 07:45:03', '2017-04-29 07:45:03');
 
 -- --------------------------------------------------------
 
@@ -7504,93 +7409,28 @@ CREATE TABLE `pelayanan_rawatjalan` (
   `diagnosa` varchar(30) DEFAULT NULL,
   `tindakan` varchar(30) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pelayanan_rawatjalan`
 --
 
-INSERT INTO `pelayanan_rawatjalan` (`id`, `id_RJ`, `anamnesa`, `riwayatAlergi`, `tensi`, `rr`, `nadi`, `bb`, `tb`, `suhu`, `diagnosa`, `tindakan`, `created_at`, `updated_at`) VALUES
-(1, 7, 'asas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'asd', '2017-04-10 14:18:04', '2017-04-04 08:25:15'),
-(2, 7, 'asas', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'asd', '2017-04-10 14:04:01', '2017-04-10 14:04:01'),
-(3, 7, 'daasd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'asd', '2017-04-10 14:18:58', '2017-04-10 14:18:58'),
-(4, 9, 'dddd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'asd', '2017-04-10 14:18:49', '2017-04-10 14:18:49'),
-(5, 8, 'asd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ads', 'ads', '2017-04-10 14:18:35', '2017-04-10 14:18:35'),
-(6, 10, 'oke', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'okasd', 'oksad', '2017-04-10 14:17:15', '2017-04-10 14:17:15'),
-(7, 8, 'gk', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'berak berak', '1200', '2017-04-11 07:01:35', '2017-04-11 07:01:35'),
-(8, 8, 'as', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'as', 'as', '2017-04-12 10:07:27', '2017-04-12 10:07:27'),
-(9, 10, 'oke', 'oke', '1', '2', '3', '4', '5', '6', 'hajarr', 'kocak', '2017-04-15 03:56:11', '2017-04-15 03:56:11'),
-(10, 10, 'oke', 'oke', '1', '2', '3', '4', '5', '6', 'hajarr', 'kocak', '2017-04-15 03:56:38', '2017-04-15 03:56:38'),
-(11, 8, 'asd', 'asd', '12', '123', '123', '321', '3', '123', 'asd', 'asd', '2017-04-15 03:59:13', '2017-04-15 03:59:13'),
-(12, 8, 'asd', 'asd', '12', '123', '123', '321', '3', '123', 'asd', 'asd', '2017-04-15 04:00:02', '2017-04-15 04:00:02'),
-(13, 10, 'hh', 'hhh', '1', '2', '3', '4', '4', '4', 'sdasd', 'gssd', '2017-04-15 04:01:09', '2017-04-15 04:01:09'),
-(14, 7, 'gfasd', 'ads', '123', '3', '3', '3', '3', '3', 'asda', 'ffff', '2017-04-15 04:16:45', '2017-04-15 04:16:45'),
-(15, 10, 'asd', 'asdsad', '123', '123', '123', '123', '123', '123', 'adsasd', 'asdasd', '2017-04-15 04:17:59', '2017-04-15 04:17:59'),
-(16, 8, 'asdads', 'asdasd', '12', '3', '3', '123', '23', '12', 'ads', 'asd', '2017-04-15 04:19:27', '2017-04-15 04:19:27'),
-(17, 10, 'asda', 'asdasd', '123', '123', '123', '123', '123', '123', 'asd', 'asd', '2017-04-15 04:20:17', '2017-04-15 04:20:17'),
-(18, 10, 'asda', 'asdasd', '123', '123', '123', '123', '123', '123', 'asd', 'asd', '2017-04-15 04:20:24', '2017-04-15 04:20:24'),
-(19, 10, 'ads', 'asd', '123', '213', '123', '213', '123', '213', 'asdasd', 'asdasd', '2017-04-15 04:57:45', '2017-04-15 04:57:45'),
-(20, 10, 'asdads', 'asdasd', '12', '123', '123', '2', '2', '123', 'asdasd', 'asdsd', '2017-04-15 05:10:46', '2017-04-15 05:10:46'),
-(21, 10, 'asdads', 'asd', NULL, NULL, NULL, NULL, NULL, NULL, 'asd', 'asd', '2017-04-15 05:12:22', '2017-04-15 05:12:22'),
-(22, 10, 'asdads', 'asd', NULL, NULL, NULL, NULL, NULL, NULL, 'asd', 'asd', '2017-04-15 05:15:08', '2017-04-15 05:15:08'),
-(23, 10, 'asd', 'adsasd', '1', '2', '3', '5', '4', '4', 'asd', 'dasd', '2017-04-15 06:02:09', '2017-04-15 06:02:09'),
-(24, 7, 'ddd', 'dddd', '1', '2', '3', '2', '3', '4', 'mencret', 'buruburu', '2017-04-19 15:19:59', '2017-04-19 15:19:59'),
-(25, 7, 'ddd', 'dddd', '1', '2', '3', '2', '3', '4', 'mencret', 'buruburu', '2017-04-19 15:24:13', '2017-04-19 15:24:13'),
-(26, 7, 'ddd', 'dddd', '1', '2', '3', '2', '3', '4', 'mencret', 'buruburu', '2017-04-19 15:24:20', '2017-04-19 15:24:20'),
-(27, 7, 'ss', 'dd', '1', '2', '3', '6', '5', '4', 'mencret', 'buruburu', '2017-04-19 15:24:50', '2017-04-19 15:24:50'),
-(28, 7, 'dd', 'ss', '1', '2', '3', '6', '5', '4', 'mencret', 'buruburu', '2017-04-19 15:27:25', '2017-04-19 15:27:25'),
-(29, 7, 'ea', 'ee', '1', '2', '3', '6', '5', '4', 'mencret', 'buruburu', '2017-04-19 15:41:20', '2017-04-19 15:41:20'),
-(30, 8, 'ss', 'ss', '1', '2', '3', '1', '1', '1', 'dd', 'dd', '2017-04-19 16:00:33', '2017-04-19 16:00:33'),
-(31, 10, 'sss', 'aa', '1', '1', '1', '1', '1', '1', 'mencret', 'buruburu', '2017-04-19 16:01:36', '2017-04-19 16:01:36'),
-(32, 10, 'ddddd', 'dd', '1', '1', '123', '1', '1', '1', 'ss', 'ss', '2017-04-19 16:03:18', '2017-04-19 16:03:18'),
-(33, 7, 'ss', 'dd', '1', '1', '1', '2', '1', '1', 'dd', 'ss', '2017-04-19 17:05:21', '2017-04-19 17:05:21'),
-(34, 8, 'okok', 'lol', '1', '1', '2', '5', '4', '3', 'ss', 'ss', '2017-04-19 17:08:08', '2017-04-19 17:08:08'),
-(35, 8, 'okok', 'lol', '1', '1', '2', '5', '4', '3', 'ss', 'ss', '2017-04-19 17:09:02', '2017-04-19 17:09:02'),
-(36, 10, 'ss', 'ss', '1', '2', '3', '4', '4', '4', 'sakit perut', 'buru', '2017-04-20 03:36:41', '2017-04-20 03:36:41'),
-(37, 10, 'ss', 'ss', '1', '2', '3', '4', '4', '4', 'sakit perut', 'buru', '2017-04-20 03:36:49', '2017-04-20 03:36:49'),
-(38, 8, 'sss', 'ss', '1', '2', '3', '5', '5', '4', 'dd', 'dd', '2017-04-20 03:37:10', '2017-04-20 03:37:10'),
-(39, 8, 'sss', 'ss', '1', '2', '3', '5', '5', '4', 'dd', 'dd', '2017-04-20 03:37:14', '2017-04-20 03:37:14'),
-(40, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:22:32', '2017-04-20 09:22:32'),
-(41, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:22:52', '2017-04-20 09:22:52'),
-(42, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:30:38', '2017-04-20 09:30:38'),
-(43, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:30:47', '2017-04-20 09:30:47'),
-(44, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:30:58', '2017-04-20 09:30:58'),
-(45, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:31:10', '2017-04-20 09:31:10'),
-(46, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:32:15', '2017-04-20 09:32:15'),
-(47, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:32:24', '2017-04-20 09:32:24'),
-(48, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:32:28', '2017-04-20 09:32:28'),
-(49, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:32:50', '2017-04-20 09:32:50'),
-(50, 10, 'oke', 'dsksk', '1', '1', '1', '1', '2', '2', 'dd', 'dd', '2017-04-20 09:33:01', '2017-04-20 09:33:01'),
-(51, 10, 'ddddd', 'dd', '2', '2', '2', '2', '2', '2', 'vvv', 'vv', '2017-04-20 09:43:43', '2017-04-20 09:43:43'),
-(52, 10, 'oke', 'kakaka', '1', '2', '1', '1', '2', '1', 'yellow claw,shotgun,masmello', 'suntik,bius,rancunin', '2017-04-21 13:49:29', '2017-04-21 13:49:29'),
-(53, 8, 'ss', 'sss', '1', '2', '2', '3', '3', '3', 'panas,dingin,hehe', 'wkkwkw,mantap,jiwa', '2017-04-29 07:43:40', '2017-04-29 07:43:40');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `permissions`
---
-
-CREATE TABLE `permissions` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `permission_role`
---
-
-CREATE TABLE `permission_role` (
-  `permission_id` int(10) UNSIGNED NOT NULL,
-  `role_id` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `pelayanan_rawatjalan` (`id`, `id_RJ`, `anamnesa`, `riwayatAlergi`, `tensi`, `rr`, `nadi`, `bb`, `tb`, `suhu`, `diagnosa`, `tindakan`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'sakit hati bang', 'gk ada', '10', '10', '10', '10', '10', '10', 'oke,mantap', 'jiwa,raga', '2017-05-18 05:21:35', '2017-05-18 05:21:35', NULL),
+(2, 1, 'suka suka', 'oke', '1', '1', '1', '1', '11', '1', 'oke,eok', 'dkd', '2017-05-18 12:31:43', '2017-05-18 12:31:43', NULL),
+(3, 1, 'suka suka', 'oke', '1', '1', '1', '1', '11', '1', 'oke,eok', 'dkd', '2017-05-18 12:35:08', '2017-05-18 12:35:08', NULL),
+(4, 1, 'ss', 'ss', '1', '1', '123', '1', '1', '1', 'oke,pkoe,kdkd', 'ddd,dd,d', '2017-05-18 12:40:38', '2017-05-18 12:40:38', NULL),
+(5, 1, 'ss', 'ss', '1', '1', '123', '1', '1', '1', 'oke,pkoe,kdkd', 'ddd,dd,d', '2017-05-18 13:41:59', '2017-05-18 13:41:59', NULL),
+(6, 1, 'mama', 'copo', '13', '1', '13', '13', '1', '13', 'sdsdsd,sdaasd,ffffff', 'dssd,sdsd,fffd', '2017-05-24 05:44:13', '2017-05-24 05:43:28', NULL),
+(7, 1, 'sdsd', 'sdsd', '1', '2', '3', '6', '5', '4', 'sdsd', 'asd', '2017-05-18 17:05:37', '2017-05-18 17:05:37', NULL),
+(8, 1, 'hehe', 'kwkw', '1', '1', '1', '1', '1', '1', 'ss', 'sss', '2017-05-24 06:34:07', '2017-05-24 06:09:44', NULL),
+(9, 2, 'mas luqman ganteng', 'gitu coeg sekali', '12', '21', '21', '122', '42', '11', 'dkdkkd,dkfkf,fkkfkf,fkfk', 'kfkfk,fkfkfkkfkf,fkfkkfkf,fkfk', '2017-05-24 06:34:12', '2017-05-24 06:09:41', NULL),
+(10, 2, 'sakit perut', '-', '12', '12', '12', '31', '32', '44', 'ddjjd,djdjdjd,fjfjf,fjfjfj,djd', 'djdjjf,fjfjfjjf,fjfjfjjfj,maka', '2017-05-24 06:41:46', '2017-05-24 06:41:08', NULL),
+(11, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-05-27 03:37:27', '2017-05-27 03:37:27', NULL),
+(12, 5, 'hehe', 'mantap', '11', '21', '200', '120', '100', '122', 'hehe,kekke,akka', 'djdjf,sdjjfjf,asdjdj', '2017-05-27 04:16:03', '2017-05-27 04:16:03', NULL),
+(14, 7, 'sakit jiwa', 'mantap jiwa', '10', '10', '10', '21', '21', '32', 'ddssd,sdsd,dfdf,df,fdfdf,dfkf', 'sdsdf,sdfsdf,sdfdsf,dfdf', '2017-06-03 05:39:53', '2017-06-03 05:39:53', NULL);
 
 -- --------------------------------------------------------
 
@@ -7600,7 +7440,7 @@ CREATE TABLE `permission_role` (
 
 CREATE TABLE `provinces` (
   `id` char(2) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -7658,27 +7498,17 @@ CREATE TABLE `rawat_igd` (
   `pengantar` varchar(30) NOT NULL,
   `alamatPengantar` varchar(50) NOT NULL,
   `rujukan` varchar(50) DEFAULT NULL,
-  `caraDatang` varchar(11) NOT NULL,
-  `caraBayar` varchar(11) NOT NULL,
-  `kendaraan` varchar(50) NOT NULL,
+  `caraDatang` enum('Sendiri','Rujukan') NOT NULL,
+  `caraBayar` enum('BPJS','UMUM') NOT NULL,
+  `kendaraan` enum('Motor','Mobil') NOT NULL,
   `penyebab` varchar(30) NOT NULL,
   `tempatKejadian` varchar(30) NOT NULL,
-  `dokterJaga` varchar(30) NOT NULL,
-  `perawat` varchar(30) NOT NULL,
+  `dokterJaga` int(10) UNSIGNED NOT NULL,
+  `perawat` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rawat_igd`
---
-
-INSERT INTO `rawat_igd` (`id`, `id_pasien`, `tanggal_masuk`, `jam_masuk`, `alasan`, `pengantar`, `alamatPengantar`, `rujukan`, `caraDatang`, `caraBayar`, `kendaraan`, `penyebab`, `tempatKejadian`, `dokterJaga`, `perawat`, `created_at`, `updated_at`) VALUES
-(1, 1, '2017-03-14', '21:33:00', 'sakit', 'agus', 'jambi', 'sarjito', '', '', 'Motor', 'gk tau', 'mboh', 'Dokter Jaga IGD 1', 'Perawat IGD 1', '2017-04-03 13:54:20', '2017-03-31 14:38:08'),
-(2, 2, '2017-03-08', '21:38:00', 'sakit', 'bram', 'hak', 'sarjito', '', '', 'Motor', 'faq', 'malioboro', 'Dokter Jaga IGD 1', 'Perawat IGD 1', '2017-04-03 13:54:24', '2017-03-31 14:39:05'),
-(3, 3, '2017-04-02', '15:31:00', 'gaa', 'as', 'ds', NULL, 'Sendiri', 'BPJS', 'Motor', 'as', 'da', 'Dokter Jaga IGD 1', 'Perawat IGD 1', '2017-04-03 13:54:27', '2017-04-02 08:32:07'),
-(4, 1, '2017-04-03', '22:03:00', 'gk tau', 'pea', 'makan', NULL, 'Sendiri', 'BPJS', 'Motor', 'asd', 'asd', 'Dokter Jaga IGD 2', 'Perawat IGD 2', '2017-04-03 15:03:34', '2017-04-03 15:03:34'),
-(5, 3, '2017-04-03', '22:03:00', 'asd', 'asd', 'ads', 'adsads', 'Rujukan', 'UMUM', 'Motor', 'asd', 'asd', 'Dokter Jaga IGD 1', 'Perawat IGD 1', '2017-04-03 15:04:15', '2017-04-03 15:04:15');
 
 -- --------------------------------------------------------
 
@@ -7692,26 +7522,16 @@ CREATE TABLE `rawat_inap` (
   `tanggal_masuk` date NOT NULL,
   `jam_masuk` time NOT NULL,
   `rujukan` varchar(30) DEFAULT NULL,
-  `caraDatang` varchar(11) NOT NULL,
-  `caraBayar` varchar(11) NOT NULL,
-  `caraMasuk` varchar(11) NOT NULL,
-  `bangsal` varchar(50) NOT NULL,
-  `kelas` varchar(50) NOT NULL,
-  `kamar` varchar(50) NOT NULL,
+  `caraDatang` enum('Sendiri','Rujukan') NOT NULL,
+  `caraBayar` enum('BPJS','UMUM') NOT NULL,
+  `caraMasuk` enum('IGD','Rawat Jalan') NOT NULL,
+  `bangsal` varchar(30) NOT NULL,
+  `kelas` varchar(30) NOT NULL,
+  `kamar` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rawat_inap`
---
-
-INSERT INTO `rawat_inap` (`id`, `id_pasien`, `tanggal_masuk`, `jam_masuk`, `rujukan`, `caraDatang`, `caraBayar`, `caraMasuk`, `bangsal`, `kelas`, `kamar`, `created_at`, `updated_at`) VALUES
-(1, 1, '2017-03-14', '19:39:00', 'sarjito', '', '', 'IGD', '2', '10', '11', '2017-04-03 13:54:36', '2017-03-31 12:46:34'),
-(2, 2, '2017-03-15', '19:46:00', 'sarjito', '', '', 'IGD', '2', '11', '12', '2017-04-03 13:54:39', '2017-03-31 12:48:24'),
-(4, 4, '2017-04-02', '15:30:00', NULL, 'Sendiri', 'BPJS', 'IGD', 'bangsal 2', 'Ruang Kelas II', '15', '2017-04-03 13:54:44', '2017-04-02 08:31:17'),
-(5, 2, '2017-04-03', '22:06:00', NULL, 'Sendiri', 'BPJS', 'IGD', 'bangsal 1', 'Ruang Kelas I', '2', '2017-04-03 15:07:15', '2017-04-03 15:07:15'),
-(6, 4, '2017-04-03', '22:07:00', 'assad', 'Rujukan', 'BPJS', 'IGD', 'bangsal 2', 'Ruang Kelas II', '16', '2017-04-03 15:07:52', '2017-04-03 15:07:52');
 
 -- --------------------------------------------------------
 
@@ -7723,29 +7543,15 @@ CREATE TABLE `rawat_jalan` (
   `id` int(11) NOT NULL,
   `id_pasien` int(11) NOT NULL,
   `tglKunjungan` date NOT NULL,
-  `caraDatang` varchar(11) NOT NULL,
+  `caraDatang` enum('Sendiri','Rujukan') NOT NULL,
   `rujukan` varchar(11) DEFAULT NULL,
-  `caraBayar` varchar(11) NOT NULL,
-  `klinikTujuan` varchar(100) NOT NULL,
-  `DokterPJ` varchar(30) NOT NULL,
+  `caraBayar` enum('BPJS','UMUM') NOT NULL,
+  `klinikTujuan` enum('Umum','Digestive','Throraks','Orthopedi','Urologi','Bedah Plastik dan Estetik') NOT NULL,
+  `DokterPJ` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rawat_jalan`
---
-
-INSERT INTO `rawat_jalan` (`id`, `id_pasien`, `tglKunjungan`, `caraDatang`, `rujukan`, `caraBayar`, `klinikTujuan`, `DokterPJ`, `created_at`, `updated_at`) VALUES
-(1, 1, '2017-03-15', '', '', '', 'Bedah Tulang dan Sendi (Orthopedi)', 'Agus Riantos', '2017-04-03 13:54:49', '2017-03-27 08:37:18'),
-(2, 2, '2017-03-22', '', '', '', 'Bedah Plastik dan Estetik', 'Agus Riantos', '2017-04-03 13:54:52', '2017-03-27 08:49:15'),
-(4, 4, '2017-04-02', 'Sendiri', NULL, 'BPJS', 'Bedah Umum', 'Agus Riantos', '2017-04-03 13:55:00', '2017-04-02 08:30:13'),
-(5, 1, '2017-04-02', 'Rujukan', 'yee', 'UMUM', 'Bedah Umum', 'Agus Riantos', '2017-04-03 13:55:35', '2017-04-02 08:30:38'),
-(6, 1, '2017-04-03', 'Sendiri', NULL, 'BPJS', 'Bedah Umum', 'Agus Riantos', '2017-04-03 14:55:08', '2017-04-03 14:55:08'),
-(7, 4, '2017-04-03', 'Rujukan', NULL, 'BPJS', 'Bedah Umum', 'Agus Riantos', '2017-04-03 14:55:37', '2017-04-03 14:55:37'),
-(8, 2, '2017-04-03', 'Rujukan', 'mantap', 'BPJS', 'Bedah Tulang dan Sendi (Orthopedi)', 'maya', '2017-04-03 14:56:48', '2017-04-03 14:56:48'),
-(9, 1, '2017-04-04', 'Sendiri', NULL, 'BPJS', 'Bedah Umum', 'Agus Riantos', '2017-04-04 08:11:08', '2017-04-04 08:11:08'),
-(10, 1, '2017-04-06', 'Sendiri', NULL, 'BPJS', 'Bedah Umum', 'Agus Riantos', '2017-04-06 05:56:43', '2017-04-06 05:56:43');
 
 -- --------------------------------------------------------
 
@@ -7756,7 +7562,7 @@ INSERT INTO `rawat_jalan` (`id`, `id_pasien`, `tglKunjungan`, `caraDatang`, `ruj
 CREATE TABLE `regencies` (
   `id` char(4) COLLATE utf8_unicode_ci NOT NULL,
   `province_id` char(2) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -7869,11 +7675,11 @@ INSERT INTO `regencies` (`id`, `province_id`, `name`) VALUES
 ('1605', '16', 'KABUPATEN MUSI RAWAS'),
 ('1606', '16', 'KABUPATEN MUSI BANYUASIN'),
 ('1607', '16', 'KABUPATEN BANYU ASIN'),
-('1608', '16', 'KABUPATEN OGAN KOMERING ULU SELATAN'),
-('1609', '16', 'KABUPATEN OGAN KOMERING ULU TIMUR'),
+('1608', '16', 'KABUPATEN OGAN KOMERING ULU SE'),
+('1609', '16', 'KABUPATEN OGAN KOMERING ULU TI'),
 ('1610', '16', 'KABUPATEN OGAN ILIR'),
 ('1611', '16', 'KABUPATEN EMPAT LAWANG'),
-('1612', '16', 'KABUPATEN PENUKAL ABAB LEMATANG ILIR'),
+('1612', '16', 'KABUPATEN PENUKAL ABAB LEMATAN'),
 ('1613', '16', 'KABUPATEN MUSI RAWAS UTARA'),
 ('1671', '16', 'KOTA PALEMBANG'),
 ('1672', '16', 'KOTA PRABUMULIH'),
@@ -8140,11 +7946,11 @@ INSERT INTO `regencies` (`id`, `province_id`, `name`) VALUES
 ('7104', '71', 'KABUPATEN KEPULAUAN TALAUD'),
 ('7105', '71', 'KABUPATEN MINAHASA SELATAN'),
 ('7106', '71', 'KABUPATEN MINAHASA UTARA'),
-('7107', '71', 'KABUPATEN BOLAANG MONGONDOW UTARA'),
-('7108', '71', 'KABUPATEN SIAU TAGULANDANG BIARO'),
+('7107', '71', 'KABUPATEN BOLAANG MONGONDOW UT'),
+('7108', '71', 'KABUPATEN SIAU TAGULANDANG BIA'),
 ('7109', '71', 'KABUPATEN MINAHASA TENGGARA'),
-('7110', '71', 'KABUPATEN BOLAANG MONGONDOW SELATAN'),
-('7111', '71', 'KABUPATEN BOLAANG MONGONDOW TIMUR'),
+('7110', '71', 'KABUPATEN BOLAANG MONGONDOW SE'),
+('7111', '71', 'KABUPATEN BOLAANG MONGONDOW TI'),
 ('7171', '71', 'KOTA MANADO'),
 ('7172', '71', 'KOTA BITUNG'),
 ('7173', '71', 'KOTA TOMOHON'),
@@ -8170,7 +7976,7 @@ INSERT INTO `regencies` (`id`, `province_id`, `name`) VALUES
 ('7306', '73', 'KABUPATEN GOWA'),
 ('7307', '73', 'KABUPATEN SINJAI'),
 ('7308', '73', 'KABUPATEN MAROS'),
-('7309', '73', 'KABUPATEN PANGKAJENE DAN KEPULAUAN'),
+('7309', '73', 'KABUPATEN PANGKAJENE DAN KEPUL'),
 ('7310', '73', 'KABUPATEN BARRU'),
 ('7311', '73', 'KABUPATEN BONE'),
 ('7312', '73', 'KABUPATEN SOPPENG'),
@@ -8215,7 +8021,7 @@ INSERT INTO `regencies` (`id`, `province_id`, `name`) VALUES
 ('7604', '76', 'KABUPATEN MAMUJU'),
 ('7605', '76', 'KABUPATEN MAMUJU UTARA'),
 ('7606', '76', 'KABUPATEN MAMUJU TENGAH'),
-('8101', '81', 'KABUPATEN MALUKU TENGGARA BARAT'),
+('8101', '81', 'KABUPATEN MALUKU TENGGARA BARA'),
 ('8102', '81', 'KABUPATEN MALUKU TENGGARA'),
 ('8103', '81', 'KABUPATEN MALUKU TENGAH'),
 ('8104', '81', 'KABUPATEN BURU'),
@@ -8287,9 +8093,9 @@ INSERT INTO `regencies` (`id`, `province_id`, `name`) VALUES
 
 CREATE TABLE `roles` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display_name` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -8301,10 +8107,12 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'admin', 'IT Support', 'IT Support', NULL, NULL),
 (2, 'rekmed', 'Petugas Rekam Medis', 'Bagian Rekam Medis', NULL, NULL),
-(3, 'perawat', 'Perawat', 'Perawat', NULL, NULL),
+(3, 'perawat IRNA', 'Perawat IRNA', 'Perawat Rawat Inap', NULL, NULL),
 (4, 'farmasi', 'Petugas Farmasi', 'Bagian Farmasi', NULL, NULL),
 (5, 'kasir', 'Petugas Kasir', 'Bagian Kasir', NULL, NULL),
-(6, 'dokter', 'Dokter', 'dokter', NULL, NULL);
+(6, 'dokter', 'Dokter', 'dokter', NULL, NULL),
+(7, 'Perawat UGD', 'Perawat UGD', 'Perawat Unit Gadat Darurat', NULL, NULL),
+(8, 'Perawat Poliklinik', 'Perawat Poliklinik', 'Perawat Poliklinik', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -8326,7 +8134,12 @@ INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
 (6, 6),
 (7, 6),
 (8, 1),
-(9, 5);
+(9, 5),
+(10, 3),
+(11, 2),
+(12, 7),
+(13, 8),
+(14, 2);
 
 -- --------------------------------------------------------
 
@@ -8337,7 +8150,7 @@ INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
 CREATE TABLE `tbl_icd9` (
   `id` int(11) NOT NULL,
   `kode` varchar(30) DEFAULT NULL,
-  `nama` varchar(70) DEFAULT NULL,
+  `nama` varchar(30) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -8402,7 +8215,7 @@ CREATE TABLE `tbl_icd10nama` (
   `id` int(11) NOT NULL,
   `id_tblicd10` int(11) NOT NULL,
   `sub_kode` int(11) NOT NULL,
-  `nama` varchar(100) DEFAULT NULL,
+  `nama` varchar(30) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -8426,7 +8239,7 @@ INSERT INTO `tbl_icd10nama` (`id`, `id_tblicd10`, `sub_kode`, `nama`, `created_a
 (12, 12, 1, 'Demam paratifoid A', '2017-04-29 04:56:32', '2017-04-29 04:56:32'),
 (13, 12, 2, 'Demam paratifoid B', '2017-04-29 04:56:32', '2017-04-29 04:56:32'),
 (14, 12, 3, 'Demam paratifoid C', '2017-04-29 04:56:32', '2017-04-29 04:56:32'),
-(15, 12, 4, 'Demam paratifoid, tidak terspesifikasi', '2017-04-29 04:57:39', '2017-04-29 04:56:32');
+(15, 12, 4, 'Demam paratifoid, tidak terspe', '2017-04-29 04:57:39', '2017-04-29 04:56:32');
 
 -- --------------------------------------------------------
 
@@ -8436,11 +8249,13 @@ INSERT INTO `tbl_icd10nama` (`id`, `id_tblicd10`, `sub_kode`, `nama`, `created_a
 
 CREATE TABLE `tindakan` (
   `id` int(11) NOT NULL,
-  `id_pelayanan` int(11) NOT NULL,
-  `jenis_pelayanan` varchar(11) NOT NULL,
-  `kode` varchar(11) DEFAULT NULL,
+  `id_pelayananigd` int(11) DEFAULT NULL,
+  `id_pelayananinap` int(11) DEFAULT NULL,
+  `id_pelayananjalan` int(11) DEFAULT NULL,
+  `kode` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -8452,26 +8267,32 @@ CREATE TABLE `tindakan` (
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `noHp` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `name`, `email`, `foto`, `noHp`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(5, 'luqman', 'luqmanul hakim', 'n.loekman@gmail.com', '1494248324.jpg', '0895063541', '$2y$10$wuTCsQA034B6kOitRj5qQufIMdse7RnMOsrPM7TZNvuEs6L1jlrMO', 'LYbra4ApWVpLlelH09Rb4ic608jnNk8x777gmIPxHdUyAodiorgZOSgFJ5OZ', '2017-03-02 21:08:41', '2017-05-08 12:58:45'),
-(6, 'agus', 'Agus Riantos', 'agus@pea.comsss', '1489917612.png', '0', '$2y$10$wuTCsQA034B6kOitRj5qQufIMdse7RnMOsrPM7TZNvuEs6L1jlrMO', 'NlxCOZDqcc9InbQRGQBRTcMSjLG8aJlVkaXVZVXD7wvddoYbf4DULQC5GPos', NULL, '2017-03-19 03:00:12'),
-(7, 'maya', 'maya', 'maya@maya.com', '1489917612.png', '0', '$2y$10$wuTCsQA034B6kOitRj5qQufIMdse7RnMOsrPM7TZNvuEs6L1jlrMO', 'RZcKHTRjDiGCb5VWcEoqXtzagYAnQBUk78LUyOwbgOHOsQNKuIuk04JDnXLZ', NULL, NULL),
-(8, 'ma', 'oxford', 'mas@mas.com', 'avatar2.png', '89', '$2y$10$q/Z86XCiRHI3ICorvV.IY.c8xpvnagEWsd0x7GAhr1e5ipMRSBIW2', 'P6aqIVSxV9dqrGOqeNt7ReVivPEQcsVlNYwf6pUGsqH4YoJcI9BqmewV46Se', '2017-04-06 00:15:01', '2017-04-06 00:15:01'),
-(9, 'yahya', 'yahya S', 'yahyah@yahya.com', 'avatar2.png', '+6289636607271', '$2y$10$RhcjdQrQktR4frpIBsTIPebLxf9q1bKKFxesWI4e26v8R6fWn3gcS', 'Lvr1sZRbvEC0sPkIPjlYz1iW7JwEyfLFAN7p7CIW6YJTKBimSPrzqkIu6YgN', '2017-04-25 03:58:14', '2017-04-25 04:30:49');
+INSERT INTO `users` (`id`, `username`, `name`, `email`, `foto`, `noHp`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 'luqman', 'luqmanul hakim', 'n.loekman@gmail.com', '1494248324.jpg', '0895063541', '$2y$10$W6ZMOOzPzHWxOeY/59fF1uCNKLJuoMwBucxsU6urFVWM35tenGtLm', 'kEUapI1F9WIE5RKezb1M3hDJzblCT1HotuSF94K7VUWX9ww4FIMkyjd5BeRr', '2017-03-02 21:08:41', '2017-06-03 02:47:34', NULL),
+(6, 'agus', 'Agus Riantos', 'agus@pea.comsss', '1495530465.jpg', '0', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'RVUgS0f4JLJQl6AdjhmL1nJ8ogTyTY9WM4BchMMnsezWlg1a33gnXR0k2bdp', NULL, '2017-05-23 09:07:47', NULL),
+(7, 'maya', 'maya', 'maya@maya.com', '1489917612.png', '0', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'RZcKHTRjDiGCb5VWcEoqXtzagYAnQBUk78LUyOwbgOHOsQNKuI', NULL, NULL, NULL),
+(8, 'ma', 'oxford', 'mas@mas.com', 'avatar2.png', '89', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'P6aqIVSxV9dqrGOqeNt7ReVivPEQcsVlNYwf6pUGsqH4YoJcI9', '2017-04-06 00:15:01', '2017-04-06 00:15:01', NULL),
+(9, 'yahya', 'yahya S', 'yahyah@yahya.com', 'avatar2.png', '+6289636607271', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'Lvr1sZRbvEC0sPkIPjlYz1iW7JwEyfLFAN7p7CIW6YJTKBimSP', '2017-04-25 03:58:14', '2017-04-25 04:30:49', NULL),
+(10, 'Purwandari', 'Sri Purwandari', 'SriPurwandari@gmail.com', 'avatar2.png', '08', '$2y$10$4LPuAXFLpPNLjNJ8xUEAJe7j6q9vOdEWvI9U694xQGhZsIWdog.6y', NULL, '2017-05-18 05:04:11', '2017-05-22 08:36:26', NULL),
+(11, 'Risa', 'Risa Mario Fitrada, Amd.Kom', 'risa@gmail.com', 'avatar2.png', '08', '$2y$10$1T.QseWMlM7z7uZJZH1EY.pHRKIH3gBoOaefE7wgfz5Wkr22zVGZ2', NULL, '2017-05-18 05:04:52', '2017-05-22 08:33:16', NULL),
+(12, 'monika', 'Monika Citra Sari, AMK', 'monika@gmail.com', 'avatar2.png', '08', '$2y$10$yU8THMOnobBmrvOWaP8SkOiK7OQubvkuu4/aI9NhOYC9juxRwaJ4q', NULL, '2017-05-18 05:05:24', '2017-05-22 08:33:47', NULL),
+(13, 'deni', 'Deni Kusumastuti, S Kep, Ners', 'deni@gmail.com', 'avatar2.png', '08', '$2y$10$oZ7khOHNhg4LiN965hfA0.mUH3E8iv11DNa4HyCoivZ7WMD7NDRjC', NULL, '2017-05-18 05:05:49', '2017-05-22 08:38:38', NULL),
+(14, 'pea', 'peapea', 'nss@gmail.com', 'avatar2.png', '29222', '$2y$10$VlJcN6c7T0MmAvv1PDrdguibLgsAkWCagRgkk0TNRIC5teeyg712C', NULL, '2017-05-22 07:58:40', '2017-06-03 06:03:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -8482,7 +8303,7 @@ INSERT INTO `users` (`id`, `username`, `name`, `email`, `foto`, `noHp`, `passwor
 CREATE TABLE `villages` (
   `id` char(10) COLLATE utf8_unicode_ci NOT NULL,
   `district_id` char(7) COLLATE utf8_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -21271,7 +21092,7 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1302070006', '1302070', 'RAWANG GUNUNG MALELO SURANTIH'),
 ('1302070007', '1302070', 'KOTO NAN TIGO SELATAN SURANTIH'),
 ('1302070008', '1302070', 'KOTO NAN TIGO UTARA SURANTIH'),
-('1302070009', '1302070', 'GANTIANG MUDIAK SELATAN SURANTIH'),
+('1302070009', '1302070', 'GANTIANG MUDIAK SELATAN SURANT'),
 ('1302070010', '1302070', 'GANTIANG MUDIAK UTARA SURANTIH'),
 ('1302070011', '1302070', 'LANSANO TARATAK'),
 ('1302070012', '1302070', 'KOTO TARATAK'),
@@ -21282,7 +21103,7 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1302080005', '1302080', 'KOTO NAN DUO IV KOTO HILIE'),
 ('1302080006', '1302080', 'SUNGAI NYALO IV KOTO MUDIEK'),
 ('1302080007', '1302080', 'TUIK IV KOTO MUDIEK'),
-('1302080008', '1302080', 'TARATAK TEMPATIH IV KOTO MUDIEK'),
+('1302080008', '1302080', 'TARATAK TEMPATIH IV KOTO MUDIE'),
 ('1302080009', '1302080', 'TALUK TIGO SAKATO'),
 ('1302090001', '1302090', 'SALIDO'),
 ('1302090002', '1302090', 'PAINAN'),
@@ -21339,7 +21160,7 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1302110010', '1302110', 'KAPUH UTARA'),
 ('1302110011', '1302110', 'MANDEH'),
 ('1302110012', '1302110', 'BARUNG BARUNG BALANTAI SELATAN'),
-('1302110013', '1302110', 'JINANG KAMPUNG PANSUR AMPANG PULAI'),
+('1302110013', '1302110', 'JINANG KAMPUNG PANSUR AMPANG P'),
 ('1302110014', '1302110', 'PULAU KARAM AMPANG PULAI'),
 ('1302110015', '1302110', 'CEROCOK ANAU AMPANG PULAI'),
 ('1302110016', '1302110', 'SUNGAI NYALO MUDIAK AIE'),
@@ -21720,7 +21541,7 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1308020001', '1308020', 'MUNGO'),
 ('1308020002', '1308020', 'ANDALEH'),
 ('1308020003', '1308020', 'SUNGAI KAMUYANG'),
-('1308020004', '1308020', 'TANJUANG ARO SIKABU-KABU PD. PANJANG'),
+('1308020004', '1308020', 'TANJUANG ARO SIKABU-KABU PD. P'),
 ('1308021001', '1308021', 'HALABAN'),
 ('1308021002', '1308021', 'AMPALU'),
 ('1308021003', '1308021', 'TANJUANG GADANG'),
@@ -21803,8 +21624,8 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1309110002', '1309110', 'PANTI SELATAN'),
 ('1309110003', '1309110', 'PANTI TIMUR'),
 ('1309111001', '1309111', 'PADANG GALUGUA'),
-('1309111002', '1309111', 'PERSIAPAN BAHAGIA PADANG GALUGUA'),
-('1309111003', '1309111', 'PERSIAPAN SITOMBOL PADANG GALUGUA'),
+('1309111002', '1309111', 'PERSIAPAN BAHAGIA PADANG GALUG'),
+('1309111003', '1309111', 'PERSIAPAN SITOMBOL PADANG GALU'),
 ('1309111004', '1309111', 'PERSIAPAN SONTANG CUBADAK'),
 ('1309121001', '1309121', 'TARUANG-TARUANG'),
 ('1309121002', '1309121', 'PADANG MANTINGGI'),
@@ -23516,15 +23337,15 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1407060005', '1407060', 'KEPENUHAN BARAT'),
 ('1407060006', '1407060', 'KEPENUHAN RAYA'),
 ('1407060007', '1407060', 'KEPENUHAN BARU'),
-('1407060008', '1407060', 'UPT SP III KOTO TENGAH/KEPENUHAN MAKMUR'),
+('1407060008', '1407060', 'UPT SP III KOTO TENGAH/KEPENUH'),
 ('1407060009', '1407060', 'KEPENUHAN TIMUR'),
 ('1407060010', '1407060', 'KEPENUHAN HILIR'),
-('1407060011', '1407060', 'UPT SP IV KOTO TENGAH/KEPENUHAN SEJATI'),
+('1407060011', '1407060', 'UPT SP IV KOTO TENGAH/KEPENUHA'),
 ('1407060012', '1407060', 'KEPENUHAN SEI MANDIAN'),
 ('1407060013', '1407060', 'ULAK PATIAN'),
 ('1407060016', '1407060', 'RANTAU BINUANG SAKTI'),
 ('1407060017', '1407060', 'KEPENUHAN BARAT MULYA'),
-('1407060018', '1407060', 'KEPENUHAN BARAT SUNGAI ROKAN JAYA'),
+('1407060018', '1407060', 'KEPENUHAN BARAT SUNGAI ROKAN J'),
 ('1407061001', '1407061', 'KEPENUHAN JAYA'),
 ('1407061002', '1407061', 'KEPENUHAN HULU'),
 ('1407061003', '1407061', 'MUARA JAYA'),
@@ -24520,9 +24341,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1502051006', '1502051', 'MUARA BANTAN'),
 ('1502051007', '1502051', 'MARKEH'),
 ('1502051008', '1502051', 'AIR BATU'),
-('1502051009', '1502051', 'MUARO PANCO TIMUR');
+('1502051009', '1502051', 'MUARO PANCO TIMUR'),
+('1502051010', '1502051', 'SIMPANG PARIT');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('1502051010', '1502051', 'SIMPANG PARIT'),
 ('1502051011', '1502051', 'MARUS JAYA'),
 ('1502051012', '1502051', 'RENAH MEDAN'),
 ('1502052001', '1502052', 'BUKIT PERENTAK'),
@@ -24543,7 +24364,7 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1502060033', '1502060', 'BELURAN PANJANG'),
 ('1502060035', '1502060', 'TANJUNG ILIR'),
 ('1502060046', '1502060', 'LUBUK NAPAL'),
-('1502060047', '1502060', 'KELURAHAN PASAR BARU RANTAU PANJANG'),
+('1502060047', '1502060', 'KELURAHAN PASAR BARU RANTAU PA'),
 ('1502061009', '1502061', 'MUARA JERNIH'),
 ('1502061010', '1502061', 'PULAU ARO'),
 ('1502061011', '1502061', 'KAPUK'),
@@ -25750,9 +25571,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1601090034', '1601090', 'SAUNG NAGA'),
 ('1601090035', '1601090', 'MITRA KENCANA'),
 ('1601090044', '1601090', 'KARANG DAPO'),
-('1601091001', '1601091', 'MERBAU');
+('1601091001', '1601091', 'MERBAU'),
+('1601091002', '1601091', 'GUNUNG MERAKSA');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('1601091002', '1601091', 'GUNUNG MERAKSA'),
 ('1601091003', '1601091', 'KURUP'),
 ('1601091004', '1601091', 'BANU AYU'),
 ('1601091006', '1601091', 'TANJUNG DALAM'),
@@ -27002,9 +26823,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1606020037', '1606020', 'BANGUN SARI'),
 ('1606020038', '1606020', 'PANGKALAN JAYA'),
 ('1606021001', '1606021', 'PENGATURAN'),
-('1606021002', '1606021', 'PINGGAP');
+('1606021002', '1606021', 'PINGGAP'),
+('1606021003', '1606021', 'TANAH ABANG');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('1606021003', '1606021', 'TANAH ABANG'),
 ('1606021004', '1606021', 'TALANG LEBAN'),
 ('1606021005', '1606021', 'SAUD'),
 ('1606021006', '1606021', 'BUKIT SEJAHTERA'),
@@ -28236,9 +28057,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1610042002', '1610042', 'TALANG DUKUN'),
 ('1610042003', '1610042', 'SUNGAI PINANG III'),
 ('1610042004', '1610042', 'SUNGAI PINANG'),
-('1610042005', '1610042', 'SUNGAI PINANG II');
+('1610042005', '1610042', 'SUNGAI PINANG II'),
+('1610042006', '1610042', 'SERIJABO');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('1610042006', '1610042', 'SERIJABO'),
 ('1610042007', '1610042', 'PENYANDINGAN'),
 ('1610042008', '1610042', 'PINANG JAYA'),
 ('1610042009', '1610042', 'SUNGAI PINANG I'),
@@ -29480,9 +29301,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1704020008', '1704020', 'KEDATARAN'),
 ('1704020009', '1704020', 'TANJUNG GANTI'),
 ('1704020011', '1704020', 'BENTENG HARAPAN'),
-('1704020012', '1704020', 'SUKA MENANTI');
+('1704020012', '1704020', 'SUKA MENANTI'),
+('1704020013', '1704020', 'SINAR MULYA');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('1704020013', '1704020', 'SINAR MULYA'),
 ('1704020014', '1704020', 'BAKAL MAKMUR'),
 ('1704020015', '1704020', 'MUARA JAYA'),
 ('1704020016', '1704020', 'TANJUNG AGUNG'),
@@ -30727,9 +30548,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1802031010', '1802031', 'ULU SEMONG'),
 ('1802031011', '1802031', 'REJOSARI'),
 ('1802031012', '1802031', 'SUKAMAJU'),
-('1802031013', '1802031', 'TANJUNG BARU');
+('1802031013', '1802031', 'TANJUNG BARU'),
+('1802031014', '1802031', 'SINAR BANTEN');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('1802031014', '1802031', 'SINAR BANTEN'),
 ('1802031015', '1802031', 'AIR ABANG'),
 ('1802031016', '1802031', 'PETAY KAYU'),
 ('1802032001', '1802032', 'WAY HARONG'),
@@ -31972,9 +31793,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1807010007', '1807010', 'SUMBER BARU'),
 ('1807010008', '1807010', 'NEKI'),
 ('1807010009', '1807010', 'RANTAU TEMIANG'),
-('1807010010', '1807010', 'MENANGA SIAMANG');
+('1807010010', '1807010', 'MENANGA SIAMANG'),
+('1807010011', '1807010', 'MENANGA JAYA');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('1807010011', '1807010', 'MENANGA JAYA'),
 ('1807010012', '1807010', 'REBANG TINGGI'),
 ('1807010013', '1807010', 'ARGOMULYO'),
 ('1807010014', '1807010', 'RANTAU JAYA'),
@@ -33215,9 +33036,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('1903010012', '1903010', 'SINAR SARI'),
 ('1903010013', '1903010', 'KELAPA'),
 ('1903010014', '1903010', 'BERUAS'),
-('1903010015', '1903010', 'PUSUK');
+('1903010015', '1903010', 'PUSUK'),
+('1903010016', '1903010', 'TEBING');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('1903010016', '1903010', 'TEBING'),
 ('1903010017', '1903010', 'AIR BULIN'),
 ('1903010018', '1903010', 'DENDANG'),
 ('1903010019', '1903010', 'KACUNG'),
@@ -34503,9 +34324,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3201241008', '3201241', 'CISEENG'),
 ('3201241009', '3201241', 'CIHOWE'),
 ('3201241010', '3201241', 'KURIPAN'),
-('3201250001', '3201250', 'JAMPANG');
+('3201250001', '3201250', 'JAMPANG'),
+('3201250002', '3201250', 'CIBADUNG');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3201250002', '3201250', 'CIBADUNG'),
 ('3201250003', '3201250', 'CIBINONG'),
 ('3201250004', '3201250', 'CIDOKOM'),
 ('3201250005', '3201250', 'PADURENAN'),
@@ -35810,9 +35631,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3205160010', '3205160', 'SIRNAGALIH'),
 ('3205160011', '3205160', 'PAKUWON'),
 ('3205160012', '3205160', 'SIMPANGSARI'),
-('3205160013', '3205160', 'PANGAUBAN');
+('3205160013', '3205160', 'PANGAUBAN'),
+('3205160014', '3205160', 'CIPAGANTI');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3205160014', '3205160', 'CIPAGANTI'),
 ('3205160015', '3205160', 'PAMULIHAN'),
 ('3205160016', '3205160', 'SITUSARI'),
 ('3205160017', '3205160', 'CINTAASIH'),
@@ -37114,9 +36935,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3209040002', '3209040', 'SERANG WETAN'),
 ('3209040003', '3209040', 'BOJONGGEBANG'),
 ('3209040004', '3209040', 'KUDUKERAS'),
-('3209040005', '3209040', 'SUMBER KIDUL');
+('3209040005', '3209040', 'SUMBER KIDUL'),
+('3209040006', '3209040', 'KUDUMULYA');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3209040006', '3209040', 'KUDUMULYA'),
 ('3209040007', '3209040', 'SUMBER LOR'),
 ('3209040008', '3209040', 'BABAKAN'),
 ('3209040009', '3209040', 'PAKUSAMBEN'),
@@ -38419,9 +38240,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3212221006', '3212221', 'PATROLLOR'),
 ('3212221007', '3212221', 'PATROL BARU'),
 ('3212221008', '3212221', 'MEKARSARI'),
-('3213010003', '3213010', 'SUKAMANDI');
+('3213010003', '3213010', 'SUKAMANDI'),
+('3213010004', '3213010', 'CICADAS');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3213010004', '3213010', 'CICADAS'),
 ('3213010005', '3213010', 'SAGALAHERANG'),
 ('3213010006', '3213010', 'DAYEUHKOLOT'),
 ('3213010011', '3213010', 'LELES'),
@@ -39715,9 +39536,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3272040003', '3272040', 'SRIWIDARI'),
 ('3272040004', '3272040', 'KARAMAT'),
 ('3272050001', '3272050', 'GUNUNG PARANG'),
-('3272050002', '3272050', 'KEBONJATI');
+('3272050002', '3272050', 'KEBONJATI'),
+('3272050003', '3272050', 'CIKOLE');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3272050003', '3272050', 'CIKOLE'),
 ('3272050004', '3272050', 'SELABATU'),
 ('3272050005', '3272050', 'CISARUA'),
 ('3272050006', '3272050', 'SUBANGJAYA'),
@@ -41015,9 +40836,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3304030014', '3304030', 'PURWASABA'),
 ('3304030015', '3304030', 'BLIMBING'),
 ('3304030016', '3304030', 'PANGGISARI'),
-('3304040001', '3304040', 'KALITENGAH');
+('3304040001', '3304040', 'KALITENGAH'),
+('3304040002', '3304040', 'PETIR');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3304040002', '3304040', 'PETIR'),
 ('3304040003', '3304040', 'KALIAJIR'),
 ('3304040004', '3304040', 'KARANGANYAR'),
 ('3304040005', '3304040', 'MERDEN'),
@@ -42334,9 +42155,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3307060008', '3307060', 'PAKUNCEN'),
 ('3307060009', '3307060', 'SELOMERTO'),
 ('3307060010', '3307060', 'SUMBERWULAN'),
-('3307060011', '3307060', 'PLOBANGAN');
+('3307060011', '3307060', 'PLOBANGAN'),
+('3307060012', '3307060', 'SIMBAREJO');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3307060012', '3307060', 'SIMBAREJO'),
 ('3307060013', '3307060', 'WULUNGSARI'),
 ('3307060014', '3307060', 'BUMITIRTO'),
 ('3307060015', '3307060', 'SEMAYU'),
@@ -43690,9 +43511,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3312010006', '3312010', 'SUCI'),
 ('3312010007', '3312010', 'JIMBAR'),
 ('3312010008', '3312010', 'SAMBIROTO'),
-('3312010009', '3312010', 'PRACIMANTORO');
+('3312010009', '3312010', 'PRACIMANTORO'),
+('3312010010', '3312010', 'GEDONG');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3312010010', '3312010', 'GEDONG'),
 ('3312010011', '3312010', 'GEBANGHARJO'),
 ('3312010012', '3312010', 'SEDAYU'),
 ('3312010013', '3312010', 'BANARAN'),
@@ -45038,9 +44859,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3317060011', '3317060', 'KEDUNGRINGIN'),
 ('3317060012', '3317060', 'GANDRIROJO'),
 ('3317060013', '3317060', 'CANDIMULYO'),
-('3317060014', '3317060', 'LEMAHPUTIH');
+('3317060014', '3317060', 'LEMAHPUTIH'),
+('3317060015', '3317060', 'KUMBO');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3317060015', '3317060', 'KUMBO'),
 ('3317060016', '3317060', 'DADAPAN'),
 ('3317060017', '3317060', 'SAMBONG'),
 ('3317060018', '3317060', 'BOGOREJO'),
@@ -46373,9 +46194,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3322101009', '3322101', 'PAKOPEN'),
 ('3322101010', '3322101', 'SIDOMUKTI'),
 ('3322110001', '3322110', 'DOPLANG'),
-('3322110002', '3322110', 'BAWEN');
+('3322110002', '3322110', 'BAWEN'),
+('3322110003', '3322110', 'ASINAN');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3322110003', '3322110', 'ASINAN'),
 ('3322110004', '3322110', 'POLOSIRI'),
 ('3322110005', '3322110', 'KANDANGAN'),
 ('3322110006', '3322110', 'LEMAHIRENG'),
@@ -47700,9 +47521,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3327090011', '3327090', 'BANJARDAWA'),
 ('3327090012', '3327090', 'BANJARAN'),
 ('3327090013', '3327090', 'SITEMU'),
-('3327090014', '3327090', 'PEDURUNGAN');
+('3327090014', '3327090', 'PEDURUNGAN'),
+('3327090015', '3327090', 'TAMAN');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3327090015', '3327090', 'TAMAN'),
 ('3327090016', '3327090', 'WANAREJAN SELATAN'),
 ('3327090017', '3327090', 'WANAREJAN UTARA'),
 ('3327090018', '3327090', 'BEJI'),
@@ -49011,9 +48832,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3404040001', '3404040', 'SIDOREJO'),
 ('3404040002', '3404040', 'SIDOLUHUR'),
 ('3404040003', '3404040', 'SIDOMULYO'),
-('3404040004', '3404040', 'SIDOAGUNG');
+('3404040004', '3404040', 'SIDOAGUNG'),
+('3404040005', '3404040', 'SIDOKARTO');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3404040005', '3404040', 'SIDOKARTO'),
 ('3404040006', '3404040', 'SIDOARUM'),
 ('3404040007', '3404040', 'SIDOMOYO'),
 ('3404050001', '3404050', 'BALECATUR'),
@@ -50358,9 +50179,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3506060001', '3506060', 'SUMBERJO'),
 ('3506060002', '3506060', 'KARANGREJO'),
 ('3506060003', '3506060', 'SELOSARI'),
-('3506060004', '3506060', 'KANDAT');
+('3506060004', '3506060', 'KANDAT'),
+('3506060005', '3506060', 'CENDONO');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3506060005', '3506060', 'CENDONO'),
 ('3506060006', '3506060', 'RINGINSARI'),
 ('3506060007', '3506060', 'TEGALAN'),
 ('3506060008', '3506060', 'NGLETIH'),
@@ -51684,9 +51505,9 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('3510210009', '3510210', 'BAJULMATI'),
 ('3510210010', '3510210', 'WATUKEBO'),
 ('3510210011', '3510210', 'SUMBERANYAR'),
-('3510210012', '3510210', 'BIMOREJO');
+('3510210012', '3510210', 'BIMOREJO'),
+('3511010001', '3511010', 'SUCOLOR');
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
-('3511010001', '3511010', 'SUCOLOR'),
 ('3511010002', '3511010', 'PUJERBARU'),
 ('3511010003', '3511010', 'TANAHWULAN'),
 ('3511010004', '3511010', 'MAESAN'),
@@ -78061,7 +77882,7 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('7326060004', '7326060', 'LEMBANG NANNA NANGGALA'),
 ('7326060005', '7326060', 'LEMBANG BASOKAN'),
 ('7326060006', '7326060', 'LEMBANG NANGGALA'),
-('7326060007', '7326060', 'KELURAHAN NANGGALA SANGPIAK SALU'),
+('7326060007', '7326060', 'KELURAHAN NANGGALA SANGPIAK SA'),
 ('7326060008', '7326060', 'LEMBANG TANDUNG NANGGALA'),
 ('7326060009', '7326060', 'LEMBANG LILIKIRA'),
 ('7326070001', '7326070', 'LEMBANG TONDON'),
@@ -78070,7 +77891,7 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('7326070004', '7326070', 'LEMBANG TONDON SIBA''TA'),
 ('7326080001', '7326080', 'KELURAHAN TAMPO TALLUNGLIPU'),
 ('7326080002', '7326080', 'KELURAHAN TAGARI TALLUNG LIPU'),
-('7326080003', '7326080', 'KELURAHAN RANTE PAKU TALLUNGLIPU'),
+('7326080003', '7326080', 'KELURAHAN RANTE PAKU TALLUNGLI'),
 ('7326080004', '7326080', 'KELURAHAN TALLUNGLIPU MATALLO'),
 ('7326080005', '7326080', 'KELURAHAN TALLUNG LIPU'),
 ('7326080006', '7326080', 'KELURAHAN TANTANAN TALLUNGLIPU'),
@@ -84596,8 +84417,8 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('9101082016', '9101082', 'GEWAB'),
 ('9101083004', '9101083', 'ONIM SARI'),
 ('9101083005', '9101083', 'MEKAR SARI'),
-('9101083006', '9101083', 'BOMBERAY V (UPT) / PINANG AGUNG'),
-('9101083007', '9101083', 'BOMBERAY  VI (UPT) / BUMI MUROH INDAH'),
+('9101083006', '9101083', 'BOMBERAY V (UPT) / PINANG AGUN'),
+('9101083007', '9101083', 'BOMBERAY  VI (UPT) / BUMI MURO'),
 ('9101083011', '9101083', 'TESHA'),
 ('9101084001', '9101084', 'ANDAMATA'),
 ('9101084002', '9101084', 'ARGUNI'),
@@ -84631,7 +84452,7 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 ('9101088001', '9101088', 'OTOWERI'),
 ('9101088002', '9101088', 'MBIMA JAYA'),
 ('9101088003', '9101088', 'WARISA MULIA'),
-('9101088004', '9101088', 'BOMBERAY VII (UPT) / WONODADI MULYA'),
+('9101088004', '9101088', 'BOMBERAY VII (UPT) / WONODADI '),
 ('9101088005', '9101088', 'TOMAGE'),
 ('9101088006', '9101088', 'WAMOSAN'),
 ('9102010001', '9102010', 'ADIJAYA'),
@@ -90608,17 +90429,14 @@ ALTER TABLE `bangsal`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `config`
---
-ALTER TABLE `config`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `diagnosis`
 --
 ALTER TABLE `diagnosis`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_pelayanan` (`id_pelayanan`);
+  ADD KEY `id_pelayanan` (`id_pelayananigd`),
+  ADD KEY `id_pelayananinap` (`id_pelayananinap`),
+  ADD KEY `id_pelayananjalan` (`id_pelayananjalan`),
+  ADD KEY `kode` (`kode`);
 
 --
 -- Indexes for table `districts`
@@ -90635,9 +90453,9 @@ ALTER TABLE `kelas`
   ADD KEY `bangsal_id` (`bangsal_id`);
 
 --
--- Indexes for table `migrations`
+-- Indexes for table `norekam_medis`
 --
-ALTER TABLE `migrations`
+ALTER TABLE `norekam_medis`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -90655,13 +90473,6 @@ ALTER TABLE `pasien`
   ADD UNIQUE KEY `noRM` (`noRm`);
 
 --
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`),
-  ADD KEY `password_resets_token_index` (`token`);
-
---
 -- Indexes for table `pelayanan_rawatigd`
 --
 ALTER TABLE `pelayanan_rawatigd`
@@ -90673,7 +90484,11 @@ ALTER TABLE `pelayanan_rawatigd`
 --
 ALTER TABLE `pelayanan_rawatinap`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_RI` (`id_RI`);
+  ADD KEY `id_RI` (`id_RI`),
+  ADD KEY `namaPerawat` (`namaPerawat`,`namaPetugasTpp`,`namaDokterPj`,`dokterMemulangkan`),
+  ADD KEY `namaPetugasTpp` (`namaPetugasTpp`),
+  ADD KEY `namaDokterPj` (`namaDokterPj`),
+  ADD KEY `dokterMemulangkan` (`dokterMemulangkan`);
 
 --
 -- Indexes for table `pelayanan_rawatjalan`
@@ -90681,20 +90496,6 @@ ALTER TABLE `pelayanan_rawatinap`
 ALTER TABLE `pelayanan_rawatjalan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_RJ` (`id_RJ`);
-
---
--- Indexes for table `permissions`
---
-ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `permissions_name_unique` (`name`);
-
---
--- Indexes for table `permission_role`
---
-ALTER TABLE `permission_role`
-  ADD PRIMARY KEY (`permission_id`,`role_id`),
-  ADD KEY `permission_role_role_id_foreign` (`role_id`);
 
 --
 -- Indexes for table `provinces`
@@ -90707,7 +90508,9 @@ ALTER TABLE `provinces`
 --
 ALTER TABLE `rawat_igd`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_pasien` (`id_pasien`);
+  ADD KEY `id_pasien` (`id_pasien`),
+  ADD KEY `dokterJaga` (`dokterJaga`),
+  ADD KEY `perawat` (`perawat`);
 
 --
 -- Indexes for table `rawat_inap`
@@ -90721,7 +90524,8 @@ ALTER TABLE `rawat_inap`
 --
 ALTER TABLE `rawat_jalan`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_pasien` (`id_pasien`);
+  ADD KEY `id_pasien` (`id_pasien`),
+  ADD KEY `DokterPJ` (`DokterPJ`);
 
 --
 -- Indexes for table `regencies`
@@ -90768,7 +90572,10 @@ ALTER TABLE `tbl_icd10nama`
 --
 ALTER TABLE `tindakan`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_pelayanan` (`id_pelayanan`);
+  ADD KEY `id_pelayananigdIndex` (`id_pelayananigd`),
+  ADD KEY `id_pelayananinap` (`id_pelayananinap`),
+  ADD KEY `id_pelayananjalan` (`id_pelayananjalan`),
+  ADD KEY `kode` (`kode`);
 
 --
 -- Indexes for table `users`
@@ -90795,11 +90602,6 @@ ALTER TABLE `villages`
 ALTER TABLE `bangsal`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `config`
---
-ALTER TABLE `config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
 -- AUTO_INCREMENT for table `diagnosis`
 --
 ALTER TABLE `diagnosis`
@@ -90810,10 +90612,10 @@ ALTER TABLE `diagnosis`
 ALTER TABLE `kelas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT for table `norekam_medis`
 --
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `norekam_medis`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `no_kamar`
 --
@@ -90823,47 +90625,42 @@ ALTER TABLE `no_kamar`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `pelayanan_rawatigd`
 --
 ALTER TABLE `pelayanan_rawatigd`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `pelayanan_rawatinap`
 --
 ALTER TABLE `pelayanan_rawatinap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `pelayanan_rawatjalan`
 --
 ALTER TABLE `pelayanan_rawatjalan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
---
--- AUTO_INCREMENT for table `permissions`
---
-ALTER TABLE `permissions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `rawat_igd`
 --
 ALTER TABLE `rawat_igd`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `rawat_inap`
 --
 ALTER TABLE `rawat_inap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `rawat_jalan`
 --
 ALTER TABLE `rawat_jalan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tbl_icd9`
 --
@@ -90888,7 +90685,7 @@ ALTER TABLE `tindakan`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Constraints for dumped tables
 --
@@ -90897,9 +90694,10 @@ ALTER TABLE `users`
 -- Constraints for table `diagnosis`
 --
 ALTER TABLE `diagnosis`
-  ADD CONSTRAINT `diagnosis_ibfk_1` FOREIGN KEY (`id_pelayanan`) REFERENCES `pelayanan_rawatjalan` (`id`),
-  ADD CONSTRAINT `diagnosis_ibfk_2` FOREIGN KEY (`id_pelayanan`) REFERENCES `pelayanan_rawatinap` (`id`),
-  ADD CONSTRAINT `diagnosis_ibfk_3` FOREIGN KEY (`id_pelayanan`) REFERENCES `pelayanan_rawatigd` (`id`);
+  ADD CONSTRAINT `diagnosis_ibfk_1` FOREIGN KEY (`id_pelayananjalan`) REFERENCES `pelayanan_rawatjalan` (`id`),
+  ADD CONSTRAINT `diagnosis_ibfk_2` FOREIGN KEY (`id_pelayananinap`) REFERENCES `pelayanan_rawatinap` (`id`),
+  ADD CONSTRAINT `diagnosis_ibfk_3` FOREIGN KEY (`id_pelayananigd`) REFERENCES `pelayanan_rawatigd` (`id`),
+  ADD CONSTRAINT `diagnosis_ibfk_4` FOREIGN KEY (`kode`) REFERENCES `tbl_icd10` (`id`);
 
 --
 -- Constraints for table `districts`
@@ -90929,7 +90727,11 @@ ALTER TABLE `pelayanan_rawatigd`
 -- Constraints for table `pelayanan_rawatinap`
 --
 ALTER TABLE `pelayanan_rawatinap`
-  ADD CONSTRAINT `pelayanan_rawatinap_ibfk_1` FOREIGN KEY (`id_RI`) REFERENCES `rawat_inap` (`id`);
+  ADD CONSTRAINT `pelayanan_rawatinap_ibfk_1` FOREIGN KEY (`id_RI`) REFERENCES `rawat_inap` (`id`),
+  ADD CONSTRAINT `pelayanan_rawatinap_ibfk_2` FOREIGN KEY (`namaPerawat`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `pelayanan_rawatinap_ibfk_3` FOREIGN KEY (`namaPetugasTpp`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `pelayanan_rawatinap_ibfk_4` FOREIGN KEY (`namaDokterPj`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `pelayanan_rawatinap_ibfk_5` FOREIGN KEY (`dokterMemulangkan`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `pelayanan_rawatjalan`
@@ -90938,17 +90740,12 @@ ALTER TABLE `pelayanan_rawatjalan`
   ADD CONSTRAINT `pelayanan_rawatjalan_ibfk_1` FOREIGN KEY (`id_RJ`) REFERENCES `rawat_jalan` (`id`);
 
 --
--- Constraints for table `permission_role`
---
-ALTER TABLE `permission_role`
-  ADD CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `rawat_igd`
 --
 ALTER TABLE `rawat_igd`
-  ADD CONSTRAINT `rawat_igd_ibfk_1` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`);
+  ADD CONSTRAINT `rawat_igd_ibfk_1` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`),
+  ADD CONSTRAINT `rawat_igd_ibfk_2` FOREIGN KEY (`dokterJaga`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `rawat_igd_ibfk_3` FOREIGN KEY (`perawat`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `rawat_inap`
@@ -90960,7 +90757,8 @@ ALTER TABLE `rawat_inap`
 -- Constraints for table `rawat_jalan`
 --
 ALTER TABLE `rawat_jalan`
-  ADD CONSTRAINT `rawat_jalan_ibfk_1` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`);
+  ADD CONSTRAINT `rawat_jalan_ibfk_1` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`),
+  ADD CONSTRAINT `rawat_jalan_ibfk_2` FOREIGN KEY (`DokterPJ`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `regencies`
@@ -90985,9 +90783,10 @@ ALTER TABLE `tbl_icd10nama`
 -- Constraints for table `tindakan`
 --
 ALTER TABLE `tindakan`
-  ADD CONSTRAINT `tindakan_ibfk_1` FOREIGN KEY (`id_pelayanan`) REFERENCES `pelayanan_rawatjalan` (`id`),
-  ADD CONSTRAINT `tindakan_ibfk_2` FOREIGN KEY (`id_pelayanan`) REFERENCES `pelayanan_rawatinap` (`id`),
-  ADD CONSTRAINT `tindakan_ibfk_3` FOREIGN KEY (`id_pelayanan`) REFERENCES `pelayanan_rawatigd` (`id`);
+  ADD CONSTRAINT `tindakan_ibfk_1` FOREIGN KEY (`id_pelayananigd`) REFERENCES `pelayanan_rawatigd` (`id`),
+  ADD CONSTRAINT `tindakan_ibfk_2` FOREIGN KEY (`id_pelayananinap`) REFERENCES `pelayanan_rawatinap` (`id`),
+  ADD CONSTRAINT `tindakan_ibfk_3` FOREIGN KEY (`id_pelayananjalan`) REFERENCES `pelayanan_rawatjalan` (`id`),
+  ADD CONSTRAINT `tindakan_ibfk_4` FOREIGN KEY (`kode`) REFERENCES `tbl_icd9` (`id`);
 
 --
 -- Constraints for table `villages`
