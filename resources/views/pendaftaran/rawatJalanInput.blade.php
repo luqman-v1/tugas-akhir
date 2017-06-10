@@ -31,7 +31,7 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <form role="form" method="post" action="{{url('rawat-jalan')}}">
+                                            <form id="form_validation" method="post" action="{{url('rawat-jalan')}}">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="col-lg-6">
                                                     <div class="form-group {{ $errors->has('noRm') ? 'has-error' : ''}}">
@@ -191,12 +191,12 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="row">
+                                                   <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group{{ $errors->has('tglKunjungan') ? ' has-error' : '' }}">
                                                             <label class="control-label " for="tglKunjungan">Tanggal Kunjungan</label><br>
                                                             <div class='input-group date'>
-                                                                <input placeholder="Tanggal Kunjungan" type='text' value="@php echo date("Y-m-d"); @endphp" name="tglKunjungan" class="form-control" id="tanggal_kunjungan">
+                                                                <input placeholder="Tanggal Kunjungan" type='text' value="@php echo date("Y-m-d"); @endphp" name="tglKunjungan" required class="form-control" id="tanggal_kunjungan">
                                                                 <span class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                                 </span>
@@ -211,33 +211,31 @@
                                                 </div>
                                                 <div class="form-group {{ $errors->has('caraDatang') ? 'has-error' : ''}}">
                                                    <label class="control-label " for="caraDatang">Cara Datang</label>
-                                                   <div class="form-group">
-                                                     <select name="caraDatang" id="caraDatang" class="form-control" onChange="changetextbox();">
+                                                     <select name="caraDatang" id="caraDatang" required class="form-control" onChange="changetextbox();">
+                                                     <option value="">pilih</option>
                                                          <option value="Sendiri">Sendiri</option>
                                                          <option value="Rujukan">Rujukan</option>
                                                      </select>
                                                      <span class="help-block">
                                                         <strong>{{ $errors->first('caraDatang') }}</strong>
                                                     </span>
-                                                </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="rujukan">Rujukan</label>
                                                 <input class="form-control" name="rujukan" disabled="" value="{{old('rujukan')}}" id="rujukan" type="text" placeholder="Rujukan">
                                             </div>
-
                                             <div class="form-group {{ $errors->has('caraBayar') ? 'has-error' : ''}}">
                                                <label class="control-label " for="caraBayar">Cara Bayar</label>
-                                               <div class="form-group">
-                                                 <select name="caraBayar" id="caraBayar" class="form-control" onChange="changetextbox();">
+                                             
+                                                 <select name="caraBayar" id="caraBayar" required class="form-control" onChange="changetextbox();">
+                                                 <option value="">pilih</option>
                                                      <option value="BPJS">BPJS</option>
                                                      <option value="UMUM">UMUM</option>
                                                  </select>
                                                  <span class="help-block">
                                                     <strong>{{ $errors->first('caraBayar') }}</strong>
                                                 </span>
-                                            </div>
                                         </div>    
 
                                         <div class="row">
@@ -245,13 +243,13 @@
                                             <div class="form-group {{ $errors->has('klinikTujuan') ? 'has-error' : ''}}">
                                                <label class="control-label " for="tanggal_kembali">Klinik Tujuan</label>
                                                <div class="input-group date">
-                                                <div class="form-group">
-                                                    <select name="klinikTujuan" class="form-control">
-                                                        <option value="Bedah Umum">Bedah Umum</option>
-                                                        <option value="Bedah Saluran Cerna (Digestive)">Bedah Saluran Cerna (Digestive)</option>
-                                                        <option value="Bedah Throraks">Bedah Throraks</option>
-                                                        <option value="Bedah Tulang dan Sendi (Orthopedi)">Bedah Tulang dan Sendi (Orthopedi)</option>
-                                                        <option value="Bedah Saluran Kencing (Urologi)">Bedah Saluran Kencing (Urologi)</option>
+                                                    <select name="klinikTujuan" required class="form-control">
+                                                    <option value="">pilih</option>
+                                                        <option value="Umum">Bedah Umum</option>
+                                                        <option value="Digestive">Bedah Saluran Cerna (Digestive)</option>
+                                                        <option value="Throraks">Bedah Throraks</option>
+                                                        <option value="Orthopedi">Bedah Tulang dan Sendi (Orthopedi)</option>
+                                                        <option value="Urologi">Bedah Saluran Kencing (Urologi)</option>
                                                         <option value="Bedah Plastik dan Estetik">Bedah Plastik dan Estetik</option>
                                                     </select>
                                                     <span class="help-block">
@@ -259,25 +257,22 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                        </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group {{ $errors->has('DokterPJ') ? 'has-error' : ''}}">
                                            <label class="control-label " for="tanggal_kembali">Dokter Penanggung Jawab</label>
                                            <div class="input-group date">
-                                            <div class="form-group">
-                                                <select name="DokterPJ" class="form-control">
+                                                <select name="DokterPJ" required class="form-control">
+                                                <option value="">pilih</option>
                                                     @foreach($dokter as $data)
-                                                    <option value="{{$data->name}}">{{$data->name}}</option>
+                                                    <option value="{{$data->id}}">{{$data->name}}</option>
                                                     @endforeach
                                                 </select>
 
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('DokterPJ') }}</strong>
                                                 </span>
-
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

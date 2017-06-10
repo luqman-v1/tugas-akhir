@@ -26,7 +26,7 @@
 
       <div class="box">
         <div class="box-header">
-      <h3 style="text-align: center;">Antrian Pasien Pelayanan Rawat IGD</h3>
+      <h3 style="text-align: center;">Antrian Pelayanan Rawat IGD</h3>
       </div>
       <!-- /.box-header -->
       <div class="box-body">

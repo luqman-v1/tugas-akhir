@@ -35,24 +35,31 @@
         <td style="text-align: center;" rowspan="2"><b>No Urut</b></td>
         <td style="text-align: center;" rowspan="2"><b>Kode ICD 10</b></td>
         <td style="text-align: center;" rowspan="2"><b>Deskripsi</b></td>
-        <td style="text-align: center;" colspan="2"><b>Kasus Baru Menurut Jenis Kelamin</b></td>
-        <td style="text-align: center;" rowspan="2"><b>Jumlah Kasus Baru</b></td>
+        {{-- <td style="text-align: center;" colspan="2"><b>Kasus Baru Menurut Jenis Kelamin</b></td> --}}
+        {{-- <td style="text-align: center;" rowspan="2"><b>Jumlah Kasus Baru</b></td> --}}
         <td style="text-align: center;" rowspan="2"><b>Jumlah Kunjungan</td>
       </tr>
       <tr>
-        <td style="text-align: center;"><b>Laki-laki</b></td>
-        <td style="text-align: center;"><b>Perempuan</b></td>
+        {{-- <td style="text-align: center;"><b>Laki-laki</b></td> --}}
+        {{-- <td style="text-align: center;"><b>Perempuan</b></td> --}}
       </tr>
       <tr>
-        <td style="text-align: center;">1</td>
-        <td style="text-align: center;">2</td>
-        <td style="text-align: center;">3</td>
-        <td style="text-align: center;">4</td>
-        <td style="text-align: center;">5</td>
-        <td style="text-align: center;">6</td>
-        <td style="text-align: center;">7</td>
+      @forelse($extR4 as $key => $data)
+       @php
+        $kode =App\ICD::where('kode',$data->kode)->first();
+        $nama = App\tbl_icd10nama::where('id_tblicd10',$kode->id)->first();
+      @endphp
+        <td style="text-align: center;">{{ $key+1 }}</td>
+        <td style="text-align: center;">{{ $data->kode }}</td>
+        <td style="text-align: center;">{{$nama->nama}}</td>
+        {{-- <td style="text-align: center;">4</td> --}}
+        {{-- <td style="text-align: center;">5</td> --}}
+        {{-- <td style="text-align: center;">6</td> --}}
+        <td style="text-align: center;">{{ $data->kunjungan }}</td>
       </tr>
-      
+      @empty
+      <p>data kosong</p>
+      @endforelse
     </tbody>
   </table>
 </div>

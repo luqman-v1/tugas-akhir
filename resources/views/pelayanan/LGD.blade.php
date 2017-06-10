@@ -35,7 +35,7 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <form role="form" method="post" action="{{url('pelayanan-igd')}}">
+                                            <form id="form_validation" method="post" action="{{url('pelayanan-igd')}}">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <input type="hidden" name="id" value="{{ $igd->id }}">
                                                 <div class="col-lg-6">
@@ -198,9 +198,8 @@
                                                     <div class="col-md-6">  
                                                         <div class="form-group {{ $errors->has('jenisKasus') ? 'has-error' : ''}}">
                                                            <label class="control-label " for="jenisKasus">Jenis Kasus</label>
-                                                           <div class="form-group">
-                                                               <select name="jenisKasus" id="jenisKasus" class="form-control">
-                                                               <option>pilih</option>
+                                                               <select name="jenisKasus" required id="jenisKasus" class="form-control">
+                                                               <option value="">pilih</option>
                                                                  <option value="Bedah">Bedah</option>
                                                                  <option value="Obsgin">Obsgin</option>
                                                                  <option value="Interna">Interna</option>
@@ -210,13 +209,12 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                </div>
+ 
                                                 <div class="col-md-6">
                                                     <div class="form-group {{ $errors->has('tindakanResuitasi') ? 'has-error' : ''}}">
                                                        <label class="control-label " for="tindakanResuitasi">Tindakan Resusitasi</label>
-                                                       <div class="form-group">
-                                                           <select name="tindakanResuitasi" id="tindakanResuitasi" class="form-control">
-                                                             <option>pilih</option>
+                                                           <select name="tindakanResuitasi" required id="tindakanResuitasi" class="form-control">
+                                                             <option value="">pilih</option>
                                                              <option value="Ya">Ya</option>
                                                              <option value="Tidak">Tidak</option>
                                                          </select>
@@ -225,37 +223,34 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                            </div>
+
                                             <div class="col-md-6">  
                                                 <div class="form-group {{ $errors->has('cramsScore') ? 'has-error' : ''}}">
                                                    <label class="control-label " for="cramsScore">Crams Score/ CGS</label>
-                                                   <div class="form-group">
-                                                       <input placeholder="Crams Score/ CGS" type='text' value="{{old('cramsScore')}}" name="cramsScore" class="form-control" id="cramsScore">
+                                                       <input placeholder="Crams Score/ CGS" type='text' required value="{{old('cramsScore')}}" name="cramsScore" class="form-control" id="cramsScore">
                                                      <span class="help-block">
                                                         <strong>{{ $errors->first('cramsScore') }}</strong>
                                                     </span>
                                                 </div>
                                             </div>
-                                        </div>
+  
                                         <div class="col-md-6">
                                             <div class="form-group {{ $errors->has('anamnesis') ? 'has-error' : ''}}">
-                                               <label class="control-label " for="anamnesis">Anamnesis</label>
-                                               <div class="form-group">
-                                                  <input placeholder="Anamnesis" type='text' value="{{old('anamnesis')}}" name="anamnesis" class="form-control" id="anamnesis">
+                                               <label class="control-label " for="anamnesis">Anamnesis</label>    
+                                                  <input placeholder="Anamnesis" required type='text' value="{{old('anamnesis')}}" name="anamnesis" class="form-control" id="anamnesis">
                                                  <span class="help-block">
                                                     <strong>{{ $errors->first('anamnesis') }}</strong>
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('pemeriksaanFisik') ? ' has-error' : '' }}">
                                             <label class="control-label " for="pemeriksaanFisik">Pemeriksaan Fisik</label><br>
-                                               {{-- <input placeholder="Pemeriksaan Fisik" type='text' value="{{old('pemeriksaanFisik')}}" name="pemeriksaanFisik" class="form-control" id="pemeriksaanFisik"> --}}
-                                               <select class="form-control" name="pemeriksaanFisik">
-                                               <option>pilih</option>
+                                               <select class="form-control" required name="pemeriksaanFisik">
+                                               <option value="">pilih</option>
                                                    <option value="0">0</option>
                                                    <option value="1">1</option>
                                                    <option value="2">2</option>
@@ -279,8 +274,8 @@
                                     <div class="col-md-6">
                                        <div class="bootstrap-timepicker">
                                         <div class="form-group{{ $errors->has('pemeriksaanStatus') ? ' has-error' : '' }}">
-                                            <label class="control-label " for="jam_masuk">Pemeriksaan Status Nyeri</label><br>
-                                             <input placeholder="Pemeriksaan Status Nyeri" type='text' value="{{old('pemeriksaanStatus')}}" name="pemeriksaanStatus" class="form-control" id="pemeriksaanStatus">
+                                            <label class="control-label" for="jam_masuk">Pemeriksaan Status Nyeri</label><br>
+                                             <input placeholder="Pemeriksaan Status Nyeri" required type='text' value="{{old('pemeriksaanStatus')}}" name="pemeriksaanStatus" class="form-control" id="pemeriksaanStatus">
                                           </div>
                                           @if ($errors->has('pemeriksaanStatus'))
                                           <span class="help-block">
@@ -294,68 +289,62 @@
                                     <div class="col-md-6">
                                         <div class="form-group {{ $errors->has('pemeriksaanLaboratorium') ? 'has-error' : ''}}">
                                             <label class="control-label " for="pemeriksaanLaboratorium">Pemeriksaan Laboratorium</label>
-                                                 <div class="form-group">
-                                                       <input type="text" class="form-control" name="pemeriksaanLaboratorium" value="{{old('pemeriksaanLaboratorium')}}" placeholder="Pemeriksaan Laboratorium">
+                                                       <input type="text" class="form-control" required name="pemeriksaanLaboratorium" value="{{old('pemeriksaanLaboratorium')}}" placeholder="Pemeriksaan Laboratorium">
                                                        <span class="help-block">
                                                         <strong>{{ $errors->first('pemeriksaanLaboratorium') }}</strong>
                                                     </span>
                                                 </div>
                                         </div>
-                                    </div>
+                          
 
                                     <div class="col-md-6">
                                         <div class="form-group {{ $errors->has('pemeriksaanRadiologi') ? 'has-error' : ''}}">
                                          <label class="control-label " for="pemeriksaanRadiologi">Pemeriksaan Radiologi</label>
-                                            <div class="form-group">
-                                               <input type="text" class="form-control" value="{{old('pemeriksaanRadiologi')}}" name="pemeriksaanRadiologi" placeholder="Pemeriksaan Radiologi">
-
+                                               <input type="text" class="form-control" required value="{{old('pemeriksaanRadiologi')}}" name="pemeriksaanRadiologi" placeholder="Pemeriksaan Radiologi">
                                                <span class="help-block">
                                                 <strong>{{ $errors->first('pemeriksaanRadiologi') }}</strong>
                                             </span>
                                          </div>
                                     </div>
-                                </div>
+                           
 
-                    <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('diagonosisAwal') ? 'has-error' : ''}}">
                                  <label class="control-label " for="diagonosisAwal">Diagnosis Awal</label>
-                                    <div class="form-group">
-                                       <input type="text" class="form-control" data-role="tagsinput" name="diagonosisAwal" value="{{old('diagonosisAwal')}}" placeholder="Diagnosis ">
+                                
+                                       <input type="text" class="form-control" required data-role="tagsinput" name="diagonosisAwal" value="{{old('diagonosisAwal')}}" placeholder="Diagnosis ">
                                        <span class="help-block">
                                         <strong>{{ $errors->first('diagonosisAwal') }}</strong>
                                     </span>
                                 </div>
                             </div>
-                    </div>
-                    <div class="col-md-6">
+
+                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('diagnosisAkhir') ? 'has-error' : ''}}">
                                  <label class="control-label " for="diagnosisAkhir">Diagnosis Akhir </label>
-                                    <div class="form-group">
-                                       <input type="text" class="form-control" data-role="tagsinput" name="diagnosisAkhir" value="{{old('diagnosisAkhir')}}" placeholder="Diagnosis ">
+                                       <input type="text" class="form-control" required data-role="tagsinput" name="diagnosisAkhir" value="{{old('diagnosisAkhir')}}" placeholder="Diagnosis ">
                                        <span class="help-block">
                                         <strong>{{ $errors->first('diagnosisAkhir') }}</strong>
                                     </span>
                                 </div>
                             </div>
-                    </div>
+               
 
                     <div class="col-md-6">
                         <div class="form-group {{ $errors->has('terapiTindakan') ? 'has-error' : ''}}">
                          <label class="control-label " for="terapiTindakan">Terapi/Tindakan di IGD</label>
-                            <div class="form-group">
-                               <input type="text" class="form-control" data-role="tagsinput" value="{{old('terapiTindakan')}}" name="terapiTindakan" placeholder="Terapi/Tindakan di IGD">
+                               <input type="text" class="form-control" required data-role="tagsinput" value="{{old('terapiTindakan')}}" name="terapiTindakan" placeholder="Terapi/Tindakan di IGD">
                                <span class="help-block">
                                 <strong>{{ $errors->first('terapiTindakan') }}</strong>
                             </span>
                             </div>
                          </div>
-                    </div>
+                 
 
                     <div class="col-md-6">
                         <div class="form-group {{ $errors->has('tindakanLanjut') ? 'has-error' : ''}}">
                          <label class="control-label" for="tindakanLanjut">Tindak Lanjut</label>
-                            <div class="form-group">
-                               <select name="tindakanLanjut" id="tindakanLanjut" class="form-control">
+                               <select name="tindakanLanjut" id="tindakanLanjut" required class="form-control">
                                                              <option value="">pilih</option>
                                                              <option value="Pulang">Pulang</option>
                                                              <option value="Dirujuk">Dirujuk</option>
@@ -368,7 +357,7 @@
                             </span>
                                 </div>
                          </div>
-                    </div>
+               
 
                     <div id="dirujuk" style="display:none;" class="col-md-6">
                                 <div class="form-group {{ $errors->has('dirujuk') ? 'has-error' : ''}}">

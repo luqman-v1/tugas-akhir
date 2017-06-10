@@ -129,15 +129,15 @@ class PelaporanController extends Controller
         
         }elseif ($request->rl == 52) {
     
-            $bedahUmum = Rawat_Jalan::where('klinikTujuan','Bedah Umum')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
+            $bedahUmum = Rawat_Jalan::where('klinikTujuan','Umum')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
            
-            $Digestive = Rawat_Jalan::where('klinikTujuan','Bedah Saluran Cerna (Digestive)')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
+            $Digestive = Rawat_Jalan::where('klinikTujuan','Digestive')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
             
-            $BedahThroraks = Rawat_Jalan::where('klinikTujuan','Bedah Throraks')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
+            $BedahThroraks = Rawat_Jalan::where('klinikTujuan','Throraks')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
            
-            $Orthopedi = Rawat_Jalan::where('klinikTujuan','Bedah Tulang dan Sendi (Orthopedi)')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
+            $Orthopedi = Rawat_Jalan::where('klinikTujuan','Orthopedi')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
            
-            $Urologi = Rawat_Jalan::where('klinikTujuan','Bedah Saluran Kencing (Urologi)')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
+            $Urologi = Rawat_Jalan::where('klinikTujuan','Urologi')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
             
             $BedahPlastik = Rawat_Jalan::where('klinikTujuan','Bedah Plastik dan Estetik')->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
 
@@ -151,34 +151,50 @@ class PelaporanController extends Controller
         return view('pelaporan.extR2')->with(compact('bedahUmum','Digestive','BedahThroraks','Orthopedi','Urologi','BedahPlastik','month_name','year'));
 
          }elseif ($request->rl == 53) {
-                $extR3 = DB::table('diagnosis')
-                ->join('pelayanan_rawatinap','id_pelayananinap','pelayanan_rawatinap.id')
-                ->join('rawat_inap','id_RI','rawat_inap.id')
-                ->join('pasien','id_pasien','pasien.id')
-                ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
-                ->select('kode','diagnosis.nama as aka',DB::raw('
-                    (SELECT COUNT(jenisKelamin) FROM pasien  WHERE jenisKelamin="Laki-Laki"  AND NOT keadaanKeluar="Meninggal" ) 
-                    as lakiHidup,
-                    (SELECT COUNT(jenisKelamin) FROM pasien  WHERE jenisKelamin="Perempuan" AND NOT keadaanKeluar="Meninggal") 
-                    as PerempuanHidup ,
-                    (SELECT COUNT(jenisKelamin) FROM pasien  WHERE jenisKelamin="Laki-Laki"  AND keadaanKeluar="Meninggal" ) 
-                    as lakiMati,
-                    (SELECT COUNT(jenisKelamin) FROM pasien  WHERE jenisKelamin="Perempuan" AND keadaanKeluar="Meninggal") 
-                    as PerempuanMati ,
-                    (SELECT COUNT(jenisKelamin) FROM pasien  ) 
-                    as total
-                    ')
-                )
-              
-                ->groupBy('kode')
-                ->orderBy('total','asc')
-                ->limit(10)
-                ->get();
+            
+            $extR3 = Pasien::join('rawat_inap','pasien.id','id_pasien')
+                        ->join('pelayanan_rawatinap','rawat_inap.id','id_RI')
+                        ->join('diagnosis','pelayanan_rawatinap.id','id_pelayananinap')
+                        ->join('tbl_icd10','diagnosis.kode','tbl_icd10.id')
+                        ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+                        ->select('tbl_icd10.kode',DB::raw('
+                            count(diagnosis.kode) as jumlah,
+                             (SELECT COUNT(jenisKelamin) FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id  WHERE jenisKelamin="Laki-Laki" and not keadaanKeluar="Meninggal" ) 
+                                as lakiHidup,
+                        (SELECT COUNT(jenisKelamin) FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id  WHERE jenisKelamin="Perempuan" and not keadaanKeluar="Meninggal") 
+                        as PerempuanHidup ,
+                        (SELECT COUNT(jenisKelamin) FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id  WHERE jenisKelamin="Laki-Laki" and keadaanKeluar="Meninggal" ) 
+                        as lakiMati,
+                        (SELECT COUNT(jenisKelamin) FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id  WHERE jenisKelamin="Perempuan" and keadaanKeluar="Meninggal") 
+                        as PerempuanMati ,
+                            (SELECT COUNT(lakiHidup+PerempuanHidup+lakiMati+PerempuanMati)  FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id ) 
+                            as total
+                            '))
+                        ->whereNotNull('id_pelayananinap')
+                        ->whereNull('diagnosis.deleted_at')
+                        ->groupBy('diagnosis.kode')
+                        ->orderBy('jumlah','desc')
+                        ->limit(10)
+                        ->get();
 
-             
              return view('pelaporan.extR3')->with(compact('extR3','month_name','year'));
          }else{
-            return view('pelaporan.extr4');
+              $extR4 = Pasien::join('rawat_jalan','pasien.id','id_pasien')
+                        ->join('pelayanan_rawatjalan','rawat_jalan.id','id_RJ')
+                        ->join('diagnosis','pelayanan_rawatjalan.id','id_pelayananjalan')
+                        ->join('tbl_icd10','diagnosis.kode','tbl_icd10.id')
+                        ->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])
+                        ->select('tbl_icd10.kode',DB::raw('
+                            count(diagnosis.kode) as jumlah,
+                            count(tglKunjungan) as  kunjungan
+                            '))
+                        ->whereNotNull('id_pelayananjalan')
+                        ->whereNull('diagnosis.deleted_at')
+                        ->groupBy('diagnosis.kode')
+                        ->orderBy('jumlah','desc')
+                        ->limit(10)
+                        ->get();
+            return view('pelaporan.extr4')->with(compact('extR4','month_name','year'));
          }   
     }
 
@@ -193,26 +209,32 @@ class PelaporanController extends Controller
         if ($request->index == "penyakit") {
             # code...
         }elseif ($request->index == "tindakan") {
-            # code...
+              $ri = Pasien::join('rawat_inap','pasien.id','id_pasien')
+                        ->join('pelayanan_rawatinap','rawat_inap.id','id_RI')
+                         ->join('tindakan','pelayanan_rawatinap.id','tindakan.id_pelayananinap')
+                        ->join('tbl_icd9','tindakan.kode','tbl_icd9.id')
+                        ->select('pasien.nama as namaPasien','pasien.*','pelayanan_rawatinap.*','rawat_inap.*','tindakan.*','tbl_icd9.*')
+                        ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+                        ->where('tindakan.kode',$request->list)
+                        ->groupBy('pelayanan_rawatinap.id')
+                        ->get();
+                      $tindakan  = $request->list;
+            return view('pelaporan.indexTindakan')->with(compact('ri','tindakan'));  
+
         }elseif ($request->index == "dokter") {
 
-             $pri = PelayananRI::where('namaDokterPj',$request->list)
-            ->join('rawat_inap','id_RI','rawat_inap.id')->join('pasien','id_pasien','pasien.id')
-            ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
-            ->get(); 
-
-            $ri = rawat_igd::where('dokterJaga',$request->list)
-            ->join('pasien','id_pasien','pasien.id')
-            ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
-            ->get();
-            $rj =  rawat_jalan::where('DokterPJ',$request->list)
-            ->join('pasien','id_pasien','pasien.id')
-            ->whereBetween('tglMasuk', [$request->dariTanggal,$request->sampaiTanggal])
-            ->get();
+             $ri = Pasien::join('rawat_inap','pasien.id','id_pasien')
+                        ->join('pelayanan_rawatinap','rawat_inap.id','id_RI')
+                        ->join('diagnosis','pelayanan_rawatinap.id','id_pelayananinap')
+                        ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+                        ->where('namaDokterPj',$request->list)
+                        ->groupBy('pelayanan_rawatinap.id')
+                        ->get();
+          
             
             $dokter = $request->list;
 
-            return view('pelaporan.indexDokter')->with(compact('pri','ri','rj','dokter'));
+            return view('pelaporan.indexDokter')->with(compact('ri','dokter'));
 
         }else{
 

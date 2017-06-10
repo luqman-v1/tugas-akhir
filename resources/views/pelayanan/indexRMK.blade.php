@@ -24,7 +24,7 @@
 
       <div class="box">
         <div class="box-header">
-          <h3 style="text-align: center;">Antrian Pasien Pelayanan Rawat Jalan</h3>
+          <h3 style="text-align: center;">Antrian Pelayanan Rawat Jalan</h3>
        </div>
        <!-- /.box-header -->
        <div class="box-body">

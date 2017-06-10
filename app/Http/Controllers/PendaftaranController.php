@@ -225,6 +225,9 @@ class PendaftaranController extends Controller
     public function igdInput($id){
 
          $igd = Pasien::findOrFail($id);
+           $dokter = role_user::join('users','user_id','users.id')->where('role_id',6)->get();
+        $perawat = role_user::join('users','user_id','users.id')->where('role_id',7)->get();
+         
          
             $biday = new DateTime($igd->tglLahir);
             $today = new DateTime();
@@ -234,7 +237,7 @@ class PendaftaranController extends Controller
             $igd['bulan'] = $diff->m;
             $igd['hari'] = $diff->d;
 
-        return view('pendaftaran.igdInput')->with(compact('igd'));
+        return view('pendaftaran.igdInput')->with(compact('igd','dokter','perawat'));
     }
 
     public function rawatIgdDelete($id){

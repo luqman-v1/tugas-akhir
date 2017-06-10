@@ -245,11 +245,11 @@
                                                <div class="input-group date">
                                                     <select name="klinikTujuan" required class="form-control">
                                                     <option value="">pilih</option>
-                                                        <option value="Bedah Umum">Bedah Umum</option>
-                                                        <option value="Bedah Saluran Cerna (Digestive)">Bedah Saluran Cerna (Digestive)</option>
-                                                        <option value="Bedah Throraks">Bedah Throraks</option>
-                                                        <option value="Bedah Tulang dan Sendi (Orthopedi)">Bedah Tulang dan Sendi (Orthopedi)</option>
-                                                        <option value="Bedah Saluran Kencing (Urologi)">Bedah Saluran Kencing (Urologi)</option>
+                                                        <option value="Umum">Bedah Umum</option>
+                                                        <option value="Digestive">Bedah Saluran Cerna (Digestive)</option>
+                                                        <option value="Throraks">Bedah Throraks</option>
+                                                        <option value="Orthopedi">Bedah Tulang dan Sendi (Orthopedi)</option>
+                                                        <option value="Urologi">Bedah Saluran Kencing (Urologi)</option>
                                                         <option value="Bedah Plastik dan Estetik">Bedah Plastik dan Estetik</option>
                                                     </select>
                                                     <span class="help-block">
@@ -266,7 +266,7 @@
                                                 <select name="DokterPJ" required class="form-control">
                                                 <option value="">pilih</option>
                                                     @foreach($dokter as $data)
-                                                    <option value="{{$data->name}}">{{$data->name}}</option>
+                                                    <option value="{{$data->id}}">{{$data->name}}</option>
                                                     @endforeach
                                                 </select>
 

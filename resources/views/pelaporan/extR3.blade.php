@@ -36,29 +36,34 @@
         <td style="text-align: center;" rowspan="2"><b>No Urut</b></td>
         <td style="text-align: center;" rowspan="2"><b>Kode ICD 10</b></td>
         <td style="text-align: center;" rowspan="2"><b>Deskripsi</b></td>
-        <td style="text-align: center;" colspan="2"><b>Pasien Keluar Hidup Menurut Jenis Kelamin</b></td>
-        <td style="text-align: center;" colspan="2"><b>Pasien Keluar Mati Menurut Jenis Kelamin</b></td>
-        <td style="text-align: center;" rowspan="2"><b>Total (Hidup & Mati)</td>
+        {{-- <td style="text-align: center;" colspan="2"><b>Pasien Keluar Hidup Menurut Jenis Kelamin</b></td> --}}
+        {{-- <td style="text-align: center;" colspan="2"><b>Pasien Keluar Mati Menurut Jenis Kelamin</b></td> --}}
+        {{-- <td style="text-align: center;" rowspan="2"><b>Total (Hidup & Mati)</td> --}}
       </tr>
       <tr>
-        <td style="text-align: center;"><b>Laki-laki</b></td>
-        <td style="text-align: center;"><b>Perempuan</b></td>
-        <td style="text-align: center;"><b>Laki-laki</b></td>
-        <td style="text-align: center;"><b>Perempuan</b></td>
+        {{-- <td style="text-align: center;"><b>Laki-laki</b></td> --}}
+        {{-- <td style="text-align: center;"><b>Perempuan</b></td> --}}
+        {{-- <td style="text-align: center;"><b>Laki-laki</b></td> --}}
+        {{-- <td style="text-align: center;"><b>Perempuan</b></td> --}}
       </tr>
       @php
         $i=1;
       @endphp
+
       @foreach($extR3 as $data)
+      @php
+        $kode =App\ICD::where('kode',$data->kode)->first();
+        $nama = App\tbl_icd10nama::where('id_tblicd10',$kode->id)->first();
+      @endphp
       <tr>
         <td style="text-align: center;">{{$i}}</td>
         <td style="text-align: center;">{{$data->kode}}</td>
-        <td style="text-align: center;">{{$data->aka}}</td>
-        <td style="text-align: center;">{{$data->lakiHidup}}</td>
-        <td style="text-align: center;">{{$data->PerempuanHidup}}</td>
-        <td style="text-align: center;">{{$data->lakiMati}}</td>
-        <td style="text-align: center;">{{$data->PerempuanMati}}</td>
-        <td style="text-align: center;">{{$data->total}}</td>
+        <td style="text-align: center;">{{$nama->nama}}</td>
+        {{-- <td style="text-align: center;">{{$data->lakiHidup}}</td> --}}
+        {{-- <td style="text-align: center;">{{$data->PerempuanHidup}}</td> --}}
+        {{-- <td style="text-align: center;">{{$data->lakiMati}}</td> --}}
+        {{-- <td style="text-align: center;">{{$data->PerempuanMati}}</td> --}}
+        {{-- <td style="text-align: center;">{{$data->total}}</td> --}}
       </tr>
         @php
         $i++;  

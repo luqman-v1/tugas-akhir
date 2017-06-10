@@ -1,5 +1,5 @@
 @extends('layouts.index')
-@section('title') Nama Dokter : {{ App\User::find($dokter)->name }}  @endsection
+@section('title') Operasi : {{ App\ICD9::find($tindakan)->nama }}  @endsection
 @section('css')
 <link rel="stylesheet" href="{{url('/plugins/datepicker/datepicker3.css')}}">
 <link rel="stylesheet" href="{{url('/plugins/timepicker/bootstrap-timepicker.min.css')}}">
@@ -24,7 +24,7 @@
 
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title"><b>Nama Dokter :</b> {{ App\User::find($dokter)->name }}</h3> 
+          <h3 class="box-title"><b>Operasi :</b> {{ App\ICD9::find($tindakan)->nama }}</h3> 
       </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -56,7 +56,7 @@
              <tr>
                 <td>{{ $i }}</td>
                 <td>{{$data->noRm}}</td>
-                <td>{{$data->nama}}</td>
+                <td>{{$data->namaPasien}}</td>
                 <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
                 <td>{{ $data->jenisKelamin }}</td>
                 <td>{{ $tahun }}</td>

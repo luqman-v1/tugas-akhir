@@ -830,7 +830,7 @@
                                  <select name="kodeTindakan[]" class="form-control select2">
                                      <option value="">pilih kode tindakan</option>
                                      @foreach($icd9 as $data)
-                                     <option value="{{$data->kode}}">{{$data->kode}}</option>
+                                     <option value="{{$data->id}}">{{$data->nama}}</option>
                                      @endforeach      
                                  </select>
                                  <span class="add_field_button2 input-group-addon"><span class="glyphicon glyphicon-plus"></span></span>
@@ -1100,7 +1100,7 @@
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
             
-            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label " for="kodeTindakan"></label><div class="input-group date"><select name="kodeTindakan[]" class="form-control select2"><option value="">pilih kode tindakan</option> @foreach($icd9 as $data) <option value="{{$data->kode}}">{{$data->kode}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
+            $(wrapper).append('<div class="col-md-6"><div class="form-group"><label class="control-label " for="kodeTindakan"></label><div class="input-group date"><select name="kodeTindakan[]" class="form-control select2"><option value="">pilih kode tindakan</option> @foreach($icd9 as $data) <option value="{{$data->id}}">{{$data->nama}}</option> @endforeach </select><a href="#" class="remove_field">Remove</a></div><br><span class="help-block"><strong></strong></span></div></div>'); //add input box
         }
     });
     
