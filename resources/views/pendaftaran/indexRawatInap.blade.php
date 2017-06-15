@@ -55,12 +55,12 @@
               <td>{{$data->tanggal_masuk}}</td>
               <td>{{$data->caraBayar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
-              <td>{{$data->bangsal}}</td>
-              <td>{{$data->kelas}}</td>  
-              <td>{{$data->kamar}}</td>
+              <td>{{App\Ruangan\Bangsal::find($data->bangsal)->nama}}</td>
+              <td>{{App\Ruangan\Kelas::find($data->kelas)->nama}}</td>
+              <td>{{App\Ruangan\No_Kamar::find($data->kamar)->kamar_no}}</td>
               <td> 
-               <button data-toggle="modal" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
-               <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+               <button data-toggle="modal" title="Edit" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
+               <button title="Hapus" data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
              </td>
            </tr>
            <?php $i++; ?>
@@ -92,7 +92,7 @@
                     <div class="form-group{{ $errors->has('tanggal_masuk') ? ' has-error' : '' }}">
                       <label class="control-label " for="tanggal_masuk">Tanggal Masuk</label><br>
                       <div class='input-group date'>
-                        <input placeholder="Tanggal Kunjungan" type='text' value="<?php echo date("Y-m-d"); ?>" name="tanggal_masuk" class="form-control" id="tanggal_masuk">
+                        <input placeholder="Tanggal Kunjungan" type='text' value="" name="tanggal_masuk" class="form-control" id="tanggal_masuk">
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -110,7 +110,7 @@
                     <div class="form-group{{ $errors->has('jam_masuk') ? ' has-error' : '' }}">
                       <label class="control-label " for="jam_masuk">Jam Masuk</label><br>
                       <div class="input-group">
-                        <input type="text" name="jam_masuk" id="jam_masuk" value="{{old('jam_masuk')}}" class="form-control timepicker">
+                        <input type="text" name="jam_masuk" id="jam_masuk" value="" class="form-control timepicker">
 
                         <div class="input-group-addon">
                           <i class="fa fa-clock-o"></i>
@@ -214,6 +214,11 @@
         <div class="form-group">
           <select name="kelas" id="kelas" class="form-control">
             <option value="">pilih</option>
+            @foreach($kelas as $key=>$value)
+
+           <option value="{{ $value->id }}">{{ $value->nama }}</option> 
+ 
+            @endforeach
           </select>
 
           <span class="help-block">
@@ -232,6 +237,9 @@
       <div class="form-group">
         <select name="kamar" id="kamar" class="form-control">
           <option value="">pilih</option>
+           @foreach($kamar as $key=>$value)
+            <option value="{{ $value->id }}">{{ $value->kamar_no }}</option>
+            @endforeach
         </select>
 
         <span class="help-block">
@@ -286,7 +294,10 @@
     autoclose: true,
     format: 'yyyy-mm-dd'
   });
-
+   $('#tanggal_masuk').datepicker({
+    autoclose: true,
+    format: 'yyyy-mm-dd'
+  });
      //Timepicker
      $(".timepicker").timepicker({
       showInputs: false,
@@ -368,13 +379,13 @@ $(document).on('click', '.edit-modal', function() {
       success: function(data){
         $('#tanggal_masuk').val(data.tanggal_masuk);
         $('#rujukan').val(data.rujukan);
-        // $('#kelas').val(data.kelas);
-        // $('#kamar').val(data.kamar);
+        $('#kelas').val(data.kelas);
+        $('#kamar').val(data.kamar);
         $('#jam_masuk').val(data.jam_masuk);
         $('#caraMasuk').val(data.caraMasuk);
         $('#caraDatang').val(data.caraDatang);
         $('#caraBayar').val(data.caraBayar);
-        // $('#bangsal').val(data.bangsal);
+        $('#bangsal').val(data.bangsal);
         $('#id').val(data.id);
         // console.log(data);
       }

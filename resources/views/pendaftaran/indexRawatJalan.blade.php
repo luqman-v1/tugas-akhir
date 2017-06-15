@@ -55,8 +55,8 @@
               <td>{{$data->caraBayar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               <td> 
-               <button data-toggle="modal" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
-               <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+               <button data-toggle="modal" title="Edit" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
+               <button data-toggle="modal" title="Hapus" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
              </td>
            </tr>
            <?php $i++; ?>
@@ -87,7 +87,7 @@
                       <div class="form-group{{ $errors->has('tglKunjungan') ? ' has-error' : '' }}">
                         <label class="control-label " for="tglKunjungan">Tanggal Kunjungan</label><br>
                         <div class='input-group date'>
-                          <input placeholder="Tanggal Kunjungan" type='text' value="@php echo date("Y-m-d"); @endphp" name="tglKunjungan" class="form-control" id="tanggal_kunjungan">
+                          <input placeholder="Tanggal Kunjungan" type='text' value="" name="tglKunjungan" class="form-control" id="tanggal_kunjungan">
                           <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                           </span>
@@ -104,7 +104,7 @@
                    <label class="control-label " for="caraDatang">Cara Datang</label>
                    <div class="form-group">
                      <select name="caraDatang" id="caraDatang" class="form-control">
-                       <option>pilih</option>
+                       <option value="">pilih</option>
                        <option value="Sendiri">Sendiri</option>
                        <option value="Rujukan">Rujukan</option>
                      </select>
@@ -126,7 +126,7 @@
                  <label class="control-label " for="caraBayar">Cara Bayar</label>
                  <div class="form-group">
                    <select name="caraBayar" id="caraBayar" class="form-control" onChange="changetextbox();">
-                     <option>pilih</option>
+                     <option value="">pilih</option>
                      <option value="BPJS">BPJS</option>
                      <option value="UMUM">UMUM</option>
                    </select>
@@ -143,7 +143,7 @@
                  <div class="input-group date">
                   <div class="form-group">
                     <select name="klinikTujuan" id="klinikTujuan" class="form-control">
-                      <option>pilih</option>
+                      <option value="">pilih</option>
                       <option value="Bedah Umum">Bedah Umum</option>
                       <option value="Bedah Saluran Cerna (Digestive)">Bedah Saluran Cerna (Digestive)</option>
                       <option value="Bedah Throraks">Bedah Throraks</option>
@@ -165,9 +165,9 @@
                <div class="input-group date">
                 <div class="form-group">
                   <select name="DokterPJ" id="DokterPJ" class="form-control">
-                    <option>pilih</option>
+                    <option value="">pilih</option>
                     @foreach($dokter as $data)
-                    <option value="{{$data->name}}">{{$data->name}}</option>
+                    <option value="{{$data->id}}">{{$data->name}}</option>
                     @endforeach
                   </select>
 

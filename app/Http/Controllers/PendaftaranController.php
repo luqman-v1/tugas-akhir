@@ -60,6 +60,10 @@ class PendaftaranController extends Controller
             'klinikTujuan' => 'required',
             'DokterPJ' => 'required',
             ]);
+         if ($request->caraDatang == "Rujukan" and $request->rujukan == null OR $request->caraDatang == "Sendiri" and $request->rujukan != null  ) {
+              Alert::error('Opps...', 'periksa kembali cara datang');
+             return back();
+         }
         $input = $request->all();
         $data = Rawat_Jalan::find($request->id);
         $data->update($input);
@@ -117,7 +121,10 @@ class PendaftaranController extends Controller
             'kelas' => 'required',
             'kamar' => 'required',
             ]);
-
+        if ($request->caraDatang == "Rujukan" and $request->rujukan == null OR $request->caraDatang == "Sendiri" and $request->rujukan != null  ) {
+              Alert::error('Opps...', 'periksa kembali cara datang');
+             return back();
+         }
         $input = $request->all();
         $data = Rawat_Inap::find($request->id);
         $data->update($input);
@@ -136,8 +143,10 @@ class PendaftaranController extends Controller
             ->whereNull('rawat_inap.deleted_at')
         ->get();
          $bangsal = Bangsal::pluck("nama","id");
+         $kelas = Kelas::all();
+         $kamar= No_Kamar::all();
 
-        return view('pendaftaran.indexRawatInap')->with('inap',$inap)->with('bangsal',$bangsal);
+        return view('pendaftaran.indexRawatInap')->with('inap',$inap)->with('bangsal',$bangsal)->with('kelas',$kelas)->with('kamar',$kamar);
     }
 
     public function rawatInapInput($id){
@@ -268,7 +277,10 @@ class PendaftaranController extends Controller
             'dokterJaga' => 'required',
             'perawat' => 'required',
             ]);
-
+            if ($request->caraDatang == "Rujukan" and $request->rujukan == null OR $request->caraDatang == "Sendiri" and $request->rujukan != null  ) {
+              Alert::error('Opps...', 'periksa kembali cara datang');
+             return back();
+         }
         $input = $request->all();
         $data = Rawat_IGD::find($request->id);
 

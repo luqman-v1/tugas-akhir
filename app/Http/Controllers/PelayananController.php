@@ -423,6 +423,10 @@ class PelayananController extends Controller
             'sebabKematian' => 'required',
             'dokterMemulangkan' => 'required',
             ]);
+        if($request->keadaanKeluar == "Meninggal" and $request->tglMeninggal == null and $request->jamMeninggal == null){
+            Alert::error('Opps..', 'Tanggal Meninggal dan Jam Meninggal Harus di masukan');
+            return back();
+        }
 
         $input = $request->all();
         $data = PelayananRI::find($request->id);
@@ -805,6 +809,27 @@ class PelayananController extends Controller
     }
 
     public function IndexlgdSave(Request $request){
+         $this->validate($request, [
+            'jenisKasus' => 'required',
+            'tindakanResuitasi' => 'required',
+            'cramsScore' => 'required',
+            'anamnesis' =>'required',
+            'pemeriksaanFisik' => 'required',
+            'pemeriksaanStatus' => 'required',
+            'pemeriksaanLaboratorium' => 'required',
+            'pemeriksaanRadiologi' => 'required',
+            'diagonosisAwal' => 'required',
+            'terapiTindakan' => 'required',
+            'diagnosisAkhir' => 'required',
+            'tindakanLanjut' => 'required',
+            ]);
+         if ($request->tindakanLanjut == "Dirujuk" and $request->dirujuk== null) {
+             Alert::error('Opps..', 'Rujukan tidak Boleh Kosong');
+             return back();
+         }elseif ($request->tindakanLanjut =="Meninggal" and $request->tglMeninggal==null and $request->jamMeninggal==null) {
+             Alert::error('Opps..', 'tanggal dan Jam Meninggal tidak Boleh Kosong');
+             return back();
+         }
         $input = $request->all();
         $data = PelayananIGD::find($request->id);
         $data->pemeriksaanFisik = $request->pemeriksaanFisik;

@@ -293,25 +293,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group {{ $errors->has('caraDatang') ? 'has-error' : ''}}">
-                                 <label class="control-label " for="caraDatang">Cara Datang</label>
-                                 <div class="form-group">
-                                   <select name="caraDatang" id="caraDatang" class="form-control" onChange="changetextbox();">
-                                   <option value="">pilih</option>
-                                   <option selected="" hidden="" value="{{ $data->caraDatang }}">{{ $data->caraDatang }}</option>
-                                       <option value="Sendiri">Sendiri</option>
-                                       <option value="Rujukan">Rujukan</option>
-                                   </select>
-                                   <span class="help-block">
-                                    <strong>{{ $errors->first('caraDatang') }}</strong>
-                                </span>
-                            </div>
-                        </div>
-
-                    <div class="form-group">
-                        <label for="rujukan">Rujukan</label>
-                        <input class="form-control" name="rujukan" disabled="" value="{{ $data->rujukan }}" id="rujukan" type="text" placeholder="Rujukan">
-                    </div>
 
                     <div class="form-group">
                         <label for="noPesertaJKN">Nomor Peserta JKN</label>

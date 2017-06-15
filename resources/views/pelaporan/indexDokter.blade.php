@@ -61,7 +61,7 @@
                 <td>{{ $data->jenisKelamin }}</td>
                 <td>{{ $tahun }}</td>
                 <td>{{ $data->tanggal_masuk }} - {{ $data->tglKeluar }}</td>
-                <td>{{ $data->kelas }}</td>
+                <td>{{App\Ruangan\Kelas::find($data->kelas)->nama}}</td>
                 <td>{{ $data->diagnosisUtama  }}/ {{ $data->operasiTindakan }}</td>
                 <td>{{ $data->keadaanKeluar }}</td>
               </tr>

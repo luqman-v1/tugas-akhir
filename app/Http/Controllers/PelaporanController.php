@@ -205,10 +205,41 @@ class PelaporanController extends Controller
 
     public function formIndexCek(Request $request){
         // return $request->all();
+        $this->validate($request, [
+            'dariTanggal' => 'required',
+            'sampaiTanggal' => 'required',
+        ]);
+
+         $dateValue = strtotime($request->dariTanggal);                     
+
+            $year = date("Y", $dateValue) ." "; 
+            $mon = date("m", $dateValue); 
+            $now = Carbon::now();
+            
+            $month_name = date("F", mktime(0, 0, 0, $mon, 10));
 
         if ($request->index == "penyakit") {
-            # code...
+            if ($request->list == null) {
+                Alert::error('pilihan penyakit wajib di pilih');
+                return back();
+            }
+             $ri = Pasien::join('rawat_inap','pasien.id','id_pasien')
+                        ->join('pelayanan_rawatinap','rawat_inap.id','id_RI')
+                         ->join('diagnosis','pelayanan_rawatinap.id','diagnosis.id_pelayananinap')
+                        ->join('tbl_icd10','diagnosis.kode','tbl_icd10.id')
+                        ->select('pasien.nama as namaPasien','pasien.*','pelayanan_rawatinap.*','rawat_inap.*','diagnosis.*','tbl_icd10.*')
+                        ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+                        ->where('diagnosis.kode',$request->list)
+                        ->groupBy('pelayanan_rawatinap.id')
+                        ->get();
+                      $penyakit  = $request->list;
+            return view('pelaporan.indexPenyakit')->with(compact('ri','penyakit'));  
+
         }elseif ($request->index == "tindakan") {
+              if ($request->list == null) {
+                Alert::error('pilihan tindakan wajib di pilih');
+                return back();
+            }
               $ri = Pasien::join('rawat_inap','pasien.id','id_pasien')
                         ->join('pelayanan_rawatinap','rawat_inap.id','id_RI')
                          ->join('tindakan','pelayanan_rawatinap.id','tindakan.id_pelayananinap')
@@ -222,7 +253,10 @@ class PelaporanController extends Controller
             return view('pelaporan.indexTindakan')->with(compact('ri','tindakan'));  
 
         }elseif ($request->index == "dokter") {
-
+              if ($request->list == null) {
+                Alert::error('pilihan dokter wajib di pilih');
+                return back();
+            }
              $ri = Pasien::join('rawat_inap','pasien.id','id_pasien')
                         ->join('pelayanan_rawatinap','rawat_inap.id','id_RI')
                         ->join('diagnosis','pelayanan_rawatinap.id','id_pelayananinap')
@@ -238,6 +272,31 @@ class PelaporanController extends Controller
 
         }else{
 
+               return $kematian = Pasien::join('rawat_inap','pasien.id','id_pasien')
+                        ->join('pelayanan_rawatinap','rawat_inap.id','id_RI')
+                        ->join('diagnosis','pelayanan_rawatinap.id','id_pelayananinap')
+                        ->join('tbl_icd10','diagnosis.kode','tbl_icd10.id')
+                        // ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+                        ->select('tbl_icd10.kode',DB::raw('
+                            count(diagnosis.kode) as jumlah,
+                             (SELECT COUNT(jenisKelamin) FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id  WHERE jenisKelamin="Laki-Laki" and not keadaanKeluar="Meninggal" ) 
+                                as lakiHidup,
+                        (SELECT COUNT(jenisKelamin) FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id  WHERE jenisKelamin="Perempuan" and not keadaanKeluar="Meninggal") 
+                        as PerempuanHidup ,
+                        (SELECT COUNT(jenisKelamin) FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id  WHERE jenisKelamin="Laki-Laki" and keadaanKeluar="Meninggal" ) 
+                        as lakiMati,
+                        (SELECT COUNT(jenisKelamin) FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id  WHERE jenisKelamin="Perempuan" and keadaanKeluar="Meninggal") 
+                        as PerempuanMati ,
+                            (SELECT COUNT(lakiHidup+PerempuanHidup+lakiMati+PerempuanMati)  FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id ) 
+                            as total
+                            '))
+                        ->whereNotNull('id_pelayananinap')
+                        ->whereNull('diagnosis.deleted_at')
+                        ->groupBy('diagnosis.kode')
+                        ->toSql();
+                        $dari = $request->dariTanggal;
+                        $sampai = $request->sampaiTanggal;
+                        return view('pelaporan.indexKematian')->with('kematian',$kematian)->with('dari',$dari)->with('sampai',$sampai);
         }
 
       

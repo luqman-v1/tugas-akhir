@@ -36,6 +36,7 @@
         <td style="text-align: center;" rowspan="2"><b>No Urut</b></td>
         <td style="text-align: center;" rowspan="2"><b>Kode ICD 10</b></td>
         <td style="text-align: center;" rowspan="2"><b>Deskripsi</b></td>
+         <td style="text-align: center;" rowspan="2"><b>Jumlah Kunjungan</td>
         {{-- <td style="text-align: center;" colspan="2"><b>Pasien Keluar Hidup Menurut Jenis Kelamin</b></td> --}}
         {{-- <td style="text-align: center;" colspan="2"><b>Pasien Keluar Mati Menurut Jenis Kelamin</b></td> --}}
         {{-- <td style="text-align: center;" rowspan="2"><b>Total (Hidup & Mati)</td> --}}
@@ -64,6 +65,7 @@
         {{-- <td style="text-align: center;">{{$data->lakiMati}}</td> --}}
         {{-- <td style="text-align: center;">{{$data->PerempuanMati}}</td> --}}
         {{-- <td style="text-align: center;">{{$data->total}}</td> --}}
+        <td style="text-align: center;">{{ $data->jumlah }}</td>
       </tr>
         @php
         $i++;  

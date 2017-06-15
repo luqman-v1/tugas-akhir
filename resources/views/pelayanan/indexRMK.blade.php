@@ -17,7 +17,7 @@
     <li class="active">daftar</li>
   </ol>
 </section>
-
+@role(['dokter','perawat','admin']) 
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
@@ -75,6 +75,8 @@
 <!--End Advanced Tables -->
 <!-- /.row -->
 </section>
+@endrole
+@role(['admin','rekmed']) 
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
@@ -128,7 +130,7 @@
 <!--End Advanced Tables -->
 <!-- /.row -->
 </section>
-
+@endrole
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
@@ -216,7 +218,7 @@
                          <select name="namaPerawat" id="namaPerawat" class="form-control">
                           <option value="">pilih</option>
                           @foreach($perawat as $data)
-                          <option value="{{ $data->name }}">{{ $data->name }}</option>
+                          <option value="{{ $data->id }}">{{ $data->name }}</option>
                           @endforeach
                         </select>
                         <span class="help-block">
@@ -232,7 +234,7 @@
                        <select name="namaPetugasTpp" id="namaPetugasTpp" class="form-control">
                         <option value="">pilih</option>
                         @foreach($rekmed as $data)
-                        <option value="{{ $data->name }}">{{ $data->name }}</option>
+                        <option value="{{ $data->id }}">{{ $data->name }}</option>
                         @endforeach
                       </select>
                       <span class="help-block">
@@ -248,7 +250,7 @@
                      <select name="namaDokterPj" id="namaDokterPj" class="form-control">
                       <option value="">pilih</option>
                       @foreach($dokter as $data)
-                      <option value="{{ $data->name }}">{{ $data->name }}</option>
+                      <option value="{{ $data->id }}">{{ $data->name }}</option>
                       @endforeach
                     </select>
                     <span class="help-block">
@@ -296,7 +298,7 @@
           <div class="form-group{{ $errors->has('tglMeninggal') ? ' has-error' : '' }}">
             <label class="control-label " for="tglMeninggal">Tanggal Meninggal</label><br>
             <div class='input-group date'>
-              <input  type='text'  name="tglMeninggal" class="form-control" id="tglMeninggalID">
+              <input  type='text'  name="tglMeninggal" placeholder="Tanggal Meninggal" class="form-control" id="tglMeninggalID">
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
@@ -314,7 +316,7 @@
           <div class="form-group{{ $errors->has('jamMeninggal') ? ' has-error' : '' }}">
             <label class="control-label " for="jamMeninggal">Jam Meninggal</label><br>
             <div class="input-group">
-              <input type="text" id="jamMeninggal" name="jamMeninggal" value="{{old('jamMeninggal')}}" class="form-control timepicker">
+              <input type="text" id="jamMeninggal" placeholder="Jam Meninggal" name="jamMeninggal" value="{{old('jamMeninggal')}}" class="form-control timepicker">
               <div class="input-group-addon">
                 <i class="fa fa-clock-o"></i>
               </div>
@@ -509,7 +511,7 @@
        <select name="dokterMemulangkan" id="dokterMemulangkan" class="form-control">
         <option value="">pilih</option>
         @foreach($dokter as $data)
-        <option value="{{ $data->name }}">{{ $data->name }}</option>
+        <option value="{{ $data->id }}">{{ $data->name }}</option>
         @endforeach
       </select>
       <span class="help-block">
@@ -522,7 +524,7 @@
   <div class="form-group {{ $errors->has('diagnosisUtama') ? 'has-error' : ''}}">
    <label class="control-label " for="diagnosisUtama">Diagnosa Utama</label>
    <div class="form-group">
-     <input type="text" class="form-control" id="diagnosisUtama" name="diagnosisUtama"  value="{{old('diagnosisUtama')}}" placeholder="Diagnosa Utama">
+     <textarea class="form-control" id="diagnosisUtama" name="diagnosisUtama"  value="{{old('diagnosisUtama')}}" placeholder="Diagnosa Utama"></textarea>
      <span class="help-block">
       <strong>{{ $errors->first('diagnosisUtama') }}</strong>
     </span>
@@ -534,7 +536,7 @@
   <div class="form-group {{ $errors->has('operasiTindakan') ? 'has-error' : ''}}">
    <label class="control-label " for="operasiTindakan">Operasi Tindakan</label>
    <div class="form-group">
-    <input type="text" class="form-control" id="operasiTindakan"  value="{{old('operasiTindakan')}}"  name="operasiTindakan" placeholder="Operasi Tindakan">
+    <textarea class="form-control" id="operasiTindakan"  value="{{old('operasiTindakan')}}"  name="operasiTindakan" placeholder="Operasi Tindakan"></textarea>
     <span class="help-block">
       <strong>{{ $errors->first('operasiTindakan') }}</strong>
     </span>
@@ -546,7 +548,7 @@
   <div class="form-group {{ $errors->has('komplikasi') ? 'has-error' : ''}}">
    <label class="control-label" for="komplikasi">Komplikasi</label>
    <div class="form-group">
-     <input type="text" class="form-control" id="komplikasi" name="komplikasi"  value="{{old('komplikasi')}}" placeholder="Komplikasi">
+     <textarea class="form-control" id="komplikasi" name="komplikasi"  value="{{old('komplikasi')}}" placeholder="Komplikasi"></textarea>
      <span class="help-block">
       <strong>{{ $errors->first('komplikasi') }}</strong>
     </span>
@@ -671,15 +673,11 @@ $(document).on('click', '.edit-modal', function() {
       autoclose: true,
       format: 'yyyy-mm-dd'
     });
-
-     //Timepicker
-     $(".timepicker").timepicker({
-      showInputs: false,
-      minuteStep: 1,
-      locale: 'id',
-      showMeridian :false,
-      use24hours: true
-
+  //Timepicker
+     $('.timepicker').bootstrapMaterialDatePicker({
+        format: 'HH:mm',
+        clearButton: true,
+        date: false
     });
 
      

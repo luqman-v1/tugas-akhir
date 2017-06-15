@@ -1,5 +1,5 @@
 @extends('layouts.index')
-@section('title') Operasi : {{ App\ICD9::find($tindakan)->nama }}  @endsection
+@section('title') Penyakit : {{ App\ICD::find($penyakit)->kode }}  @endsection
 @section('css')
 <link rel="stylesheet" href="{{url('/plugins/datepicker/datepicker3.css')}}">
 <link rel="stylesheet" href="{{url('/plugins/timepicker/bootstrap-timepicker.min.css')}}">
@@ -9,7 +9,7 @@
 <section class="content-header">
   <h1>
       Index 
-      <small>Tindakan</small>
+      <small>Penyakit</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -24,7 +24,11 @@
 
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title"><b>Operasi :</b> {{ App\ICD9::find($tindakan)->nama }}</h3> 
+        @php
+        $kode = App\ICD::find($penyakit);
+        $nama = App\tbl_icd10nama::where('id_tblicd10',$kode->id)->first();
+        @endphp
+          <h3 class="box-title"><b>Diagnosa :</b>{{ $kode->kode }} ({{ $nama->nama }})</h3> 
       </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -35,8 +39,6 @@
                   <th>No RM</th>
                   <th>Nama</th>
                   <th>Alamat</th>
-                  <th>Kelamin</th>
-                  <th>Usia</th>
                   <th>Tgl MRS - KRS</th>
                   <th>Ruangan</th>
                   <th>Diagnosis Utama/Nama Operasi</th>
@@ -58,8 +60,6 @@
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->namaPasien}}</td>
                 <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
-                <td>{{ $data->jenisKelamin }}</td>
-                <td>{{ $tahun }}</td>
                 <td>{{ $data->tanggal_masuk }} - {{ $data->tglKeluar }}</td>
                 <td>{{App\Ruangan\Kelas::find($data->kelas)->nama}}</td>
                 <td>{{ $data->diagnosisUtama  }}/ {{ $data->operasiTindakan }}</td>

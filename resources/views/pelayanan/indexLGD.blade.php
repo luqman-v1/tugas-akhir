@@ -19,7 +19,7 @@
     <li class="active">daftar</li>
 </ol>
 </section>
-
+@role(['dokter','perawat','admin']) 
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
@@ -78,7 +78,8 @@
 </div>
 <!-- /.row -->
 </section>
-
+@endrole
+@role(['admin','rekmed']) 
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
@@ -135,7 +136,7 @@
 </div>
 <!-- /.row -->
 </section>
-
+@endrole
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
@@ -399,7 +400,7 @@
                                         <div class="form-group{{ $errors->has('tglMeninggal') ? ' has-error' : '' }}">
                                             <label class="control-label " for="tglMeninggal">Tanggal Meninggal</label><br>
                                             <div class='input-group date'>
-                                                <input placeholder="tglMeninggal" type='text'  name="tglMeninggal" class="form-control" id="tanggal_masuk">
+                                                <input placeholder="Tanggal Meninggal" type='text'  name="tglMeninggal" class="form-control" id="tanggal_masuk">
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
@@ -417,7 +418,7 @@
                                         <div class="form-group{{ $errors->has('jamMeninggal') ? ' has-error' : '' }}">
                                             <label class="control-label " for="jamMeninggal">Jam Meninggal</label><br>
                                             <div class="input-group">
-                                                <input type="text" id="jamMeninggal" name="jamMeninggal" value="{{old('jamMeninggal')}}" class="form-control timepicker">
+                                                <input type="text" id="jamMeninggal" placeholder="Jam Meninggal" name="jamMeninggal" value="{{old('jamMeninggal')}}" class="form-control timepicker">
                                                 <div class="input-group-addon">
                                                   <i class="fa fa-clock-o"></i>
                                               </div>
@@ -466,8 +467,6 @@
 @endsection
 
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 <script src="{{url('plugins/datepicker/bootstrap-datepicker.js')}}"></script>
 <script src="{{url('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
 <script src="{{url('/plugins/select2/select2.full.min.js')}}"></script>
@@ -526,6 +525,7 @@ $(document).on('click', '.edit-modal', function() {
 
 <script>
   $(function () {
+    
    $(".select2").select2();
      //Date picker
      $('#tglLahir').datepicker({
@@ -539,13 +539,10 @@ $(document).on('click', '.edit-modal', function() {
   });
 
      //Timepicker
-     $(".timepicker").timepicker({
-        showInputs: false,
-        minuteStep: 1,
-        locale: 'id',
-        showMeridian :false,
-        use24hours: true
-
+     $('.timepicker').bootstrapMaterialDatePicker({
+        format: 'HH:mm',
+        clearButton: true,
+        date: false
     });
      
  });

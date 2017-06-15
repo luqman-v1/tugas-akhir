@@ -16,6 +16,7 @@
   <!-- jvectormap -->
   <link rel="stylesheet" href="{{url('plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}">
   <link rel="stylesheet" href="{{url('plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
+  <link rel="stylesheet" href="{{url('plugins/pace/pace.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{url('dist/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -24,6 +25,7 @@
   <link href="{{ url('dist/sweetalert.css') }}" rel="stylesheet">
   <!-- DataTables -->
   <link rel="stylesheet" href="{{url('plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}">
+  <link rel="stylesheet" href="{{url('plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}">
   <link rel="stylesheet" href="{{url('css/style.css')}}">
 
   @yield('css')
@@ -60,6 +62,7 @@
 <script src="{{url('plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{url('bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{url('plugins/chained/jquery.chained.js')}}"></script>
 <!-- FastClick -->
 <script src="{{url('plugins/fastclick/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
@@ -95,6 +98,9 @@
 {{-- validation --}}
 <script src="{{url('plugins/jquery-validation/jquery.validate.js')}}"></script>
 <script src="{{url('plugins/jquery-validation/form-validation.js')}}"></script>
+<script src="{{url('plugins/pace/pace.min.js')}}"></script>
+<script src="{{url('plugins/momentjs/moment.js')}}"></script>
+<script src="{{url('plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js')}}"></script>
 
 
 

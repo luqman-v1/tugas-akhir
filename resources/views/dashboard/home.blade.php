@@ -123,7 +123,7 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Pendaftaran Pasien</h3>
+              <h3 class="box-title">Pendaftaran Pasien Rawat jalan,Inap dan IGD</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -134,9 +134,9 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                   <p class="text-center">
-                    <strong>Pendaftaran Pasien Bulan: @foreach($rj as $data) {{ $data->bulan }} @endforeach Tahun {{ $tahun }}</strong>
+                    <strong>Pendaftaran Pasien Bulan: (@foreach($rj as $data) {{ $data->bulan }}, @endforeach) Tahun {{ $tahun }}</strong>
                   </p>
 
                   <div class="chart">
@@ -146,48 +146,7 @@
                   <!-- /.chart-responsive -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-4">
-                  <p class="text-center">
-                    <strong>Stok Formulir</strong>
-                  </p>
-
-                  <div class="progress-group">
-                    <span class="progress-text">Add Products to Cart</span>
-                    <span class="progress-number"><b>160</b>/200</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">Complete Purchase</span>
-                    <span class="progress-number"><b>310</b>/400</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">Visit Premium Page</span>
-                    <span class="progress-number"><b>480</b>/800</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                  <div class="progress-group">
-                    <span class="progress-text">Send Inquiries</span>
-                    <span class="progress-number"><b>250</b>/500</span>
-
-                    <div class="progress sm">
-                      <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                    </div>
-                  </div>
-                  <!-- /.progress-group -->
-                </div>
+                
                 <!-- /.col -->
               </div>
               <!-- /.row -->
@@ -233,6 +192,17 @@
 
                   <div class="knob-label">Perempuan</div>
                 </div>
+
+                <div class="col-xs-6 col-md-3 text-center">
+                  <input type="text" class="knob" value="{{ $laki }}" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+
+                  <div class="knob-label">Laki-Laki</div>
+                </div>
+                <div class="col-xs-6 col-md-3 text-center">
+                  <input type="text" class="knob" value="{{ $laki }}" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+
+                  <div class="knob-label">Laki-Laki</div>
+                </div>
                   </div>
                 </div>
 
@@ -247,7 +217,7 @@
           <!-- /.box -->
            <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Cara Bayar Pasien</h3>
+              <h3 class="box-title">Pasien Baru</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -261,7 +231,7 @@
               <div class="row">
                <div class="col-md-12">
                   <p class="text-center">
-                    <strong>Cara Bayar Pasien bulan : @foreach($getBulan as $data) {{ $data->bulan }} @endforeach Tahun {{ $tahun }}</strong>
+                    <strong>Pendaftaran Pasien Baru : (@foreach($pasien as $data) {{ $data->bulan }}, @endforeach) Tahun {{ $tahun }}</strong>
                   </p>
                   <div class="chart">
                     <!-- Sales Chart Canvas -->
@@ -518,7 +488,7 @@
     //String - A legend template
     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
     //String - A tooltip template
-    tooltipTemplate: "<%=value %> <%=label%> users"
+    tooltipTemplate: "<%=value %> <%=label%>"
   };
   //Create pie or douhnut chart
   // You can switch between pie and douhnut using the method below.
@@ -611,7 +581,22 @@
     // This will get the first returned node in the jQuery collection.
     var areaChart = new Chart(areaChartCanvas);
 
-    
+     var areaChartData = {
+      labels: [@foreach($pasien as $data) "{{ $data->bulan }}", @endforeach],
+      datasets: [
+        {
+          label: "Pasien Baru",
+          fillColor: "rgba(210, 214, 222, 1)",
+          strokeColor: "rgba(210, 214, 222, 1)",
+          pointColor: "rgba(210, 214, 222, 1)",
+          pointStrokeColor: "#c1c7d1",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          data: [@foreach($pasien as $data) {{ $data->jumlah }}, @endforeach]
+        },
+       
+      ]
+    };
 
     var areaChartOptions = {
       //Boolean - If we should show the scale at all
@@ -658,11 +643,11 @@
     //-------------
     //- LINE CHART -
     //--------------
-    var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
-    var lineChart = new Chart(lineChartCanvas);
-    var lineChartOptions = areaChartOptions;
-    lineChartOptions.datasetFill = false;
-    lineChart.Line(areaChartData, lineChartOptions);
+    // var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+    // var lineChart = new Chart(lineChartCanvas);
+    // var lineChartOptions = areaChartOptions;
+    // lineChartOptions.datasetFill = false;
+    // lineChart.Line(areaChartData, lineChartOptions);
     });
 </script>
 @include('sweet::alert')

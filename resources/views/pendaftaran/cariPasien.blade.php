@@ -196,7 +196,12 @@
                                                        </div>                                                             
                                                    </div>
 
-                                                   <div class="row">
+                                                  
+
+                                        
+                        </div>
+                        <div class="col-lg-6">
+                         <div class="row">
                                                      <div class="col-md-6">
                                                         <div class="form-group {{ $errors->has('jenisKelamin') ? 'has-error' : ''}}">
                                                          <label class="control-label " for="jenisKelamin">Jenis Kelamin</label>
@@ -226,7 +231,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="row">
                                          <div class="col-md-6">
                                             <div class="form-group {{ $errors->has('statusPerkawinan') ? 'has-error' : ''}}">
@@ -258,8 +262,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="form-group {{ $errors->has('pekerjaanPasien') ? 'has-error' : ''}}">
                                     <label for="pekerjaanPasien">Pekerjaan Pasien</label>
@@ -312,21 +314,6 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group {{ $errors->has('caraDatang') ? 'has-error' : ''}}">
-                                 <label class="control-label " for="caraDatang">Cara Datang</label>
-                                 <div class="form-group">
-                                   <input  type='text' readonly=""  value="@php echo date("Y-m-d"); @endphp" name="tglMasuk" class="form-control" id="caraDatang">
-                                   <span class="help-block">
-                                    <strong>{{ $errors->first('caraDatang') }}</strong>
-                                </span>
-                            </div>
-                        </div>
-
-                    <div class="form-group">
-                        <label for="rujukan">Rujukan</label>
-                        <input class="form-control" name="rujukan" readonly="" value="{{old('rujukan')}}" id="rujukan" type="text">
                     </div>
 
                     <div class="form-group">

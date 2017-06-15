@@ -55,8 +55,8 @@
               <td>{{$data->caraBayar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               <td> 
-               <button data-toggle="modal" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
-               <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+               <button data-toggle="modal" title="Edit" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
+               <button title="Hapus" data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
              </td>
            </tr>
            <?php $i++; ?>
@@ -88,7 +88,7 @@
                       <div class="form-group{{ $errors->has('tanggal_masuk') ? ' has-error' : '' }}">
                         <label class="control-label " for="tanggal_masuk">Tanggal Masuk</label><br>
                         <div class='input-group date'>
-                          <input placeholder="Tanggal Kunjungan" type='text' value="<?php echo date("Y-m-d"); ?>" name="tanggal_masuk" class="form-control" id="tanggal_masuk">
+                          <input placeholder="Tanggal Kunjungan" type='text' value="" name="tanggal_masuk" class="form-control" id="tanggal_masuk">
                           <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                           </span>
@@ -252,7 +252,7 @@
       <select name="dokterJaga" id="dokterJaga" class="form-control">
         <option value="">pilih</option>
         @foreach($dokter as $data)
-        <option value="{{ $data->name }}">{{ $data->name }}</option>
+        <option value="{{ $data->id }}">{{ $data->name }}</option>
         @endforeach
       </select>
 
@@ -272,7 +272,7 @@
       <select name="perawat" id="perawat" class="form-control">
         <option value="">pilih</option>
         @foreach($perawat as $data)
-        <option value="{{ $data->name }}">{{ $data->name }}</option>
+        <option value="{{ $data->id }}">{{ $data->name }}</option>
         @endforeach
       </select>
       <span class="help-block">
@@ -323,13 +323,9 @@
 <script>
   $(function () {
 
-     //Date picker
-     $('#tglLahir').datepicker({
-      autoclose: true,
-      format: 'yyyy-mm-dd'
-    });
+   
    //Date picker
-   $('#tanggal_kunjungan').datepicker({
+   $('#tanggal_masuk').datepicker({
     autoclose: true,
     format: 'yyyy-mm-dd'
   });

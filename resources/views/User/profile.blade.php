@@ -26,13 +26,9 @@
               <img class="profile-user-img img-responsive img-circle" src="{{url('foto/'.auth::user()->foto)}}" alt="User profile picture">
 
               <h3 class="profile-username text-center">{{$detailProf->name}}</h3>
-              	 @php
-                    $cek = App\role_user::where('user_id',Auth::User()->id)->first();
-                    $cek->role_id;
-                    $jabatan = App\Role::find($cek)->display_name;
-                  @endphp
+              	
                   
-              <p class="text-muted text-center">{{$jabatan}}</p>
+              <p class="text-muted text-center">{{ Auth::user()->roles->first()->display_name }}</p>
 
               <ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
