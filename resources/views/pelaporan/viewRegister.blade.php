@@ -41,7 +41,7 @@
                 <td>{{ $i }}</td>
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
-                <td>{{$data->tglLahir}}</td>
+                <td>{{ date('d F Y', strtotime($data->tglLahir))}}</td>
                 <td>Jl. {{$data->dukuh}} RT{{$data->rt}}/{{$data->rw}},Kelurahan {{$data->kelurahan}}, Kecamatan {{$data->kecamatan}}, {{$data->kabupaten}}, {{$data->provinsi}}</td>
               </tr>
             <?php $i++; ?>

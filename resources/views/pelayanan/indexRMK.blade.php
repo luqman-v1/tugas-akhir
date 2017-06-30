@@ -17,14 +17,14 @@
     <li class="active">daftar</li>
   </ol>
 </section>
-@role(['dokter','perawat','admin']) 
+@role(['dokter','perawat IRNA','admin','Perawat UGD','Perawat Poliklinik'])
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
 
       <div class="box">
         <div class="box-header">
-          <h3 style="text-align: center;">Antrian Pelayanan Rawat Jalan</h3>
+          <h3 style="text-align: center;">Antrian Pelayanan Rawat Inap</h3>
        </div>
        <!-- /.box-header -->
        <div class="box-body">
@@ -52,13 +52,13 @@
               <td>{{$data->noRm}}</td>
               <td>{{$data->nama}}</td>
               <td>{{$data->noHp}}</td>
-              <td>{{$data->tanggal_masuk}}</td>
+              <td>{{ date('d F Y', strtotime($data->tanggal_masuk))}}</td>
               <td>{{$data->caraBayar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
-              <td>{{$data->bangsal}}</td>
-              <td>{{$data->kelas}}</td>  
-              <td>{{$data->kamar}}</td>
-            <td>
+             <td>{{App\Ruangan\Bangsal::find($data->bangsal)->nama}}</td>
+              <td>{{App\Ruangan\Kelas::find($data->kelas)->nama}}</td>
+              <td>{{App\Ruangan\No_Kamar::find($data->kamar)->kamar_no}}</td>
+              <td> 
               <a href="{{ url('/rmk/form/'.$data->id) }}"><button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span></button></a>
               
             </td>
@@ -105,7 +105,7 @@
             <td>{{ $i }}</td>
             <td>{{$data->noRm}}</td>
             <td>{{$data->nama}}</td>
-            <td>{{$data->tglLahir}}</td>
+            <td>{{ date('d F Y', strtotime($data->tglLahir))}}</td>
               @if($data->kode == null)
             <td><span class="label label-warning">Harap Masukan Kode ICD</span></td>
             @else
@@ -164,10 +164,10 @@
            <td>{{ $i }}</td>
               <td>{{$data->noRm}}</td>
               <td>{{$data->nama}}</td>
-              <td>{{$data->namaDokterPj}}</td>
+              <td>{{App\User::find($data->namaDokterPj)->name}}</td>
               <td>{{$data->noHp}}</td>
-              <td>{{$data->tanggal_masuk}}</td>
-              <td>{{$data->tglKeluar}}</td>
+              <td>{{ date('d F Y', strtotime($data->tanggal_masuk))}}</td>
+              <td>{{ date('d F Y', strtotime($data->tglKeluar))}}</td>
               <td>{{$data->caraBayar}}</td>
               <td>{{$data->keadaanKeluar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>

@@ -46,7 +46,7 @@
                 <td>{{ $i }}</td>
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
-                <td>{{$data->tglLahir}}</td>
+                <td>{{ date('d F Y', strtotime($data->tglLahir))}}</td>
                 <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
                 <td>
                <button type="button" class="btn-xs btn-info"  data-toggle="modal" value="{{$data->noRm}}" id="noRm{{ $i }}" name="noRm" data-target="#myModal">Lihat Detail </button> 

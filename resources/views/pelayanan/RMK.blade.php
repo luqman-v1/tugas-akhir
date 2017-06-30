@@ -359,7 +359,7 @@
     <div class="col-md-6">
         <div class="form-group {{ $errors->has('penyebabLuarCedera') ? 'has-error' : ''}}">
          <label class="control-label " for="penyebabLuarCedera">Penyebab Luar Cedera/Keracunan/Morfologi Neoplasma</label>
-           <input type="text" class="form-control" required value="{{old('penyebabLuarCedera')}}" name="penyebabLuarCedera" placeholder="Penyebab Luar Cedera/Keracunan/Morfologi Neoplasma">
+           <input type="text" class="form-control" value="{{old('penyebabLuarCedera')}}" name="penyebabLuarCedera" placeholder="Penyebab Luar Cedera/Keracunan/Morfologi Neoplasma">
            <span class="help-block">
             <strong>{{ $errors->first('penyebabLuarCedera') }}</strong>
         </span>
@@ -401,7 +401,7 @@
  <div class="col-md-6">
     <div class="form-group {{ $errors->has('infeksiNosokomial') ? 'has-error' : ''}}">
      <label class="control-label " for="infeksiNosokomial">Infeksi Nosokomial</label>
-       <input type="text" class="form-control" required name="infeksiNosokomial" value="{{old('infeksiNosokomial')}}" placeholder="Infeksi Nosokomial">
+       <input type="text" class="form-control" name="infeksiNosokomial" value="{{old('infeksiNosokomial')}}" placeholder="Infeksi Nosokomial">
        <span class="help-block">
         <strong>{{ $errors->first('infeksiNosokomial') }}</strong>
     </span>
@@ -412,7 +412,7 @@
 <div class="col-md-6">
     <div class="form-group {{ $errors->has('penyebabInfeksiNosokomial') ? 'has-error' : ''}}">
      <label class="control-label " for="penyebabInfeksiNosokomial">Penyebab Infeksi Nosokomial</label>
-       <input type="text" class="form-control" required value="{{old('penyebabInfeksiNosokomial')}}" name="penyebabInfeksiNosokomial" placeholder="Penyebab Infeksi Nosokomial">
+       <input type="text" class="form-control" value="{{old('penyebabInfeksiNosokomial')}}" name="penyebabInfeksiNosokomial" placeholder="Penyebab Infeksi Nosokomial">
        <span class="help-block">
         <strong>{{ $errors->first('penyebabInfeksiNosokomial') }}</strong>
     </span>
@@ -446,7 +446,7 @@
  <div class="col-md-6">
     <div class="form-group {{ $errors->has('pengobatanRadio/nuklir') ? 'has-error' : ''}}">
      <label class="control-label " for="pengobatanRadio">Pengobatan Radioterapi/Nuklir</label>
-       <input type="text" class="form-control" required name="pengobatanRadio" value="{{old('pengobatanRadio')}}" placeholder="Pengobatan Radioterapi/Nuklir">
+       <input type="text" class="form-control" name="pengobatanRadio" value="{{old('pengobatanRadio')}}" placeholder="Pengobatan Radioterapi/Nuklir">
        <span class="help-block">
         <strong>{{ $errors->first('pengobatanRadio') }}</strong>
     </span>
@@ -457,7 +457,7 @@
 <div class="col-md-6">
     <div class="form-group {{ $errors->has('transfusiDarah') ? 'has-error' : ''}}">
      <label class="control-label " for="transfusiDarah">Transfusi Darah</label>
-       <input type="text" class="form-control" required value="{{old('transfusiDarah')}}" name="transfusiDarah" placeholder="Transfusi Darah">
+       <input type="text" class="form-control" value="{{old('transfusiDarah')}}" name="transfusiDarah" placeholder="Transfusi Darah">
 
        <span class="help-block">
         <strong>{{ $errors->first('transfusiDarah') }}</strong>
@@ -469,7 +469,7 @@
 <div class="col-md-6">
     <div class="form-group {{ $errors->has('sebabKematian') ? 'has-error' : ''}}">
      <label class="control-label " for="sebabKematian">Sebab Kematian</label>
-       <input type="text" class="form-control" required name="sebabKematian" value="{{old('sebabKematian')}}" placeholder="Sebab Kematian">
+       <input type="text" class="form-control"  name="sebabKematian" value="{{old('sebabKematian')}}" placeholder="Sebab Kematian">
        <span class="help-block">
         <strong>{{ $errors->first('sebabKematian') }}</strong>
     </span>
@@ -522,7 +522,7 @@
                 <div class="form-group {{ $errors->has('komplikasi') ? 'has-error' : ''}}">
                  <label class="control-label " for="komplikasi">Komplikasi</label>
                  <div class="form-group">
-                   <input type="text" class="form-control" required name="komplikasi" data-role="tagsinput" value="{{old('komplikasi')}}" placeholder="Komplikasi">
+                   <input type="text" class="form-control" name="komplikasi" data-role="tagsinput" value="{{old('komplikasi')}}" placeholder="Komplikasi">
                    <span class="help-block">
                     <strong>{{ $errors->first('komplikasi') }}</strong>
                 </span>

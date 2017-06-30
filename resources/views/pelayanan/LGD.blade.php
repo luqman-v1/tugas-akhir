@@ -226,8 +226,8 @@
 
                                             <div class="col-md-6">  
                                                 <div class="form-group {{ $errors->has('cramsScore') ? 'has-error' : ''}}">
-                                                   <label class="control-label " for="cramsScore">Crams Score/ CGS</label>
-                                                       <input placeholder="Crams Score/ CGS" type='text' required value="{{old('cramsScore')}}" name="cramsScore" class="form-control" id="cramsScore">
+                                                   <label class="control-label " for="cramsScore">Crams Score/ GCS</label>
+                                                       <input placeholder="Crams Score/ GCS" type='number' required value="{{old('cramsScore')}}" name="cramsScore" class="form-control" id="cramsScore">
                                                      <span class="help-block">
                                                         <strong>{{ $errors->first('cramsScore') }}</strong>
                                                     </span>
@@ -275,7 +275,7 @@
                                        <div class="bootstrap-timepicker">
                                         <div class="form-group{{ $errors->has('pemeriksaanStatus') ? ' has-error' : '' }}">
                                             <label class="control-label" for="jam_masuk">Pemeriksaan Status Nyeri</label><br>
-                                             <input placeholder="Pemeriksaan Status Nyeri" required type='text' value="{{old('pemeriksaanStatus')}}" name="pemeriksaanStatus" class="form-control" id="pemeriksaanStatus">
+                                             <input placeholder="Pemeriksaan Status Nyeri" required type='number' value="{{old('pemeriksaanStatus')}}" name="pemeriksaanStatus" class="form-control" id="pemeriksaanStatus">
                                           </div>
                                           @if ($errors->has('pemeriksaanStatus'))
                                           <span class="help-block">
@@ -289,7 +289,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group {{ $errors->has('pemeriksaanLaboratorium') ? 'has-error' : ''}}">
                                             <label class="control-label " for="pemeriksaanLaboratorium">Pemeriksaan Laboratorium</label>
-                                                       <input type="text" class="form-control" required name="pemeriksaanLaboratorium" value="{{old('pemeriksaanLaboratorium')}}" placeholder="Pemeriksaan Laboratorium">
+                                                       <input type="text" class="form-control"  name="pemeriksaanLaboratorium" value="{{old('pemeriksaanLaboratorium')}}" placeholder="Pemeriksaan Laboratorium">
                                                        <span class="help-block">
                                                         <strong>{{ $errors->first('pemeriksaanLaboratorium') }}</strong>
                                                     </span>
@@ -300,7 +300,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group {{ $errors->has('pemeriksaanRadiologi') ? 'has-error' : ''}}">
                                          <label class="control-label " for="pemeriksaanRadiologi">Pemeriksaan Radiologi</label>
-                                               <input type="text" class="form-control" required value="{{old('pemeriksaanRadiologi')}}" name="pemeriksaanRadiologi" placeholder="Pemeriksaan Radiologi">
+                                               <input type="text" class="form-control" value="{{old('pemeriksaanRadiologi')}}" name="pemeriksaanRadiologi" placeholder="Pemeriksaan Radiologi">
                                                <span class="help-block">
                                                 <strong>{{ $errors->first('pemeriksaanRadiologi') }}</strong>
                                             </span>

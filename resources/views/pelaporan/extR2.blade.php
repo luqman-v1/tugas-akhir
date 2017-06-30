@@ -13,14 +13,11 @@
 <div class="container">
 <hr><width="100" height="75"></hr>
 <div class="row">
-<div class="col-md-4"></div>
-  <div class="col-md-1">
-  <img style="height: 80px;width: auto;margin-top: -10px;" src="{{url('/logos.png')}}">
-  </div>
-  <div class="col-md-4">
-    <b><font size="5" face="Courier New">Formulir RL 5.2</font></b><br>
-    <b><font size="4" face="Courier New">Kunjungan Rawat Jalan</font></b>
-  </div>
+  
+  <p style="text-align: center;"><img style="height: 80px;width: auto;margin-top: -10px;" src="{{url('/logos.png')}}"></p>
+    <p  style="text-align: center;"><b><font size="5" face="Courier New">Formulir RL 5.2</font></b></p>
+    <p  style="text-align: center;"><b><font size="4" face="Courier New">Kunjungan Rawat Jalan</font></b></p>
+  
 </div>
 <hr><width="100" height="75"></hr>
 

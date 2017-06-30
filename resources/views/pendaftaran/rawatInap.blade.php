@@ -448,7 +448,28 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-$("#bangsal").chained("#kelas");
+        $('select[name="bangsal"]').on('change', function() {
+            var bangsalID = $(this).val();
+            if(bangsalID) {
+                $.ajax({
+                    url: '{{url('/')}}/rawat-inap/kelas/'+bangsalID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        // console.log(data);
+                        
+
+                        $('select[name="kelas"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="kelas"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+
+                    }
+                });
+            }else{
+                $('select[name="kelas"]').empty();
+            }
+        });
     });
 </script>
 

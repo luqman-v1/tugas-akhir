@@ -67,7 +67,7 @@
                 $today = new DateTime();
                 $diff = $today->diff($biday);
                   //bikin array baru
-                  $jam = ($tahun = $diff->days * 24) + $diff->h; 
+                  $jam = ($tahun = $diff->days * 24) + $diff->d; 
                   $tahun = $diff->y;
                 
           @endphp
@@ -76,7 +76,7 @@
         <td style="text-align: center; font-size: 10px;">{{$data->noRm}}</td>
         <td style="text-align: center; font-size: 10px;">{{$data->namaPasien}}</td>
         <td style="text-align: center; font-size: 10px;">JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
-        <td style="text-align: center; font-size: 10px;">{{ $data->tanggal_masuk }} - {{ $data->tglKeluar }}</td>
+        <td style="text-align: center; font-size: 10px;">{{ date('d F Y', strtotime($data->tanggal_masuk))}} - {{ date('d F Y', strtotime($data->tglKeluar))}}</td>
         
         @if($data->jenisKelamin == "Laki-Laki" and $jam >=0 and $jam <=6)
         <td style="text-align: center; font-size: 10px;">&#10004;</td>

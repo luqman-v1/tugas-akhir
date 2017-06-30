@@ -19,7 +19,7 @@
     <li class="active">daftar</li>
 </ol>
 </section>
-@role(['dokter','perawat','admin']) 
+@role(['dokter','perawat IRNA','admin','Perawat UGD','Perawat Poliklinik']) 
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
@@ -51,13 +51,13 @@
                 <td>{{ $i }}</td>
               <td>{{$data->noRm}}</td>
               <td>{{$data->nama}}</td>
-              <td>{{$data->dokterJaga}}</td>
+              <td>{{App\User::find($data->dokterJaga)->name}}</td>
               <td>{{$data->noHp}}</td>
-              <td>{{$data->tanggal_masuk}}</td>
+              <td>{{ date('d F Y', strtotime($data->tanggal_masuk))}}</td>
               <td>{{$data->caraBayar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
             <td>
-              <a href="{{ url('/pelayanan-igd/form/'.$data->id) }}"><button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span></button></a>
+              <a href="{{ url('/pelayanan-igd/form/'.$data->id) }}"><button title="masukan pelayanan" data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="btn-xs btn-success"><span class="glyphicon glyphicon-plus"></span></button></a>
               
             </td>                                                         
                                                                    
@@ -108,7 +108,7 @@
                 <td>{{ $i }}</td>
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
-                <td>{{$data->tglLahir}}</td>
+                <td>{{ date('d F Y', strtotime($data->tglLahir))}}</td>
                 @role(['admin','rekmed']) 
                 @if($data->kode == null)
                 <td><span class="label label-warning">Harap Masukan Kode ICD</span></td>
@@ -120,8 +120,9 @@
                 @role(['admin','rekmed'])
                 <a href="{{url('pelayanan-igd/form/edit/'.$data->idp)}}"><button type="button" class="btn-xsm btn-success"><span class="glyphicon glyphicon-plus"></span> Tambahkan Kode ICD</button></a>
                 @endrole
-                  <button data-toggle="modal" data-id="{{$data->id}}" data-target=".bs-example-modal-sm1" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
-                <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>                                                         
+               <a href="{{url('pelayanan-igd/selesai/'.$data->idp) }}"><button class="btn-xsm btn-primary"><span class="glyphicon glyphicon-ok"></span> Selesai</button></a>
+                  <button title="Edit" data-toggle="modal" data-id="{{$data->id}}" data-target=".bs-example-modal-sm1" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
+                <button data-toggle="modal" data-id="{{$data->id}}" title="Hapus" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>                                                         
                                                                    
                 </td>
             </tr>
@@ -168,14 +169,14 @@
                 <td>{{ $i }}</td>
               <td>{{$data->noRm}}</td>
               <td>{{$data->nama}}</td>
-              <td>{{$data->dokterJaga}}</td>
+              <td>{{App\User::find($data->dokterJaga)->name}}</td>
               <td>{{$data->noHp}}</td>
-              <td>{{$data->tanggal_masuk}}</td>
+              <td>{{ date('d F Y', strtotime($data->tanggal_masuk))}}</td>
               <td>{{$data->caraBayar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
                 <td>
-                  <button data-toggle="modal" data-id="{{$data->id}}" data-target=".bs-example-modal-sm1" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
-                <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>                                                         
+                  <button data-toggle="modal" title="Edit" data-id="{{$data->id}}" data-target=".bs-example-modal-sm1" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
+                <button data-toggle="modal" title="Hapus" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>                                                         
                                                                    
                 </td>
             </tr>

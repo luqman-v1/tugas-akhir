@@ -75,18 +75,28 @@
         </li>
         @endrole
 
-        @role(['admin','dokter','rekmed','perawat'])
+        @role(['admin','dokter','rekmed','Perawat Poliklinik','Perawat UGD','perawat IRNA'])
         <li>
           <a href="">
             <i class="fa fa-files-o"></i> <span>Pelayanan</span>
-            <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
+            <span class="pull-right-container">
+            @role(['admin','rekmed'])
+              <small class="label pull-right bg-yellow">12</small>
+              <small class="label pull-right bg-green">16</small>
+              <small class="label pull-right bg-red">5</small>
+            @endrole
+            @role(['Perawat Poliklinik','Perawat UGD','perawat IRNA'])
+              <small class="label pull-right bg-yellow">1</small>
+              <small class="label pull-right bg-green">1</small>
+              <small class="label pull-right bg-red">1</small>
+            @endrole
             </span>
-          </a>
+            </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('/lrj')}}"><i class="fa fa-circle-o"></i> Lembar Rawat Jalan</a></li>
-            <li><a href="{{url('/rmk')}}"><i class="fa fa-circle-o"></i> Ringkasan Masuk Keluar</a></li>
-            <li><a href="{{url('/pelayanan-igd')}}"><i class="fa fa-circle-o"></i> Lembar Gawat Darurat</a></li>
+            <li><a href="{{url('/lrj')}}"><i class="fa fa-circle-o"></i> Lembar Rawat Jalan<small class="label pull-right bg-red">12</small></a></li>
+            <li><a href="{{url('/rmk')}}"><i class="fa fa-circle-o"></i> Ringkasan Masuk Keluar<small class="label pull-right bg-green">12</small></a></li>
+            <li><a href="{{url('/pelayanan-igd')}}"><i class="fa fa-circle-o"></i> Lembar Gawat Darurat<small class="label pull-right bg-yellow">12</small></a></li>
           </ul>
         </li>
         @endrole

@@ -13,14 +13,11 @@
 <div class="container">
 <hr><width="100" height="75"></hr>
 <div class="row">
-<div class="col-md-4"></div>
-  <div class="col-md-1">
-  <img style="height: 80px;width: auto;margin-top: -10px;" src="{{url('/logos.png')}}">
-  </div>
-  <div class="col-md-4">
-    <b><font size="5" face="Courier New">Formulir RL 5.4</font></b><br>
-    <b><font size="4" face="Courier New">Daftar 10 Besar Penyakit Rawat Jalan</font></b>
-  </div>
+  
+  <p style="text-align: center;"><img style="height: 80px;width: auto;margin-top: -10px;" src="{{url('/logos.png')}}"></p>
+    <p  style="text-align: center;"><b><font size="5" face="Courier New">Formulir RL 5.4</font></b></p>
+    <p  style="text-align: center;"><b><font size="4" face="Courier New">Daftar 10 Besar Penyakit Rawat Jalan</font></b></p>
+  
 </div>
 <hr><width="100" height="75"></hr>
 
@@ -37,7 +34,7 @@
         <td style="text-align: center;" rowspan="2"><b>Deskripsi</b></td>
         {{-- <td style="text-align: center;" colspan="2"><b>Kasus Baru Menurut Jenis Kelamin</b></td> --}}
         {{-- <td style="text-align: center;" rowspan="2"><b>Jumlah Kasus Baru</b></td> --}}
-        <td style="text-align: center;" rowspan="2"><b>Jumlah Kunjungan</td>
+        <td style="text-align: center;" rowspan="2"><b>Jumlah</td>
       </tr>
       <tr>
         {{-- <td style="text-align: center;"><b>Laki-laki</b></td> --}}
@@ -58,7 +55,7 @@
         <td style="text-align: center;">{{ $data->kunjungan }}</td>
       </tr>
       @empty
-      <p>data kosong</p>
+      <td style="text-align: center;" colspan="4">Data Tidak ditemukan</td>
       @endforelse
     </tbody>
   </table>

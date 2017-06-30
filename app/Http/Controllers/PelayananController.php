@@ -26,25 +26,27 @@ class PelayananController extends Controller
         $lrj = Tindakan::join('pelayanan_rawatjalan','tindakan.id_pelayananjalan','pelayanan_rawatjalan.id')
        ->join('rawat_jalan','id_RJ','rawat_jalan.id')
        ->join('pasien','id_pasien','pasien.id')
-       ->orderBy('pelayanan_rawatjalan.id','desc')
-       ->Where('tindakan.kode',null)
+       ->orderBy('pelayanan_rawatjalan.id','asc')
+       // ->Where('tindakan.kode',null)
+       ->where('status',1)   
        ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
        ->get();
 
-       $histori = Tindakan::join('pelayanan_rawatjalan','tindakan.id_pelayananjalan','pelayanan_rawatjalan.id')
+       $histori = Tindakan::rightjoin('pelayanan_rawatjalan','tindakan.id_pelayananjalan','pelayanan_rawatjalan.id')
        ->join('rawat_jalan','id_RJ','rawat_jalan.id')
        ->join('pasien','id_pasien','pasien.id')
         ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
        ->orderBy('pelayanan_rawatjalan.id','desc')
        ->whereNotNull('anamnesa')
-       ->whereNotNull('kode')
+       // ->whereNotNull('kode')
+       ->where('status',0)   
        ->groupBy('id_pelayananjalan')
        ->get();
 
        $antrian = PelayananRj::join('rawat_jalan','id_RJ','rawat_jalan.id')
        ->join('pasien','id_pasien','pasien.id')
         ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
-       ->orderBy('pelayanan_rawatjalan.id','desc')
+       ->orderBy('pelayanan_rawatjalan.id','asc')
        ->where('anamnesa',Null)->whereNull('rawat_jalan.deleted_at')
        ->get();
 
@@ -121,7 +123,7 @@ class PelayananController extends Controller
     }
 
     public function lrjUbahSimpan(Request $request,$id){
-      
+
     if ($request->kodeTindakan == [null] or $request->namaDiagnosis == null or $request->kodeDiagnosis == null) {
         
         Alert::error('data Harus Diisi !','Oops...');
@@ -149,6 +151,10 @@ class PelayananController extends Controller
             $diagnosa->sub_kode = $request->namaDiagnosis;
             $diagnosa->save();
 
+            $change = PelayananRj::find($id);
+            $change->status = 0;
+            $change->Save();
+
           if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
                   Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
@@ -160,6 +166,10 @@ class PelayananController extends Controller
             $diagnosa->kode = $request->kodeDiagnosis1;
             $diagnosa->sub_kode = $request->namaDiagnosis1;
             $diagnosa->save();
+
+            $change = PelayananRj::find($id);
+            $change->status = 0;
+            $change->Save();
 
             if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
                   Alert::success('Berhasil', 'data telah ditambahkan');
@@ -173,6 +183,10 @@ class PelayananController extends Controller
             $diagnosa->sub_kode = $request->namaDiagnosis2;
             $diagnosa->save();
             
+            $change = PelayananRj::find($id);
+            $change->status = 0;
+            $change->Save();
+
             if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
                   Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
@@ -185,6 +199,9 @@ class PelayananController extends Controller
             $diagnosa->sub_kode = $request->namaDiagnosis3;
             $diagnosa->save();
 
+            $change = PelayananRj::find($id);
+            $change->status = 0;
+            $change->Save();
             if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
                   Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('lrj');  
@@ -196,7 +213,11 @@ class PelayananController extends Controller
             $diagnosa->kode = $request->kodeDiagnosis4;
             $diagnosa->sub_kode = $request->namaDiagnosis4;
             $diagnosa->save();
-        
+            
+            $change = PelayananRj::find($id);
+            $change->status = 0;
+            $change->Save();
+
         Alert::success('Berhasil', 'data telah ditambahkan');
         return redirect('lrj');
     }
@@ -341,6 +362,14 @@ class PelayananController extends Controller
          return back();
     	
     }
+    public function selesaiRJ($id){
+    
+    $change = PelayananRj::find($id);
+     $change->status = 0;
+     $change->Save();
+      Alert::success('Berhasil', 'Pelayanan telah selesai');
+     return redirect('/rawat-inap');
+    }
 
     public function AjaxCariRawatJalan($id){
 
@@ -410,17 +439,10 @@ class PelayananController extends Controller
             'tglKeluar' => 'required',
             'jamKeluar' => 'required',
             'diagnosisUtama' => 'required',
-            'komplikasi' => 'required',
-            'penyebabLuarCedera' => 'required',
             'operasiTindakan' => 'required',
             'golonganOperasiTindakan' => 'required',
             'tanggal_operasiTindakan' => 'required',
-            'infeksiNosokomial' => 'required',
-            'penyebabInfeksiNosokomial' => 'required',
             'imunisasi' => 'required',
-            'pengobatanRadio' => 'required',
-            'transfusiDarah' => 'required',
-            'sebabKematian' => 'required',
             'dokterMemulangkan' => 'required',
             ]);
         if($request->keadaanKeluar == "Meninggal" and $request->tglMeninggal == null and $request->jamMeninggal == null){
@@ -455,8 +477,9 @@ class PelayananController extends Controller
          $rmk  = Tindakan::join('pelayanan_rawatinap','tindakan.id_pelayananinap','pelayanan_rawatinap.id')
        ->join('rawat_inap','id_RI','rawat_inap.id')
        ->join('pasien','id_pasien','pasien.id')
-       ->orderBy('pelayanan_rawatinap.id','desc')
+       ->orderBy('pelayanan_rawatinap.id','asc')
        ->Where('tindakan.kode',null)
+       // ->where('status',1)   
        ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
        ->get();
 
@@ -467,13 +490,14 @@ class PelayananController extends Controller
        ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
        ->whereNotNull('diagnosisMasuk')
        ->whereNotNull('kode')
+       // ->where('status',0)   
        ->groupBy('id_pelayananinap')
        ->get();
 
        $antrian = PelayananRI::join('rawat_inap','id_RI','rawat_inap.id')
        ->join('pasien','id_pasien','pasien.id')
         ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
-       ->orderBy('pelayanan_rawatinap.id','desc')
+       ->orderBy('pelayanan_rawatinap.id','asc')
        ->where('diagnosisMasuk',Null)->whereNull('rawat_inap.deleted_at')
        ->get();
 
@@ -487,7 +511,7 @@ class PelayananController extends Controller
     }
 
     public function rmkSimpan(Request $request){
-
+        // return $request->all();
     	  $this->validate($request, [
     	  	'noRm' => 'required',
             'nama' => 'required',
@@ -511,20 +535,16 @@ class PelayananController extends Controller
             'tglKeluar' => 'required',
             'jamKeluar' => 'required',
             'diagnosisUtama' => 'required',
-            'komplikasi' => 'required',
-            'penyebabLuarCedera' => 'required',
             'operasiTindakan' => 'required',
             'golonganOperasiTindakan' => 'required',
             'tanggal_operasiTindakan' => 'required',
-            'infeksiNosokomial' => 'required',
-            'penyebabInfeksiNosokomial' => 'required',
             'imunisasi' => 'required',
-            'pengobatanRadio' => 'required',
-            'transfusiDarah' => 'required',
-            'sebabKematian' => 'required',
             'dokterMemulangkan' => 'required',
             ]);
-
+          if ($request->keadaanKeluar == "Meninggal" and $request->sebabKematian == null) {
+                Alert::error('Opps .. ','Sebab Kematian Harus Diisi');
+              return back();
+          }
     	 $rawatInap = Pasien::where('noRm',$request->noRm)
     	->join('rawat_inap','pasien.id','id_pasien')
     	->orderBy('rawat_inap.id','desc')
@@ -628,7 +648,98 @@ class PelayananController extends Controller
     }
 
     public function rmkUbahSimpan(Request $request,$id){
+        $cek = PelayananRI::find($id);
+
+        if ($cek->komplikasi == null) {
+              if ($request->kodeTindakan == null or $request->namaDiagnosis == null or $request->kodeDiagnosis == null or $request->kodeKomplikasi != null or $request->kodeKomplikasi != null ) {
         
+        Alert::error('Periksa Kembali data inputan','Oops...');
+        return back();
+    }else{
+
+        Diagnosis::where('id_pelayananinap',$id)->forceDelete();
+        Tindakan::where('id_pelayananinap',$id)->forceDelete();
+
+
+        foreach ($request->kodeTindakan as $data) {
+        $tindakan = new Tindakan();
+        $tindakan->id_pelayananinap = $id;
+        $tindakan->kode  = $data;
+        $tindakan->save(); 
+        }
+
+         if ($request->kodeDiagnosis == null OR $request->namaDiagnosis == null) {
+                  Alert::success('Berhasil', 'data telah ditambahkan');
+                  return redirect('rmk');  
+            }
+
+        $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayananinap = $id;
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = $request->kodeDiagnosis;
+            $diagnosa->sub_kode = $request->namaDiagnosis;
+            $diagnosa->save();
+
+          if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
+                  Alert::success('Berhasil', 'data telah ditambahkan');
+                  return redirect('rmk');  
+            }  
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayananinap = $id;
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = $request->kodeDiagnosis1;
+            $diagnosa->sub_kode = $request->namaDiagnosis1;
+            $diagnosa->save();
+
+
+            if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
+                  Alert::success('Berhasil', 'data telah ditambahkan');
+                  return redirect('rmk');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayananinap = $id;
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = $request->kodeDiagnosis2;
+            $diagnosa->sub_kode = $request->namaDiagnosis2;
+            $diagnosa->save();
+
+            
+            if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null ) {
+                  Alert::success('Berhasil', 'data telah ditambahkan');
+                  return redirect('rmk');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayananinap = $id;
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = $request->kodeDiagnosis3;
+            $diagnosa->sub_kode = $request->namaDiagnosis3;
+            $diagnosa->save();
+
+          
+            if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null ) {
+                  Alert::success('Berhasil', 'data telah ditambahkan');
+                  return redirect('rmk');  
+            }
+
+            $diagnosa = new Diagnosis();
+            $diagnosa->id_pelayananinap = $id;
+            $diagnosa->diagnosa_komplikasi = 'diagnosa';
+            $diagnosa->kode = $request->kodeDiagnosis4;
+            $diagnosa->sub_kode = $request->namaDiagnosis4;
+            $diagnosa->save();
+
+          
+
+        Alert::success('Berhasil', 'data Pelayanan Rawat Inap telah ditambahkan');
+
+        return redirect('rmk');
+    }
+        }
+
+
          if ($request->kodeTindakan == null or $request->namaDiagnosis == null or $request->kodeDiagnosis == null or $request->kodeKomplikasi == null or $request->kodeKomplikasi == null ) {
         
         Alert::error('data Harus Diisi !','Oops...');
@@ -774,25 +885,28 @@ class PelayananController extends Controller
           $igd  = Tindakan::join('pelayanan_rawatigd','tindakan.id_pelayananigd','pelayanan_rawatigd.id')
        ->join('rawat_igd','id_IGD','rawat_igd.id')
        ->join('pasien','id_pasien','pasien.id')
-       ->orderBy('pelayanan_rawatigd.id','desc')
-       ->Where('tindakan.kode',null)
+       ->orderBy('pelayanan_rawatigd.id','asc')
+       // ->whereNull('kode')
+       ->where('status',1)    
        ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
        ->get();
 
-       $histori = Tindakan::join('pelayanan_rawatigd','tindakan.id_pelayananigd','pelayanan_rawatigd.id')
+
+      $histori = Tindakan::rightjoin('pelayanan_rawatigd','tindakan.id_pelayananigd','pelayanan_rawatigd.id')
        ->join('rawat_igd','id_IGD','rawat_igd.id')
        ->join('pasien','id_pasien','pasien.id')
         ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
        ->orderBy('pelayanan_rawatigd.id','desc')
        ->whereNotNull('anamnesis')
-       ->whereNotNull('kode')
-       ->groupBy('id_pelayananigd')
+       ->where('status',0)
+       // ->whereNotNull('kode')    
+       ->groupBy('pelayanan_rawatigd.id')
        ->get();
 
        $antrian = PelayananIGD::join('rawat_igd','id_IGD','rawat_igd.id')
        ->join('pasien','id_pasien','pasien.id')
         ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
-       ->orderBy('pelayanan_rawatigd.id','desc')
+       ->orderBy('pelayanan_rawatigd.id','asc')
        ->where('anamnesis',Null)->whereNull('rawat_igd.deleted_at')
        ->get();
 
@@ -816,8 +930,6 @@ class PelayananController extends Controller
             'anamnesis' =>'required',
             'pemeriksaanFisik' => 'required',
             'pemeriksaanStatus' => 'required',
-            'pemeriksaanLaboratorium' => 'required',
-            'pemeriksaanRadiologi' => 'required',
             'diagonosisAwal' => 'required',
             'terapiTindakan' => 'required',
             'diagnosisAkhir' => 'required',
@@ -891,17 +1003,50 @@ class PelayananController extends Controller
             'hari' => 'required',
             'jenisKasus' => 'required',
             'tindakanResuitasi' => 'required',
-            'cramsScore' => 'required',
+            'cramsScore' => 'required|numeric',
             'anamnesis' =>'required',
-            'pemeriksaanFisik' => 'required',
+            'pemeriksaanFisik' => 'required|numeric',
             'pemeriksaanStatus' => 'required',
-            'pemeriksaanLaboratorium' => 'required',
-            'pemeriksaanRadiologi' => 'required',
             'diagonosisAwal' => 'required',
             'terapiTindakan' => 'required',
             'diagnosisAkhir' => 'required',
             'tindakanLanjut' => 'required',
             ]);
+         if ($request->tindakanLanjut == "Dirawat") {
+             $rawatIGD = Pasien::where('noRm',$request->noRm)
+        ->join('rawat_igd','pasien.id','id_pasien')
+        ->orderBy('rawat_igd.id','desc')
+        ->first();
+          if ($request->tindakanLanjut != "Meninggal") {
+            $tglMeninggal = $request->tglMeninggal = null;
+            $jamMeninggal = $request->jamMeninggal = null;
+        }else{
+            $tglMeninggal = $request->tglMeninggal;
+            $jamMeninggal = $request->jamMeninggal;
+        }
+
+        $igd = PelayananIGD::find($request->id);
+        $igd->jenisKasus = $request->jenisKasus;
+        $igd->tindakanResuitasi = $request->tindakanResuitasi;
+        $igd->cramsScore = $request->cramsScore;
+        $igd->anamnesis = $request->anamnesis;
+        $igd->pemeriksaanFisik = $request->pemeriksaanFisik;
+        $igd->pemeriksaanStatus = $request->pemeriksaanStatus;
+        $igd->pemeriksaanLaboratorium = $request->pemeriksaanLaboratorium;
+        $igd->pemeriksaanRadiologi = $request->pemeriksaanRadiologi;
+        $igd->diagonosisAwal = $request->diagonosisAwal;
+        $igd->terapiTindakan = $request->terapiTindakan;
+        $igd->diagnosisAkhir = $request->diagnosisAkhir;
+        $igd->tindakanLanjut = $request->tindakanLanjut;
+        $igd->tglMeninggal = $tglMeninggal;
+        $igd->jamMeninggal = $jamMeninggal;
+        $igd->dirujuk = $request->dirujuk;
+        $igd->status = 0;
+        $igd->save();
+
+        Alert::success('Berhasil', 'Data Pelayanan Rawat IGD telah ditambahkan');
+        return redirect('rawat-inap');
+         }
 
     	 $rawatIGD = Pasien::where('noRm',$request->noRm)
     	->join('rawat_igd','pasien.id','id_pasien')
@@ -1057,6 +1202,9 @@ class PelayananController extends Controller
             $diagnosa->sub_kode = $request->namaDiagnosis;
             $diagnosa->save();
 
+            $change = PelayananIGD::find($id);
+            $change->status = 0;
+            $change->Save();
           if ($request->kodeDiagnosis1 == null OR $request->namaDiagnosis1 == null) {
                   Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
@@ -1069,6 +1217,9 @@ class PelayananController extends Controller
             $diagnosa->sub_kode = $request->namaDiagnosis1;
             $diagnosa->save();
 
+            $change = PelayananIGD::find($id);
+            $change->status = 0;
+            $change->Save();
             if ($request->kodeDiagnosis2 == null OR $request->namaDiagnosis2 == null) {
                   Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
@@ -1081,6 +1232,9 @@ class PelayananController extends Controller
             $diagnosa->sub_kode = $request->namaDiagnosis2;
             $diagnosa->save();
             
+            $change = PelayananIGD::find($id);
+            $change->status = 0;
+            $change->Save();
             if ($request->kodeDiagnosis3 == null OR $request->namaDiagnosis3 == null) {
                   Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
@@ -1093,6 +1247,9 @@ class PelayananController extends Controller
             $diagnosa->sub_kode = $request->namaDiagnosis3;
             $diagnosa->save();
 
+            $change = PelayananIGD::find($id);
+            $change->status = 0;
+            $change->Save();
             if ($request->kodeDiagnosis4 == null OR $request->namaDiagnosis4 == null) {
                   Alert::success('Berhasil', 'data telah ditambahkan');
                   return redirect('pelayanan-igd');  
@@ -1104,12 +1261,23 @@ class PelayananController extends Controller
             $diagnosa->kode = $request->kodeDiagnosis4;
             $diagnosa->sub_kode = $request->namaDiagnosis4;
             $diagnosa->save();
-        
+            
+            $change = PelayananIGD::find($id);
+            $change->status = 0;
+            $change->Save();
         Alert::success('Berhasil', 'data telah ditambahkan');
 
         return redirect('pelayanan-igd');
     }
 }
+    public function selesaiIGD($id){
+    
+    $change = PelayananIGD::find($id);
+     $change->status = 0;
+     $change->Save();
+      Alert::success('Berhasil', 'Pelayanan telah selesai');
+     return redirect('/rawat-inap');
+    }
 
     public function AjaxCarilgd($id){
     		$rawatIGD = Pasien::where('noRm',$id)

@@ -255,7 +255,7 @@
 
                         <div class="form-group">
                         <label for="namaSuami-istri">Nama Suami/Istri</label>
-                        <input class="form-control" name="namaSuami_istri" required value="{{old('namaSuami_istri')}}" id="namaSuami_istri" type="text" placeholder="Nama Suami/Istri">
+                        <input class="form-control" name="namaSuami_istri" value="{{old('namaSuami_istri')}}" id="namaSuami_istri" type="text" placeholder="Nama Suami/Istri">
                     </div>
 
                     <div class="form-group">
@@ -284,7 +284,7 @@
 
                     <div class="form-group">
                         <label for="noPesertaJKN">Nomor Peserta JKN</label>
-                        <input class="form-control" name="noPesertaJKN" required value="{{old('noPesertaJKN')}}" id="noPesertaJKN" type="text" placeholder="Nomor Peserta JKN">
+                        <input class="form-control" name="noPesertaJKN" value="{{old('noPesertaJKN')}}" id="noPesertaJKN" type="text" placeholder="Nomor Peserta JKN">
                     </div>
                     <div class="form-group">
                         <label for="noAsuransiLain">Nomor Asuransi Lain</label>
@@ -406,7 +406,7 @@
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-                        console.log(data);
+                        // console.log(data);
                         
 
                         $('select[name="kelurahan"]').empty();

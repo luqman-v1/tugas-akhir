@@ -40,6 +40,7 @@ class PelaporanController extends Controller
                 ->join('pasien','id_pasien','pasien.id')
             ->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])
             ->orderBy('pelayanan_rawatjalan.id','desc')
+            ->groupBy('rawat_jalan.id')
             ->get();
             $nama = 'Rawat Jalan';
 
@@ -61,18 +62,21 @@ class PelaporanController extends Controller
                 ->join('pasien','id_pasien','pasien.id')
             ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
             ->orderBy('pelayanan_rawatinap.id','desc')
+            ->groupBy('rawat_inap.id')
             ->get();
 
              $jalan = PelayananRJ::join('rawat_jalan','id_RJ','rawat_jalan.id')
                 ->join('pasien','id_pasien','pasien.id')
             ->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])
             ->orderBy('pelayanan_rawatjalan.id','desc')
+            ->groupBy('rawat_jalan.id')
             ->get();
 
             $igd =  PelayananIGD::join('rawat_igd','id_IGD','rawat_igd.id')
                 ->join('pasien','id_pasien','pasien.id')
             ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
             ->orderBy('pelayanan_rawatigd.id','desc')
+            ->groupBy('rawat_igd.id')
             ->get();
 
             return view('pelaporan.kunjunganRumahSakit')->with(compact('inap','jalan','igd'));
@@ -272,7 +276,7 @@ class PelaporanController extends Controller
 
         }else{
 
-               return $kematian = Pasien::join('rawat_inap','pasien.id','id_pasien')
+                $kematian = Pasien::join('rawat_inap','pasien.id','id_pasien')
                         ->join('pelayanan_rawatinap','rawat_inap.id','id_RI')
                         ->join('diagnosis','pelayanan_rawatinap.id','id_pelayananinap')
                         ->join('tbl_icd10','diagnosis.kode','tbl_icd10.id')
@@ -287,13 +291,19 @@ class PelaporanController extends Controller
                         as lakiMati,
                         (SELECT COUNT(jenisKelamin) FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id  WHERE jenisKelamin="Perempuan" and keadaanKeluar="Meninggal") 
                         as PerempuanMati ,
+                        (SELECT COUNT(jenisKelamin) FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id  WHERE keadaanKeluar="Meninggal") 
+                        as mati ,
+                          (SELECT COUNT(lakiHidup+lakiMati)  FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id ) 
+                            as lkhm,
+                            (SELECT COUNT(PerempuanHidup+PerempuanMati)  FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id ) 
+                            as prhm,
                             (SELECT COUNT(lakiHidup+PerempuanHidup+lakiMati+PerempuanMati)  FROM pasien right join rawat_inap on pasien.id = rawat_inap.id_pasien INNER join pelayanan_rawatinap on pelayanan_rawatinap.id_RI = rawat_inap.id ) 
                             as total
                             '))
                         ->whereNotNull('id_pelayananinap')
                         ->whereNull('diagnosis.deleted_at')
                         ->groupBy('diagnosis.kode')
-                        ->toSql();
+                        ->get();
                         $dari = $request->dariTanggal;
                         $sampai = $request->sampaiTanggal;
                         return view('pelaporan.indexKematian')->with('kematian',$kematian)->with('dari',$dari)->with('sampai',$sampai);

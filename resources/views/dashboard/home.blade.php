@@ -167,7 +167,7 @@
           <!-- MAP & BOX PANE -->
           <div class="box box-success">
             <div class="box-header with-border">
-              <h3 class="box-title">Pasien Info</h3>
+              <h3 class="box-title">Total Pasien Info</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -194,14 +194,14 @@
                 </div>
 
                 <div class="col-xs-6 col-md-3 text-center">
-                  <input type="text" class="knob" value="{{ $laki }}" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+                  <input type="text" class="knob" value="{{ $bpjs }}" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
 
-                  <div class="knob-label">Laki-Laki</div>
+                  <div class="knob-label">BPJS</div>
                 </div>
                 <div class="col-xs-6 col-md-3 text-center">
-                  <input type="text" class="knob" value="{{ $laki }}" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
+                  <input type="text" class="knob" value="{{ $umum }}" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
 
-                  <div class="knob-label">Laki-Laki</div>
+                  <div class="knob-label">UMUM</div>
                 </div>
                   </div>
                 </div>
@@ -420,7 +420,7 @@
     //Number - Tension of the bezier curve between points
     bezierCurveTension: 0.3,
     //Boolean - Whether to show a dot for each point
-    pointDot: false,
+    pointDot: true,
     //Number - Radius of each point dot in pixels
     pointDotRadius: 4,
     //Number - Pixel width of point dot stroke
@@ -432,7 +432,7 @@
     //Number - Pixel width of dataset stroke
     datasetStrokeWidth: 2,
     //Boolean - Whether to fill the dataset with a color
-    datasetFill: true,
+    datasetFill: false,
     //String - A legend template
     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%=datasets[i].label%></li><%}%></ul>",
     //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container

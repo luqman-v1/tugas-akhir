@@ -32,7 +32,7 @@ class DashboardController extends Controller
     // }
 
     public function index(){
-      if(Auth::user()->hasRole('dokter') OR Auth::user()->hasRole('perawat')) {
+      if(Auth::user()->hasRole('dokter') OR Auth::user()->hasRole('perawat IRNA') OR Auth::user()->hasRole('Perawat UGD') OR Auth::user()->hasRole('Perawat Poliklinik')) {
           return redirect('lrj')->with('success', 'Selamat datang '.Auth::user()->name);
       }
       $totalPasien = Pasien::count();
@@ -77,7 +77,17 @@ class DashboardController extends Controller
 
        $laki = Pasien::where('jenisKelamin','Laki-Laki')->count();
        $perempuan = Pasien::where('jenisKelamin','Perempuan')->count();
+       //hitung jumlah bpjs
+       $rjb = Rawat_Jalan::where('caraBayar','BPJS')->count(); 
+       $rib = Rawat_Inap::where('caraBayar','BPJS')->count(); 
+       $rigdb = Rawat_IGD::where('caraBayar','BPJS')->count(); 
+       $bpjs = $rjb+$rib+$rigdb;
+       //hitung jumlah umum
+       $rju = Rawat_Jalan::where('caraBayar','UMUM')->count(); 
+       $riu = Rawat_Inap::where('caraBayar','UMUM')->count(); 
+       $rigdu = Rawat_IGD::where('caraBayar','UMUM')->count();
+        $umum = $rju+$riu+$rigdu; 
 
-      return view('dashboard.home')->with(compact('totalPasien','rj','ri','igd','tahun','besar','pegawai','icd10','icd9','laki','perempuan','pasien'));
+      return view('dashboard.home')->with(compact('totalPasien','rj','ri','igd','tahun','besar','pegawai','icd10','icd9','laki','perempuan','pasien','bpjs','umum'));
     }
 }

@@ -14,21 +14,21 @@
 
 
 <h4>DATA KEADAAN MORBIDITAS PASIEN RAWAT INAP</h4>
-<h5 style="text-align: right;">Tanggal : {{ $dari }} s.d {{ $sampai }}</h5> 
+<h5 style="text-align: right;">Tanggal : {{ date('d F Y', strtotime($dari))}} s.d {{ date('d F Y', strtotime($sampai))}}</h5> 
   
   <table class="table table-bordered">
     <tbody>
       <tr>
-        <td style="text-align: center; font-size: 12px;" rowspan="3"><b>No</b></td>
-        <td style="text-align: center; font-size: 12px;" rowspan="3"><b>No. Daftar Terperinci</b></td>
-        <td style="text-align: center; font-size: 12px;" rowspan="3"><b>Golongan Sebab Penyakit</b></td>
-        <td style="text-align: center; font-size: 12px;" colspan="18" ="2"><b>Jumlah Pasien Hidup dan Mati menurut Golongan Umur dan Jenis Kelamin</b></td>
-        <td style="text-align: center; font-size: 12px;" rowspan="2" colspan="2"><b>Pasien Keluar (Hidup&Mati) Menurut Jenis Kelamin </b></td>
-        <td style="text-align: center; font-size: 12px;" rowspan="3"><b>Jumlah Pasien Keluar (Hidup&Mati)</b></td>
-        <td style="text-align: center; font-size: 12px;" rowspan="3"><b>Jumlah Pasien Keluar Mati</b></td>
+        <td style="text-align: center; font-size: 12px;" rowspan="1"><b>No</b></td>
+        <td style="text-align: center; font-size: 12px;" rowspan="1"><b>No. Daftar Terperinci</b></td>
+        <td style="text-align: center; font-size: 12px;" rowspan="1"><b>Golongan Sebab Penyakit</b></td>
+        <!-- <td style="text-align: center; font-size: 12px;" colspan="18" ="2"><b>Jumlah Pasien Hidup dan Mati menurut Golongan Umur dan Jenis Kelamin</b></td> -->
+        <!-- <td style="text-align: center; font-size: 12px;" rowspan="2" colspan="2"><b>Pasien Keluar (Hidup&Mati) Menurut Jenis Kelamin </b></td> -->
+        <td style="text-align: center; font-size: 12px;" rowspan="1"><b>Jumlah Pasien Keluar (Hidup&Mati)</b></td>
+        <td style="text-align: center; font-size: 12px;" rowspan="1"><b>Jumlah Pasien Keluar Mati</b></td>
         
       </tr>
-      <tr>
+    <!--   <tr>
         <td style="text-align: center; font-size: 10px;" colspan="2"><b>0-6hr</b></td>
         <td style="text-align: center; font-size: 10px;" colspan="2"><b>7-28hr</b></td>
         <td style="text-align: center; font-size: 10px;" colspan="2"><b>28-1th</b></td>
@@ -60,7 +60,7 @@
         <td style="text-align: center; font-size: 12px;"><b>P</b></td>
         <td style="text-align: center; font-size: 12px;"><b>LK</b></td>
         <td style="text-align: center; font-size: 12px;"><b>PR</b></td>
-      </tr>
+      </tr> -->
         @forelse($kematian as $key=> $data)
          @php
                 $biday = new DateTime($data->tglLahir);
@@ -79,10 +79,10 @@
         <td style="text-align: center; font-size: 10px;">{{ $key+1 }}</td>
         <td style="text-align: center; font-size: 10px;">{{$data->kode}}</td>
         <td style="text-align: center; font-size: 10px;">{{$nama->nama}}</td>
-        <td style="text-align: center; font-size: 10px;"></td>
-        <td style="text-align: center; font-size: 10px;"></td>
+     <!--    <td style="text-align: center; font-size: 10px;"></td>
+        <td style="text-align: center; font-size: 10px;"></td> -->
         
-        @if($data->jenisKelamin == "Laki-Laki" and $jam >=0 and $jam <=6)
+        <!-- @if($data->jenisKelamin == "Laki-Laki" and $jam >=0 and $jam <=6)
         <td style="text-align: center; font-size: 10px;">&#10004;</td>
         <td style="text-align: center; font-size: 10px;"></td>
         @elseif($data->jenisKelamin == "Perempuan" and $jam >=0 and $jam <=6)
@@ -177,12 +177,12 @@
        <td style="text-align: center; font-size: 10px;"></td>
          <td style="text-align: center; font-size: 10px;">&#10004;</td>
          @else
-         <td style="text-align: center; font-size: 10px;"></td>
-        <td style="text-align: center; font-size: 10px;"></td>
+         <td style="text-align: center; font-size: 10px;">{{ $data->lkhm }}</td>
+        <td style="text-align: center; font-size: 10px;">{{ $data->prhm }}</td>
         @endif
-       
-        <td style="text-align: center; font-size: 10px;"></td>
-        <td style="text-align: center; font-size: 10px;"></td>
+        -->
+        <td style="text-align: center; font-size: 10px;">{{ $data->total }}</td>
+        <td style="text-align: center; font-size: 10px;">{{ $data->mati }}</td>
       </tr>
       @empty
       <tr>

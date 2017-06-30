@@ -18,7 +18,7 @@
   </ol>
 </section>
 
-@role(['dokter','perawat','admin']) 
+@role(['dokter','perawat IRNA','admin','Perawat UGD','Perawat Poliklinik'])
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
@@ -50,9 +50,9 @@
             <td>{{ $i }}</td>
               <td>{{$data->noRm}}</td>
               <td>{{$data->nama}}</td>
-              <td>{{$data->DokterPJ}}</td>
+              <td>{{App\User::find($data->DokterPJ)->name}}</td>
               <td>{{$data->noHp}}</td>
-              <td>{{$data->tglKunjungan}}</td>
+              <td>{{ date('d F Y', strtotime($data->tglKunjungan))}}</td>
               <td>{{$data->caraBayar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
             <td>
@@ -106,7 +106,7 @@
             <td>{{ $i }}</td>
             <td>{{$data->noRm}}</td>
             <td>{{$data->nama}}</td>
-            <td>{{$data->tglLahir}}</td>
+            <td>{{ date('d F Y', strtotime($data->tglLahir))}}</td>
              @if($data->kode == null)
             <td><span class="label label-warning">Harap Masukan Kode ICD</span></td>
             @else
@@ -114,6 +114,7 @@
             @endif
             <td>
               <a href="{{url('lrj/form/edit/'.$data->idp)}}"><button title="tambah" type="button" class="btn-xsm btn-success"><span class="glyphicon glyphicon-plus"></span> Tambahkan Kode ICD</button></a>
+              <a href="{{url('lrj/selesai/'.$data->idp) }}"><button class="btn-xsm btn-primary"><span class="glyphicon glyphicon-ok"></span> Selesai</button></a>
               <button data-toggle="modal" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" title="Edit" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
               <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" title="Hapus" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
               
@@ -167,9 +168,9 @@
             <td>{{ $i }}</td>
               <td>{{$data->noRm}}</td>
               <td>{{$data->nama}}</td>
-              <td>{{$data->DokterPJ}}</td>
+              <td>{{App\User::find($data->DokterPJ)->name}}</td>
               <td>{{$data->noHp}}</td>
-              <td>{{$data->tglKunjungan}}</td>
+              <td>{{ date('d F Y', strtotime($data->tglKunjungan))}}</td>
               <td>{{$data->caraBayar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
             <td>

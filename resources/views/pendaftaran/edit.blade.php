@@ -271,7 +271,7 @@
 
                     <div class="form-group">
                         <label for="noHp">Nomor Telepon yang Bisa Dihubungi</label>
-                        <input class="form-control" id="noHp" name="noHp" value="{{ $data->noHp }}" type="text" placeholder="Nomor Telepon yang Bisa Dihubungi">
+                        <input class="form-control" id="noHp" name="noHp" value="{{ $data->noHp }}" type="number" placeholder="Nomor Telepon yang Bisa Dihubungi">
                     </div>
 
                     <div class="row">
@@ -435,18 +435,6 @@
     });
 </script>
 
-<script type="text/javascript">
-function changetextbox()
-{
-    if (document.getElementById("caraDatang").value == "Sendiri") {
-        document.getElementById("rujukan").disabled='true';
-    } else {
-        document.getElementById("rujukan").disabled='';
-    }
-}
-
-
-</script>
 
 
 @endsection

@@ -52,7 +52,7 @@
               <td>{{$data->noRm}}</td>
               <td>{{$data->nama}}</td>
               <td>{{$data->noHp}}</td>
-              <td>{{$data->tanggal_masuk}}</td>
+              <td>{{ date('d F Y', strtotime($data->tanggal_masuk))}}</td>
               <td>{{$data->caraBayar}}</td>
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               <td>{{App\Ruangan\Bangsal::find($data->bangsal)->nama}}</td>

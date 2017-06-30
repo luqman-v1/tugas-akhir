@@ -45,7 +45,7 @@
                 <td>{{ $i }}</td>
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
-                <td>{{$data->tglLahir}}</td>
+                <td>{{ date('d F Y', strtotime($data->tglLahir))}}</td>
                 <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               </tr>
             <?php $i++; ?>
@@ -57,7 +57,7 @@
                 <td>{{$a}}</td>
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
-                <td>{{$data->tglLahir}}</td>
+                <td>{{ date('d F Y', strtotime($data->tglLahir))}}</td>
                 <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               </tr>
             <?php $a++; ?>
@@ -68,7 +68,7 @@
                 <td>{{$b}}</td>
                 <td>{{$data->noRm}}</td>
                 <td>{{$data->nama}}</td>
-                <td>{{$data->tglLahir}}</td>
+                <td>{{ date('d F Y', strtotime($data->tglLahir))}}</td>
                 <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               </tr>
             <?php $b++; ?>

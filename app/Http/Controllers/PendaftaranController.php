@@ -188,12 +188,12 @@ class PendaftaranController extends Controller
             'kelas' => 'required',
             ]);
 
-        $getBangsal = Bangsal::where('id',$request->bangsal)->first();
-        $bangsal = $getBangsal->nama;
-        $getKelas = Kelas::where('id',$request->kelas)->first();
-        $kelas = $getKelas->nama;
-        $getKamar = No_Kamar::where('id',$request->kamar)->first();
-        $kamar = $getKamar->kamar_no;
+        // $getBangsal = Bangsal::where('id',$request->bangsal)->first();
+        // $bangsal = $getBangsal->nama;
+        // $getKelas = Kelas::where('id',$request->kelas)->first();
+        // $kelas = $getKelas->nama;
+        // $getKamar = No_Kamar::where('id',$request->kamar)->first();
+        // $kamar = $getKamar->kamar_no;
         
         $pasien = Pasien::where('noRm',$request->noRm)->first();
          $id = $pasien->id;
@@ -205,9 +205,9 @@ class PendaftaranController extends Controller
         $inap->caraBayar = $request->caraBayar;
         $inap->caraDatang = $request->caraDatang;
         $inap->caraMasuk = $request->caraMasuk;
-        $inap->bangsal = $bangsal;
-        $inap->kelas = $kelas;
-        $inap->kamar = $kamar;
+        $inap->bangsal = $request->bangsal;
+        $inap->kelas = $request->kelas;
+        $inap->kamar = $request->kamar;
         $inap->rujukan = $request->rujukan;
         $inap->Save();
 
@@ -389,12 +389,13 @@ class PendaftaranController extends Controller
             'pekerjaanPasien' => 'required',
             'kewarganegaraan' => 'required',
             'namaOrtu' => 'required',
-            'namaSuami_istri' => 'required',
-            'noHp' => 'required',
+            'noHp' => 'required|numeric',
             'tglMasuk' => 'required',
-            'caraDatang' => 'required',
-            'noPesertaJKN' => 'required',
             ]);
+         if ($request->statusPerkawinan=="Kawin" and $request->namaSuami_istri==null OR $request->statusPerkawinan!="Kawin" and $request->namaSuami_istri != null) {
+             Alert::error('Opps ..','Cek Kembali Nama Suami/Istri');
+             return back();
+         }
          $getProvinsi = Provinces::where('id',$request->provinsi)->first();
     $getKota = Regencies::where('id',$request->kota)->first();
     $getKecamatan = Districts::where('id',$request->kecamatan)->first();
@@ -422,7 +423,6 @@ class PendaftaranController extends Controller
             $pasien->namaSuami_istri = $request->namaSuami_istri;
             $pasien->noHp = $request->noHp;
             $pasien->tglMasuk = $request->tglMasuk;
-            $pasien->caraDatang = $request->caraDatang;
             $pasien->noPesertaJKN = $request->noPesertaJKN;
             $pasien->noAsuransiLain = $request->noAsuransiLain;
             $pasien->save();
@@ -482,13 +482,14 @@ class PendaftaranController extends Controller
             'pekerjaanPasien' => 'required',
             'kewarganegaraan' => 'required',
             'namaOrtu' => 'required',
-            'namaSuami_istri' => 'required',
-            'noHp' => 'required',
+            'noHp' => 'required|numeric',
             'tglMasuk' => 'required',
-            'noPesertaJKN' => 'required',
             ]);
 
-
+ if ($request->statusPerkawinan=="Kawin" and $request->namaSuami_istri==null OR $request->statusPerkawinan!="Kawin" and $request->namaSuami_istri != null) {
+             Alert::error('Opps ..','Cek Kembali Nama Suami/Istri');
+             return back();
+         }
     $getProvinsi = Provinces::where('id',$request->provinsi)->first();
     $getKota = Regencies::where('id',$request->kota)->first();
     $getKecamatan = Districts::where('id',$request->kecamatan)->first();
@@ -578,7 +579,7 @@ class PendaftaranController extends Controller
     public function formAjaxCari($id){
 
         // return DB::table("pasien")->where("noRm",$id)->first();
-        Log::info(Input::all());
+        // Log::info(Input::all());
         $pasien = Pasien::where('noRm',$id)->first();
 
         $biday = new DateTime($pasien->tglLahir);

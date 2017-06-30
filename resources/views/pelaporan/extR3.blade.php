@@ -13,14 +13,11 @@
 <div class="container">
 <hr><width="100" height="75"></hr>
 <div class="row">
-<div class="col-md-4"></div>
-  <div class="col-md-1">
-  <img style="height: 80px;width: auto;margin-top: -10px;" src="{{url('/logos.png')}}">
-  </div>
-  <div class="col-md-4">
-    <b><font size="5" face="Courier New">Formulir RL 5.3</font></b><br>
-    <b><font size="4" face="Courier New">Daftar 10 Besar Penyakit Rawat Inap</font></b>
-  </div>
+  
+  <p style="text-align: center;"><img style="height: 80px;width: auto;margin-top: -10px;" src="{{url('/logos.png')}}"></p>
+    <p  style="text-align: center;"><b><font size="5" face="Courier New">Formulir RL 5.3</font></b></p>
+    <p  style="text-align: center;"><b><font size="4" face="Courier New">Daftar 10 Besar Penyakit Rawat Inap</font></b></p>
+  
 </div>
 
 <hr><width="100" height="75"></hr>
@@ -36,7 +33,7 @@
         <td style="text-align: center;" rowspan="2"><b>No Urut</b></td>
         <td style="text-align: center;" rowspan="2"><b>Kode ICD 10</b></td>
         <td style="text-align: center;" rowspan="2"><b>Deskripsi</b></td>
-         <td style="text-align: center;" rowspan="2"><b>Jumlah Kunjungan</td>
+         <td style="text-align: center;" rowspan="2"><b>Jumlah</td>
         {{-- <td style="text-align: center;" colspan="2"><b>Pasien Keluar Hidup Menurut Jenis Kelamin</b></td> --}}
         {{-- <td style="text-align: center;" colspan="2"><b>Pasien Keluar Mati Menurut Jenis Kelamin</b></td> --}}
         {{-- <td style="text-align: center;" rowspan="2"><b>Total (Hidup & Mati)</td> --}}
@@ -51,7 +48,7 @@
         $i=1;
       @endphp
 
-      @foreach($extR3 as $data)
+      @forelse($extR3 as $data)
       @php
         $kode =App\ICD::where('kode',$data->kode)->first();
         $nama = App\tbl_icd10nama::where('id_tblicd10',$kode->id)->first();
@@ -70,8 +67,9 @@
         @php
         $i++;  
         @endphp
-
-      @endforeach
+    @empty
+    <td style="text-align: center;" colspan="4">Data Tidak ditemukan</td>
+      @endforelse
     </tbody>
   </table>
 </div>

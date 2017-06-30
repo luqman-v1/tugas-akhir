@@ -60,7 +60,7 @@
                 <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
                 <td>{{ $data->jenisKelamin }}</td>
                 <td>{{ $tahun }}</td>
-                <td>{{ $data->tanggal_masuk }} - {{ $data->tglKeluar }}</td>
+                <td>{{ date('d F Y', strtotime($data->tanggal_masuk))}} - {{ date('d F Y', strtotime($data->tglKeluar))}}</td>
                 <td>{{App\Ruangan\Kelas::find($data->kelas)->nama}}</td>
                 <td>{{ $data->diagnosisUtama  }}/ {{ $data->operasiTindakan }}</td>
                 <td>{{ $data->keadaanKeluar }}</td>

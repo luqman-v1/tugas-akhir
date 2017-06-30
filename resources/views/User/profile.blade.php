@@ -132,7 +132,7 @@
                    <div class="form-group">
                   <label for="exampleInputFile" class="col-sm-2 control-label">Upload foto</label>
                     <div class="col-sm-10">
-                  <input type="file" name="foto" id="exampleInputFile">
+                  <input type="file" name="foto" accept="image/x-png,image/gif,image/jpeg" id="exampleInputFile">
                    <p class="help-block">pilih poto</p>
                   </div>
                  

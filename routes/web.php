@@ -144,7 +144,7 @@ Route::get('cari-pasien','PendaftaranController@viewCariPasien');
 Route::get('cetak-krs/{id}','PendaftaranController@cetakkrs');
 });
 
-Route::group([ 'as' => 'pelayanan','middleware' => ['role:admin|rekmed|dokter|perawat']], function(){
+Route::group([ 'as' => 'pelayanan','middleware' => ['role:admin|rekmed|dokter|Perawat Poliklinik|Perawat UGD|perawat IRNA']], function(){
 //====================================================
 //=======================PELAYANAN====================
 //====================================================
@@ -156,6 +156,8 @@ Route::get('/lrj/form/{id}','PelayananController@lrj');
 Route::get('/lrj/form/edit/{id}','PelayananController@lrjUbah');
 Route::post('/lrj/form/edit/{id}','PelayananController@lrjUbahSimpan');
 Route::post('/lrj','PelayananController@lrjSimpan');
+Route::get('lrj/selesai/{id}','PelayananController@selesaiRJ');
+
 //ajax
 Route::get('lrj/norm/{id}','PelayananController@AjaxCariRawatJalan');
 Route::get('/lrj/diagnosa/{id}','PelayananController@AjaxCariDiagnosa');
@@ -168,6 +170,7 @@ Route::get('/rmk/form/{id}','PelayananController@rmk');
 Route::get('/rmk/form/edit/{id}','PelayananController@rmkUbah');
 Route::post('/rmk/form/edit/{id}','PelayananController@rmkUbahSimpan');
 Route::post('/rmk','PelayananController@rmkSimpan');
+
 //ajax
 Route::get('/rmk/norm/{id}','PelayananController@AjaxCariRawatInap');
 
@@ -179,6 +182,7 @@ Route::DELETE('/pelayanan-igd/delete/{id}','PelayananController@indexDeleteIgd')
 Route::get('/pelayanan-igd/form/edit/{id}','PelayananController@lgdUbah');
 Route::post('/pelayanan-igd/form/edit/{id}','PelayananController@lgdUbahSimpan');
 Route::post('/pelayanan-igd','PelayananController@lgdSimpan');
+Route::get('pelayanan-igd/selesai/{id}','PelayananController@selesaiIGD');
 
 //ajax
 Route::get('/pelayanan-igd/norm/{id}','PelayananController@AjaxCarilgd');
