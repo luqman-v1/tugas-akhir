@@ -60,7 +60,7 @@
               <td>{{App\Ruangan\No_Kamar::find($data->kamar)->kamar_no}}</td>
               <td> 
                <button data-toggle="modal" title="Edit" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
-               <button title="Hapus" data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+               {{-- <button title="Hapus" data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button> --}}
              </td>
            </tr>
            <?php $i++; ?>

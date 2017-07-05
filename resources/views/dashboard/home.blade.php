@@ -16,6 +16,7 @@
   <!-- jvectormap -->
   <link rel="stylesheet" href="{{url('plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}">
   <link rel="stylesheet" href="{{url('plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
+  <link rel="stylesheet" href="{{url('/plugins/morris/morris.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{url('dist/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -62,11 +63,23 @@
       <div class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
-            <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
+            <span class="info-box-icon bg-aqua"><i class="fa fa-hospital-o"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Pegawai Rumah Sakit </span>
-              <span class="info-box-number">{{ $pegawai }} <small>Pegawai</small></span>
+              <span class="info-box-text">Penyakit RJ Bulan ini </span>
+              @php
+              $diagnosa = App\ICD::find($trendDRj->kode);
+              if($diagnosa == null){
+             $diagnosa->nama = "Belum ada Diagnosis";
+             $tindakan = "Belum ada Tindakan";
+             }else{
+             $id =  App\ICD::find($trendDRj->kode)->id;
+             $diagnosa =  App\tbl_icd10nama::where('id_tblicd10',$id)->first();
+             $tindakan =  App\ICD9::find($trendTRj->kode)->nama;
+             }
+              @endphp
+              <span  class="info-box-text">Diagnosis  : {{ $diagnosa->nama}}</span>
+              <span  class="info-box-text">Tindakan  : {{ $tindakan }}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -78,8 +91,21 @@
             <span class="info-box-icon bg-red"><i class="fa fa-hospital-o"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Total daftar ICD 10</span>
-              <span class="info-box-number">{{ $icd10 }}</span>
+              <span class="info-box-text">Penyakit RI Bulan ini </span>
+              @php
+             $diagnosa = App\ICD::find($trendDRI->kode);
+             if($diagnosa == null){
+             $diagnosa->nama = "Belum ada Diagnosis";
+             $tindakan = "Belum ada Tindakan";
+             }else{
+             $id =  App\ICD::find($trendDRI->kode)->id;
+             $diagnosa =  App\tbl_icd10nama::where('id_tblicd10',$id)->first();
+             $tindakan =  App\ICD9::find($trendTRI->kode)->nama;
+             }
+
+              @endphp
+              <span  class="info-box-text">Diagnosis  : {{ $diagnosa->nama }}</span>
+              <span  class="info-box-text">Tindakan  : {{ $tindakan }}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -95,8 +121,20 @@
             <span class="info-box-icon bg-green"><i class="fa fa-hospital-o"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Total daftar ICD 9</span>
-              <span class="info-box-number">{{ $icd9 }}</span>
+              <span class="info-box-text">Penyakit GD Bulan ini </span>
+              @php
+               $diagnosa = App\ICD::find($trendDIGD->kode);
+            if($diagnosa == null){
+             $diagnosa->nama = "Belum ada Diagnosis";
+             $tindakan = "Belum ada Tindakan";
+             }else{
+             $id =  App\ICD::find($trendDIGD->kode)->id;
+             $diagnosa =  App\tbl_icd10nama::where('id_tblicd10',$id)->first();
+             $tindakan =  App\ICD9::find($trendTIGD->kode)->nama;
+             }
+              @endphp
+             <span  class="info-box-text">Diagnosis  : {{ $diagnosa->nama }}</span>
+              <span  class="info-box-text">Tindakan  : {{ $tindakan }}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -181,28 +219,14 @@
                 <div class="col-md-9 col-sm-8">
                   <div class="pad">
                     <!-- Map will be created here -->
-                    <div class="col-xs-6 col-md-3 text-center">
-                  <input type="text" class="knob" value="{{ $laki }}" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
-
-                  <div class="knob-label">Laki-Laki</div>
-                </div>
-
-                 <div class="col-xs-6 col-md-3 text-center">
-                  <input type="text" class="knob" value="{{ $perempuan }}" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
-
-                  <div class="knob-label">Perempuan</div>
-                </div>
-
-                <div class="col-xs-6 col-md-3 text-center">
-                  <input type="text" class="knob" value="{{ $bpjs }}" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
-
-                  <div class="knob-label">BPJS</div>
-                </div>
-                <div class="col-xs-6 col-md-3 text-center">
-                  <input type="text" class="knob" value="{{ $umum }}" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true">
-
-                  <div class="knob-label">UMUM</div>
-                </div>
+                    <div class="col-xl-12 col-md-6 text-center">
+                   <div class="chart" id="jk" style="height: 200px; position: relative;"></div>
+                   <span>Laki/Perempuan</span>
+                  </div>
+                    <div class="col-xl-12 col-md-6 text-center">
+                   <div class="chart" id="caraBayar" style="height: 200px; position: relative;"></div>
+                   <span>BPJS/UMUM</span>
+                  </div>                
                   </div>
                 </div>
 
@@ -269,19 +293,13 @@
             <div class="box-body">
               <div class="row">
                 <div class="col-md-8">
-                  <div class="chart-responsive">
-                    <canvas id="pieChart" height="150"></canvas>
+                  <div class="chart-responsive text-center">
+                    <canvas id="pieChart" height="250"></canvas>
                   </div>
                   <!-- ./chart-responsive -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-4">
-                  <ul class="chart-legend clearfix">
-                  @foreach($besar as $data)
-                    <li><i class="fa fa-circle-o text-red"></i> {{ $data->kecamatan }}</li>
-                  @endforeach
-                  </ul>
-                </div>
+             
                 <!-- /.col -->
               </div>
               <!-- /.row -->
@@ -336,6 +354,9 @@
 <script src="{{url('plugins/chartjs/Chart.min.js')}}"></script>
 {{-- jQuery Knob --}}
 <script src="{{url('plugins/knob/jquery.knob.js')}}"></script>
+<!-- Morris.js charts -->
+<script src="{{url('plugins/morris/raphael-min.js')}}"></script>
+<script src="{{url('plugins/morris/morris.min.js')}}"></script>
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 {{-- <script src="{{url('dist/js/pages/dashboard2.js')}}"></script> --}}
@@ -455,11 +476,19 @@
   var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
   var pieChart = new Chart(pieChartCanvas);
   var PieData = [
-    @foreach ($besar as $data)
+    @foreach ($besar as $val => $data)
     {
       value: {{ $data->jumlah }},
-      color: "#f56951",
-      highlight: "#f56951",
+      @if($val == 1)
+      color: "#BE90D4",
+      highlight: "#BE90D4",
+      @elseif($val==2)
+      color: "#9B59B6",
+      highlight: "#9B59B6",
+      @else
+      color: "#446CB3",
+      highlight: "#446CB3",
+      @endif
       label: "{{ $data->kecamatan }}"
     },
      @endforeach
@@ -648,6 +677,32 @@
     // var lineChartOptions = areaChartOptions;
     // lineChartOptions.datasetFill = false;
     // lineChart.Line(areaChartData, lineChartOptions);
+    
+    //DONUT CHART
+    var donut = new Morris.Donut({
+      element: 'jk',
+      resize: true,
+      colors: ["#3c8dbc", "#f56954"],
+      data: [
+        {label: "Laki-Laki", value: {{ $laki }}},
+        {label: "Perempuan", value: {{ $perempuan }}}
+      ],
+      hideHover: 'auto'
+    });
+  
+    //DONUT CHART
+    var donut = new Morris.Donut({
+      element: 'caraBayar',
+      resize: true,
+      colors: ["#3c8dbc", "#f56954"],
+      data: [
+        {label: "BPJS", value: {{ $bpjs }}},
+        {label: "UMUM", value: {{ $umum }}}
+      ],
+      hideHover: 'auto'
+    });
+   
+
     });
 </script>
 @include('sweet::alert')

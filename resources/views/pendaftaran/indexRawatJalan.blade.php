@@ -56,7 +56,7 @@
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
               <td> 
                <button data-toggle="modal" title="Edit" data-target=".bs-example-modal-sm1" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
-               <button data-toggle="modal" title="Hapus" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>
+               {{-- <button data-toggle="modal" title="Hapus" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button> --}}
              </td>
            </tr>
            <?php $i++; ?>
@@ -144,7 +144,6 @@
                   <div class="form-group">
                     <select name="klinikTujuan" id="klinikTujuan" class="form-control">
                       <option value="">pilih</option>
-                      <option value="Umum">Bedah Umum</option>
                       <option value="Digestive">Bedah Saluran Cerna (Digestive)</option>
                       <option value="Throraks">Bedah Throraks</option>
                       <option value="Orthopedi">Bedah Tulang dan Sendi (Orthopedi)</option>

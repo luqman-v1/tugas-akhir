@@ -158,6 +158,7 @@ class UserController extends Controller
         }
 
         public function register(Request $request){
+            // return $request->all();
         $this->validate($request, [
             'username' => 'required|alpha_dash|unique:users',
             'name' => 'required',
@@ -173,6 +174,7 @@ class UserController extends Controller
             'email' => $request['email'],
             'foto' => 'avatar2.png',
             'noHp' => $request['noHp'],
+            'spesialis' => $request['spesialis'],
             'password' => bcrypt($request['password']),
         ]);
 

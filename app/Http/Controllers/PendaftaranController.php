@@ -194,6 +194,10 @@ class PendaftaranController extends Controller
         // $kelas = $getKelas->nama;
         // $getKamar = No_Kamar::where('id',$request->kamar)->first();
         // $kamar = $getKamar->kamar_no;
+        if (No_Kamar::find($request->kamar)->no_pasien != null) {
+            Alert::error('Opppps ..', 'Bed sudah di gunakan');
+            return back();
+        }
         
         $pasien = Pasien::where('noRm',$request->noRm)->first();
          $id = $pasien->id;
@@ -425,6 +429,7 @@ class PendaftaranController extends Controller
             $pasien->tglMasuk = $request->tglMasuk;
             $pasien->noPesertaJKN = $request->noPesertaJKN;
             $pasien->noAsuransiLain = $request->noAsuransiLain;
+            $pasien->riwayatAlergi = $request->riwayatAlergi;
             $pasien->save();
         Alert::success('Berhasil', 'Data Pasien telah di ubah');
         return redirect('/cari-pasien');
@@ -486,6 +491,17 @@ class PendaftaranController extends Controller
             'tglMasuk' => 'required',
             ]);
 
+    //menyimpan no rm
+    $config = Config::all()->first();
+            $pertama = $config->no1;
+            $kedua = $config->no2;
+            $ketiga = $config->no3;
+            
+            $awal = $pertama<10?'0'.$pertama:$pertama;
+            $tengah = $kedua<10?'0'.$kedua:$kedua;
+            $akhir = $ketiga<10?'0'.$ketiga:$ketiga;
+            $noRM = $awal.'-'.$tengah.'-'.$akhir;
+
  if ($request->statusPerkawinan=="Kawin" and $request->namaSuami_istri==null OR $request->statusPerkawinan!="Kawin" and $request->namaSuami_istri != null) {
              Alert::error('Opps ..','Cek Kembali Nama Suami/Istri');
              return back();
@@ -496,7 +512,7 @@ class PendaftaranController extends Controller
     $getKelurahan = Villages::where('id',$request->kelurahan)->first();
 
     $pasien = new Pasien();
-    $pasien->noRm = $request->noRm;
+    $pasien->noRm = $noRM;
     $pasien->nama = $request->nama;
     $pasien->provinsi  = $getProvinsi->name;
     $pasien->kabupaten = $getKota->name;
@@ -519,6 +535,7 @@ class PendaftaranController extends Controller
     $pasien->tglMasuk = $request->tglMasuk;
     $pasien->noPesertaJKN = $request->noPesertaJKN;
     $pasien->noAsuransiLain = $request->noAsuransiLain;
+    $pasien->riwayatAlergi = $request->riwayatAlergi;
     $pasien->save();
 
     $config = Config::all()->first();
@@ -542,11 +559,82 @@ class PendaftaranController extends Controller
              $config->save();
 
             }
+            Alert::success('Berhasil', 'Data Pasien telah ditambahkan');
 
-           
+            $pasien = Pasien::orderBy('id', 'desc')->first(); 
+        $pdf = PDF::loadView('pendaftaran.printKRS', compact('pasien'))->setPaper('a7')->setOrientation('landscape');
+        
+    
+        return $pdf->stream("$pasien->noRm.pdf");
+  }
 
-     Alert::success('Berhasil', 'Data Pasien telah ditambahkan');
-     return back();
+  public function spesialis($id){
+    $dokter = User::where('spesialis',$id)->pluck("name","id");
+
+        return json_encode($dokter);
+  }
+
+  public function getNoname(){
+
+            $config = Config::all()->first();
+            $pertama = $config->no1;
+            $kedua = $config->no2;
+            $ketiga = $config->no3;
+            
+            $awal = $pertama<10?'0'.$pertama:$pertama;
+            $tengah = $kedua<10?'0'.$kedua:$kedua;
+            $akhir = $ketiga<10?'0'.$ketiga:$ketiga;
+            $noRM = $awal.'-'.$tengah.'-'.$akhir;
+            
+            $provinces =  DB::table("provinces")->pluck("name","id");
+
+    return view('pendaftaran.noname')->with(compact('noRM','provinces'));
+  }
+  public function saveNoname(Request $request){
+     $this->validate($request, [
+            'noRm' => 'required',
+            'noname' => 'required',
+            ]);
+     //menyimpan no rm
+    $config = Config::all()->first();
+            $pertama = $config->no1;
+            $kedua = $config->no2;
+            $ketiga = $config->no3;
+            
+            $awal = $pertama<10?'0'.$pertama:$pertama;
+            $tengah = $kedua<10?'0'.$kedua:$kedua;
+            $akhir = $ketiga<10?'0'.$ketiga:$ketiga;
+            $noRM = $awal.'-'.$tengah.'-'.$akhir;
+
+    $pasien = new Pasien();
+    $pasien->noRm = $noRM;
+    $pasien->noname = $request->noname;
+    $pasien->save();
+
+     $config = Config::all()->first();
+            $pertama = $config->no1;
+            $kedua = $config->no2;
+            $ketiga = $config->no3;
+            
+            if ($ketiga < 99) {
+             $config->no3=$config->no3+1;
+             $config->save();
+                
+            }elseif ($kedua < 99) {
+             $config->no3 = 00;
+             $config->no2=$config->no2+1;
+             $config->save();
+                
+            }else{
+             $config->no3 = 00;
+             $config->no2 = 00;
+             $config->no1=$config->no1+1;
+             $config->save();
+
+            }
+
+    Alert::success('Berhasil', 'Data Pasien telah ditambahkan');
+    return back();
   }
 
   public function formAjaxKota($id)

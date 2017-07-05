@@ -196,17 +196,20 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group {{ $errors->has('anamnesa') ? 'has-error' : ''}}">
-                                                    <label for="anamnesa">Anamnesa</label>
-                                                    <input class="form-control" name="anamnesa" required id="anamnesa" value="{{old('anamnesa')}}" type="text" placeholder="Anamnesa">
+                                                    <label for="anamnesa">Anamnesa*</label>
+                                                    <input class="form-control" name="anamnesa" required id="anamnesa" value="{{$lastcek == null ? old('anamnesa') : $lastcek->anamnesa }}" type="text" placeholder="Anamnesa">
                                                     @if ($errors->has('anamnesa'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('anamnesa') }}</strong>
                                                     </span>
                                                     @endif
                                                 </div>
+                                                @php
+                                                $Alergi = App\Pasien::where('noRm',$lrj->noRm)->first();
+                                                @endphp
                                                 <div class="form-group {{ $errors->has('riwayatAlergi') ? 'has-error' : ''}}">
-                                                    <label for="riwayatAlergi">Riwayat Alergi</label>
-                                                    <input class="form-control" required name="riwayatAlergi" id="riwayatAlergi" value="{{old('riwayatAlergi')}}" type="text" placeholder="Riwayat Alergi">
+                                                    <label for="riwayatAlergi">Riwayat Alergi*</label><br>
+                                                    <input class="form-control" data-role="tagsinput" required name="riwayatAlergi" id="riwayatAlergi" value="{{ $Alergi->riwayatAlergi }}" type="text" placeholder="Riwayat Alergi">
                                                     @if ($errors->has('riwayatAlergi'))
                                                     <span class="help-block">
                                                         <strong>{{ $errors->first('riwayatAlergi') }}</strong>
@@ -220,7 +223,7 @@
                                                         <div class="form-group {{ $errors->has('tensi') ? 'has-error' : ''}}">
                                                             <label for="tensi">Tensi</label>
                                                             <div class='input-group date'>
-                                                                <input class="form-control" required name="tensi" id="tensi" value="{{old('tensi')}}" type="text" placeholder="Tensi">
+                                                                <input class="form-control" required name="tensi" id="tensi" value="{{$lastcek == null ? old('tensi') : $lastcek->tensi }}" type="number" placeholder="Tensi">
                                                                 <span class="input-group-addon">mmHg</span>
                                                             </div>
                                                             @if ($errors->has('tensi'))
@@ -234,7 +237,7 @@
                                                         <div class="form-group {{ $errors->has('rr') ? 'has-error' : ''}}">
                                                             <label for="rr">RR</label>
                                                             <div class='input-group date'>
-                                                                <input class="form-control" required name="rr" id="rr" value="{{old('rr')}}" type="text" placeholder="RR">
+                                                                <input class="form-control" required name="rr" id="rr" value="{{$lastcek == null ? old('rr') : $lastcek->rr }}" type="number" placeholder="RR">
                                                                 <span class="input-group-addon">x/menit</span>
                                                             </div>
                                                             @if ($errors->has('rr'))
@@ -248,7 +251,7 @@
                                                         <div class="form-group {{ $errors->has('nadi') ? 'has-error' : ''}}">
                                                             <label for="nadi">Nadi</label>
                                                             <div class='input-group date'>
-                                                                <input class="form-control" required name="nadi" id="nadi" value="{{old('nadi')}}" type="text" placeholder="Nadi">
+                                                                <input class="form-control" required name="nadi" id="nadi" value="{{$lastcek == null ? old('nadi') : $lastcek->nadi }}" type="number" placeholder="Nadi">
                                                                 <span class="input-group-addon">x/menit</span>
                                                             </div>
                                                             @if ($errors->has('nadi'))
@@ -262,7 +265,7 @@
                                                         <div class="form-group {{ $errors->has('bb') ? 'has-error' : ''}}">
                                                             <label for="bb">BB</label>
                                                             <div class='input-group date'>
-                                                                <input class="form-control" required name="bb" id="bb" value="{{old('pemeriksaanFisik')}}" type="text" placeholder="BB">
+                                                                <input class="form-control" required name="bb" id="bb" value="{{$lastcek == null ? old('bb') : $lastcek->bb }}" type="number" placeholder="BB">
                                                                 <span class="input-group-addon">KG</span>
                                                             </div>
                                                             @if ($errors->has('bb'))
@@ -276,7 +279,7 @@
                                                         <div class="form-group {{ $errors->has('tb') ? 'has-error' : ''}}">
                                                             <label for="tb">TB</label>
                                                             <div class='input-group date'>
-                                                                <input class="form-control" required name="tb" id="tb" value="{{old('tb')}}" type="text" placeholder="TB">
+                                                                <input class="form-control" required name="tb" id="tb" value="{{$lastcek == null ? old('tb') : $lastcek->tb }}" type="number" placeholder="TB">
                                                                 <span class="input-group-addon">CM</span>
                                                             </div>
                                                             @if ($errors->has('tb'))
@@ -290,7 +293,7 @@
                                                         <div class="form-group {{ $errors->has('suhu') ? 'has-error' : ''}}">
                                                             <label for="suhu">SUHU</label>
                                                             <div class='input-group date'>
-                                                                <input class="form-control" required name="suhu" id="suhu" value="{{old('suhu')}}" type="text" placeholder="SUHU">
+                                                                <input class="form-control" required name="suhu" id="suhu" value="{{$lastcek == null ? old('suhu') : $lastcek->suhu }}" type="number" placeholder="SUHU">
                                                                 <span class="input-group-addon">&deg;C</span>
                                                             </div>
                                                             @if ($errors->has('suhu'))
@@ -306,10 +309,10 @@
                                                 <div class="row">
                                                    <div class="col-md-6">
                                                     <div class="form-group {{ $errors->has('diagnosa') ? 'has-error' : ''}}">
-                                                       <label class="control-label " for="diagnosa">Diagnosa</label>
+                                                       <label class="control-label " for="diagnosa">Diagnosa*</label>
                                                        <div class="input-group date">
                                                         <div class="form-group">
-                                                         <input type="text" id="input" required data-role="tagsinput" class="form-control" name="diagnosa" value="{{old('diagnosa')}}" placeholder="Diagnosa">
+                                                         <input type="text" id="input" required data-role="tagsinput" class="form-control" name="diagnosa" value="{{$lastcek == null ? old('diagnosa') : $lastcek->diagnosa }}" placeholder="Diagnosa">
                                                          <span class="help-block">
                                                             <strong>{{ $errors->first('diagnosa') }}</strong>
                                                         </span>
@@ -320,10 +323,10 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group {{ $errors->has('tindakan') ? 'has-error' : ''}}">
-                                               <label class="control-label " for="tindakan">Tindakan</label>
+                                               <label class="control-label " for="tindakan">Tindakan*</label>
                                                <div class="input-group date">
                                                 <div class="form-group">
-                                                 <input type="text" id="input" data-role="tagsinput" required class="form-control" value="{{old('tindakan')}}" name="tindakan" placeholder="Tindakan">
+                                                 <input type="text" id="input" data-role="tagsinput" required class="form-control" value="{{$lastcek == null ? old('tindakan') : $lastcek->tindakan }}" name="tindakan" placeholder="Tindakan">
 
                                                  <span class="help-block">
                                                     <strong>{{ $errors->first('tindakan') }}</strong>

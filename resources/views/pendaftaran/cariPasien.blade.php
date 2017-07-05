@@ -55,7 +55,7 @@
                 <a href="{{url('/igd/input/'.$data->id)}}"><button type="button" class="btn-xs btn-default">IGD</button></a>
                 <a href="{{url('/cetak-krs/'.$data->id)}}"><button type="button" class="btn-xs">Cetak KIB</button></a>
                 <a href="{{ url('pendaftaran-pasien/ubah/'.$data->id) }}"><button data-toggle="modal" data-id="{{$data->id}}" id="ubah" value="{{$data->id}}" class="btn-xs btn-warning"> Ubah</button></a>
-                <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xs btn-danger"> Hapus</button>                                              
+                {{-- <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xs btn-danger"> Hapus</button>                                               --}}
                 </td>
             </tr>
             <?php $i++; ?>
@@ -315,7 +315,10 @@
                             </div>
                         </div>
                     </div>
-
+                     <div class="form-group">
+                        <label for="noPesertaJKN">Alergi</label>
+                        <input class="form-control" name="riwayatAlergi" readonly="" value="{{old('riwayatAlergi')}}" id="riwayatAlergi" type="text" placeholder="Alergi">
+                    </div>
                     <div class="form-group">
                         <label for="noPesertaJKN">Nomor Peserta JKN</label>
                         <input class="form-control" name="noPesertaJKN" value="{{old('noPesertaJKN')}}" readonly="" id="noPesertaJKN" type="text" placeholder="Nomor Peserta JKN">
@@ -401,7 +404,7 @@
                     type: "GET",
                     dataType: "json",
                     success:function(data) {
-                        console.log(data);
+                        // console.log(data);
                         var pasien = jQuery.parseJSON(JSON.stringify(data));
                         var noRm = document.getElementById("noRm").value =pasien['noRm'];
                         var nama = document.getElementById("nama").value =pasien['nama'];
@@ -424,10 +427,9 @@
                         var namaSuami_istri = document.getElementById("namaSuami_istri").value =pasien['namaSuami_istri'];
                         var noHp = document.getElementById("noHp").value =pasien['noHp'];
                         var tglMasuk = document.getElementById("tglMasuk").value =pasien['tglMasuk'];
-                        var tglMasuk = document.getElementById("caraDatang").value =pasien['caraDatang'];
-                        var rujukan = document.getElementById("rujukan").value =pasien['rujukan'];
                         var noPesertaJKN = document.getElementById("noPesertaJKN").value =pasien['noPesertaJKN'];
                         var noAsuransiLain = document.getElementById("noAsuransiLain").value =pasien['noAsuransiLain'];
+                        var riwayatAlergi = document.getElementById("riwayatAlergi").value =pasien['riwayatAlergi'];
 
 
 

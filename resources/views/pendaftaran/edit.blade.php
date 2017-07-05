@@ -293,7 +293,10 @@
                         </div>
                     </div>
 
-
+                     <div class="form-group">
+                        <label for="noPesertaJKN">Alergi</label>
+                        <input class="form-control" name="riwayatAlergi" value="{{old('riwayatAlergi')}}" id="riwayatAlergi" type="text" placeholder="Alergi">
+                    </div>
                     <div class="form-group">
                         <label for="noPesertaJKN">Nomor Peserta JKN</label>
                         <input class="form-control" name="noPesertaJKN" value="{{ $data->noPesertaJKN }}" id="noPesertaJKN" type="text" placeholder="Nomor Peserta JKN">

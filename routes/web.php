@@ -49,7 +49,7 @@ Route::get('/stok-formulir','ProfileController@formulir');
 
 //================== end ==============
 
-Route::group(['as' => 'user','middleware' => ['role:admin']], function(){
+Route::group(['as' => 'user','middleware' => ['role:admin','auth']], function(){
 //====================================================
 //=======================USER====================
 //====================================================
@@ -64,7 +64,7 @@ Route::post('/user/register/ubahPassword','UserController@ubahPassword');
 
 
 
-Route::group(['as' => 'pelaporan','middleware' => ['role:admin|rekmed']], function(){
+Route::group(['as' => 'pelaporan','middleware' => ['role:admin|rekmed','auth']], function(){
 
 // ====================== index ================
 Route::get('/index/list/dokter','PelaporanController@dokter');
@@ -95,7 +95,7 @@ Route::delete('pelaporan/kodeicd9/{id}','IcdController@hapusIcd9');
 
 
 });
-Route::group(['as' => 'pendaftaran','middleware' => ['role:admin|rekmed']], function(){
+Route::group(['as' => 'pendaftaran','middleware' => ['role:admin|rekmed','auth']], function(){
 //====================================================
 //=======================PENDAFTARAN==================
 //====================================================
@@ -120,6 +120,8 @@ Route::get('rawat-jalan/input/{id}','PendaftaranController@rawatJalanInput');
 Route::post('rawat-jalan','PendaftaranController@saveRawatJalan');
 //ajax keyup
 Route::get('pasien/norm/{id}','PendaftaranController@formAjaxCari');
+//dokter spesialis
+Route::get('/rawatJalan/spesialis/{id}','PendaftaranController@spesialis');
 
 Route::get('rawat-inap','PendaftaranController@rawatInapIndex');
 Route::get('rawat-inap/detail/{id}','PendaftaranController@rawatInapDetail');
@@ -142,9 +144,12 @@ Route::get('igd/input/{id}','PendaftaranController@igdInput');
 Route::post('igd','PendaftaranController@igdSimpan');
 Route::get('cari-pasien','PendaftaranController@viewCariPasien');
 Route::get('cetak-krs/{id}','PendaftaranController@cetakkrs');
+Route::get('/noname','PendaftaranController@getNoname');
+Route::post('/noname','PendaftaranController@saveNoname');
+
 });
 
-Route::group([ 'as' => 'pelayanan','middleware' => ['role:admin|rekmed|dokter|Perawat Poliklinik|Perawat UGD|perawat IRNA']], function(){
+Route::group([ 'as' => 'pelayanan','middleware' => ['role:admin|rekmed|dokter|Perawat Poliklinik|Perawat UGD|perawat IRNA','auth']], function(){
 //====================================================
 //=======================PELAYANAN====================
 //====================================================

@@ -70,6 +70,7 @@
             <li><a href="{{url('/rawat-jalan')}}"><i class="fa fa-circle-o"></i> Pendaftaran Rawat Jalan</a></li>
             <li><a href="{{url('rawat-inap')}}"><i class="fa fa-circle-o"></i> Rawat Inap</a></li>
             <li><a href="{{url('igd')}}"><i class="fa fa-circle-o"></i> IGD</a></li>
+            <li><a href="{{url('noname')}}"><i class="fa fa-circle-o"></i> NONAME</a></li>
             <li><a href="{{url('cari-pasien')}}"><i class="fa fa-circle-o"></i> Cari Pasien</a></li>
           </ul>
         </li>
@@ -81,23 +82,90 @@
             <i class="fa fa-files-o"></i> <span>Pelayanan</span>
             <i class="fa fa-angle-left pull-right"></i>
             <span class="pull-right-container">
+              @php
+                  $lrj = App\Tindakan::join('pelayanan_rawatjalan','tindakan.id_pelayananjalan','pelayanan_rawatjalan.id')
+       ->join('rawat_jalan','id_RJ','rawat_jalan.id')
+       ->join('pasien','id_pasien','pasien.id')
+       ->orderBy('pelayanan_rawatjalan.id','asc')
+       // ->Where('tindakan.kode',null)
+       ->where('status',1)   
+       ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
+       ->get();
+
+         $rmk  = App\Tindakan::join('pelayanan_rawatinap','tindakan.id_pelayananinap','pelayanan_rawatinap.id')
+       ->join('rawat_inap','id_RI','rawat_inap.id')
+       ->join('pasien','id_pasien','pasien.id')
+       ->orderBy('pelayanan_rawatinap.id','asc')
+       ->Where('tindakan.kode',null)
+       // ->where('status',1)   
+       ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
+       ->get();
+
+
+       $igd  = App\Tindakan::join('pelayanan_rawatigd','tindakan.id_pelayananigd','pelayanan_rawatigd.id')
+       ->join('rawat_igd','id_IGD','rawat_igd.id')
+       ->join('pasien','id_pasien','pasien.id')
+       ->orderBy('pelayanan_rawatigd.id','asc')
+       // ->whereNull('kode')
+       ->where('status',1)    
+       ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
+       ->get();
+            @endphp
+
             @role(['admin','rekmed'])
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
+              <small class="label pull-right bg-yellow">{{ $lrj->count() }}</small>
+              <small class="label pull-right bg-green">{{ $rmk->count() }}</small>
+              <small class="label pull-right bg-red">{{ $igd->count()  }}</small>
             @endrole
-            @role(['Perawat Poliklinik','Perawat UGD','perawat IRNA'])
-              <small class="label pull-right bg-yellow">1</small>
-              <small class="label pull-right bg-green">1</small>
-              <small class="label pull-right bg-red">1</small>
+
+
+            @php
+                $antrianRJ = App\PelayananRj::join('rawat_jalan','id_RJ','rawat_jalan.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatjalan.id as idp','pasien.*','rawat_jalan.*','pelayanan_rawatjalan.*')
+       ->orderBy('pelayanan_rawatjalan.id','asc')
+       ->where('anamnesa',Null)->whereNull('rawat_jalan.deleted_at')
+       ->get();
+
+        $antrianRI = App\PelayananRI::join('rawat_inap','id_RI','rawat_inap.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
+       ->orderBy('pelayanan_rawatinap.id','asc')
+       ->where('diagnosisMasuk',Null)->whereNull('rawat_inap.deleted_at')
+       ->get();
+
+
+       $antrianIGD = App\PelayananIGD::join('rawat_igd','id_IGD','rawat_igd.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatigd.id as idp','pasien.*','rawat_igd.*','pelayanan_rawatigd.*')
+       ->orderBy('pelayanan_rawatigd.id','asc')
+       ->where('anamnesis',Null)->whereNull('rawat_igd.deleted_at')
+       ->get();
+            @endphp
+
+            @role(['Perawat Poliklinik','Perawat UGD','perawat IRNA','dokter'])
+              <small class="label pull-right bg-yellow">{{ $antrianIGD->count() }}</small>
+              <small class="label pull-right bg-green">{{ $antrianRI->count() }}</small>
+              <small class="label pull-right bg-red">{{ $antrianRJ->count()  }}</small>
             @endrole
             </span>
             </a>
+  
+         @role(['admin','rekmed'])
           <ul class="treeview-menu">
-            <li><a href="{{url('/lrj')}}"><i class="fa fa-circle-o"></i> Lembar Rawat Jalan<small class="label pull-right bg-red">12</small></a></li>
-            <li><a href="{{url('/rmk')}}"><i class="fa fa-circle-o"></i> Ringkasan Masuk Keluar<small class="label pull-right bg-green">12</small></a></li>
-            <li><a href="{{url('/pelayanan-igd')}}"><i class="fa fa-circle-o"></i> Lembar Gawat Darurat<small class="label pull-right bg-yellow">12</small></a></li>
+            <li><a href="{{url('/lrj')}}"><i class="fa fa-circle-o"></i> Lembar Rawat Jalan<small class="label pull-right bg-red">{{$igd->count() }}</small></a></li>
+            <li><a href="{{url('/rmk')}}"><i class="fa fa-circle-o"></i> Ringkasan Masuk Keluar<small class="label pull-right bg-green">{{ $rmk->count() }}</small></a></li>
+            <li><a href="{{url('/pelayanan-igd')}}"><i class="fa fa-circle-o"></i> Lembar Gawat Darurat<small class="label pull-right bg-yellow">{{  $lrj->count()  }}</small></a></li>
           </ul>
+        @endrole
+          @role(['Perawat Poliklinik','Perawat UGD','perawat IRNA','dokter'])
+          <ul class="treeview-menu">
+            <li><a href="{{url('/lrj')}}"><i class="fa fa-circle-o"></i> Lembar Rawat Jalan<small class="label pull-right bg-red">{{ $antrianRJ->count()  }}</small></a></li>
+            <li><a href="{{url('/rmk')}}"><i class="fa fa-circle-o"></i> Ringkasan Masuk Keluar<small class="label pull-right bg-green">{{ $antrianRI->count() }}</small></a></li>
+            <li><a href="{{url('/pelayanan-igd')}}"><i class="fa fa-circle-o"></i> Lembar Gawat Darurat<small class="label pull-right bg-yellow">{{  $antrianIGD->count()}}</small></a></li>
+          </ul>
+        @endrole
+
         </li>
         @endrole
 {{--         @role(['admin','rekmed','perawat'])

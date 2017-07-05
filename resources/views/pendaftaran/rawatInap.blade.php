@@ -308,7 +308,7 @@
 
         <div class="col-md-6">
             <div class="form-group {{ $errors->has('kamar') ? 'has-error' : ''}}">
-               <label class="control-label " for="tanggal_kembali">Nomor Kamar</label>
+               <label class="control-label " for="tanggal_kembali">pilih bed</label>
                <div class="input-group date">
                     <select name="kamar" required class="form-control">
                         <option value="">pilih</option>

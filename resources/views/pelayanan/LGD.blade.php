@@ -197,12 +197,21 @@
                                                 <div class="row">
                                                     <div class="col-md-6">  
                                                         <div class="form-group {{ $errors->has('jenisKasus') ? 'has-error' : ''}}">
-                                                           <label class="control-label " for="jenisKasus">Jenis Kasus</label>
+                                                           <label class="control-label " for="jenisKasus">Jenis Kasus*</label>
                                                                <select name="jenisKasus" required id="jenisKasus" class="form-control">
-                                                               <option value="">pilih</option>
+                                                               
+                                                                  @if($lastcek != null)
+                                                                     <optio selected hidden value="{{ $lastcek->jenisKasus }}">{{ $lastcek->jenisKasus }}</option>
+                                                                   <option value="Bedah">Bedah</option>
+                                                                 <option value="Obsgin">Obsgin</option>
+                                                                 <option value="Interna">Interna</option>
+                                                                @else    
+                                                                     <<option value="">pilih</option>
                                                                  <option value="Bedah">Bedah</option>
                                                                  <option value="Obsgin">Obsgin</option>
                                                                  <option value="Interna">Interna</option>
+
+                                                                @endif
                                                              </select>
                                                              <span class="help-block">
                                                                 <strong>{{ $errors->first('jenisKasus') }}</strong>
@@ -212,11 +221,20 @@
  
                                                 <div class="col-md-6">
                                                     <div class="form-group {{ $errors->has('tindakanResuitasi') ? 'has-error' : ''}}">
-                                                       <label class="control-label " for="tindakanResuitasi">Tindakan Resusitasi</label>
+                                                       <label class="control-label " for="tindakanResuitasi">Tindakan Resusitasi*</label>
                                                            <select name="tindakanResuitasi" required id="tindakanResuitasi" class="form-control">
-                                                             <option value="">pilih</option>
+                                                             
+                                                               @if($lastcek != null)
+                                                                     <optio selected hidden value="{{ $lastcek->tindakanResuitasi }}">{{ $lastcek->tindakanResuitasi }}</option>
+                                                                  <option value="Ya">Ya</option>
+                                                             <option value="Tidak">Tidak</option>
+                                                                @else    
+                                                                    <option value="">pilih</option>
                                                              <option value="Ya">Ya</option>
                                                              <option value="Tidak">Tidak</option>
+
+
+                                                                @endif
                                                          </select>
                                                          <span class="help-block">
                                                             <strong>{{ $errors->first('tindakanResuitasi') }}</strong>
@@ -226,8 +244,8 @@
 
                                             <div class="col-md-6">  
                                                 <div class="form-group {{ $errors->has('cramsScore') ? 'has-error' : ''}}">
-                                                   <label class="control-label " for="cramsScore">Crams Score/ GCS</label>
-                                                       <input placeholder="Crams Score/ GCS" type='number' required value="{{old('cramsScore')}}" name="cramsScore" class="form-control" id="cramsScore">
+                                                   <label class="control-label " for="cramsScore">Crams Score/ GCS*</label>
+                                                       <input placeholder="Crams Score/ GCS" type='number' required value="{{$lastcek == null ? old('cramsScore') : $lastcek->cramsScore }}" name="cramsScore" class="form-control" id="cramsScore">
                                                      <span class="help-block">
                                                         <strong>{{ $errors->first('cramsScore') }}</strong>
                                                     </span>
@@ -236,8 +254,8 @@
   
                                         <div class="col-md-6">
                                             <div class="form-group {{ $errors->has('anamnesis') ? 'has-error' : ''}}">
-                                               <label class="control-label " for="anamnesis">Anamnesis</label>    
-                                                  <input placeholder="Anamnesis" required type='text' value="{{old('anamnesis')}}" name="anamnesis" class="form-control" id="anamnesis">
+                                               <label class="control-label " for="anamnesis">Anamnesis*</label>    
+                                                  <input placeholder="Anamnesis" required type='text' value="{{$lastcek == null ? old('anamnesis') : $lastcek->anamnesis }}" name="anamnesis" class="form-control" id="anamnesis">
                                                  <span class="help-block">
                                                     <strong>{{ $errors->first('anamnesis') }}</strong>
                                                 </span>
@@ -248,9 +266,24 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group{{ $errors->has('pemeriksaanFisik') ? ' has-error' : '' }}">
-                                            <label class="control-label " for="pemeriksaanFisik">Pemeriksaan Fisik</label><br>
+                                            <label class="control-label " for="pemeriksaanFisik">Pemeriksaan Fisik*</label><br>
                                                <select class="form-control" required name="pemeriksaanFisik">
-                                               <option value="">pilih</option>
+                                               
+                                                    @if($lastcek != null)
+                                                                     <optio selected hidden value="{{ $lastcek->pemeriksaanFisik }}">{{ $lastcek->pemeriksaanFisik }}</option>
+                                                                   <option value="0">0</option>
+                                                   <option value="1">1</option>
+                                                   <option value="2">2</option>
+                                                   <option value="3">3</option>
+                                                   <option value="4">4</option>
+                                                   <option value="5">5</option>
+                                                   <option value="6">6</option>
+                                                   <option value="7">7</option>
+                                                   <option value="8">8</option>
+                                                   <option value="9">9</option>
+                                                   <option value="10">10</option>
+                                                                @else    
+                                                                  <option value="">pilih</option>
                                                    <option value="0">0</option>
                                                    <option value="1">1</option>
                                                    <option value="2">2</option>
@@ -262,6 +295,9 @@
                                                    <option value="8">8</option>
                                                    <option value="9">9</option>
                                                    <option value="10">10</option>
+
+
+                                                                @endif
                                                </select>
                                             </div>
                                             @if ($errors->has('pemeriksaanFisik'))
@@ -274,8 +310,8 @@
                                     <div class="col-md-6">
                                        <div class="bootstrap-timepicker">
                                         <div class="form-group{{ $errors->has('pemeriksaanStatus') ? ' has-error' : '' }}">
-                                            <label class="control-label" for="jam_masuk">Pemeriksaan Status Nyeri</label><br>
-                                             <input placeholder="Pemeriksaan Status Nyeri" required type='number' value="{{old('pemeriksaanStatus')}}" name="pemeriksaanStatus" class="form-control" id="pemeriksaanStatus">
+                                            <label class="control-label" for="jam_masuk">Pemeriksaan Status Nyeri*</label><br>
+                                             <input placeholder="Pemeriksaan Status Nyeri" required type='number' value="{{$lastcek == null ? old('pemeriksaanStatus') : $lastcek->pemeriksaanStatus }}" name="pemeriksaanStatus" class="form-control" id="pemeriksaanStatus">
                                           </div>
                                           @if ($errors->has('pemeriksaanStatus'))
                                           <span class="help-block">
@@ -289,7 +325,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group {{ $errors->has('pemeriksaanLaboratorium') ? 'has-error' : ''}}">
                                             <label class="control-label " for="pemeriksaanLaboratorium">Pemeriksaan Laboratorium</label>
-                                                       <input type="text" class="form-control"  name="pemeriksaanLaboratorium" value="{{old('pemeriksaanLaboratorium')}}" placeholder="Pemeriksaan Laboratorium">
+                                                       <input type="text" class="form-control"  name="pemeriksaanLaboratorium" value="{{$lastcek == null ? old('pemeriksaanLaboratorium') : $lastcek->pemeriksaanLaboratorium }}" placeholder="Pemeriksaan Laboratorium">
                                                        <span class="help-block">
                                                         <strong>{{ $errors->first('pemeriksaanLaboratorium') }}</strong>
                                                     </span>
@@ -300,7 +336,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group {{ $errors->has('pemeriksaanRadiologi') ? 'has-error' : ''}}">
                                          <label class="control-label " for="pemeriksaanRadiologi">Pemeriksaan Radiologi</label>
-                                               <input type="text" class="form-control" value="{{old('pemeriksaanRadiologi')}}" name="pemeriksaanRadiologi" placeholder="Pemeriksaan Radiologi">
+                                               <input type="text" class="form-control" value="{{$lastcek == null ? old('pemeriksaanRadiologi') : $lastcek->pemeriksaanRadiologi }}" name="pemeriksaanRadiologi" placeholder="Pemeriksaan Radiologi">
                                                <span class="help-block">
                                                 <strong>{{ $errors->first('pemeriksaanRadiologi') }}</strong>
                                             </span>
@@ -310,9 +346,9 @@
 
                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('diagonosisAwal') ? 'has-error' : ''}}">
-                                 <label class="control-label " for="diagonosisAwal">Diagnosis Awal</label>
+                                 <label class="control-label " for="diagonosisAwal">Diagnosis Awal*</label><br>
                                 
-                                       <input type="text" class="form-control" required data-role="tagsinput" name="diagonosisAwal" value="{{old('diagonosisAwal')}}" placeholder="Diagnosis ">
+                                       <input type="text" class="form-control" required data-role="tagsinput" name="diagonosisAwal" value="{{$lastcek == null ? old('diagonosisAwal') : $lastcek->diagonosisAwal }}" placeholder="Diagnosis ">
                                        <span class="help-block">
                                         <strong>{{ $errors->first('diagonosisAwal') }}</strong>
                                     </span>
@@ -321,8 +357,8 @@
 
                              <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('diagnosisAkhir') ? 'has-error' : ''}}">
-                                 <label class="control-label " for="diagnosisAkhir">Diagnosis Akhir </label>
-                                       <input type="text" class="form-control" required data-role="tagsinput" name="diagnosisAkhir" value="{{old('diagnosisAkhir')}}" placeholder="Diagnosis ">
+                                 <label class="control-label " for="diagnosisAkhir">Diagnosis Akhir*</label><br>
+                                       <input type="text" class="form-control" required data-role="tagsinput" name="diagnosisAkhir" value="{{$lastcek == null ? old('diagnosisAkhir') : $lastcek->diagnosisAkhir }}" placeholder="Diagnosis ">
                                        <span class="help-block">
                                         <strong>{{ $errors->first('diagnosisAkhir') }}</strong>
                                     </span>
@@ -332,8 +368,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group {{ $errors->has('terapiTindakan') ? 'has-error' : ''}}">
-                         <label class="control-label " for="terapiTindakan">Terapi/Tindakan di IGD</label>
-                               <input type="text" class="form-control" required data-role="tagsinput" value="{{old('terapiTindakan')}}" name="terapiTindakan" placeholder="Terapi/Tindakan di IGD">
+                         <label class="control-label " for="terapiTindakan">Terapi/Tindakan di IGD*</label>
+                               <input type="text" class="form-control" required data-role="tagsinput" value="{{$lastcek == null ? old('terapiTindakan') : $lastcek->terapiTindakan }}" name="terapiTindakan" placeholder="Terapi/Tindakan di IGD">
                                <span class="help-block">
                                 <strong>{{ $errors->first('terapiTindakan') }}</strong>
                             </span>
@@ -343,7 +379,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group {{ $errors->has('tindakanLanjut') ? 'has-error' : ''}}">
-                         <label class="control-label" for="tindakanLanjut">Tindak Lanjut</label>
+                         <label class="control-label" for="tindakanLanjut">Tindak Lanjut*</label>
                                <select name="tindakanLanjut" id="tindakanLanjut" required class="form-control">
                                                              <option value="">pilih</option>
                                                              <option value="Pulang">Pulang</option>

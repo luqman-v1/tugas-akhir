@@ -78,4 +78,6 @@
     font-weight: normal;
     color: #F44336; }
 
-    
+.bg-aqua, .callout.callout-info, .alert-info, .label-info, .modal-info .modal-body {
+    background-color: #000000 !important;
+}

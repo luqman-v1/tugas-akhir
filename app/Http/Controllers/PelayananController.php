@@ -227,6 +227,7 @@ class PelayananController extends Controller
     
 
     public function lrj($id){
+
         $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
         $icd9 = Icd9::all();
 
@@ -236,6 +237,15 @@ class PelayananController extends Controller
        ->where('pelayanan_rawatjalan.id',$id)
        ->first();
 
+       $lastcek = PelayananRj::join('rawat_jalan','id_RJ','rawat_jalan.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatjalan.*')
+       ->where('noRM',$lrj->noRm)
+       ->orderBy('pelayanan_rawatjalan.id','desc')
+       ->skip(1)
+       ->first();
+
+
         $biday = new DateTime($lrj->tglLahir);
               $today = new DateTime();
             $diff = $today->diff($biday);
@@ -244,7 +254,7 @@ class PelayananController extends Controller
             $lrj['bulan'] = $diff->m;
             $lrj['hari'] = $diff->d;
        
-    	return view('pelayanan.LRJ')->with('icd',$icd)->with('icd9',$icd9)->with('lrj',$lrj);
+    	return view('pelayanan.LRJ')->with('icd',$icd)->with('icd9',$icd9)->with('lrj',$lrj)->with('lastcek',$lastcek);
     }
 
     public function lrjSimpan(Request $request){
@@ -263,7 +273,6 @@ class PelayananController extends Controller
             'bulan' => 'required',
             'hari' => 'required',
             'anamnesa' => 'required',
-            'riwayatAlergi'=>'required',
             'diagnosa' => 'required',
             'tindakan' => 'required',
               'tensi' => 'required',
@@ -274,9 +283,12 @@ class PelayananController extends Controller
             'suhu' => 'required',
             ]);
 
+        $pasien = Pasien::where('noRm',$request->noRm)->first();
+         $pasien->riwayatAlergi = $request->riwayatAlergi;
+         $pasien->Save();
+
     	$prj = PelayananRj::find($request->id);
         $prj->anamnesa = $request->anamnesa;
-        $prj->riwayatAlergi = $request->riwayatAlergi;
         $prj->tensi = $request->tensi;
         $prj->rr = $request->rr;
         $prj->nadi = $request->nadi;
@@ -402,15 +414,24 @@ class PelayananController extends Controller
     public function rmk($id){
          $icd = Icd::join('tbl_icd10nama','tbl_icd10.id','id_tblicd10')->get();
         $icd9 = Icd9::all();
-        $dokter = role_user::join('users','user_id','users.id')->where('role_id',6)->get();
-        $perawat = role_user::join('users','user_id','users.id')->where('role_id',3)->get();
-        $rekmed = role_user::join('users','user_id','users.id')->where('role_id',2)->get();
+        $dokter = role_user::join('users','user_id','users.id')->where('role_id',6)->orderBy('users.name','asc')->get();
+        $perawat = role_user::join('users','user_id','users.id')->where('role_id',3)->orderBy('users.name','asc')->get();
+        $rekmed = role_user::join('users','user_id','users.id')->where('role_id',2)->orderBy('users.name','asc')->get();
         $rmk = PelayananRI::join('rawat_inap','id_RI','rawat_inap.id')
        ->join('pasien','id_pasien','pasien.id')
         ->select('pelayanan_rawatinap.id as idp','pasien.*','rawat_inap.*','pelayanan_rawatinap.*')
        ->orderBy('pelayanan_rawatinap.id','desc')
        ->where('pelayanan_rawatinap.id',$id)
        ->first();
+
+        $lastcek = PelayananRI::join('rawat_inap','id_RI','rawat_inap.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatinap.*')
+       ->where('noRM',$rmk->noRm)
+       ->orderBy('pelayanan_rawatinap.id','desc')
+       ->skip(1)
+       ->first();
+
         $biday = new DateTime($rmk->tglLahir);
         $today = new DateTime();
         $diff = $today->diff($biday);
@@ -419,7 +440,7 @@ class PelayananController extends Controller
         $rmk['bulan'] = $diff->m;
         $rmk['hari'] = $diff->d;
 
-    	return view('pelayanan.RMK')->with(compact('icd','icd9','dokter','perawat','rekmed','rmk'));
+    	return view('pelayanan.RMK')->with(compact('icd','icd9','dokter','perawat','rekmed','rmk','lastcek'));
     }
     public function indexDetail($id){
         $data = PelayananRI::find($id);
@@ -971,6 +992,14 @@ class PelayananController extends Controller
        ->where('pelayanan_rawatigd.id',$id)
        ->first();
 
+        $lastcek =  PelayananIGD::join('rawat_igd','id_IGD','rawat_igd.id')
+       ->join('pasien','id_pasien','pasien.id')
+        ->select('pelayanan_rawatigd.*')
+       ->where('noRM',$igd->noRm)
+       ->orderBy('pelayanan_rawatigd.id','desc')
+       ->skip(1)
+       ->first();
+
        $biday = new DateTime($igd->tglLahir);
         $today = new DateTime();
         $diff = $today->diff($biday);
@@ -982,6 +1011,7 @@ class PelayananController extends Controller
     	return view('pelayanan.LGD')
                         ->with('icd',$icd)
                         ->with('icd9',$icd9)
+                        ->with('lastcek',$lastcek)
                         ->with('igd',$igd);
     }
 

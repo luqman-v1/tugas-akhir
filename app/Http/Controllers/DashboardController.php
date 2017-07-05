@@ -37,6 +37,7 @@ class DashboardController extends Controller
       }
       $totalPasien = Pasien::count();
       $tahun = date('Y');
+      $bulan = date('m');
        $rj = Rawat_Jalan::select(DB::raw('MONTHNAME(tglKunjungan) AS bulan'),DB::raw('count(*) AS jumlah'))
        ->whereYear('tglKunjungan',$tahun)
        ->orderBy('tglKunjungan','asc')
@@ -56,18 +57,11 @@ class DashboardController extends Controller
        ->get();
 
 
-      $besar = Pasien::select(DB::raw('count(kecamatan) as jumlah'),'kecamatan')
+     $besar = Pasien::select(DB::raw('count(kecamatan) as jumlah'),'kecamatan','id')
      ->groupBy('kecamatan')
      ->orderBy('jumlah','desc')
      ->limit(3)
      ->get();
-
-     $pegawai = User::count();
-
-     $icd10 = Icd::count();
-     $icd9 = Icd9::count();
-
-    
 
        $pasien = Pasien::select(DB::raw('MONTHNAME(tglMasuk) AS bulan'),DB::raw('count(*) AS jumlah'))
        ->whereYear('tglMasuk',$tahun)
@@ -88,6 +82,40 @@ class DashboardController extends Controller
        $rigdu = Rawat_IGD::where('caraBayar','UMUM')->count();
         $umum = $rju+$riu+$rigdu; 
 
-      return view('dashboard.home')->with(compact('totalPasien','rj','ri','igd','tahun','besar','pegawai','icd10','icd9','laki','perempuan','pasien','bpjs','umum'));
+        $trendDRj = Diagnosis::select(DB::raw('max(kode) as jml'),DB::raw('count(kode) as count'),'kode')
+       ->whereMonth( 'created_at',$bulan )
+        ->whereNull('id_pelayananigd')
+       ->whereNull('id_pelayananinap')
+       ->first();
+      $trendDRI = Diagnosis::select(DB::raw('max(kode) as jml'),DB::raw('count(kode) as count'),'kode')
+       ->whereMonth( 'created_at',$bulan )
+       ->whereNull('id_pelayananigd')
+       ->whereNull('id_pelayananjalan')
+       ->first();
+
+       $trendDIGD = Diagnosis::select(DB::raw('max(kode) as jml'),DB::raw('count(kode) as count'),'kode')
+       ->whereMonth( 'created_at',$bulan )
+         ->whereNull('id_pelayananinap')
+       ->whereNull('id_pelayananjalan')
+       ->first();
+
+       $trendTRj = Tindakan::select(DB::raw('max(kode) as jml'),DB::raw('count(kode) as count'),'kode')
+       ->whereMonth( 'created_at',$bulan )
+        ->whereNull('id_pelayananigd')
+       ->whereNull('id_pelayananinap')
+       ->first();
+      $trendTRI = Tindakan::select(DB::raw('max(kode) as jml'),DB::raw('count(kode) as count'),'kode')
+       ->whereMonth( 'created_at',$bulan )
+       ->whereNull('id_pelayananigd')
+       ->whereNull('id_pelayananjalan')
+       ->first();
+       $trendTIGD = Tindakan::select(DB::raw('max(kode) as jml'),DB::raw('count(kode) as count'),'kode')
+       ->whereMonth( 'created_at',$bulan )
+         ->whereNull('id_pelayananinap')
+       ->whereNull('id_pelayananjalan')
+       ->first();
+
+
+      return view('dashboard.home')->with(compact('totalPasien','rj','ri','igd','tahun','besar','laki','perempuan','pasien','bpjs','umum','trendDRj','trendDRI','trendDIGD','trendTRj','trendTRI','trendTIGD'));
     }
 }

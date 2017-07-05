@@ -122,7 +122,7 @@
                 @endrole
                <a href="{{url('pelayanan-igd/selesai/'.$data->idp) }}"><button class="btn-xsm btn-primary"><span class="glyphicon glyphicon-ok"></span> Selesai</button></a>
                   <button title="Edit" data-toggle="modal" data-id="{{$data->id}}" data-target=".bs-example-modal-sm1" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
-                <button data-toggle="modal" data-id="{{$data->id}}" title="Hapus" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>                                                         
+                {{-- <button data-toggle="modal" data-id="{{$data->id}}" title="Hapus" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>                                                          --}}
                                                                    
                 </td>
             </tr>
@@ -176,7 +176,7 @@
               <td>JL {{$data->dukuh}} RT.{{$data->rt}} RW.{{$data->rw}} {{$data->kabupaten}}, {{$data->provinsi}}</td>
                 <td>
                   <button data-toggle="modal" title="Edit" data-id="{{$data->id}}" data-target=".bs-example-modal-sm1" id="ubah" value="{{$data->id}}" class="btn-xsm btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
-                <button data-toggle="modal" title="Hapus" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>                                                         
+                {{-- <button data-toggle="modal" title="Hapus" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger"><span class="glyphicon glyphicon-trash"></span></button>                                                          --}}
                                                                    
                 </td>
             </tr>

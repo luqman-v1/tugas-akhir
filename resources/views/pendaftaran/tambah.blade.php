@@ -198,7 +198,7 @@
                                              <label class="control-label " for="statusPerkawinan">Status Perkawinan</label>
                                              <div class="input-group date">
                                                 <div class="form-group">
-                                                    <select name="statusPerkawinan" required class="form-control">
+                                                    <select name="statusPerkawinan" id="statusPerkawinan" required class="form-control">
                                                     <option value="">pilih</option>
                                                         <option value="Kawin">Kawin</option>
                                                         <option value="Belum Kawin">Belum Kawin</option>
@@ -253,7 +253,7 @@
                             <input class="form-control" id="namaOrtu" name="namaOrtu" required value="{{old('namaOrtu')}}" type="text" placeholder="Nama Orang Tua">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" style="display: none;" id="istri_suami">
                         <label for="namaSuami-istri">Nama Suami/Istri</label>
                         <input class="form-control" name="namaSuami_istri" value="{{old('namaSuami_istri')}}" id="namaSuami_istri" type="text" placeholder="Nama Suami/Istri">
                     </div>
@@ -281,7 +281,10 @@
                             </div>
                         </div>
                     </div>
-
+                     <div class="form-group">
+                        <label for="noPesertaJKN">Alergi</label>
+                        <input class="form-control" name="riwayatAlergi" value="{{old('riwayatAlergi')}}" id="riwayatAlergi" type="text" placeholder="Alergi">
+                    </div>
                     <div class="form-group">
                         <label for="noPesertaJKN">Nomor Peserta JKN</label>
                         <input class="form-control" name="noPesertaJKN" value="{{old('noPesertaJKN')}}" id="noPesertaJKN" type="text" placeholder="Nomor Peserta JKN">
@@ -424,5 +427,14 @@
 </script>
 
 
+<script type="text/javascript">
+    $("#statusPerkawinan").on("change",function(){
+        if($(this).val() == "Kawin"){
+            $("#istri_suami").show();
+        }else{
+            $("#istri_suami").hide();
+        }
 
+    });
+</script>
 @endsection

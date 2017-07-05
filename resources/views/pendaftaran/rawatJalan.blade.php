@@ -245,7 +245,6 @@
                                                <div class="input-group date">
                                                     <select name="klinikTujuan" required class="form-control">
                                                     <option value="">pilih</option>
-                                                        <option value="Umum">Bedah Umum</option>
                                                         <option value="Digestive">Bedah Saluran Cerna (Digestive)</option>
                                                         <option value="Throraks">Bedah Throraks</option>
                                                         <option value="Orthopedi">Bedah Tulang dan Sendi (Orthopedi)</option>
@@ -265,9 +264,6 @@
                                            <div class="input-group date">
                                                 <select name="DokterPJ" required class="form-control">
                                                 <option value="">pilih</option>
-                                                    @foreach($dokter as $data)
-                                                    <option value="{{$data->id}}">{{$data->name}}</option>
-                                                    @endforeach
                                                 </select>
 
                                                 <span class="help-block">
@@ -399,4 +395,31 @@ function changetextbox()
     }
 }
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select[name="klinikTujuan"]').on('change', function() {
+            var klinikTujuan = $(this).val();
+            if(klinikTujuan) {
+                $.ajax({
+                    url: '{{ url('/') }}/rawatJalan/spesialis/'+klinikTujuan,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+
+                        // console.log(data);
+                        $('select[name="DokterPJ"]').empty();
+                        $.each(data, function(key, value) {
+                            $('select[name="DokterPJ"]').append('<option value="'+ key +'">'+ value +'</option>');
+                        });
+
+                    }
+                });
+            }else{
+                $('select[name="DokterPJ"]').empty();
+            }
+        });
+    });
+</script>
+
 @endsection

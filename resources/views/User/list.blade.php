@@ -49,7 +49,13 @@
               <td>{{$data->name}}</td>
               <td>{{$data->email}}</td>
               <td>{{$data->noHp}}</td>
-              <td>{{App\Role::find($data->role_id)->display_name}}</td>
+              <td>{{App\Role::find($data->role_id)->display_name}} 
+              @if(App\user::find($data->id)->spesialis == null)
+              @else
+              ( {{ App\user::find($data->id)->spesialis }} )
+               @endif     
+              </td>
+              
               <td>
               <button data-toggle="modal" id="ubahPassword" value="{{$data->id}}" data-target=".modal-edit" class="btn-xsm btn-warning">Ubah Password</button> 
               <button data-toggle="modal" data-id="{{$data->id}}" id="ubahPassword" value="{{$data->id}}" class="delete-modal btn-xsm btn-danger">Hapus User</button>
@@ -103,8 +109,8 @@
                 <section>
                   <div id="initRow">
                    <label class="control-label " for="penyebab">Jabatan</label>
-                   <select class="form-control" name="jabatan">
-                  <option>pilih</option>
+                   <select class="form-control" id="jabatan" name="jabatan">
+                  <option value="">pilih</option>
                    @foreach($role as $data)
                      <option value="{{$data->id}}">{{$data->display_name}}</option>
                     @endforeach
@@ -112,6 +118,23 @@
                  </div>
                </section>
              </div>
+             <div id="spesialisasi" class="form-group" style="display: none;">
+               <label class="control-label " for="tanggal_kembali">Spesialis</label>
+               <div class="input-group date">
+                <select id="spesialis" name="spesialis" class="form-control">
+                  <option value="">pilih</option>
+                  <option value="Digestive">Bedah Saluran Cerna (Digestive)</option>
+                  <option value="Throraks">Bedah Throraks</option>
+                  <option value="Orthopedi">Bedah Tulang dan Sendi (Orthopedi)</option>
+                  <option value="Urologi">Bedah Saluran Kencing (Urologi)</option>
+                  <option value="Bedah Plastik dan Estetik">Bedah Plastik dan Estetik</option>
+                </select>
+                <span class="help-block">
+                  <strong></strong>
+                </span>
+              </div>
+            </div>
+
              <div class="form-group">
                 <section>
                   <div id="initRow">
@@ -280,6 +303,19 @@ $(document).on('click', '.edit-modal', function() {
       "info": true,
       "autoWidth": false
     });
+  
+  $("#jabatan").on('change',function(){
+
+     if( $(this).val() == 6){
+        $('#spesialis').prop('disabled', false);
+        $('#spesialisasi').show();
+
+    }else{
+      $('#spesialis').prop('disabled', true);
+      $('#spesialisasi').hide();
+    }
+  });
+    
   });
 </script>
 @endsection
