@@ -35,7 +35,7 @@
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="col-lg-6">
                                                     <div class="form-group {{ $errors->has('noRm') ? 'has-error' : ''}}">
-                                                        <label for="noRm">Nomor Rekam Medis</label>
+                                                        <label for="noRm">Nomor Rekam Medis*</label>
                                                         <input class="form-control" readonly="" id="noRm" name="noRm" value="{{$rawatJalan->noRm}}" type="text" placeholder="Nomor Rekam Medis" onkeyup="
                                                         var noRm = this.value;
                                                         if (noRm.match(/^\d{2}$/) !== null) {
@@ -53,7 +53,7 @@
                                                 
 
                                                 <div class="form-group {{ $errors->has('nama') ? 'has-error' : ''}}">
-                                                    <label for="nama">Nama Pasien</label>
+                                                    <label for="nama">Nama Pasien*</label>
                                                     <input class="form-control" type="text" readonly="" value="{{$rawatJalan->nama}}"  id="nama" name="nama" placeholder="Nama Pasien">
                                                     @if ($errors->has('nama'))
                                                     <span class="help-block">
@@ -65,24 +65,24 @@
                                                 <hr>
                                                 <center><label for="title">Alamat Lengkap :</label></center>
                                                 <div class="form-group">
-                                                    <label for="title">Provinsi :</label>
+                                                    <label for="title">Provinsi :*</label>
                                                     <input class="form-control" id="provinsi" readonly="" type="text" value="{{$rawatJalan->provinsi}}" name="provinsi" placeholder="Provinsi" style="width:350px">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="title">Kabupaten/Kota :</label>
+                                                    <label for="title">Kabupaten/Kota :*</label>
                                                     <input class="form-control" id="kabupaten" readonly="" type="text" value="{{$rawatJalan->kabupaten}}" name="kabupaten" placeholder="Kabupaten/Kota" style="width:350px">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="title">Kecamatan :</label>
+                                                    <label for="title">Kecamatan :*</label>
                                                     <input class="form-control" id="kecamatan" readonly="" type="text" value="{{$rawatJalan->kecamatan}}" name="kecamatan" placeholder="Kecamatan" style="width:350px">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="title">Kelurahan/Desa :</label>
+                                                    <label for="title">Kelurahan/Desa :*</label>
                                                     <input class="form-control" id="kelurahan" readonly="" type="text" value="{{$rawatJalan->kelurahan}}" name="kelurahan" placeholder="Kelurahan/Desa" style="width:350px">
                                                 </div>
 
                                                 <div class="form-group {{ $errors->has('dukuh') ? 'has-error' : ''}}">
-                                                    <label for="dukuh">Dukuh</label>
+                                                    <label for="dukuh">Dukuh*</label>
                                                     <input class="form-control" id="dukuh" readonly="" type="text" value="{{$rawatJalan->dukuh}}" name="dukuh" placeholder="Dukuh">
                                                     @if ($errors->has('dukuh'))
                                                     <span class="help-block">
@@ -94,7 +94,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group{{ $errors->has('rt') ? ' has-error' : '' }}">
-                                                            <label class="control-label " for="RT">RT</label><br>
+                                                            <label class="control-label " for="RT">RT*</label><br>
                                                             <div class='input-group date'>
                                                                 <input placeholder="RT" type='text' readonly="" value="{{$rawatJalan->rt}}" name="rt" class="form-control" id="rt" >
                                                             </div>
@@ -108,7 +108,7 @@
 
                                                     <div class="col-md-6">
                                                         <div class="form-group{{ $errors->has('rw') ? ' has-error' : '' }}">
-                                                            <label class="control-label " for="rw">RW</label><br>
+                                                            <label class="control-label " for="rw">RW*</label><br>
                                                             <div class='input-group date'>
                                                                 <input placeholder="rw" type='number' readonly="" value="{{$rawatJalan->rw}}" name="rw" class="form-control" id="rw" >
                                                             </div>
@@ -128,7 +128,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group{{ $errors->has('tglLahir') ? ' has-error' : '' }}">
-                                                            <label class="control-label " for="tglLahir"> Tanggal Lahir</label><br>
+                                                            <label class="control-label " for="tglLahir"> Tanggal Lahir*</label><br>
                                                             <div class='input-group date'>
                                                                 <input placeholder="Tanggal Lahir" readonly="" type='text' value="{{$rawatJalan->tglLahir}}" name="tglLahir" class="form-control" id="tglLahir" >
                                                                 <span class="input-group-addon">
@@ -145,7 +145,7 @@
 
                                                     <div class="col-md-2">
                                                         <div class="form-group {{ $errors->has('tahun') ? ' has-error' : '' }}">
-                                                            <label class="control-label " for="tahun"> Tahun</label><br>
+                                                            <label class="control-label " for="tahun"> Tahun*</label><br>
                                                             <div class="input-group date">
                                                                 <input placeholder="tahun" type='text' readonly="" value="{{$rawatJalan->tahun}}" name="tahun" class="form-control" id='tahun' />
                                                                 
@@ -161,7 +161,7 @@
 
                                                     <div class="col-md-2">
                                                         <div class="form-group {{ $errors->has('bulan') ? ' has-error' : '' }}">
-                                                            <label class="control-label " for="bulan"> Bulan</label><br>
+                                                            <label class="control-label " for="bulan"> Bulan*</label><br>
                                                             <div class="input-group date">
                                                                 <input placeholder="bulan" type='text' readonly="" value="{{$rawatJalan->bulan}}" name="bulan" class="form-control" id='bulan' />
                                                                 
@@ -177,7 +177,7 @@
 
                                                     <div class="col-md-2">
                                                         <div class="form-group {{ $errors->has('hari') ? ' has-error' : '' }}">
-                                                            <label class="control-label " for="hari"> Hari</label><br>
+                                                            <label class="control-label " for="hari"> Hari*</label><br>
                                                             <div class="input-group date">
                                                                 <input placeholder="hari" type='text' readonly="" value="{{$rawatJalan->hari}}" name="hari" class="form-control" id='hari' />
                                                                 
@@ -194,7 +194,7 @@
                                                    <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group{{ $errors->has('tglKunjungan') ? ' has-error' : '' }}">
-                                                            <label class="control-label " for="tglKunjungan">Tanggal Kunjungan</label><br>
+                                                            <label class="control-label " for="tglKunjungan">Tanggal Kunjungan*</label><br>
                                                             <div class='input-group date'>
                                                                 <input placeholder="Tanggal Kunjungan" type='text' value="@php echo date("Y-m-d"); @endphp" name="tglKunjungan" required class="form-control" id="tanggal_kunjungan">
                                                                 <span class="input-group-addon">
@@ -210,7 +210,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group {{ $errors->has('caraDatang') ? 'has-error' : ''}}">
-                                                   <label class="control-label " for="caraDatang">Cara Datang</label>
+                                                   <label class="control-label " for="caraDatang">Cara Datang*</label>
                                                      <select name="caraDatang" id="caraDatang" required class="form-control" onChange="changetextbox();">
                                                      <option value="">pilih</option>
                                                          <option value="Sendiri">Sendiri</option>
@@ -226,7 +226,7 @@
                                                 <input class="form-control" name="rujukan" disabled="" value="{{old('rujukan')}}" id="rujukan" type="text" placeholder="Rujukan">
                                             </div>
                                             <div class="form-group {{ $errors->has('caraBayar') ? 'has-error' : ''}}">
-                                               <label class="control-label " for="caraBayar">Cara Bayar</label>
+                                               <label class="control-label " for="caraBayar">Cara Bayar*</label>
                                              
                                                  <select name="caraBayar" id="caraBayar" required class="form-control" onChange="changetextbox();">
                                                  <option value="">pilih</option>
@@ -241,7 +241,7 @@
                                         <div class="row">
                                            <div class="col-md-6">
                                             <div class="form-group {{ $errors->has('klinikTujuan') ? 'has-error' : ''}}">
-                                               <label class="control-label " for="tanggal_kembali">Klinik Tujuan</label>
+                                               <label class="control-label " for="tanggal_kembali">Klinik Tujuan*</label>
                                                <div class="input-group date">
                                                     <select name="klinikTujuan" required class="form-control">
                                                     <option value="">pilih</option>
@@ -261,7 +261,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group {{ $errors->has('DokterPJ') ? 'has-error' : ''}}">
-                                           <label class="control-label " for="tanggal_kembali">Dokter Penanggung Jawab</label>
+                                           <label class="control-label " for="tanggal_kembali">Dokter Penanggung Jawab*</label>
                                            <div class="input-group date">
                                                 <select name="DokterPJ" required class="form-control">
                                                 <option value="">pilih</option>

@@ -35,7 +35,7 @@
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                 <div class="col-md-5 col-md-offset-3 ">
                                                     <div class="form-group {{ $errors->has('noRm') ? 'has-error' : ''}}">
-                                                        <label for="nama_q">Nomor Rekam Medis</label>
+                                                        <label for="nama_q">Nomor Rekam Medis*</label>
                                                         <input class="form-control" value="{{$noRM}}" readonly="" name="noRm" id="noRm" type="text" placeholder="Nomor Rekam Medis">
                                                         @if ($errors->has('noRm'))
                                                         <span class="help-block">
@@ -44,7 +44,7 @@
                                                         @endif
                                                     </div>
                                                     <div class="form-group">
-                                                    <label>Mr/Mrs</label>
+                                                    <label>Mr/Mrs*</label>
                                                     <div class="form-group">
                                              
                                                         <input type="radio" name="noname" value="mr">

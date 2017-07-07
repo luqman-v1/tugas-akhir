@@ -347,6 +347,7 @@
                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('diagonosisAwal') ? 'has-error' : ''}}">
                                  <label class="control-label " for="diagonosisAwal">Diagnosis Awal*</label><br>
+                                                       <small>Note : untuk diagnosa awal lebih dari 1 batasi dengan koma (,)</small><br>
                                 
                                        <input type="text" class="form-control" required data-role="tagsinput" name="diagonosisAwal" value="{{$lastcek == null ? old('diagonosisAwal') : $lastcek->diagonosisAwal }}" placeholder="Diagnosis ">
                                        <span class="help-block">
@@ -358,6 +359,7 @@
                              <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('diagnosisAkhir') ? 'has-error' : ''}}">
                                  <label class="control-label " for="diagnosisAkhir">Diagnosis Akhir*</label><br>
+                                                       <small>Note : untuk diagnosa akhir lebih dari 1 batasi dengan koma (,)</small><br>
                                        <input type="text" class="form-control" required data-role="tagsinput" name="diagnosisAkhir" value="{{$lastcek == null ? old('diagnosisAkhir') : $lastcek->diagnosisAkhir }}" placeholder="Diagnosis ">
                                        <span class="help-block">
                                         <strong>{{ $errors->first('diagnosisAkhir') }}</strong>
@@ -368,7 +370,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group {{ $errors->has('terapiTindakan') ? 'has-error' : ''}}">
-                         <label class="control-label " for="terapiTindakan">Terapi/Tindakan di IGD*</label>
+                         <label class="control-label " for="terapiTindakan">Terapi/Tindakan di IGD*</label><br>
+                                                       <small>Note : untuk terapi tindakan lebih dari 1 batasi dengan koma (,)</small><br>
                                <input type="text" class="form-control" required data-role="tagsinput" value="{{$lastcek == null ? old('terapiTindakan') : $lastcek->terapiTindakan }}" name="terapiTindakan" placeholder="Terapi/Tindakan di IGD">
                                <span class="help-block">
                                 <strong>{{ $errors->first('terapiTindakan') }}</strong>

@@ -192,7 +192,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group {{ $errors->has('diagnosisMasuk') ? 'has-error' : ''}}">
-                                                    <label for="diagnosisMasuk">Diagnosis Masuk*</label>
+                                                    <label for="diagnosisMasuk">Diagnosis Masuk*</label><br>
+                                                       <small>Note : untuk diagnosis masuk lebih dari 1 batasi dengan koma (,)</small>
                                                     <div class="form-group">
                                                     <input class="form-control" data-role="tagsinput" required name="diagnosisMasuk" id="diagnosisMasuk" value="{{$lastcek == null ? old('diagnosisMasuk') : $lastcek->diagnosisMasuk }}" type="text" placeholder="Diagnosis Masuk">
                                                     </div>
@@ -521,7 +522,8 @@
 <div class="row">
  <div class="col-md-6">
     <div class="form-group {{ $errors->has('diagnosisUtama') ? 'has-error' : ''}}">
-     <label class="control-label " for="diagnosisUtama">Diagnosa Utama*</label>
+     <label class="control-label " for="diagnosisUtama">Diagnosa Utama*</label><br>
+                                                       <small>Note : untuk diagnosa utama lebih dari 1 batasi dengan koma (,)</small>
         <div class="form-group">
            <input type="text" class="form-control" required name="diagnosisUtama" data-role="tagsinput" value="{{$lastcek == null ? old('diagnosisUtama') : $lastcek->diagnosisUtama }}" placeholder="Diagnosa Utama">
            <span class="help-block">
@@ -533,7 +535,8 @@
 
 <div class="col-md-6">
     <div class="form-group {{ $errors->has('operasiTindakan') ? 'has-error' : ''}}">
-     <label class="control-label " for="operasiTindakan">Operasi Tindakan*</label>
+     <label class="control-label " for="operasiTindakan">Operasi Tindakan*</label><br>
+                                                       <small>Note : untuk operasi tindakan lebih dari 1 batasi dengan koma (,)</small>
         <div class="form-group">
         <input type="text" class="form-control" required  value="{{$lastcek == null ? old('operasiTindakan') : $lastcek->operasiTindakan }}" data-role="tagsinput" name="operasiTindakan" placeholder="Operasi Tindakan">
            <span class="help-block">
@@ -545,7 +548,8 @@
 
   <div class="col-md-6">
                 <div class="form-group {{ $errors->has('komplikasi') ? 'has-error' : ''}}">
-                 <label class="control-label " for="komplikasi">Komplikasi</label>
+                 <label class="control-label " for="komplikasi">Komplikasi</label><br>
+                                                       <small>Note : untuk komplikasi lebih dari 1 batasi dengan koma (,)</small>
                  <div class="form-group">
                    <input type="text" class="form-control" name="komplikasi" data-role="tagsinput" value="{{$lastcek == null ? old('komplikasi') : $lastcek->komplikasi }}" placeholder="Komplikasi">
                    <span class="help-block">

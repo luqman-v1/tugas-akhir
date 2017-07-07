@@ -209,6 +209,7 @@
                                                 @endphp
                                                 <div class="form-group {{ $errors->has('riwayatAlergi') ? 'has-error' : ''}}">
                                                     <label for="riwayatAlergi">Riwayat Alergi*</label><br>
+                                                       <small>Note : untuk riwayat alergi lebih dari 1 batasi dengan koma (,)</small><br>
                                                     <input class="form-control" data-role="tagsinput" required name="riwayatAlergi" id="riwayatAlergi" value="{{ $Alergi->riwayatAlergi }}" type="text" placeholder="Riwayat Alergi">
                                                     @if ($errors->has('riwayatAlergi'))
                                                     <span class="help-block">
@@ -309,7 +310,8 @@
                                                 <div class="row">
                                                    <div class="col-md-6">
                                                     <div class="form-group {{ $errors->has('diagnosa') ? 'has-error' : ''}}">
-                                                       <label class="control-label " for="diagnosa">Diagnosa*</label>
+                                                       <label class="control-label " for="diagnosa">Diagnosa*</label><br>
+                                                       <small>Note : untuk diagnosa lebih dari 1 batasi dengan koma (,)</small>
                                                        <div class="input-group date">
                                                         <div class="form-group">
                                                          <input type="text" id="input" required data-role="tagsinput" class="form-control" name="diagnosa" value="{{$lastcek == null ? old('diagnosa') : $lastcek->diagnosa }}" placeholder="Diagnosa">
@@ -323,7 +325,8 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group {{ $errors->has('tindakan') ? 'has-error' : ''}}">
-                                               <label class="control-label " for="tindakan">Tindakan*</label>
+                                               <label class="control-label " for="tindakan">Tindakan*</label><br>
+                                                       <small>Note : untuk tindakan lebih dari 1 batasi dengan koma (,)</small>
                                                <div class="input-group date">
                                                 <div class="form-group">
                                                  <input type="text" id="input" data-role="tagsinput" required class="form-control" value="{{$lastcek == null ? old('tindakan') : $lastcek->tindakan }}" name="tindakan" placeholder="Tindakan">
