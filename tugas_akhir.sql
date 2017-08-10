@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2017 at 04:43 PM
+-- Generation Time: Jul 12, 2017 at 10:08 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -59,6 +59,92 @@ CREATE TABLE `diagnosis` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `diagnosis`
+--
+
+INSERT INTO `diagnosis` (`id`, `id_pelayananigd`, `id_pelayananinap`, `id_pelayananjalan`, `diagnosa_komplikasi`, `kode`, `sub_kode`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, NULL, NULL, 18, 'diagnosa', 12, 2, '2017-06-09 02:22:12', '2017-06-09 02:22:12', NULL),
+(6, NULL, NULL, 18, 'diagnosa', 12, 3, '2017-06-09 02:22:12', '2017-06-09 02:22:12', NULL),
+(7, NULL, NULL, 18, 'diagnosa', 3, 1, '2017-06-09 02:22:12', '2017-06-09 02:22:12', NULL),
+(8, NULL, NULL, 18, 'diagnosa', 11, 1, '2017-06-09 02:22:12', '2017-06-09 02:22:12', NULL),
+(9, NULL, NULL, 18, 'diagnosa', 10, 1, '2017-06-09 02:22:12', '2017-06-09 02:22:12', NULL),
+(10, NULL, NULL, 17, 'diagnosa', 3, 1, '2017-06-09 02:25:23', '2017-06-09 02:25:23', NULL),
+(11, NULL, NULL, 17, 'diagnosa', 2, 1, '2017-06-09 02:25:23', '2017-06-09 02:25:23', NULL),
+(12, NULL, NULL, 17, 'diagnosa', 12, 1, '2017-06-09 02:25:23', '2017-06-09 02:25:23', NULL),
+(13, NULL, NULL, 17, 'diagnosa', 12, 1, '2017-06-09 02:25:23', '2017-06-09 02:25:23', NULL),
+(14, NULL, NULL, 17, 'diagnosa', 2, 1, '2017-06-09 02:25:23', '2017-06-09 02:25:23', NULL),
+(15, NULL, 2, NULL, 'diagnosa', 12, 1, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(16, NULL, 2, NULL, 'komplikasi', 3, 1, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(17, NULL, 2, NULL, 'diagnosa', 12, 1, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(18, NULL, 2, NULL, 'komplikasi', 2, 1, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(19, NULL, 2, NULL, 'diagnosa', 2, 1, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(20, NULL, 2, NULL, 'komplikasi', 11, 1, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(21, NULL, 2, NULL, 'diagnosa', 2, 1, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(22, NULL, 2, NULL, 'komplikasi', 2, 1, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(23, NULL, 2, NULL, 'diagnosa', 2, 1, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(24, NULL, 2, NULL, 'komplikasi', 3, 1, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(25, 2, NULL, NULL, 'diagnosa', 12, 1, '2017-06-09 02:50:23', '2017-06-09 02:50:23', NULL),
+(26, 2, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 02:50:23', '2017-06-09 02:50:23', NULL),
+(27, 2, NULL, NULL, 'diagnosa', 7, 1, '2017-06-09 02:50:23', '2017-06-09 02:50:23', NULL),
+(28, 2, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 02:50:23', '2017-06-09 02:50:23', NULL),
+(29, 2, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 02:50:23', '2017-06-09 02:50:23', NULL),
+(30, 1, NULL, NULL, 'diagnosa', 3, 1, '2017-06-09 02:53:15', '2017-06-09 02:53:15', NULL),
+(31, 1, NULL, NULL, 'diagnosa', 12, 1, '2017-06-09 02:53:15', '2017-06-09 02:53:15', NULL),
+(32, 1, NULL, NULL, 'diagnosa', 12, 4, '2017-06-09 02:53:15', '2017-06-09 02:53:15', NULL),
+(33, 1, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 02:53:15', '2017-06-09 02:53:15', NULL),
+(34, 1, NULL, NULL, 'diagnosa', 10, 1, '2017-06-09 02:53:15', '2017-06-09 02:53:15', NULL),
+(35, 3, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 03:02:21', '2017-06-09 03:02:21', NULL),
+(36, 3, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 03:02:21', '2017-06-09 03:02:21', NULL),
+(37, 3, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 03:02:22', '2017-06-09 03:02:22', NULL),
+(38, 3, NULL, NULL, 'diagnosa', 3, 1, '2017-06-09 03:02:22', '2017-06-09 03:02:22', NULL),
+(39, 3, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 03:02:22', '2017-06-09 03:02:22', NULL),
+(40, 5, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 03:21:01', '2017-06-09 03:21:01', NULL),
+(41, 5, NULL, NULL, 'diagnosa', 3, 1, '2017-06-09 03:21:01', '2017-06-09 03:21:01', NULL),
+(42, 5, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 03:21:01', '2017-06-09 03:21:01', NULL),
+(43, 5, NULL, NULL, 'diagnosa', 12, 1, '2017-06-09 03:21:01', '2017-06-09 03:21:01', NULL),
+(44, 5, NULL, NULL, 'diagnosa', 12, 1, '2017-06-09 03:21:01', '2017-06-09 03:21:01', NULL),
+(45, 4, NULL, NULL, 'diagnosa', 12, 1, '2017-06-09 03:25:07', '2017-06-09 03:25:07', NULL),
+(46, 4, NULL, NULL, 'diagnosa', 12, 1, '2017-06-09 03:25:07', '2017-06-09 03:25:07', NULL),
+(47, 4, NULL, NULL, 'diagnosa', 2, 1, '2017-06-09 03:25:07', '2017-06-09 03:25:07', NULL),
+(48, 4, NULL, NULL, 'diagnosa', 11, 1, '2017-06-09 03:25:07', '2017-06-09 03:25:07', NULL),
+(49, 4, NULL, NULL, 'diagnosa', 11, 1, '2017-06-09 03:25:07', '2017-06-09 03:25:07', NULL),
+(58, NULL, NULL, 16, 'diagnosa', 12, 1, '2017-06-13 09:14:55', '2017-06-13 09:14:55', NULL),
+(59, NULL, NULL, 19, 'diagnosa', 2, 1, '2017-06-15 12:36:34', '2017-06-15 12:36:34', NULL),
+(60, NULL, NULL, 21, 'diagnosa', 2, 1, '2017-06-17 03:43:27', '2017-06-17 03:43:27', NULL),
+(61, NULL, NULL, 21, 'diagnosa', 2, 1, '2017-06-17 03:43:27', '2017-06-17 03:43:27', NULL),
+(62, NULL, NULL, 22, 'diagnosa', 7, 1, '2017-06-18 15:11:46', '2017-06-18 15:11:46', NULL),
+(63, NULL, 1, NULL, 'diagnosa', 2, 1, '2017-06-18 15:58:45', '2017-06-18 15:58:45', NULL),
+(64, NULL, 1, NULL, 'komplikasi', 3, 1, '2017-06-18 15:58:45', '2017-06-18 15:58:45', NULL),
+(65, NULL, 3, NULL, 'diagnosa', 12, 1, '2017-06-18 15:58:57', '2017-06-18 15:58:57', NULL),
+(66, NULL, 3, NULL, 'komplikasi', 12, 1, '2017-06-18 15:58:57', '2017-06-18 15:58:57', NULL),
+(67, NULL, 4, NULL, 'diagnosa', 3, 1, '2017-06-18 15:59:10', '2017-06-18 15:59:10', NULL),
+(68, NULL, 4, NULL, 'komplikasi', 2, 1, '2017-06-18 15:59:10', '2017-06-18 15:59:10', NULL),
+(71, NULL, 7, NULL, 'diagnosa', 2, 1, '2017-06-18 16:55:06', '2017-06-18 16:55:06', NULL),
+(74, NULL, 6, NULL, 'diagnosa', 3, 1, '2017-06-18 17:09:02', '2017-06-18 17:09:02', NULL),
+(75, NULL, 6, NULL, 'diagnosa', 12, 1, '2017-06-18 17:09:02', '2017-06-18 17:09:02', NULL),
+(78, NULL, NULL, 20, 'diagnosa', 12, 1, '2017-06-19 00:53:56', '2017-06-19 00:53:56', NULL),
+(81, 9, NULL, NULL, 'diagnosa', 12, 1, '2017-06-19 01:17:07', '2017-06-19 01:17:07', NULL),
+(84, NULL, 8, NULL, 'diagnosa', 12, 1, '2017-06-19 01:26:54', '2017-06-19 01:26:54', NULL),
+(85, NULL, 8, NULL, 'diagnosa', 2, 1, '2017-06-19 01:26:54', '2017-06-19 01:26:54', NULL),
+(86, NULL, 5, NULL, 'diagnosa', 11, 1, '2017-06-19 01:27:24', '2017-06-19 01:27:24', NULL),
+(87, NULL, 5, NULL, 'komplikasi', 12, 1, '2017-06-19 01:27:24', '2017-06-19 01:27:24', NULL),
+(88, NULL, NULL, 25, 'diagnosa', 12, 1, '2017-06-19 03:45:10', '2017-06-19 03:45:10', NULL),
+(89, NULL, NULL, 25, 'diagnosa', 3, 1, '2017-06-19 03:45:10', '2017-06-19 03:45:10', NULL),
+(90, NULL, NULL, 26, 'diagnosa', 12, 1, '2017-06-19 06:27:10', '2017-06-19 06:27:10', NULL),
+(91, NULL, NULL, 26, 'diagnosa', 2, 1, '2017-06-19 06:27:10', '2017-06-19 06:27:10', NULL),
+(94, NULL, 9, NULL, 'diagnosa', 12, 1, '2017-06-19 06:30:45', '2017-06-19 06:30:45', NULL),
+(95, NULL, NULL, 27, 'diagnosa', 1, 1, '2017-06-19 07:15:55', '2017-06-19 07:15:55', NULL),
+(96, NULL, NULL, 27, 'diagnosa', 2, 1, '2017-06-19 07:15:55', '2017-06-19 07:15:55', NULL),
+(97, NULL, NULL, 28, 'diagnosa', 12, 1, '2017-06-19 07:48:28', '2017-06-19 07:48:28', NULL),
+(98, NULL, NULL, 29, 'diagnosa', 12, 1, '2017-07-04 04:13:25', '2017-07-04 04:13:25', NULL),
+(103, 10, NULL, NULL, 'diagnosa', 3, 1, '2017-07-05 05:00:44', '2017-07-05 05:00:44', NULL),
+(104, NULL, 10, NULL, 'diagnosa', 2, 1, '2017-07-05 06:43:11', '2017-07-05 06:43:11', NULL),
+(105, NULL, 10, NULL, 'komplikasi', 2, 1, '2017-07-05 06:43:11', '2017-07-05 06:43:11', NULL),
+(106, NULL, 11, NULL, 'diagnosa', 3, 1, '2017-07-05 06:43:29', '2017-07-05 06:43:29', NULL),
+(107, NULL, 11, NULL, 'komplikasi', 3, 1, '2017-07-05 06:43:29', '2017-07-05 06:43:29', NULL),
+(108, NULL, NULL, 33, 'diagnosa', 2, 1, '2017-07-06 07:01:43', '2017-07-06 07:01:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -7225,7 +7311,7 @@ CREATE TABLE `norekam_medis` (
 --
 
 INSERT INTO `norekam_medis` (`id`, `no1`, `no2`, `no3`, `created_at`, `updated_at`) VALUES
-(1, 00, 00, 13, '2017-06-03 06:26:20', '2017-06-03 06:26:20');
+(1, 00, 00, 28, '2017-07-05 17:06:45', '2017-07-05 17:06:45');
 
 -- --------------------------------------------------------
 
@@ -7249,22 +7335,22 @@ CREATE TABLE `no_kamar` (
 
 INSERT INTO `no_kamar` (`id`, `id_kelas`, `kamar_no`, `no_pasien`, `status`, `created_at`, `updated_at`) VALUES
 (1, 5, 'VIP 1', '', 0, '2017-05-27 09:39:49', '2017-05-27 09:39:49'),
-(2, 6, '2', '', 0, '2017-06-03 05:54:47', '2017-06-03 05:54:47'),
-(3, 6, '3', '', 0, '2017-03-27 15:57:17', '0000-00-00 00:00:00'),
-(4, 7, '4', '', 0, '2017-03-27 15:57:28', '0000-00-00 00:00:00'),
-(5, 7, '5', '', 0, '2017-03-27 15:57:31', '0000-00-00 00:00:00'),
+(2, 6, '2', '00-00-03', 1, '2017-07-02 09:17:52', '2017-07-02 09:17:52'),
+(3, 6, '3', '00-00-05', 1, '2017-07-05 03:09:32', '2017-07-05 03:09:32'),
+(4, 7, '4', '', 0, '2017-07-05 03:05:19', '2017-07-05 03:05:19'),
+(5, 7, '5', '', 0, '2017-07-05 03:09:00', '2017-07-05 03:09:00'),
 (6, 7, '6', '', 0, '2017-03-27 15:57:53', '0000-00-00 00:00:00'),
-(7, 8, '7', '00-00-06', 1, '2017-05-27 09:24:09', '2017-05-27 09:24:09'),
-(8, 8, '8', '00-00-03', 1, '2017-05-27 09:26:10', '2017-05-27 09:26:10'),
-(9, 8, '9', '', 0, '2017-03-27 15:59:33', '0000-00-00 00:00:00'),
-(10, 8, '10', '', 0, '2017-03-27 15:59:33', '0000-00-00 00:00:00'),
+(7, 8, '7', '00-00-02', 1, '2017-07-02 09:28:16', '2017-07-02 09:28:16'),
+(8, 8, '8', '', 0, '2017-06-19 01:33:48', '2017-05-27 09:26:10'),
+(9, 8, '9', '', 0, '2017-06-10 03:52:41', '2017-06-10 03:52:41'),
+(10, 8, '10', '', 0, '2017-06-18 16:36:26', '2017-06-18 16:36:26'),
 (11, 10, 'VIP 2', '', 0, '2017-03-31 09:42:02', '0000-00-00 00:00:00'),
-(12, 11, '12', '00-00-01', 1, '2017-06-05 04:45:52', '2017-06-05 04:45:52'),
-(13, 11, '13', '', 0, '2017-03-27 16:03:43', '0000-00-00 00:00:00'),
+(12, 11, '12', '', 0, '2017-06-19 06:30:09', '2017-06-19 06:30:09'),
+(13, 11, '13', '', 0, '2017-06-18 17:03:22', '2017-06-18 17:03:22'),
 (14, 12, '14', '', 0, '2017-03-27 16:04:36', '0000-00-00 00:00:00'),
 (15, 12, '15', '', 0, '2017-03-27 16:04:36', '0000-00-00 00:00:00'),
 (16, 12, '16', '', 0, '2017-03-27 16:04:36', '0000-00-00 00:00:00'),
-(17, 13, '17', '', 0, '2017-03-27 16:05:54', '0000-00-00 00:00:00'),
+(17, 13, '17', '', 0, '2017-06-19 01:26:33', '2017-06-19 01:26:33'),
 (18, 13, '18', '', 0, '2017-03-27 16:05:54', '0000-00-00 00:00:00'),
 (19, 13, '19', '', 0, '2017-03-27 16:35:20', '0000-00-00 00:00:00'),
 (20, 13, '20', '', 0, '2017-04-01 04:56:28', '0000-00-00 00:00:00');
@@ -7295,11 +7381,13 @@ CREATE TABLE `pasien` (
   `pekerjaanPasien` varchar(30) NOT NULL,
   `kewarganegaraan` enum('WNI','WNA') NOT NULL,
   `namaOrtu` varchar(30) NOT NULL,
-  `namaSuami_istri` varchar(30) NOT NULL,
+  `namaSuami_istri` varchar(30) DEFAULT NULL,
   `noHp` varchar(20) NOT NULL,
   `tglMasuk` date NOT NULL,
-  `noPesertaJKN` varchar(30) NOT NULL,
+  `noPesertaJKN` varchar(30) DEFAULT NULL,
   `noAsuransiLain` varchar(30) DEFAULT NULL,
+  `noname` enum('mr','mrs','','') DEFAULT NULL,
+  `riwayatAlergi` varchar(30) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -7309,19 +7397,34 @@ CREATE TABLE `pasien` (
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`id`, `noRm`, `nama`, `provinsi`, `kabupaten`, `kecamatan`, `kelurahan`, `dukuh`, `rt`, `rw`, `tglLahir`, `tmptLahir`, `jenisKelamin`, `agama`, `statusPerkawinan`, `pendidikanPasien`, `pekerjaanPasien`, `kewarganegaraan`, `namaOrtu`, `namaSuami_istri`, `noHp`, `tglMasuk`, `noPesertaJKN`, `noAsuransiLain`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '00-00-01', 'luqmanul hakim', 'NUSA TENGGARA BARAT', 'KABUPATEN DOMPU', 'DOMPU', 'KARAMABURA', 'sleman', 10, 12, '1995-10-30', 'jambi', 'Laki-Laki', 'Islam', 'Kawin', 'D3', 'ngoding', 'WNI', 'loekman', 'anom', '089636607271', '2017-03-22', '21973981239', '89278973298', '2017-05-23 06:32:20', '2017-05-23 04:57:39', NULL),
-(2, '00-00-02', 'Agus Rianto', 'DI YOGYAKARTA', 'KABUPATEN GUNUNG KIDUL', 'PONJONG', 'PONJONG', 'coeg', 12, 1, '2016-11-16', 'cibubur', 'Laki-Laki', 'Kristen Protestan', 'Kawin', 'S1', 'jaga warnet', 'WNI', 'paijo', 'egy', '089636607271', '2017-03-17', 'o1238098213', '29389283423', '2017-05-17 08:13:10', '2017-03-26 07:01:03', NULL),
-(3, '00-00-03', 'raya', 'DI YOGYAKARTA', 'KABUPATEN SLEMAN', 'MLATI', 'SINDUADI', 'sendowo', 5, 12, '1995-07-13', 'jakarata', 'Perempuan', 'Islam', 'Kawin', 's1', 'tes', 'WNI', 'tes', 'tes', '+6289636607271', '2017-04-20', '0981209380', '-', '2017-05-17 17:01:30', '2017-04-01 04:46:21', NULL),
-(4, '00-00-04', 'farid', 'DKI JAKARTA', 'KOTA JAKARTA TIMUR', 'CAKUNG', 'CAKUNG TIMUR', 'gak tau', 1, 9, '2017-04-11', 'RSKB', 'Laki-Laki', 'Kristen Protestan', 'Kawin', 'S1', 'ngoding', 'WNI', 'coeg', 'dudu', '089506461641', '2017-04-02', '090909090928', '-', '2017-05-17 17:01:27', '2017-04-02 08:19:46', NULL),
-(5, '00-00-05', 'ikhsan', 'NUSA TENGGARA BARAT', 'KABUPATEN LOMBOK TIMUR', 'AIKMEL', 'KALIJAGA TENGAH', 'sendowo', 12, 21, '2017-04-27', 'jakarata', 'Laki-Laki', 'Kristen Protestan', 'Kawin', 'S1', 'asd', 'WNI', 'das', 'asd', '097777878787', '2017-04-06', '90980980', NULL, '2017-05-27 09:43:06', '2017-05-27 09:43:06', NULL),
-(6, '00-00-06', 'yahya S', 'SUMATERA UTARA', 'KABUPATEN TAPANULI SELATAN', 'SAYUR MATINGGI', 'HUTA PARDOMUAN', 'Bantul', 12, 11, '2017-05-31', 'bantul', 'Laki-Laki', 'Islam', 'Belum Kawin', 'S1', 'kuli', 'WNI', 'paijo', 'sukijam', '+6289636607271', '2017-05-25', '0088888888', NULL, '2017-05-17 17:00:42', '2017-05-17 17:00:42', NULL),
-(7, '00-00-07', 'nurul', 'ACEH', 'KABUPATEN ACEH SINGKIL', 'PULAU BANYAK BARAT', 'UJUNG SIALIT', 'sukuharjo', 10, 11, '2017-05-11', 'kandang', 'Perempuan', 'Kristen Katolik', 'Belum Kawin', 'D3', 'mangkal', 'WNA', 'das', 'anom', '+6289636607271', '2017-05-18', '12123132', NULL, '2017-05-23 04:59:01', '2017-05-23 04:58:44', NULL),
-(10, '00-00-08', 'agung', 'ACEH', 'KABUPATEN ACEH SELATAN', 'TRUMON TIMUR', 'ALUR BUJOK', 'oke', 10, 10, '2017-05-17', 'jambi', 'Perempuan', 'Islam', 'Belum Kawin', 'D1', 'maling', 'WNI', 'bambang', 'adsasd', '+6289636607271', '2017-05-18', '00012021', NULL, '2017-05-23 04:59:06', '2017-05-23 04:58:41', NULL),
-(11, '00-00-09', 'Hanna Montana', 'JAMBI', 'KABUPATEN SAROLANGUN', 'PELAWAN', 'MEKARSARI', 'belimbingsari', 19, 12, '2017-05-11', 'grogol', 'Laki-Laki', 'Kristen Protestan', 'Belum Kawin', 'S1', 'ngoding', 'WNI', 'Jako', 'Hak', '+6289636607271', '2017-05-18', '02002020', NULL, '2017-05-23 06:29:04', '2017-05-23 06:29:04', NULL),
-(12, '00-00-10', 'ipul', 'JAWA BARAT', 'KABUPATEN BOGOR', 'CIAWI', 'CILEUNGSI', 'serodotan', 12, 21, '1994-06-22', 'bogor', 'Laki-Laki', 'Islam', 'Belum Kawin', 'D3', 'Mahasiswa', 'WNI', 'Haki', 'Gavin', '0895063652', '2017-05-23', '090909090900', NULL, '2017-05-23 08:51:08', '2017-05-23 08:51:08', NULL),
-(13, '00-00-11', 'vita', 'SUMATERA UTARA', 'KABUPATEN MANDAILING NATAL', 'SINUNUKAN', 'SINUNUKAN II', 'kemayoran', 10, 12, '2017-06-22', 'jakarta', 'Perempuan', 'Islam', 'Belum Kawin', 'S1', 'masak', 'WNI', 'carla', 'yonglex', '+6289636607271', '2017-06-03', '898989822882', NULL, '2017-06-03 03:02:41', '2017-06-03 03:02:41', NULL),
-(14, '00-00-12', 'gina', 'SUMATERA UTARA', 'KABUPATEN MANDAILING NATAL', 'BATAHAN', 'PULO SAROK', 'serodotan', 12, 32, '2017-06-22', 'dd', 'Perempuan', 'Islam', 'Belum Kawin', 'D3', 'dd', 'WNI', 'suparman', 'suamiti', '+6289636607271', '2017-06-03', '090909090900', NULL, '2017-06-03 06:26:20', '2017-06-03 06:26:20', NULL);
+INSERT INTO `pasien` (`id`, `noRm`, `nama`, `provinsi`, `kabupaten`, `kecamatan`, `kelurahan`, `dukuh`, `rt`, `rw`, `tglLahir`, `tmptLahir`, `jenisKelamin`, `agama`, `statusPerkawinan`, `pendidikanPasien`, `pekerjaanPasien`, `kewarganegaraan`, `namaOrtu`, `namaSuami_istri`, `noHp`, `tglMasuk`, `noPesertaJKN`, `noAsuransiLain`, `noname`, `riwayatAlergi`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '00-00-01', 'luqmanul hakim', 'NUSA TENGGARA BARAT', 'KABUPATEN DOMPU', 'DOMPU', 'KARAMABURA', 'sleman', 10, 12, '1995-10-30', 'jambi', 'Laki-Laki', 'Islam', 'Kawin', 'D3', 'ngoding', 'WNI', 'loekman', 'anom', '089636607271', '2017-03-22', '21973981239', '89278973298', NULL, NULL, '2017-05-23 06:32:20', '2017-05-23 04:57:39', NULL),
+(2, '00-00-02', 'Agus Rianto', 'DI YOGYAKARTA', 'KABUPATEN GUNUNG KIDUL', 'PONJONG', 'PONJONG', 'coeg', 12, 1, '1990-11-16', 'cibubur', 'Laki-Laki', 'Kristen Protestan', 'Kawin', 'S1', 'jaga warnet', 'WNI', 'paijo', 'egy', '089636607271', '2017-03-17', 'o1238098213', '29389283423', NULL, 'makan', '2017-07-05 17:03:35', '2017-07-05 17:03:35', NULL),
+(3, '00-00-03', 'raya', 'DI YOGYAKARTA', 'KABUPATEN SLEMAN', 'MLATI', 'SINDUADI', 'sendowo', 5, 12, '1995-07-13', 'jakarata', 'Perempuan', 'Islam', 'Kawin', 's1', 'tes', 'WNI', 'tes', 'tes', '+6289636607271', '2017-04-20', '0981209380', '-', NULL, NULL, '2017-05-17 17:01:30', '2017-04-01 04:46:21', NULL),
+(4, '00-00-04', 'farid', 'DKI JAKARTA', 'KOTA JAKARTA TIMUR', 'CAKUNG', 'CAKUNG TIMUR', 'gak tau', 1, 9, '1994-04-11', 'RSKB', 'Laki-Laki', 'Kristen Protestan', 'Kawin', 'S1', 'ngoding', 'WNI', 'coeg', 'dudu', '089506461641', '2017-04-02', '090909090928', '-', NULL, NULL, '2017-06-18 17:10:39', '2017-04-02 08:19:46', NULL),
+(5, '00-00-05', 'ikhsan', 'DI YOGYAKARTA', 'KABUPATEN KULON PROGO', 'PANJATAN', 'GARONGAN', 'sendowo', 12, 21, '1995-10-30', 'jakarata', 'Laki-Laki', 'Kristen Protestan', 'Kawin', 'S1', 'asd', 'WNI', 'zainuri', 'riri', '097777878787', '2017-04-06', '90980980', NULL, NULL, NULL, '2017-06-18 02:03:25', '2017-06-18 02:03:25', NULL),
+(6, '00-00-06', 'yahya S', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'IMOGIRI', 'SELOPAMIORO', 'Bantul', 12, 11, '1989-05-31', 'bantul', 'Laki-Laki', 'Islam', 'Belum Kawin', 'S1', 'kuli', 'WNI', 'paijo', NULL, '+6289636607271', '2017-05-25', '0088888888', NULL, NULL, NULL, '2017-06-18 17:10:48', '2017-06-18 02:02:20', NULL),
+(7, '00-00-07', 'nurul', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'SANDEN', 'SRIGADING', 'sukuharjo', 10, 11, '1978-05-11', 'kandang', 'Perempuan', 'Kristen Katolik', 'Belum Kawin', 'D3', 'mangkal', 'WNA', 'agus', NULL, '+6289636607271', '2017-05-18', '12123132', NULL, NULL, NULL, '2017-06-18 17:10:58', '2017-06-18 02:01:54', NULL),
+(10, '00-00-08', 'desi wijaya', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'KRETEK', 'TIRTOHARGO', 'oke', 10, 10, '1966-05-17', 'jambi', 'Perempuan', 'Islam', 'Belum Kawin', 'D3', 'maling', 'WNI', 'bambang', NULL, '+6289636607271', '2017-05-18', NULL, NULL, NULL, NULL, '2017-06-18 17:11:04', '2017-06-18 02:01:14', NULL),
+(11, '00-00-09', 'Hanna Montana', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'SANDEN', 'GADINGSARI', 'belimbingsari', 19, 12, '1955-05-11', 'grogol', 'Laki-Laki', 'Kristen Protestan', 'Belum Kawin', 'S1', 'ngoding', 'WNI', 'Jako', NULL, '+6289636607271', '2017-05-18', '02002020', NULL, NULL, NULL, '2017-06-18 17:11:10', '2017-06-18 01:57:43', NULL),
+(12, '00-00-10', 'ipul', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'SANDEN', 'GADINGSARI', 'serodotan', 12, 21, '1994-06-22', 'bogor', 'Laki-Laki', 'Islam', 'Belum Kawin', 'D3', 'Mahasiswa', 'WNI', 'Haki', NULL, '0895063652', '2017-05-23', '090909090900', NULL, NULL, NULL, '2017-06-18 01:55:45', '2017-06-18 01:55:45', NULL),
+(13, '00-00-11', 'vita', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'SANDEN', 'GADINGSARI', 'kemayoran', 10, 12, '1997-06-22', 'jakarta', 'Perempuan', 'Islam', 'Belum Kawin', 'S1', 'masak', 'WNI', 'carla', NULL, '+6289636607271', '2017-06-03', NULL, NULL, NULL, NULL, '2017-06-18 17:11:16', '2017-06-18 01:54:57', NULL),
+(14, '00-00-12', 'gina', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'KRETEK', 'DONOTIRTO', 'serodotan', 12, 32, '1990-06-22', 'dd', 'Perempuan', 'Islam', 'Belum Kawin', 'D3', 'dd', 'WNI', 'suparman', 'suamiti', '+6289636607271', '2017-06-03', '', NULL, NULL, NULL, '2017-06-18 17:11:22', '2017-06-18 01:32:36', NULL),
+(15, '00-00-13', 'fahmi', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'KRETEK', 'TIRTOHARGO', 'sendowo', 10, 12, '1994-06-29', 'bali', 'Laki-Laki', 'Islam', 'Belum Kawin', 'D3', 'mahasiswa', 'WNI', 'musliha', '', '089636607271', '2017-06-17', '', NULL, NULL, NULL, '2017-06-18 01:54:15', '2017-06-18 01:27:19', NULL),
+(16, '00-00-14', 'nanda fathiya gumay', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'SANDEN', 'GADINGSARI', 'pogung', 10, 12, '1997-06-14', 'lampung', 'Laki-Laki', 'Islam', 'Belum Kawin', 'D3', 'pelajar', 'WNI', 'pariyem', NULL, '089636607271', '2017-06-18', NULL, NULL, NULL, NULL, '2017-06-18 17:11:31', '2017-06-18 01:53:42', NULL),
+(17, '00-00-15', 'bani', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'KRETEK', 'PARANGTRITIS', 'sendowo', 12, 10, '1982-10-31', 'bantul', 'Laki-Laki', 'Islam', 'Kawin', 'S1', 'Dosen', 'WNI', 'zainuri', 'stella', '089636607271', '2017-06-18', NULL, NULL, NULL, NULL, '2017-06-18 15:05:34', '2017-06-18 15:05:34', NULL),
+(18, '00-00-16', 'daddy', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'PUNDONG', 'SELOHARJO', 'seragen', 10, 21, '1986-03-21', 'gunung kidul', 'Laki-Laki', 'Islam', 'Kawin', 'S1', 'pensiun', 'WNI', 'sukarja', 'silma', '089636607271', '2017-06-19', NULL, NULL, NULL, NULL, '2017-06-19 03:37:53', '2017-06-19 03:37:53', NULL),
+(19, '00-00-17', 'melati', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'PUNDONG', 'PANJANGREJO', 'sendowo', 10, 12, '1985-11-28', 'kaliurang', 'Perempuan', 'Kristen Protestan', 'Kawin', 'D3', 'Mahasiswa', 'WNI', 'gina', 'azis', '0895063652', '2017-06-19', NULL, NULL, NULL, NULL, '2017-06-19 06:22:00', '2017-06-19 06:22:00', NULL),
+(20, '00-00-18', 'l1', 'ACEH', 'KABUPATEN ACEH SELATAN', 'SAWANG', 'SAWANG BAU', 'fe', 1, 2, '2017-06-21', 'dds', 'Perempuan', 'Islam', 'Kawin', 'qsdad', 'asd', 'WNI', 'asd', 'asd', '123', '2017-06-19', NULL, NULL, NULL, NULL, '2017-06-19 06:50:03', '2017-06-19 06:50:03', NULL),
+(21, '00-00-19', 'risda', 'DI YOGYAKARTA', 'KABUPATEN SLEMAN', 'GODEAN', 'SIDOLUHUR', 'sendowo', 10, 12, '2017-07-12', 'gampil', 'Laki-Laki', 'Islam', 'Belum Kawin', 'D3', 'ngoding', 'WNI', 'ucok', NULL, '089636607271', '2017-07-02', NULL, NULL, NULL, NULL, '2017-07-02 07:47:15', '2017-07-02 07:47:15', NULL),
+(22, '00-00-20', 'septian', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'PUNDONG', 'PANJANGREJO', 'belimbingsari', 21, 22, '1975-07-24', 'bengkulu', 'Perempuan', 'Islam', 'Kawin', 's1', 'jaga warnet', 'WNI', 'sarpuji', 'grogon', '089506351641', '2017-07-02', NULL, NULL, NULL, NULL, '2017-07-02 07:48:35', '2017-07-02 07:48:35', NULL),
+(23, '00-00-21', 'danang', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'BANGUNTAPAN', 'TAMANAN', 'sendowo', 12, 21, '1994-10-26', 'pogung', 'Laki-Laki', 'Kristen Katolik', 'Belum Kawin', 'D4', 'jaringan', 'WNI', 'sumat', NULL, '089636607271', '2017-07-04', NULL, NULL, NULL, NULL, '2017-07-04 15:57:58', '2017-07-04 15:57:58', NULL),
+(24, '00-00-22', 'dani', 'DI YOGYAKARTA', 'KABUPATEN BANTUL', 'SEWON', 'BANGUNHARJO', 'sendowo', 12, 21, '1975-07-17', 'yogya', 'Laki-Laki', 'Islam', 'Kawin', 'S1', 'swasta', 'WNI', 'paijo', 'oppa', '089636607271', '2017-07-05', NULL, NULL, NULL, NULL, '2017-07-05 05:26:26', '2017-07-05 05:26:26', NULL),
+(25, '00-00-23', 'bani', 'KEPULAUAN BANGKA BELITUNG', 'KABUPATEN BANGKA BARAT', 'TEMPILANG', 'TANJUNGNIUR', 'ss', 12, 21, '1995-07-13', 'dd', 'Perempuan', 'Islam', 'Kawin', 'dd', 'd', 'WNA', 'dd', 'dd', '0912890812', '2017-07-05', NULL, NULL, NULL, NULL, '2017-07-05 05:28:06', '2017-07-05 05:28:06', NULL),
+(26, '00-00-24', 'nandut', 'KEPULAUAN BANGKA BELITUNG', 'KABUPATEN BELITUNG', 'TANJUNG PANDAN', 'BULUH TUMBANG', 'dd', 12, 22, '2004-06-15', 'dd', 'Laki-Laki', 'Islam', 'Cerai Hidup', 'dd', 'dd', 'WNI', 'dd', NULL, '089636607271', '2017-07-05', NULL, NULL, NULL, NULL, '2017-07-05 05:37:20', '2017-07-05 05:37:20', NULL),
+(27, '00-00-25', 'nandut', 'KEPULAUAN BANGKA BELITUNG', 'KABUPATEN BELITUNG', 'TANJUNG PANDAN', 'BULUH TUMBANG', 'dd', 12, 22, '2004-06-15', 'dd', 'Laki-Laki', 'Islam', 'Cerai Hidup', 'dd', 'dd', 'WNI', 'dd', NULL, '089636607271', '2017-07-05', NULL, NULL, NULL, NULL, '2017-07-05 05:38:27', '2017-07-05 05:38:27', NULL),
+(28, '00-00-26', '', '', '', '', '', '', 0, 0, '0000-00-00', '', 'Laki-Laki', 'Islam', 'Kawin', '', '', 'WNI', '', NULL, '', '0000-00-00', NULL, NULL, 'mr', NULL, '2017-07-05 06:14:25', '2017-07-05 06:14:25', NULL),
+(30, '00-00-27', 'hakim', 'SUMATERA UTARA', 'KABUPATEN MANDAILING NATAL', 'BATANG NATAL', 'AMPUNG SIALA', 'coeg', 12, 21, '1995-07-19', 'sdsd', 'Perempuan', 'Islam', 'Belum Kawin', 'dd', 'dd', 'WNI', 'dd', NULL, '21212121', '2017-07-06', NULL, NULL, NULL, 'asdsad,adsasd,asdasd', '2017-07-05 17:14:11', '2017-07-05 17:14:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -7334,23 +7437,41 @@ CREATE TABLE `pelayanan_rawatigd` (
   `id_IGD` int(11) DEFAULT NULL,
   `jenisKasus` enum('Bedah','Obsgin','Interna') DEFAULT NULL,
   `tindakanResuitasi` enum('Ya','Tidak') DEFAULT NULL,
-  `cramsScore` varchar(30) DEFAULT NULL,
+  `cramsScore` int(11) DEFAULT NULL,
   `anamnesis` varchar(30) DEFAULT NULL,
   `pemeriksaanFisik` enum('0','1','2','3','4','5','6','7','8','9','10') DEFAULT NULL,
-  `pemeriksaanStatus` varchar(30) DEFAULT NULL,
+  `pemeriksaanStatus` int(10) DEFAULT NULL,
   `pemeriksaanLaboratorium` varchar(30) DEFAULT NULL,
   `pemeriksaanRadiologi` varchar(30) DEFAULT NULL,
   `terapiTindakan` varchar(30) DEFAULT NULL,
-  `diagonosisAwal` varchar(30) NOT NULL,
-  `diagnosisAkhir` varchar(30) DEFAULT NULL,
+  `diagonosisAwal` varchar(100) NOT NULL,
+  `diagnosisAkhir` varchar(100) DEFAULT NULL,
   `tindakanLanjut` enum('Pulang','Dirujuk','Dirawat','Meninggal','Menolak Dirawat') DEFAULT NULL,
   `tglMeninggal` date DEFAULT NULL,
   `jamMeninggal` time DEFAULT NULL,
   `dirujuk` varchar(30) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pelayanan_rawatigd`
+--
+
+INSERT INTO `pelayanan_rawatigd` (`id`, `id_IGD`, `jenisKasus`, `tindakanResuitasi`, `cramsScore`, `anamnesis`, `pemeriksaanFisik`, `pemeriksaanStatus`, `pemeriksaanLaboratorium`, `pemeriksaanRadiologi`, `terapiTindakan`, `diagonosisAwal`, `diagnosisAkhir`, `tindakanLanjut`, `tglMeninggal`, `jamMeninggal`, `dirujuk`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'Obsgin', 'Ya', 0, 'aa', '3', 0, 'aa', 'aa', 'ss', 'as', 's', 'Pulang', NULL, NULL, NULL, 0, '2017-06-09 02:52:17', '2017-06-09 02:52:17', NULL),
+(2, 2, 'Bedah', 'Ya', 0, 'gg', '2', 0, 'gg', 'gg', 'gg', 'gg', 'gg', 'Dirujuk', NULL, NULL, 'gg', 0, '2017-06-08 17:16:15', '2017-06-08 17:16:15', NULL),
+(3, 3, 'Interna', 'Ya', 0, 'dd', '0', 0, 'dd', 'dd', 'dd', 'dd', 'dd', 'Pulang', NULL, NULL, NULL, 0, '2017-06-09 03:00:34', '2017-06-09 03:00:34', NULL),
+(4, 4, 'Bedah', 'Tidak', 0, 'dd', '1', 0, 'dd', 'dd', 'dd', 'dd', 'dd', 'Meninggal', '2017-06-09', '10:24:00', NULL, 0, '2017-06-09 03:24:19', '2017-06-09 03:24:19', NULL),
+(5, 5, 'Obsgin', 'Ya', 0, 'dd', '1', 0, 'dd', 'dd', 'dd', 'dd', 'dd', 'Pulang', NULL, NULL, NULL, 0, '2017-06-14 14:23:46', '2017-06-14 14:23:46', NULL),
+(6, 6, 'Bedah', 'Tidak', 10, 'sakit', '2', 0, 'di operasi', 'di operasi', 'di istirahatkan', 'di bedah', 'di suntik', 'Dirawat', NULL, NULL, NULL, 0, '2017-06-18 12:35:29', '2017-06-18 12:35:29', NULL),
+(7, 7, 'Bedah', 'Ya', 2, 'sakit hati', '2', 2, 'operasi', 'operasi', 'lakukan', 'terkena infeksi saluran', 'pilek', 'Dirawat', NULL, NULL, NULL, 0, '2017-06-18 13:55:45', '2017-06-18 13:55:45', NULL),
+(8, 8, 'Bedah', 'Tidak', 1, 'sakit di pipi', '1', 12, NULL, NULL, 'di cek lagi', 'sepertinya sakit perut', 'ternyata sakit gigi', 'Pulang', NULL, NULL, NULL, 0, '2017-06-19 00:29:49', '2017-06-19 00:29:49', NULL),
+(9, 9, 'Obsgin', 'Ya', 10, 'sakit hati', '2', 10, NULL, NULL, 'obatin', 'pusing', 'pusing', 'Pulang', NULL, NULL, NULL, 0, '2017-06-19 01:17:07', '2017-06-19 01:17:07', NULL),
+(10, 10, 'Bedah', 'Ya', 12, 'sakit hati', '1', 22, 'ss', 'ss', 'ss', 'ss', 'ss', 'Pulang', NULL, NULL, NULL, 0, '2017-07-05 05:00:44', '2017-07-05 05:00:44', NULL),
+(11, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, 1, '2017-07-05 05:01:13', '2017-07-05 05:01:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -7371,14 +7492,14 @@ CREATE TABLE `pelayanan_rawatinap` (
   `jamMeninggal` time DEFAULT NULL,
   `tglKeluar` date DEFAULT NULL,
   `jamKeluar` time DEFAULT NULL,
-  `diagnosisUtama` varchar(30) DEFAULT NULL,
-  `komplikasi` varchar(30) DEFAULT NULL,
+  `diagnosisUtama` varchar(100) DEFAULT NULL,
+  `komplikasi` varchar(100) DEFAULT NULL,
   `penyebabLuarCedera` varchar(30) DEFAULT NULL,
-  `operasiTindakan` varchar(30) DEFAULT NULL,
+  `operasiTindakan` varchar(100) DEFAULT NULL,
   `golonganOperasiTindakan` enum('Kecil','Sedang','Khusus') DEFAULT NULL,
   `tanggal_operasiTindakan` date DEFAULT NULL,
   `infeksiNosokomial` varchar(30) DEFAULT NULL,
-  `penyebabInfeksiNosokomial` varchar(30) NOT NULL,
+  `penyebabInfeksiNosokomial` varchar(30) DEFAULT NULL,
   `imunisasi` enum('BCG','DT','DPT','POLIO','TFT','CAMPAK','Lain-lain') DEFAULT NULL,
   `pengobatanRadio` varchar(30) DEFAULT NULL,
   `transfusiDarah` varchar(30) DEFAULT NULL,
@@ -7388,6 +7509,27 @@ CREATE TABLE `pelayanan_rawatinap` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pelayanan_rawatinap`
+--
+
+INSERT INTO `pelayanan_rawatinap` (`id`, `id_RI`, `diagnosisMasuk`, `namaPerawat`, `namaPetugasTpp`, `namaDokterPj`, `caraKeluar`, `keadaanKeluar`, `tglMeninggal`, `jamMeninggal`, `tglKeluar`, `jamKeluar`, `diagnosisUtama`, `komplikasi`, `penyebabLuarCedera`, `operasiTindakan`, `golonganOperasiTindakan`, `tanggal_operasiTindakan`, `infeksiNosokomial`, `penyebabInfeksiNosokomial`, `imunisasi`, `pengobatanRadio`, `transfusiDarah`, `sebabKematian`, `dokterMemulangkan`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'sdsd', 10, 11, 6, 'permintaan sendiri', 'Sembuh', '2017-06-10', '10:45:00', '2017-06-10', '10:45:00', 'dd', 'dd', 'ddd', 'dd', 'Sedang', '2017-06-10', 'dd', 'dd', 'DT', 'dd', 'd', 'dd', 6, '2017-06-10 03:49:18', '2017-06-10 03:45:38', NULL),
+(2, 2, 'hu', 10, 11, 6, 'Diizinkan', 'Sembuh', NULL, NULL, '2017-06-14', '00:04:00', 'hu', 'hu', 'hu', 'hu', 'Kecil', '2017-06-09', 'hu', 'hu', 'DT', 'hu', 'hu', 'hu', 6, '2017-06-14 13:53:43', '2017-06-14 13:53:43', NULL),
+(3, 3, 'ddd', 10, 11, 7, 'permintaan sendiri', 'Belum Sembuh', NULL, NULL, '2017-06-14', '10:46:00', 'dd', 'dd', 'dd', 'dd', 'Kecil', '2017-06-10', 'dd', 'dd', 'POLIO', 'dd', 'dd', 'dd', 6, '2017-06-14 13:58:38', '2017-06-14 13:58:38', NULL),
+(4, 4, 'sdasd', 10, 11, 6, 'Diizinkan', 'Belum Sembuh', NULL, NULL, '2017-06-10', '10:52:00', 'asdsad', 'adssda', 'asdad', 'asdsda', 'Kecil', '2017-06-10', 'asdasd', 'asdsda', 'TFT', 'asdasd', 'asdasd', 'adsads', 6, '2017-06-10 03:52:41', '2017-06-10 03:52:41', NULL),
+(5, 5, 'ddds', 10, 11, 7, 'permintaan sendiri', 'Sembuh', NULL, NULL, '2017-06-14', '10:58:00', 'dd', 'dd', 'dd', 'dd', 'Sedang', '2017-06-10', 'dd', 'dd', 'BCG', 'dd', 'dd', 'dd', 7, '2017-06-14 13:56:57', '2017-06-14 13:56:57', NULL),
+(6, 8, 'sakit kepala', 18, 26, 6, 'Diizinkan', 'Sembuh', NULL, NULL, '2017-06-19', '00:02:00', 'sakit hati', NULL, NULL, 'biarkan', 'Kecil', '2017-06-19', NULL, NULL, 'DT', NULL, NULL, NULL, 6, '2017-06-18 17:03:22', '2017-06-18 17:03:22', NULL),
+(7, 9, 'sakit perut', 15, 11, 7, 'permintaan sendiri', 'Sembuh', NULL, NULL, '2017-06-18', '23:34:00', 'sakit perut', NULL, NULL, 'tidak ada', 'Kecil', '2017-06-18', NULL, NULL, 'BCG', NULL, NULL, NULL, 6, '2017-06-18 16:36:25', '2017-06-18 16:36:25', NULL),
+(8, 10, 'jantung', 16, 26, 7, 'Diizinkan', 'Meninggal', '2017-06-19', '08:24:00', '2017-06-19', '08:24:00', 'sakit jantung', NULL, NULL, 'operasi', 'Sedang', '2017-06-19', NULL, NULL, 'DT', NULL, NULL, 'sudah parah penyakitnya', 6, '2017-06-19 01:26:33', '2017-06-19 01:26:33', NULL),
+(9, 11, 'sakit kepala', 19, 26, 6, 'Diizinkan', 'Sembuh', NULL, NULL, '2017-06-19', '13:28:00', 'sakit kepala', NULL, NULL, 'diberi obat', 'Kecil', '2017-06-19', NULL, NULL, 'BCG', NULL, NULL, NULL, 6, '2017-06-19 06:30:09', '2017-06-19 06:30:09', NULL),
+(10, 12, 'asd', 17, 14, 42, 'lari', 'Belum Sembuh', NULL, NULL, '2017-07-05', '10:08:00', 'dd', 'dd', NULL, 'dd', 'Sedang', '2017-07-05', NULL, NULL, 'DT', NULL, NULL, NULL, 7, '2017-07-05 03:08:59', '2017-07-05 03:08:59', NULL),
+(11, 13, 'ke', 19, 26, 41, 'lari', 'Sembuh', NULL, NULL, '2017-07-05', '10:04:00', 'ff', 'ff', NULL, 'ff', 'Kecil', '2017-07-05', NULL, NULL, 'DPT', NULL, NULL, NULL, 43, '2017-07-05 03:05:19', '2017-07-05 03:05:19', NULL),
+(12, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-07-02 09:17:27', '2017-07-02 09:17:27', NULL),
+(13, 15, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-07-02 09:17:52', '2017-07-02 09:17:52', NULL),
+(14, 16, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-07-02 09:28:16', '2017-07-02 09:28:16', NULL),
+(15, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-07-05 03:09:32', '2017-07-05 03:09:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -7399,15 +7541,15 @@ CREATE TABLE `pelayanan_rawatjalan` (
   `id` int(11) NOT NULL,
   `id_RJ` int(11) DEFAULT NULL,
   `anamnesa` varchar(50) DEFAULT NULL,
-  `riwayatAlergi` varchar(30) DEFAULT NULL,
   `tensi` varchar(11) DEFAULT NULL,
   `rr` varchar(11) DEFAULT NULL,
   `nadi` varchar(11) DEFAULT NULL,
   `bb` varchar(11) DEFAULT NULL,
   `tb` varchar(11) DEFAULT NULL,
   `suhu` varchar(11) DEFAULT NULL,
-  `diagnosa` varchar(30) DEFAULT NULL,
-  `tindakan` varchar(30) DEFAULT NULL,
+  `diagnosa` varchar(100) DEFAULT NULL,
+  `tindakan` varchar(100) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -7417,20 +7559,40 @@ CREATE TABLE `pelayanan_rawatjalan` (
 -- Dumping data for table `pelayanan_rawatjalan`
 --
 
-INSERT INTO `pelayanan_rawatjalan` (`id`, `id_RJ`, `anamnesa`, `riwayatAlergi`, `tensi`, `rr`, `nadi`, `bb`, `tb`, `suhu`, `diagnosa`, `tindakan`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'sakit hati bang', 'gk ada', '10', '10', '10', '10', '10', '10', 'oke,mantap', 'jiwa,raga', '2017-05-18 05:21:35', '2017-05-18 05:21:35', NULL),
-(2, 1, 'suka suka', 'oke', '1', '1', '1', '1', '11', '1', 'oke,eok', 'dkd', '2017-05-18 12:31:43', '2017-05-18 12:31:43', NULL),
-(3, 1, 'suka suka', 'oke', '1', '1', '1', '1', '11', '1', 'oke,eok', 'dkd', '2017-05-18 12:35:08', '2017-05-18 12:35:08', NULL),
-(4, 1, 'ss', 'ss', '1', '1', '123', '1', '1', '1', 'oke,pkoe,kdkd', 'ddd,dd,d', '2017-05-18 12:40:38', '2017-05-18 12:40:38', NULL),
-(5, 1, 'ss', 'ss', '1', '1', '123', '1', '1', '1', 'oke,pkoe,kdkd', 'ddd,dd,d', '2017-05-18 13:41:59', '2017-05-18 13:41:59', NULL),
-(6, 1, 'mama', 'copo', '13', '1', '13', '13', '1', '13', 'sdsdsd,sdaasd,ffffff', 'dssd,sdsd,fffd', '2017-05-24 05:44:13', '2017-05-24 05:43:28', NULL),
-(7, 1, 'sdsd', 'sdsd', '1', '2', '3', '6', '5', '4', 'sdsd', 'asd', '2017-05-18 17:05:37', '2017-05-18 17:05:37', NULL),
-(8, 1, 'hehe', 'kwkw', '1', '1', '1', '1', '1', '1', 'ss', 'sss', '2017-05-24 06:34:07', '2017-05-24 06:09:44', NULL),
-(9, 2, 'mas luqman ganteng', 'gitu coeg sekali', '12', '21', '21', '122', '42', '11', 'dkdkkd,dkfkf,fkkfkf,fkfk', 'kfkfk,fkfkfkkfkf,fkfkkfkf,fkfk', '2017-05-24 06:34:12', '2017-05-24 06:09:41', NULL),
-(10, 2, 'sakit perut', '-', '12', '12', '12', '31', '32', '44', 'ddjjd,djdjdjd,fjfjf,fjfjfj,djd', 'djdjjf,fjfjfjjf,fjfjfjjfj,maka', '2017-05-24 06:41:46', '2017-05-24 06:41:08', NULL),
-(11, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-05-27 03:37:27', '2017-05-27 03:37:27', NULL),
-(12, 5, 'hehe', 'mantap', '11', '21', '200', '120', '100', '122', 'hehe,kekke,akka', 'djdjf,sdjjfjf,asdjdj', '2017-05-27 04:16:03', '2017-05-27 04:16:03', NULL),
-(14, 7, 'sakit jiwa', 'mantap jiwa', '10', '10', '10', '21', '21', '32', 'ddssd,sdsd,dfdf,df,fdfdf,dfkf', 'sdsdf,sdfsdf,sdfdsf,dfdf', '2017-06-03 05:39:53', '2017-06-03 05:39:53', NULL);
+INSERT INTO `pelayanan_rawatjalan` (`id`, `id_RJ`, `anamnesa`, `tensi`, `rr`, `nadi`, `bb`, `tb`, `suhu`, `diagnosa`, `tindakan`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 'sakit hati bang', '10', '10', '10', '10', '10', '10', 'oke,mantap', 'jiwa,raga', 0, '2017-05-18 05:21:35', '2017-05-18 05:21:35', NULL),
+(2, 1, 'suka suka', '1', '1', '1', '1', '11', '1', 'oke,eok', 'dkd', 0, '2017-05-18 12:31:43', '2017-05-18 12:31:43', NULL),
+(3, 1, 'suka suka', '1', '1', '1', '1', '11', '1', 'oke,eok', 'dkd', 0, '2017-05-18 12:35:08', '2017-05-18 12:35:08', NULL),
+(4, 1, 'ss', '1', '1', '123', '1', '1', '1', 'oke,pkoe,kdkd', 'ddd,dd,d', 0, '2017-05-18 12:40:38', '2017-05-18 12:40:38', NULL),
+(5, 1, 'ss', '1', '1', '123', '1', '1', '1', 'oke,pkoe,kdkd', 'ddd,dd,d', 0, '2017-05-18 13:41:59', '2017-05-18 13:41:59', NULL),
+(6, 1, 'mama', '13', '1', '13', '13', '1', '13', 'sdsdsd,sdaasd,ffffff', 'dssd,sdsd,fffd', 0, '2017-05-24 05:44:13', '2017-05-24 05:43:28', NULL),
+(7, 1, 'sdsd', '1', '2', '3', '6', '5', '4', 'sdsd', 'asd', 0, '2017-05-18 17:05:37', '2017-05-18 17:05:37', NULL),
+(8, 1, 'hehe', '1', '1', '1', '1', '1', '1', 'ss', 'sss', 0, '2017-05-24 06:34:07', '2017-05-24 06:09:44', NULL),
+(9, 2, 'mas luqman ganteng', '12', '21', '21', '122', '42', '11', 'dkdkkd,dkfkf,fkkfkf,fkfk', 'kfkfk,fkfkfkkfkf,fkfkkfkf,fkfk', 0, '2017-05-24 06:34:12', '2017-05-24 06:09:41', NULL),
+(10, 2, 'sakit perut', '12', '12', '12', '31', '32', '44', 'ddjjd,djdjdjd,fjfjf,fjfjfj,djd', 'djdjjf,fjfjfjjf,fjfjfjjfj,maka', 0, '2017-05-24 06:41:46', '2017-05-24 06:41:08', NULL),
+(11, 4, 'sakit mas', '10', '10', '10', '12', '21', '22', 'sakit perut yang mendalam,sakit hati abang,iya nih', 'segera lakukan operasi', 0, '2017-06-14 13:29:10', '2017-06-14 13:29:10', NULL),
+(12, 5, 'hehe', '11', '21', '200', '120', '100', '122', 'hehe,kekke,akka', 'djdjf,sdjjfjf,asdjdj', 0, '2017-05-27 04:16:03', '2017-05-27 04:16:03', NULL),
+(14, 7, 'sakit jiwa', '10', '10', '10', '21', '21', '32', 'ddssd,sdsd,dfdf,df,fdfdf,dfkf', 'sdsdf,sdfsdf,sdfdsf,dfdf', 0, '2017-06-03 05:39:53', '2017-06-03 05:39:53', NULL),
+(15, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '2017-06-08 16:28:42', '2017-06-08 16:28:42', NULL),
+(16, 2, 'ss', '1', '1', '1', '1', '1', '1', 'xsxsxsx,xcc', 'ssx', 0, '2017-06-18 15:13:24', '2017-06-18 15:13:24', '2017-06-18 15:13:24'),
+(17, 3, 'pea', '30', '30', '10', '101', '102', '10', 'ok gan', 'jiji', 0, '2017-06-14 13:32:02', '2017-06-14 13:32:02', NULL),
+(18, 4, 'sakit hati', '10', '10', '10', '101', '10', '10', 'sakit jiwa', 'mantap gan', 0, '2017-06-08 16:39:04', '2017-06-08 16:39:04', NULL),
+(19, 5, 'sakit', '10', '10', '10', '101', '10', '10', 'ssds', 'sdsd', 0, '2017-06-15 12:36:12', '2017-06-15 12:36:12', NULL),
+(20, 6, 'sakit pinggang di bagian kiri', '70', '20', '80', '50', '170', '60', 'sakit tipes', 'di periksakan lagi', 0, '2017-06-19 00:53:56', '2017-06-19 00:53:56', NULL),
+(21, 7, 'sakit perut', '1', '10', '10', '10', '10', '10', 'harus dirawat', 'dioperas', 0, '2017-06-17 03:42:22', '2017-06-17 03:42:22', NULL),
+(22, 8, 'sakit', '90', '10', '10', '70', '170', '50', 'cuma sakit perut', 'diberi obat sakit perut', 0, '2017-06-18 15:10:45', '2017-06-18 15:10:45', NULL),
+(23, 9, 'sakit kepala', '100', '10', '50', '60', '170', '36', 'migran', 'beri obat sakit kepala', 0, '2017-06-19 00:43:33', '2017-06-19 00:43:33', NULL),
+(24, 10, 'sakit kepala', '100', '20', '60', '80', '160', '80', 'migran', 'beri obat sakit kepala', 0, '2017-06-19 06:27:27', '2017-06-19 06:27:27', NULL),
+(25, 11, 'sakit kepala sebelah', '100', '30', '70', '70', '170', '60', 'terkena dbd', 'dirawat', 0, '2017-06-19 03:45:10', '2017-06-19 03:45:10', NULL),
+(26, 12, 'sakit kepala', '100', '20', '70', '70', '160', '60', 'sakit kepala,migran', 'diberi obat saja', 0, '2017-06-19 06:27:10', '2017-06-19 06:27:10', NULL),
+(27, 13, 'flu', '100', '30', '50', '60', '100', '38', 'jiwa', 'suntikk pemenenag', 0, '2017-06-19 07:15:55', '2017-06-19 07:15:55', NULL),
+(28, 14, 'sss', '11', '1', '1', '1', '1', '1', 'sakit kepala,migran', 'dikasih obat', 0, '2017-06-19 07:48:28', '2017-06-19 07:48:28', NULL),
+(29, 15, 'ss', '1', '1', '1', '1', '1', '1', 'aa', 'aa', 0, '2017-07-04 04:13:25', '2017-07-04 04:13:25', NULL),
+(30, 16, 'sakit', '10', '10', '10', '101', '10', '10', 'ssds', 'sdsd', 1, '2017-07-05 17:03:35', '2017-07-05 17:03:35', NULL),
+(31, 17, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-07-02 09:09:48', '2017-07-02 09:09:48', NULL),
+(32, 18, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-07-04 15:58:25', '2017-07-04 15:58:25', NULL),
+(33, 19, 'asd', '12', '22', '12', '12', '21', '12', 'asd', 'asdsad', 0, '2017-07-06 07:01:43', '2017-07-06 07:01:43', NULL),
+(34, 20, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2017-07-06 07:03:08', '2017-07-06 07:03:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -7510,6 +7672,23 @@ CREATE TABLE `rawat_igd` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `rawat_igd`
+--
+
+INSERT INTO `rawat_igd` (`id`, `id_pasien`, `tanggal_masuk`, `jam_masuk`, `alasan`, `pengantar`, `alamatPengantar`, `rujukan`, `caraDatang`, `caraBayar`, `kendaraan`, `penyebab`, `tempatKejadian`, `dokterJaga`, `perawat`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 5, '2017-04-05', '23:31:00', 'sakit', 'luqman', 'sendowo blok f135', NULL, 'Sendiri', 'BPJS', 'Mobil', 'salto', 'kos', 6, 12, '2017-06-18 02:55:40', '2017-06-08 16:32:32', NULL),
+(2, 1, '2017-05-17', '23:32:00', 'gatel', 'luqman', 'blimbingsari', 'kosan', 'Rujukan', 'BPJS', 'Mobil', 'ditabrak', 'sv', 7, 12, '2017-06-18 02:55:44', '2017-06-08 16:33:20', NULL),
+(3, 4, '2017-05-11', '09:59:00', 'huhu', 'hah', 'aka', NULL, 'Sendiri', 'BPJS', 'Motor', 'dd', 'dd', 6, 12, '2017-06-18 02:56:31', '2017-06-09 02:59:59', NULL),
+(4, 7, '2017-06-09', '10:03:00', 'dd', 'dd', 'dd', NULL, 'Sendiri', 'BPJS', 'Motor', 'dd', 'dd', 7, 12, '2017-06-09 03:03:37', '2017-06-09 03:03:37', NULL),
+(5, 14, '2017-06-09', '10:05:00', 'ff', 'ff', 'ff', NULL, 'Sendiri', 'BPJS', 'Mobil', 'fdf', 'dg', 6, 12, '2017-06-14 12:42:53', '2017-06-14 12:42:53', NULL),
+(6, 3, '2017-06-18', '19:20:00', 'kecelakaan', 'muri', 'sendowo', NULL, 'Sendiri', 'BPJS', 'Motor', 'tabrakan', 'pogung', 6, 36, '2017-06-18 12:23:58', '2017-06-18 12:23:58', NULL),
+(7, 2, '2017-06-18', '20:18:00', 'diabetes', 'luqman', 'sendowo', NULL, 'Sendiri', 'BPJS', 'Mobil', 'kurang tau', 'kurang tau', 7, 33, '2017-06-18 13:19:51', '2017-06-18 13:19:51', NULL),
+(8, 13, '2017-06-19', '00:40:00', 'sakit', 'luqman', 'sendowo blok f135', 'sarjito', 'Rujukan', 'BPJS', 'Motor', 'kesleo', 'burjo', 6, 33, '2017-06-18 17:41:32', '2017-06-18 17:41:32', NULL),
+(9, 7, '2017-06-19', '08:07:00', 'pendaraahan', 'agus', 'gajayan', NULL, 'Sendiri', 'BPJS', 'Motor', 'tabrakan', 'ring road', 6, 34, '2017-06-19 01:09:00', '2017-06-19 01:09:00', NULL),
+(10, 11, '2017-06-30', '17:50:00', 'sakit', 'asdf', 'ASDF', NULL, 'Sendiri', 'BPJS', 'Motor', 'fgh', 'dfg', 6, 12, '2017-06-30 10:50:55', '2017-06-30 10:50:55', NULL),
+(11, 11, '2017-07-05', '12:00:00', 'dd', 'dd', 'dd', NULL, 'Sendiri', 'BPJS', 'Mobil', 'dd', 'dd', 42, 35, '2017-07-05 05:01:13', '2017-07-05 05:01:13', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -7525,13 +7704,34 @@ CREATE TABLE `rawat_inap` (
   `caraDatang` enum('Sendiri','Rujukan') NOT NULL,
   `caraBayar` enum('BPJS','UMUM') NOT NULL,
   `caraMasuk` enum('IGD','Rawat Jalan') NOT NULL,
-  `bangsal` varchar(30) NOT NULL,
-  `kelas` varchar(30) NOT NULL,
-  `kamar` varchar(30) NOT NULL,
+  `bangsal` int(11) NOT NULL,
+  `kelas` int(11) NOT NULL,
+  `kamar` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rawat_inap`
+--
+
+INSERT INTO `rawat_inap` (`id`, `id_pasien`, `tanggal_masuk`, `jam_masuk`, `rujukan`, `caraDatang`, `caraBayar`, `caraMasuk`, `bangsal`, `kelas`, `kamar`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 2, '2017-05-17', '23:30:00', NULL, 'Sendiri', 'BPJS', 'IGD', 1, 5, 9, '2017-06-18 02:55:14', '2017-06-08 16:31:09', NULL),
+(2, 5, '2017-04-20', '23:31:00', 'huhuhu', 'Rujukan', 'BPJS', 'IGD', 1, 5, 3, '2017-06-18 02:55:26', '2017-06-08 16:31:35', NULL),
+(3, 14, '2017-06-10', '10:45:00', NULL, 'Sendiri', 'BPJS', 'IGD', 1, 5, 4, '2017-06-14 04:41:33', '2017-06-10 03:46:13', NULL),
+(4, 7, '2017-06-10', '10:51:00', 'dd', 'Rujukan', 'UMUM', 'IGD', 1, 5, 9, '2017-06-14 04:41:35', '2017-06-10 03:52:11', NULL),
+(5, 3, '2017-06-25', '10:57:00', NULL, 'Sendiri', 'UMUM', 'IGD', 2, 13, 17, '2017-06-14 12:35:36', '2017-06-14 12:35:36', NULL),
+(8, 5, '2017-06-18', '20:40:00', NULL, 'Sendiri', 'BPJS', 'IGD', 2, 11, 13, '2017-06-18 13:44:38', '2017-06-18 13:44:38', NULL),
+(9, 2, '2017-06-18', '23:00:00', NULL, 'Sendiri', 'UMUM', 'IGD', 1, 8, 10, '2017-06-18 16:00:44', '2017-06-18 16:00:44', NULL),
+(10, 7, '2017-06-19', '08:17:00', NULL, 'Sendiri', 'UMUM', 'IGD', 2, 13, 17, '2017-06-19 01:18:00', '2017-06-19 01:18:00', NULL),
+(11, 19, '2017-06-19', '13:27:00', NULL, 'Sendiri', 'BPJS', 'Rawat Jalan', 2, 11, 12, '2017-06-19 06:28:21', '2017-06-19 06:28:21', NULL),
+(12, 5, '2017-06-19', '14:54:00', NULL, 'Sendiri', 'BPJS', 'IGD', 1, 7, 5, '2017-06-19 07:55:56', '2017-06-19 07:55:56', NULL),
+(13, 5, '2017-06-30', '17:48:00', NULL, 'Sendiri', 'BPJS', 'IGD', 1, 7, 4, '2017-06-30 10:49:05', '2017-06-30 10:49:05', NULL),
+(14, 22, '2017-07-02', '16:15:00', NULL, 'Sendiri', 'BPJS', 'Rawat Jalan', 1, 6, 2, '2017-07-02 09:17:26', '2017-07-02 09:17:26', NULL),
+(15, 3, '2017-07-02', '16:13:00', NULL, 'Sendiri', 'BPJS', 'IGD', 1, 6, 2, '2017-07-02 09:17:52', '2017-07-02 09:17:52', NULL),
+(16, 2, '2017-07-02', '16:23:00', NULL, 'Sendiri', 'BPJS', 'IGD', 1, 8, 7, '2017-07-02 09:28:16', '2017-07-02 09:28:16', NULL),
+(17, 5, '2017-07-05', '10:09:00', 'sarjito', 'Rujukan', 'BPJS', 'IGD', 1, 6, 3, '2017-07-05 03:09:31', '2017-07-05 03:09:31', NULL);
 
 -- --------------------------------------------------------
 
@@ -7546,12 +7746,38 @@ CREATE TABLE `rawat_jalan` (
   `caraDatang` enum('Sendiri','Rujukan') NOT NULL,
   `rujukan` varchar(11) DEFAULT NULL,
   `caraBayar` enum('BPJS','UMUM') NOT NULL,
-  `klinikTujuan` enum('Umum','Digestive','Throraks','Orthopedi','Urologi','Bedah Plastik dan Estetik') NOT NULL,
+  `klinikTujuan` enum('Digestive','Throraks','Orthopedi','Urologi','Bedah Plastik dan Estetik') NOT NULL,
   `DokterPJ` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rawat_jalan`
+--
+
+INSERT INTO `rawat_jalan` (`id`, `id_pasien`, `tglKunjungan`, `caraDatang`, `rujukan`, `caraBayar`, `klinikTujuan`, `DokterPJ`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, '2017-06-08', 'Sendiri', NULL, 'BPJS', '', 6, '2017-06-17 03:40:48', '2017-06-17 03:40:48', '2017-06-17 03:40:48'),
+(2, 4, '2017-05-10', 'Sendiri', NULL, 'BPJS', 'Digestive', 6, '2017-06-19 03:40:32', '2017-06-19 03:40:32', '2017-06-19 03:40:32'),
+(3, 2, '2017-05-17', 'Sendiri', NULL, 'UMUM', '', 6, '2017-06-18 02:54:28', '2017-06-08 16:29:27', NULL),
+(4, 4, '2017-04-11', 'Sendiri', NULL, 'UMUM', 'Bedah Plastik dan Estetik', 7, '2017-06-18 02:54:43', '2017-06-14 12:26:29', NULL),
+(5, 2, '2017-06-15', 'Sendiri', NULL, 'BPJS', '', 7, '2017-06-15 12:35:28', '2017-06-15 12:35:28', NULL),
+(6, 6, '2017-04-12', 'Sendiri', NULL, 'BPJS', 'Throraks', 6, '2017-06-18 02:54:47', '2017-06-17 00:59:00', NULL),
+(7, 15, '2017-06-17', 'Sendiri', NULL, 'BPJS', '', 6, '2017-06-17 03:39:45', '2017-06-17 03:39:45', NULL),
+(8, 17, '2017-06-18', 'Sendiri', NULL, 'UMUM', 'Throraks', 6, '2017-06-18 15:08:04', '2017-06-18 15:08:04', NULL),
+(9, 10, '2017-06-19', 'Sendiri', NULL, 'UMUM', 'Bedah Plastik dan Estetik', 6, '2017-06-19 00:35:09', '2017-06-19 00:35:09', NULL),
+(10, 4, '2017-06-19', 'Sendiri', NULL, 'BPJS', 'Throraks', 7, '2017-06-19 00:48:24', '2017-06-19 00:48:24', NULL),
+(11, 17, '2017-06-19', 'Sendiri', NULL, 'BPJS', 'Throraks', 6, '2017-06-19 03:39:45', '2017-06-19 03:39:45', NULL),
+(12, 19, '2017-06-19', 'Sendiri', NULL, 'BPJS', '', 6, '2017-06-19 06:23:18', '2017-06-19 06:23:18', NULL),
+(13, 20, '2017-06-19', 'Sendiri', NULL, 'BPJS', 'Bedah Plastik dan Estetik', 6, '2017-06-19 07:04:06', '2017-06-19 07:04:06', NULL),
+(14, 1, '2017-06-19', 'Sendiri', NULL, 'BPJS', 'Orthopedi', 6, '2017-06-19 07:42:15', '2017-06-19 07:42:15', NULL),
+(15, 1, '2017-06-19', 'Sendiri', NULL, 'BPJS', 'Digestive', 6, '2017-06-19 07:48:59', '2017-06-19 07:48:59', NULL),
+(16, 2, '2017-06-30', 'Sendiri', NULL, 'BPJS', 'Throraks', 6, '2017-06-30 10:48:09', '2017-06-30 10:48:09', NULL),
+(17, 22, '2017-07-02', 'Rujukan', 'huhu', 'UMUM', 'Throraks', 41, '2017-07-02 09:09:48', '2017-07-02 09:09:48', NULL),
+(18, 23, '2017-07-04', 'Sendiri', NULL, 'BPJS', 'Throraks', 41, '2017-07-04 15:58:25', '2017-07-04 15:58:25', NULL),
+(19, 30, '2017-07-06', 'Sendiri', NULL, 'BPJS', 'Digestive', 45, '2017-07-05 17:12:30', '2017-07-05 17:12:30', NULL),
+(20, 30, '2017-07-06', 'Sendiri', NULL, 'BPJS', 'Digestive', 45, '2017-07-06 07:03:08', '2017-07-06 07:03:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -8139,7 +8365,39 @@ INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
 (11, 2),
 (12, 7),
 (13, 8),
-(14, 2);
+(14, 2),
+(15, 3),
+(16, 3),
+(17, 3),
+(18, 3),
+(19, 3),
+(20, 3),
+(21, 3),
+(22, 3),
+(23, 3),
+(24, 3),
+(25, 3),
+(26, 2),
+(27, 2),
+(28, 2),
+(29, 2),
+(30, 2),
+(31, 2),
+(32, 2),
+(33, 7),
+(34, 7),
+(35, 7),
+(36, 7),
+(37, 8),
+(38, 8),
+(39, 8),
+(40, 8),
+(41, 6),
+(42, 6),
+(43, 6),
+(44, 6),
+(45, 6),
+(46, 2);
 
 -- --------------------------------------------------------
 
@@ -8215,7 +8473,7 @@ CREATE TABLE `tbl_icd10nama` (
   `id` int(11) NOT NULL,
   `id_tblicd10` int(11) NOT NULL,
   `sub_kode` int(11) NOT NULL,
-  `nama` varchar(30) DEFAULT NULL,
+  `nama` varchar(50) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -8258,6 +8516,83 @@ CREATE TABLE `tindakan` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tindakan`
+--
+
+INSERT INTO `tindakan` (`id`, `id_pelayananigd`, `id_pelayananinap`, `id_pelayananjalan`, `kode`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(6, NULL, NULL, 18, 26, '2017-06-09 02:22:12', '2017-06-09 02:22:12', NULL),
+(7, NULL, NULL, 18, 34, '2017-06-09 02:22:12', '2017-06-09 02:22:12', NULL),
+(8, NULL, NULL, 18, 34, '2017-06-09 02:22:12', '2017-06-09 02:22:12', NULL),
+(9, NULL, NULL, 18, 25, '2017-06-09 02:22:12', '2017-06-09 02:22:12', NULL),
+(10, NULL, NULL, 18, 35, '2017-06-09 02:22:12', '2017-06-09 02:22:12', NULL),
+(12, NULL, NULL, 17, 24, '2017-06-09 02:25:23', '2017-06-09 02:25:23', NULL),
+(13, NULL, NULL, 17, 28, '2017-06-09 02:25:23', '2017-06-09 02:25:23', NULL),
+(14, NULL, NULL, 17, 35, '2017-06-09 02:25:23', '2017-06-09 02:25:23', NULL),
+(15, NULL, NULL, 17, 26, '2017-06-09 02:25:23', '2017-06-09 02:25:23', NULL),
+(16, NULL, NULL, 17, 26, '2017-06-09 02:25:23', '2017-06-09 02:25:23', NULL),
+(17, NULL, 2, NULL, 28, '2017-06-09 02:46:54', '2017-06-09 02:46:54', NULL),
+(18, NULL, 2, NULL, 35, '2017-06-09 02:46:54', '2017-06-09 02:46:54', NULL),
+(19, NULL, 2, NULL, 23, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(20, NULL, 2, NULL, 23, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(21, NULL, 2, NULL, 23, '2017-06-09 02:46:55', '2017-06-09 02:46:55', NULL),
+(22, 2, NULL, NULL, 28, '2017-06-09 02:50:22', '2017-06-09 02:50:22', NULL),
+(23, 2, NULL, NULL, 28, '2017-06-09 02:50:22', '2017-06-09 02:50:22', NULL),
+(24, 2, NULL, NULL, 23, '2017-06-09 02:50:23', '2017-06-09 02:50:23', NULL),
+(25, 2, NULL, NULL, 28, '2017-06-09 02:50:23', '2017-06-09 02:50:23', NULL),
+(26, 2, NULL, NULL, 25, '2017-06-09 02:50:23', '2017-06-09 02:50:23', NULL),
+(28, 1, NULL, NULL, 28, '2017-06-09 02:53:15', '2017-06-09 02:53:15', NULL),
+(29, 1, NULL, NULL, 27, '2017-06-09 02:53:15', '2017-06-09 02:53:15', NULL),
+(30, 1, NULL, NULL, 25, '2017-06-09 02:53:15', '2017-06-09 02:53:15', NULL),
+(31, 1, NULL, NULL, 25, '2017-06-09 02:53:15', '2017-06-09 02:53:15', NULL),
+(32, 1, NULL, NULL, 34, '2017-06-09 02:53:15', '2017-06-09 02:53:15', NULL),
+(34, 3, NULL, NULL, 28, '2017-06-09 03:02:21', '2017-06-09 03:02:21', NULL),
+(35, 3, NULL, NULL, 28, '2017-06-09 03:02:21', '2017-06-09 03:02:21', NULL),
+(36, 3, NULL, NULL, 26, '2017-06-09 03:02:21', '2017-06-09 03:02:21', NULL),
+(37, 3, NULL, NULL, 28, '2017-06-09 03:02:21', '2017-06-09 03:02:21', NULL),
+(38, 3, NULL, NULL, 31, '2017-06-09 03:02:21', '2017-06-09 03:02:21', NULL),
+(40, 5, NULL, NULL, 24, '2017-06-09 03:21:00', '2017-06-09 03:21:00', NULL),
+(41, 5, NULL, NULL, 28, '2017-06-09 03:21:00', '2017-06-09 03:21:00', NULL),
+(42, 5, NULL, NULL, 31, '2017-06-09 03:21:00', '2017-06-09 03:21:00', NULL),
+(43, 5, NULL, NULL, 27, '2017-06-09 03:21:00', '2017-06-09 03:21:00', NULL),
+(44, 5, NULL, NULL, 29, '2017-06-09 03:21:01', '2017-06-09 03:21:01', NULL),
+(46, 4, NULL, NULL, 28, '2017-06-09 03:25:07', '2017-06-09 03:25:07', NULL),
+(47, 4, NULL, NULL, 28, '2017-06-09 03:25:07', '2017-06-09 03:25:07', NULL),
+(48, 4, NULL, NULL, 23, '2017-06-09 03:25:07', '2017-06-09 03:25:07', NULL),
+(49, 4, NULL, NULL, 26, '2017-06-09 03:25:07', '2017-06-09 03:25:07', NULL),
+(50, 4, NULL, NULL, 34, '2017-06-09 03:25:07', '2017-06-09 03:25:07', NULL),
+(56, NULL, NULL, 16, 32, '2017-06-18 15:13:24', '2017-06-18 15:13:24', '2017-06-18 15:13:24'),
+(57, NULL, NULL, 11, NULL, '2017-06-14 13:24:14', '2017-06-14 13:24:14', NULL),
+(59, NULL, NULL, 19, 24, '2017-06-15 12:36:34', '2017-06-15 12:36:34', NULL),
+(61, NULL, NULL, 21, 24, '2017-06-17 03:43:27', '2017-06-17 03:43:27', NULL),
+(62, NULL, NULL, 21, 27, '2017-06-17 03:43:27', '2017-06-17 03:43:27', NULL),
+(66, NULL, NULL, 22, 32, '2017-06-18 15:11:46', '2017-06-18 15:11:46', NULL),
+(67, NULL, 1, NULL, 26, '2017-06-18 15:58:45', '2017-06-18 15:58:45', NULL),
+(68, NULL, 3, NULL, 24, '2017-06-18 15:58:57', '2017-06-18 15:58:57', NULL),
+(69, NULL, 4, NULL, 28, '2017-06-18 15:59:10', '2017-06-18 15:59:10', NULL),
+(71, NULL, 7, NULL, 32, '2017-06-18 16:55:06', '2017-06-18 16:55:06', NULL),
+(73, NULL, 6, NULL, 24, '2017-06-18 17:09:02', '2017-06-18 17:09:02', NULL),
+(74, NULL, 6, NULL, 28, '2017-06-18 17:09:02', '2017-06-18 17:09:02', NULL),
+(75, 8, NULL, NULL, NULL, '2017-06-18 17:45:51', '2017-06-18 17:45:51', NULL),
+(76, NULL, NULL, 23, NULL, '2017-06-19 00:40:19', '2017-06-19 00:40:19', NULL),
+(80, NULL, NULL, 20, 24, '2017-06-19 00:53:56', '2017-06-19 00:53:56', NULL),
+(81, NULL, NULL, 24, NULL, '2017-06-19 00:56:20', '2017-06-19 00:56:20', NULL),
+(85, 9, NULL, NULL, 24, '2017-06-19 01:17:07', '2017-06-19 01:17:07', NULL),
+(87, NULL, 8, NULL, 35, '2017-06-19 01:26:54', '2017-06-19 01:26:54', NULL),
+(88, NULL, 5, NULL, 28, '2017-06-19 01:27:24', '2017-06-19 01:27:24', NULL),
+(90, NULL, NULL, 25, 24, '2017-06-19 03:45:10', '2017-06-19 03:45:10', NULL),
+(91, NULL, NULL, 25, 23, '2017-06-19 03:45:10', '2017-06-19 03:45:10', NULL),
+(93, NULL, NULL, 26, 24, '2017-06-19 06:27:10', '2017-06-19 06:27:10', NULL),
+(95, NULL, 9, NULL, 24, '2017-06-19 06:30:45', '2017-06-19 06:30:45', NULL),
+(97, NULL, NULL, 27, 32, '2017-06-19 07:15:55', '2017-06-19 07:15:55', NULL),
+(99, NULL, NULL, 28, 32, '2017-06-19 07:48:27', '2017-06-19 07:48:27', NULL),
+(101, NULL, NULL, 29, 32, '2017-07-04 04:13:25', '2017-07-04 04:13:25', NULL),
+(105, 10, NULL, NULL, 32, '2017-07-05 05:00:44', '2017-07-05 05:00:44', NULL),
+(106, NULL, 10, NULL, 28, '2017-07-05 06:43:11', '2017-07-05 06:43:11', NULL),
+(107, NULL, 11, NULL, 28, '2017-07-05 06:43:29', '2017-07-05 06:43:29', NULL),
+(108, NULL, NULL, 30, NULL, '2017-07-05 17:03:35', '2017-07-05 17:03:35', NULL),
+(110, NULL, NULL, 33, 24, '2017-07-06 07:01:43', '2017-07-06 07:01:43', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -8269,10 +8604,11 @@ CREATE TABLE `users` (
   `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `foto` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `foto` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'avatar2.png',
   `noHp` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `spesialis` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -8282,17 +8618,49 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `name`, `email`, `foto`, `noHp`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(5, 'luqman', 'luqmanul hakim', 'n.loekman@gmail.com', '1494248324.jpg', '0895063541', '$2y$10$W6ZMOOzPzHWxOeY/59fF1uCNKLJuoMwBucxsU6urFVWM35tenGtLm', 'kEUapI1F9WIE5RKezb1M3hDJzblCT1HotuSF94K7VUWX9ww4FIMkyjd5BeRr', '2017-03-02 21:08:41', '2017-06-03 02:47:34', NULL),
-(6, 'agus', 'Agus Riantos', 'agus@pea.comsss', '1495530465.jpg', '0', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'RVUgS0f4JLJQl6AdjhmL1nJ8ogTyTY9WM4BchMMnsezWlg1a33gnXR0k2bdp', NULL, '2017-05-23 09:07:47', NULL),
-(7, 'maya', 'maya', 'maya@maya.com', '1489917612.png', '0', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'RZcKHTRjDiGCb5VWcEoqXtzagYAnQBUk78LUyOwbgOHOsQNKuI', NULL, NULL, NULL),
-(8, 'ma', 'oxford', 'mas@mas.com', 'avatar2.png', '89', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'P6aqIVSxV9dqrGOqeNt7ReVivPEQcsVlNYwf6pUGsqH4YoJcI9', '2017-04-06 00:15:01', '2017-04-06 00:15:01', NULL),
-(9, 'yahya', 'yahya S', 'yahyah@yahya.com', 'avatar2.png', '+6289636607271', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'Lvr1sZRbvEC0sPkIPjlYz1iW7JwEyfLFAN7p7CIW6YJTKBimSP', '2017-04-25 03:58:14', '2017-04-25 04:30:49', NULL),
-(10, 'Purwandari', 'Sri Purwandari', 'SriPurwandari@gmail.com', 'avatar2.png', '08', '$2y$10$4LPuAXFLpPNLjNJ8xUEAJe7j6q9vOdEWvI9U694xQGhZsIWdog.6y', NULL, '2017-05-18 05:04:11', '2017-05-22 08:36:26', NULL),
-(11, 'Risa', 'Risa Mario Fitrada, Amd.Kom', 'risa@gmail.com', 'avatar2.png', '08', '$2y$10$1T.QseWMlM7z7uZJZH1EY.pHRKIH3gBoOaefE7wgfz5Wkr22zVGZ2', NULL, '2017-05-18 05:04:52', '2017-05-22 08:33:16', NULL),
-(12, 'monika', 'Monika Citra Sari, AMK', 'monika@gmail.com', 'avatar2.png', '08', '$2y$10$yU8THMOnobBmrvOWaP8SkOiK7OQubvkuu4/aI9NhOYC9juxRwaJ4q', NULL, '2017-05-18 05:05:24', '2017-05-22 08:33:47', NULL),
-(13, 'deni', 'Deni Kusumastuti, S Kep, Ners', 'deni@gmail.com', 'avatar2.png', '08', '$2y$10$oZ7khOHNhg4LiN965hfA0.mUH3E8iv11DNa4HyCoivZ7WMD7NDRjC', NULL, '2017-05-18 05:05:49', '2017-05-22 08:38:38', NULL),
-(14, 'pea', 'peapea', 'nss@gmail.com', 'avatar2.png', '29222', '$2y$10$VlJcN6c7T0MmAvv1PDrdguibLgsAkWCagRgkk0TNRIC5teeyg712C', NULL, '2017-05-22 07:58:40', '2017-06-03 06:03:03', NULL);
+INSERT INTO `users` (`id`, `username`, `name`, `email`, `foto`, `noHp`, `password`, `remember_token`, `spesialis`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 'luqman', 'luqmanul hakim', 'n.loekman@gmail.com', '1494248324.jpg', '0895063541', '$2y$10$W6ZMOOzPzHWxOeY/59fF1uCNKLJuoMwBucxsU6urFVWM35tenGtLm', 'XolzPeylqjZEfXKjanIj4syj2YY6yEWNbJCDo7oXf37I0jxL0LMeet7E7K12', NULL, '2017-03-02 21:08:41', '2017-06-03 02:47:34', NULL),
+(6, 'agus', 'Agus Rianto', 'agus@pea.comsss', '1495530465.jpg', '089506145074', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'jFmTgDeRKBlVgVKknyCFnV9XpTIrYbLiO40vko5gvLZvNWDuMaJWgc6MjcJf', NULL, NULL, '2017-06-11 22:00:26', NULL),
+(7, 'maya', 'maya', 'maya@maya.com', '1489917612.png', '0', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'RZcKHTRjDiGCb5VWcEoqXtzagYAnQBUk78LUyOwbgOHOsQNKuI', NULL, NULL, NULL, NULL),
+(8, 'ma', 'oxford', 'mas@mas.com', 'avatar2.png', '89', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'P6aqIVSxV9dqrGOqeNt7ReVivPEQcsVlNYwf6pUGsqH4YoJcI9', NULL, '2017-04-06 00:15:01', '2017-04-06 00:15:01', NULL),
+(9, 'yahya', 'yahya S', 'yahyah@yahya.com', 'avatar2.png', '+6289636607271', '$2a$06$ICwZUHzlqRIMvWPSPBmS9O7hvw4.i8lifkZe9wQeqTkavjjOHv4NG', 'Lvr1sZRbvEC0sPkIPjlYz1iW7JwEyfLFAN7p7CIW6YJTKBimSP', NULL, '2017-04-25 03:58:14', '2017-04-25 04:30:49', NULL),
+(10, 'Purwandari', 'Sri Purwandari', 'SriPurwandari@gmail.com', 'avatar2.png', '08', '$2y$10$4LPuAXFLpPNLjNJ8xUEAJe7j6q9vOdEWvI9U694xQGhZsIWdog.6y', NULL, NULL, '2017-05-18 05:04:11', '2017-05-22 08:36:26', NULL),
+(11, 'Risa', 'Risa Mario Fitrada, Amd.Kom', 'risa@gmail.com', 'avatar2.png', '08', '$2y$10$1T.QseWMlM7z7uZJZH1EY.pHRKIH3gBoOaefE7wgfz5Wkr22zVGZ2', NULL, NULL, '2017-05-18 05:04:52', '2017-05-22 08:33:16', NULL),
+(12, 'monika', 'Monika Citra Sari, AMK', 'monika@gmail.com', 'avatar2.png', '08', '$2y$10$yU8THMOnobBmrvOWaP8SkOiK7OQubvkuu4/aI9NhOYC9juxRwaJ4q', NULL, NULL, '2017-05-18 05:05:24', '2017-05-22 08:33:47', NULL),
+(13, 'deni', 'Deni Kusumastuti, S Kep, Ners', 'deni@gmail.com', 'avatar2.png', '08', '$2y$10$oZ7khOHNhg4LiN965hfA0.mUH3E8iv11DNa4HyCoivZ7WMD7NDRjC', NULL, NULL, '2017-05-18 05:05:49', '2017-05-22 08:38:38', NULL),
+(14, 'rekmed', 'rekam medis 1', 'rekmed@gmail.com', '1497853196.jpg', '29222', '$2y$10$5YrgUzuqXt7svjpeGkFoxuIYs2RJhUkPfkv59s.NSeRNOljQIrVL6', 'qID6hJI3TPUQB1l7ny8xYw1XW6p1q8WdIKuvRNgeO8lnmXj2WKtOTayCrAY2', NULL, '2017-05-22 07:58:40', '2017-06-19 06:19:56', NULL),
+(15, 'defi', 'Defi WP', 'defi@gmail.com', 'avatar2.png', '08', '$2y$10$y/Qk9iO7tpiTQT3wGYLU3ODMgmXlVre3ybIKbH6gbee2E9za7jXmi', NULL, NULL, '2017-06-18 02:07:35', '2017-06-18 02:07:35', NULL),
+(16, 'farida', 'Farida Listiana', 'farida@gmail.com', 'avatar2.png', '08', '$2y$10$SfrdPsda0dK4HoCVSINzQ.58Yy6TfBLobyh2Cvg1g6kQJXe/NIbM2', NULL, NULL, '2017-06-18 02:08:13', '2017-06-18 02:08:13', NULL),
+(17, 'marwahati', 'Sri Marwahati', 'marwahati@gmail.com', 'avatar2.png', '08', '$2y$10$B/MiUwSoB9hL4Iz1IHruMuunFF/0.kQZCTaQTMJ/Dk/2Qg4AAtKoK', NULL, NULL, '2017-06-18 02:08:50', '2017-06-18 02:08:50', NULL),
+(18, 'handy', 'Handy Kurnianto', 'handy@gmail.com', 'avatar2.png', '08', '$2y$10$EGjWLvieItPE83/8krJt2uta6pLYgT6bkiweo71RmYfCd6hg0nqFu', NULL, NULL, '2017-06-18 02:09:21', '2017-06-18 02:09:21', NULL),
+(19, 'titik', 'Titik Wahyuni', 'titik@gmail.com', 'avatar2.png', '08', '$2y$10$puq0ac5WqdMwZE3ub87IXeOsHl66WtYGHux7zOQV82ETNEoE4eszC', NULL, NULL, '2017-06-18 02:09:50', '2017-06-18 02:09:50', NULL),
+(20, 'tri', 'Tri Istanti', 'istanti@gmail.com', 'avatar2.png', '08', '$2y$10$KCEnP3TYXrwZzP77j9HmQuz23cuquwVJXH974JWUQqzAwZyBfz5Na', NULL, NULL, '2017-06-18 02:10:20', '2017-06-18 02:10:20', NULL),
+(21, 'widiyati', 'Wahyu Widayati', 'widiyati@gmail.com', 'avatar2.png', '08', '$2y$10$LIIpdO/jb1mWv3HqBqUUOea4BDWTz0nktUDnKy4lVA2UujYvSHowq', NULL, NULL, '2017-06-18 02:10:51', '2017-06-18 02:10:51', NULL),
+(22, 'yoma', 'Yoma Erawanti', 'yoma@gmail.com', 'avatar2.png', '08', '$2y$10$K/oMwii04.lN.8RfD0AhS.XHtBI0DF1dHI72R93kSStilJEqND7vu', NULL, NULL, '2017-06-18 02:11:16', '2017-06-18 02:11:16', NULL),
+(23, 'dwiana', 'Dwiana Safriliani', 'dwiana@gmail.com', 'avatar2.png', '08', '$2y$10$AuSveUKCCq33YffEk6BEoeP1.PSLnGqGnC66y/0zI8cw/xe2e2Acq', NULL, NULL, '2017-06-18 02:12:11', '2017-06-18 02:12:11', NULL),
+(24, 'masna', 'Masna Fitriana', 'masna@gmail.com', 'avatar2.png', '08', '$2y$10$ERpTkBh2GlZfDIl1S6AJC.Wbg7dHR55yGuESGtSvona6TW.K104zK', NULL, NULL, '2017-06-18 02:12:36', '2017-06-18 02:12:36', NULL),
+(25, 'ririh', 'Ririh Dwiyanti', 'ririh@gmail.com', 'avatar2.png', '08', '$2y$10$.taMPL4gOYF87ZUPhFTJ4.m0sb0sOKIGCA9rFVDxUmUNhYRMx8s/e', NULL, NULL, '2017-06-18 02:12:59', '2017-06-18 02:12:59', NULL),
+(26, 'mario', 'Risa Mario Fitrada', 'mario@gmail.com', 'avatar2.png', '08', '$2y$10$StzuVaTFVWsVeScYLA7pZekV1fbRYM/N4z6GTJ9VOzgrbUBBOhvaG', NULL, NULL, '2017-06-18 02:14:22', '2017-06-18 02:14:22', NULL),
+(27, 'dayanti', 'Dwi Ris Dayanti', 'dayanti@gmail.com', 'avatar2.png', '08', '$2y$10$Qu0v9saKTwjKf7c2wvUTOuqdJMR781SwGU44s62eLRxnBf1wGTY.a', NULL, NULL, '2017-06-18 02:14:48', '2017-06-18 02:14:48', NULL),
+(28, 'purwanti', 'Titi Purwanti', 'purwanti@gmail.com', 'avatar2.png', '0', '$2y$10$.jkw/VDcge1XdSCRUTb2beVUpLSMq5iNtuAwiazFB0j/1tVn2TZF6', NULL, NULL, '2017-06-18 02:15:17', '2017-06-18 02:15:17', NULL),
+(29, 'yuyun', 'Yuyun Rahmawati', 'yuyun@gmail.com', 'avatar2.png', '08', '$2y$10$/y4rcmc5p2mkzGHJ/rnMquedhT5QD3lhiLOqXN4uWaXQrDkrITC56', NULL, NULL, '2017-06-18 02:15:42', '2017-06-18 02:15:42', NULL),
+(30, 'ratih', 'Ratih Ayuningtyas', 'ratih@gmail.com', 'avatar2.png', '08', '$2y$10$GGOV5yNW2evvY3CH6k3u1u1jbJmLqEHw8UMwHg7Rk8AfeTkm6D59.', NULL, NULL, '2017-06-18 02:16:05', '2017-06-18 02:16:05', NULL),
+(31, 'fatihah', 'Nurul Fatihah Kurnia Dewi', 'fatihah@gmailc.om', 'avatar2.png', '08', '$2y$10$CTpq6F2TDn.nNQeat0KEyuQsRyqoAsKhjOlc7q2vJB0cdkG6xEzGm', NULL, NULL, '2017-06-18 02:16:34', '2017-06-18 02:16:34', NULL),
+(32, 'widya', 'Widya Nur Mahendra', 'widya@gmal.com', 'avatar2.png', '08', '$2y$10$eMv0IR5GTXr5rjwLnsbYUuJykChTT3fN3snFE7pLZIesFck8UsFxK', NULL, NULL, '2017-06-18 02:16:59', '2017-06-18 02:16:59', NULL),
+(33, 'dewi', 'Dewi Pratiwi', 'dewi@gmail.com', 'avatar2.png', '08', '$2y$10$lKUlseIUERpRwceJxzRQ3Ol9hWySZ6qBgswbFEMRdjzV2W/3TkBNa', NULL, NULL, '2017-06-18 02:18:23', '2017-06-18 02:18:23', NULL),
+(34, 'ika', 'Ika Sholikatiningsih', 'ika@gmail.com', 'avatar2.png', '08', '$2y$10$AEMjTyUH1rjG3X3jz8wdhO/c9Q4f22AHokppSyKcxPaTpWFaTRRTG', NULL, NULL, '2017-06-18 02:18:50', '2017-06-18 02:18:50', NULL),
+(35, 'dzikrina', 'Dzikrina Istighfarah', 'dzikrina@gmail.com', 'avatar2.png', '08', '$2y$10$Z7l44R26/obBN/IuuzuCxehDUllDvLMancZUpOz.GKTobeTWLRuES', NULL, NULL, '2017-06-18 02:19:24', '2017-06-18 02:19:24', NULL),
+(36, 'pipih', 'Pipin Riyanti', 'pipih@gmail.com', 'avatar2.png', '08', '$2y$10$WpmIn1RY6cSeuL7xFipJzeLAyyZvWNVENCyWptwbzYT3qNYI0kP7q', NULL, NULL, '2017-06-18 02:19:49', '2017-06-18 02:19:49', NULL),
+(37, 'septi', 'Septi Tri Nugroheni', 'septi@gmail.com', 'avatar2.png', '08', '$2y$10$BaN0epqRmPI4CumuOTjSYO/KvTdlER/ohoD7b0cR5BZwHnsUt.OBO', NULL, NULL, '2017-06-18 02:20:47', '2017-06-18 02:20:47', NULL),
+(38, 'rini', 'Tri Rini', 'rini@gmail.com', 'avatar2.png', '08', '$2y$10$SQ4ejIQwqdPn9ayf9BPadOPAqEcATu8oNrMGP5kDyzlgxeRb2Peia', 'Md5l4REfMYQT5bVtwbVBLnZ6mhB71Xxvx0IblmaBsWJhffKQKQn5KtX5acus', NULL, '2017-06-18 02:21:10', '2017-06-18 02:21:10', NULL),
+(39, 'irmay', 'Irmay Romadhoni W', 'irmay@gmail.com', 'avatar2.png', '08', '$2y$10$OUe.gA1Lsrj1ycTWursAZ.AN9moFd18eaGCWbdh6piF8yQqmrQVU.', NULL, NULL, '2017-06-18 02:21:33', '2017-06-18 02:21:33', NULL),
+(40, 'diani', 'Diani Ade Widya Sari', 'diani@gmail.com', 'avatar2.png', '08', '$2y$10$h2m7TZFyx8mpRTrbCCwqlO4I7P9mGQn7cTs6fIlorGSccu4734ZQ2', NULL, NULL, '2017-06-18 02:22:03', '2017-06-18 02:22:03', NULL),
+(41, 'supomo', 'Dr. dr. Supomo, SpB. BTKV', 'supumo@gmail.com', 'avatar2.png', '08', '$2y$10$KsI8fAzbvp3QngKwVC.TSufU4z7bjizhuFrf4cMcj0ep..vxXYU3G', NULL, 'Throraks', '2017-07-02 08:37:12', '2017-07-02 08:37:12', NULL),
+(42, 'tanaya', 'dr. Tanaya Ghinorawa, SpU', 'tanaya@gmail.com', 'avatar2.png', '08', '$2y$10$C8djadoFAkuP6WUner.tqugwRBxtoJjby7LYb4GkVHj0yJavznehe', NULL, 'Urologi', '2017-07-02 08:40:09', '2017-07-02 08:40:09', NULL),
+(43, 'isya', 'dr. Siti Isya Wahdini, SpBP-RE', 'isya@gmail.com', 'avatar2.png', '08', '$2y$10$kvQh9KYr8VvjB1D7Thsbf.N4xDHpxelgduTegPbTvI0OySs4sIj9y', NULL, 'Bedah Plastik dan Estetik', '2017-07-02 08:42:40', '2017-07-02 08:42:40', NULL),
+(44, 'sugeng', 'dr. Sugeng Yuwana, SpOT-FICS', 'sugeng@gmail.com', 'avatar2.png', '08', '$2y$10$joWZY.WWe8SeZv7OBDSGleibWfO.y8DI9kY99KER5h36UOQWkM2We', NULL, 'Orthopedi', '2017-07-02 08:44:00', '2017-07-02 08:44:00', NULL),
+(45, 'marijata', 'prof. dr. Marijata, SpB. KBD', 'marijata@gmail.com', 'avatar2.png', '08', '$2y$10$13/FLlxX26rIBp0fUq0uQOlXcFx8ekeq057tYyZop7EsbQdwClxVW', NULL, 'Digestive', '2017-07-02 08:44:56', '2017-07-02 08:44:56', NULL),
+(46, 'rian', 'rian', 'rian@gmail.com', 'avatar2.png', '08', '$2y$10$k//rvnZ66MpdVC3xky.dpeKorGjYKM7RnqkE3V/JbI2Sba3e0XFRy', NULL, NULL, '2017-07-02 08:45:34', '2017-07-02 08:45:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -90517,7 +90885,10 @@ ALTER TABLE `rawat_igd`
 --
 ALTER TABLE `rawat_inap`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_pasien` (`id_pasien`);
+  ADD KEY `id_pasien` (`id_pasien`),
+  ADD KEY `bangsal` (`bangsal`),
+  ADD KEY `kelas` (`kelas`),
+  ADD KEY `kamar` (`kamar`);
 
 --
 -- Indexes for table `rawat_jalan`
@@ -90583,7 +90954,8 @@ ALTER TABLE `tindakan`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD UNIQUE KEY `username` (`username`),
+  ADD KEY `id_poli` (`spesialis`);
 
 --
 -- Indexes for table `villages`
@@ -90605,7 +90977,7 @@ ALTER TABLE `bangsal`
 -- AUTO_INCREMENT for table `diagnosis`
 --
 ALTER TABLE `diagnosis`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 --
 -- AUTO_INCREMENT for table `kelas`
 --
@@ -90625,37 +90997,37 @@ ALTER TABLE `no_kamar`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- AUTO_INCREMENT for table `pelayanan_rawatigd`
 --
 ALTER TABLE `pelayanan_rawatigd`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `pelayanan_rawatinap`
 --
 ALTER TABLE `pelayanan_rawatinap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `pelayanan_rawatjalan`
 --
 ALTER TABLE `pelayanan_rawatjalan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `rawat_igd`
 --
 ALTER TABLE `rawat_igd`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `rawat_inap`
 --
 ALTER TABLE `rawat_inap`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `rawat_jalan`
 --
 ALTER TABLE `rawat_jalan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `roles`
 --
@@ -90680,12 +91052,12 @@ ALTER TABLE `tbl_icd10nama`
 -- AUTO_INCREMENT for table `tindakan`
 --
 ALTER TABLE `tindakan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- Constraints for dumped tables
 --
@@ -90751,7 +91123,10 @@ ALTER TABLE `rawat_igd`
 -- Constraints for table `rawat_inap`
 --
 ALTER TABLE `rawat_inap`
-  ADD CONSTRAINT `rawat_inap_ibfk_1` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`);
+  ADD CONSTRAINT `rawat_inap_ibfk_1` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id`),
+  ADD CONSTRAINT `rawat_inap_ibfk_2` FOREIGN KEY (`kamar`) REFERENCES `no_kamar` (`id`),
+  ADD CONSTRAINT `rawat_inap_ibfk_3` FOREIGN KEY (`bangsal`) REFERENCES `bangsal` (`id`),
+  ADD CONSTRAINT `rawat_inap_ibfk_4` FOREIGN KEY (`kelas`) REFERENCES `kelas` (`id`);
 
 --
 -- Constraints for table `rawat_jalan`

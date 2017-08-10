@@ -70,7 +70,7 @@
               @php
               $diagnosa = App\ICD::find($trendDRj->kode);
               if($diagnosa == null){
-             $diagnosa->nama = "Belum ada Diagnosis";
+             $diagnosa = "Belum ada Diagnosis";
              $tindakan = "Belum ada Tindakan";
              }else{
              $id =  App\ICD::find($trendDRj->kode)->id;
@@ -78,7 +78,7 @@
              $tindakan =  App\ICD9::find($trendTRj->kode)->nama;
              }
               @endphp
-              <span  class="info-box-text">Diagnosis  : {{ $diagnosa->nama}}</span>
+              <span  class="info-box-text">Diagnosis  : {{ $diagnosa }}</span>
               <span  class="info-box-text">Tindakan  : {{ $tindakan }}</span>
             </div>
             <!-- /.info-box-content -->
@@ -95,7 +95,7 @@
               @php
              $diagnosa = App\ICD::find($trendDRI->kode);
              if($diagnosa == null){
-             $diagnosa->nama = "Belum ada Diagnosis";
+               $diagnosa = "Belum ada Diagnosis";
              $tindakan = "Belum ada Tindakan";
              }else{
              $id =  App\ICD::find($trendDRI->kode)->id;
@@ -104,7 +104,7 @@
              }
 
               @endphp
-              <span  class="info-box-text">Diagnosis  : {{ $diagnosa->nama }}</span>
+              <span  class="info-box-text">Diagnosis  : {{ $diagnosa }}</span>
               <span  class="info-box-text">Tindakan  : {{ $tindakan }}</span>
             </div>
             <!-- /.info-box-content -->
@@ -125,7 +125,7 @@
               @php
                $diagnosa = App\ICD::find($trendDIGD->kode);
             if($diagnosa == null){
-             $diagnosa->nama = "Belum ada Diagnosis";
+               $diagnosa = "Belum ada Diagnosis";
              $tindakan = "Belum ada Tindakan";
              }else{
              $id =  App\ICD::find($trendDIGD->kode)->id;
@@ -133,7 +133,7 @@
              $tindakan =  App\ICD9::find($trendTIGD->kode)->nama;
              }
               @endphp
-             <span  class="info-box-text">Diagnosis  : {{ $diagnosa->nama }}</span>
+             <span  class="info-box-text">Diagnosis  : {{ $diagnosa }}</span>
               <span  class="info-box-text">Tindakan  : {{ $tindakan }}</span>
             </div>
             <!-- /.info-box-content -->
