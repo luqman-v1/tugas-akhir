@@ -196,6 +196,7 @@
           <ul class="treeview-menu">
             <li><a href="{{url('/laporan/eksternal')}}"><i class="fa fa-circle-o"></i> Laporan Eksternal</a></li>
             <li><a href="{{url('laporan/register')}}"><i class="fa fa-circle-o"></i> Register</a></li>
+            {{-- <li><a href="{{url('pelaporan/domisili')}}"><i class="fa fa-circle-o"></i> Domisili</a></li> --}}
             <li><a href="{{url('pelaporan/kodeicd9')}}"><i class="fa fa-circle-o"></i> Kode ICD 9</a></li>
             <li><a href="{{url('pelaporan/kodeicd10')}}"><i class="fa fa-circle-o"></i> Kode ICD 10</a></li>
           </ul>

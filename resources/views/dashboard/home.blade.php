@@ -74,7 +74,8 @@
              $tindakan = "Belum ada Tindakan";
              }else{
              $id =  App\ICD::find($trendDRj->kode)->id;
-             $diagnosa =  App\tbl_icd10nama::where('id_tblicd10',$id)->first();
+             $tmpdiagnosa =  App\tbl_icd10nama::where('id_tblicd10',$id)->first();
+             $diagnosa = $tmpdiagnosa->nama;
              $tindakan =  App\ICD9::find($trendTRj->kode)->nama;
              }
               @endphp
@@ -99,7 +100,8 @@
              $tindakan = "Belum ada Tindakan";
              }else{
              $id =  App\ICD::find($trendDRI->kode)->id;
-             $diagnosa =  App\tbl_icd10nama::where('id_tblicd10',$id)->first();
+             $tmpdiagnosa =  App\tbl_icd10nama::where('id_tblicd10',$id)->first();
+             $diagnosa = $tmpdiagnosa->nama;
              $tindakan =  App\ICD9::find($trendTRI->kode)->nama;
              }
 
@@ -129,7 +131,8 @@
              $tindakan = "Belum ada Tindakan";
              }else{
              $id =  App\ICD::find($trendDIGD->kode)->id;
-             $diagnosa =  App\tbl_icd10nama::where('id_tblicd10',$id)->first();
+             $tmpdiagnosa =  App\tbl_icd10nama::where('id_tblicd10',$id)->first();
+             $diagnosa = $tmpdiagnosa->nama;
              $tindakan =  App\ICD9::find($trendTIGD->kode)->nama;
              }
               @endphp
@@ -225,7 +228,7 @@
                   </div>
                     <div class="col-xl-12 col-md-6 text-center">
                    <div class="chart" id="caraBayar" style="height: 200px; position: relative;"></div>
-                   <span>BPJS/UMUM</span>
+                   <span>BPJS/UMUM/JAMKESDA/JAMKESOS/JASARAHARJA</span>
                   </div>                
                   </div>
                 </div>
@@ -694,8 +697,11 @@
     var donut = new Morris.Donut({
       element: 'caraBayar',
       resize: true,
-      colors: ["#3c8dbc", "#f56954"],
+      colors: ["#3c8dbc", "#f56954","#446CB3", "#9B59B6", "#59ABE3"],
       data: [
+        {label: "JAMKESDA", value: {{ $jka }}},
+        {label: "JAMKESOS", value: {{ $jks }}},
+        {label: "JASARAHARJA", value: {{ $jaj }}},
         {label: "BPJS", value: {{ $bpjs }}},
         {label: "UMUM", value: {{ $umum }}}
       ],

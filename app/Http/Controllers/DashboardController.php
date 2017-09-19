@@ -80,7 +80,22 @@ class DashboardController extends Controller
        $rju = Rawat_Jalan::where('caraBayar','UMUM')->count(); 
        $riu = Rawat_Inap::where('caraBayar','UMUM')->count(); 
        $rigdu = Rawat_IGD::where('caraBayar','UMUM')->count();
-        $umum = $rju+$riu+$rigdu; 
+        $umum = $rju+$riu+$rigdu;
+        //hitung jumlah jaj
+       $rju1 = Rawat_Jalan::where('caraBayar','JASARAHARJA')->count(); 
+       $riu1 = Rawat_Inap::where('caraBayar','JASARAHARJA')->count(); 
+       $rigdu1 = Rawat_IGD::where('caraBayar','JASARAHARJA')->count();
+        $jaj = $rju1+$riu1+$rigdu1;
+        //hitung jumlah jks
+       $rju2 = Rawat_Jalan::where('caraBayar','JAMKESOS')->count(); 
+       $riu2 = Rawat_Inap::where('caraBayar','JAMKESOS')->count(); 
+       $rigdu2 = Rawat_IGD::where('caraBayar','JAMKESOS')->count();
+        $jks = $rju2+$riu2+$rigdu2;
+        //hitung jumlah jka
+       $rju3 = Rawat_Jalan::where('caraBayar','JAMKESDA')->count(); 
+       $riu3 = Rawat_Inap::where('caraBayar','JAMKESDA')->count(); 
+       $rigdu3 = Rawat_IGD::where('caraBayar','JAMKESDA')->count();
+        $jka = $rju3+$riu3+$rigdu3; 
 
         $trendDRj = Diagnosis::select(DB::raw('max(kode) as jml'),DB::raw('count(kode) as count'),'kode')
        ->whereMonth( 'created_at',$bulan )
@@ -116,6 +131,6 @@ class DashboardController extends Controller
        ->first();
 
 
-      return view('dashboard.home')->with(compact('totalPasien','rj','ri','igd','tahun','besar','laki','perempuan','pasien','bpjs','umum','trendDRj','trendDRI','trendDIGD','trendTRj','trendTRI','trendTIGD'));
+      return view('dashboard.home')->with(compact('totalPasien','rj','ri','igd','tahun','besar','laki','perempuan','pasien','bpjs','umum','trendDRj','trendDRI','trendDIGD','trendTRj','trendTRI','trendTIGD','jaj','jks','jka'));
     }
 }

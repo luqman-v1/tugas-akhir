@@ -92,7 +92,9 @@ Route::get('pelaporan/kodeicd9','IcdController@formicd9');
 Route::post('pelaporan/kodeicd9/simpan','IcdController@simpanIcd9');
 Route::post('pelaporan/kodeicd9/ubah','IcdController@ubahIcd9');
 Route::delete('pelaporan/kodeicd9/{id}','IcdController@hapusIcd9');
-
+// domisili
+Route::get('/pelaporan/domisili','PelaporanController@domisili');
+Route::post('/pelaporan/domisili/show','PelaporanController@domisilishow');
 
 });
 Route::group(['as' => 'pendaftaran','middleware' => ['role:admin|rekmed','auth']], function(){
@@ -206,6 +208,7 @@ Route::group(['as' => 'farmasi', 'middleware' => ['role:admin|rekmed|farmasi']],
 // Route::get('tes','PelaporanController@tes');
 
 Route::get('tes',function(){
-	return view('pendaftaran.printKRS');
+	
+	return view('pelaporan.tes');
 });
 

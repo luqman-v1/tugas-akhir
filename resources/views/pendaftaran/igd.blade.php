@@ -287,8 +287,11 @@
                    <label class="control-label " for="caraBayar">Cara Bayar*</label>
                      <select name="caraBayar" id="caraBayar" required class="form-control" onChange="changetextbox();">
                          <option value="">pilih</option>
-                         <option value="BPJS">BPJS</option>
                          <option value="UMUM">UMUM</option>
+                                                     <option value="BPJS">BPJS</option>
+                                                     <option value="JAMKESDA">JAMKESDA</option>
+                                                     <option value="JAMKESOS">JAMKESOS</option>
+                                                     <option value="JASARAHARJA">JASARAHARJA</option>
                      </select>
                      <span class="help-block">
                         <strong>{{ $errors->first('caraBayar') }}</strong>

@@ -561,11 +561,12 @@ class PendaftaranController extends Controller
             }
             Alert::success('Berhasil', 'Data Pasien telah ditambahkan');
 
-            $pasien = Pasien::orderBy('id', 'desc')->first(); 
-        $pdf = PDF::loadView('pendaftaran.printKRS', compact('pasien'))->setPaper('a7')->setOrientation('landscape');
+        //     $pasien = Pasien::orderBy('id', 'desc')->first(); 
+        // $pdf = PDF::loadView('pendaftaran.printKRS', compact('pasien'))->setPaper('a7')->setOrientation('landscape');
         
     
-        return $pdf->stream("$pasien->noRm.pdf");
+        // return $pdf->stream("$pasien->noRm.pdf");
+        return redirect('cari-pasien');
   }
 
   public function spesialis($id){

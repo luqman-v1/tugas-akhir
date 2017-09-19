@@ -20,6 +20,7 @@ use App\role_user;
 use App\ICD;
 use App\tbl_icd10nama;
 use App\ICD9;
+use App\Wilayah\Districts as kecamatan;
 class PelaporanController extends Controller
 {
     public function getFormRegister(){
@@ -110,6 +111,7 @@ class PelaporanController extends Controller
             $mon = date("m", $dateValue); 
             $now = Carbon::now();
             
+
             $month_name = date("F", mktime(0, 0, 0, $mon, 10));
 
         if ($request->rl == 51) {
@@ -117,7 +119,6 @@ class PelaporanController extends Controller
         $getPasienBaru = Pasien::whereBetween('tglMasuk', [$request->dariTanggal,$request->sampaiTanggal])->count();
           
           $getPasienRJ = Rawat_Jalan::whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->count();
-          
           $getPasienRI = Rawat_Inap::whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])->count();
           
           $getPasienIGD = Rawat_IGD::whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])->count();
@@ -330,4 +331,44 @@ class PelaporanController extends Controller
         return $tindakan;
 
     }
+
+    public function domisili(){
+
+        return view('pelaporan.domisili');
+    }
+
+    public function domisilishow(Request $request){
+
+          $dateValue = strtotime($request->dariTanggal);                     
+          $dateValues = strtotime($request->sampaiTanggal);                     
+ 
+            $c = date("d", $dateValue); 
+            $b = date("d", $dateValues);
+           $a= str_replace("0","",$c);
+        
+        $getPasienBaru = Pasien::whereBetween('tglMasuk', [$request->dariTanggal,$request->sampaiTanggal])->get();
+        // dd($getPasienBaru);
+        
+         
+        $getPasienRJ = Rawat_Jalan::join('pasien','id_pasien','pasien.id')
+        ->whereBetween('tglKunjungan', [$request->dariTanggal,$request->sampaiTanggal])->get();
+        
+        $getPasienRI = Rawat_Inap::join('pasien','id_pasien','pasien.id')
+        ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])->get();
+        
+        $getPasienIGD = Rawat_IGD::join('pasien','id_pasien','pasien.id')
+        ->whereBetween('tanggal_masuk', [$request->dariTanggal,$request->sampaiTanggal])
+        ->get();
+        
+        $getKecamatan = kecamatan::where('regency_id',3402)->orderBy('name')->get();
+        return view('pelaporan.tes')->with('getKecamatan',$getKecamatan)
+                                    ->with('getPasienBaru',$getPasienBaru)
+                                    ->with('getPasienRJ',$getPasienRJ)
+                                    ->with('getPasienRI',$getPasienRI)
+                                    ->with('b',$b)
+                                    ->with('a',$a)
+                                    ->with('getPasienIGD',$getPasienIGD);
+    }
+
+
 }

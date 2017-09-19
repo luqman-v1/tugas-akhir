@@ -7,6 +7,15 @@
   <link rel="stylesheet" href="{{url('/bootstrap/css/bootstrap.min.css')}}">
   <script src="{{url('plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
   <script src="{{url('/bootstrap/js/bootstrap.min.js')}}"></script>
+<style>
+  th{
+    text-align: center;
+  }
+  tr{
+    font-size: 10px;
+  }
+
+</style>
 </head>
 <body>
 
@@ -23,26 +32,109 @@
   <h4>Tahun :  2017 </h4> 
   
   <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th style="text-align: center;">NO</th>
-        <th style="text-align: center;">JENIS KEGIATAN</th>
-        <th style="text-align: center;">JUMLAH  </th>
-      </tr>
-    </thead>
+
+
     <tbody>
       <tr>
-        <td style="text-align: center;">1</td>
-        <td style="text-align: center;">Pengunjung Baru</td>
-        <td style="text-align: center;">3</td>
+        <th rowspan="5">Kecamatan</th>
       </tr>
+
       <tr>
-        <td style="text-align: center;">2</td>
-        <td style="text-align: center;">Pengunjung Lama</td>
-        <td style="text-align: center;">10</td>
+        @for($i=$a;$i<=$b;$i++)
+        <th rowspan ="2" colspan="4">tanggal {{ $i }}</th>
+        @endfor
       </tr>
+
+
+     <tr></tr>
       
+      <tr>
+     @for($i=$a;$i<=$b;$i++)
+          <th colspan ="2">BARU</th>
+          <th colspan ="2">LAMA</th> 
+       @endfor
+      </tr>
+
+      <tr>
+       @for($i=$a;$i<=$b;$i++)
+          <th style="color: red;" >L</th>
+          <th style="color: blue;" >P</th>
+          <th style="color: red;" >L</th>
+          <th style="color: blue;" >P</th>
+      @endfor
+      </tr>
+
+      @php
+       $pasienBaru = $getPasienBaru; 
+       $PasienRJ = $getPasienRJ; 
+       $PasienRI = $getPasienRI; 
+       $PasienIGD = $getPasienIGD;
+       $hitungPBL = 0; 
+       $hitungPBP = 0; 
+
+       $hitungPLLJ = 0; 
+       $hitungPLPJ = 0;
+
+
+       $hitungPLLI = 0; 
+       $hitungPLPI = 0;
+
+
+       $hitungPLLG = 0; 
+       $hitungPLPG = 0;
+
+       $jmlL=0;
+       $jmlP=0;
+
+      @endphp
+
+
+      {{-- isi data --}}
+       @foreach($getKecamatan as $data)
+      <tr>
+        <th>{{ $data->name }}</th>
+           @for($i=$a;$i<=$b;$i++)
+           @php
+               $dateValue = strtotime($getPasienBaru[$i]['tglMasuk']);                     
+ 
+            $x = date("d", $dateValue); 
+           $q= str_replace("0","",$x); 
+           @endphp
+          {{-- baru lk --}}
+          @if($q == $i)
+          
+          @if($getPasienBaru[$i]['kecamatan'] == $data->name && $getPasienBaru[$i]['jenisKelamin'] == "Laki-Laki" )
+          <th style="color: red;">{{ $hitungPBL+=1 }} {{ $i }} {{ $x }} {{ $getPasienBaru[$i]['tglMasuk'] }}</th>
+          @else
+          <th>0</th>
+          @endif
+          @else 
+          <th>{{ $q }} {{ $i }}</th>
+          
+          @endif
+          
+          {{-- baru pr --}}
+          @if($q==$i)
+          @if($getPasienBaru[$i]['kecamatan'] == $data->name && $getPasienBaru[$i]['jenisKelamin'] == "Perempuan" && $q == $i)
+          <th style="color: red;">{{ $hitungPBP+=1 }} {{ $i }}</th>
+          @else
+          <th>0</th>
+          @endif
+          @else 
+          <th>0</th>
+          
+          @endif
+          {{-- lama lk --}}
+          
+          <th></th>
+          {{-- lama pr --}}
+          <th></th>
+          @endfor
+      </tr>
+    @endforeach
+
     </tbody>
+   
   </table>
 </div>
 

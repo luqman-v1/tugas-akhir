@@ -50,12 +50,12 @@
 										I.Dokter
 									</label>
 								</div>
-								<div>
+								{{-- <div>
 									<label>
 										<input type="radio" class="flat-red" name="index" id="optionsRadios1" value="kematian" >
 										I.Kematian
 									</label>
-								</div>
+								</div> --}}
 							</div>
 							
 							<div  id="list" style="display: none;" class="form-group">
